@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<project name="REST Console" default="build.dev" basedir=".">
+    <property name="version" value="3.0.6"/>
+    <property name="id" value="rest-console"/>
+    <property name="package" value="${id}-${version}"/>
+
+    <property name="name" value="REST Console"/>
+    <property name="description" value="'${name}' is a REST Client for Google Chrome to visualize and construct custom HTTP requests to test with any web service."/>
+
+    <property name="src" location="src"/>
+    <property name="lib" location="lib"/>
+    <property name="build" location="build"/>
+
+    <filterset id="filters">
+        <filter token="NAME" value="${name}"/>
+        <filter token="DESCRIPTION" value="${description}"/>
+        <filter token="VERSION" value="${version}"/>
+    </filterset>
+
+    <target name="clean" description="clean up">
+        <delete dir="${build}" quiet="true"/>
+    </target>
+
+    <target name="init" depends="clean">
+        <mkdir dir="${build}"/>
+        <mkdir dir="${build}/${id}"/>
+
+        <copy todir="${build}/${id}">
+            <filterset refid="filters"/>
+            <fileset dir="${src}" includes="**/*.js"/>
+            <fileset dir="${src}" includes="**/*.css"/>
+            <fileset dir="${src}" includes="**/*.html"/>
+        </copy>
+
+        <copy todir="${build}/${id}">
+            <fileset dir="${src}" includes="**/*.png"/>
+        </copy>
+    </target>
+
+    <target name="compress-js" depends="init">
+        <apply executable="java" parallel="false" dest="${build}/${id}">
+            <fileset dir="${build}/${id}" includes="**/*.js" />
+            <arg line="-jar"/>
+            <arg path="${lib}/yuicompressor-2.4.2.jar"/>
+            <srcfile/>
+            <arg line="-o"/>
+            <targetfile/>
+            <mapper type="glob" from="*.js" to="*-min.js"/>
+        </apply>
+
+        <move todir="${build}/${id}" overwrite="true">
+            <fileset dir="${build}/${id}" />
+            <mapper type="glob" from="*-min.js" to="*.js"/>
+        </move>
+   </target>
+
+    <target name="compress-css" depends="init">
+        <apply executable="java" parallel="false" dest="${build}/${id}">
+            <fileset dir="${build}/${id}" includes="**/*.css" />
+            <arg line="-jar"/>
+            <arg path="${lib}/yuicompressor-2.4.2.jar"/>
+            <arg line="--line-break 0"/>
+            <srcfile/>
+            <arg line="-o"/>
+            <targetfile/>
+            <mapper type="glob" from="*.css" to="*-min.css"/>
+        </apply>
+
+        <move todir="${build}/${id}" overwrite="true">
+            <fileset dir="${build}/${id}" />
+            <mapper type="glob" from="*-min.css" to="*.css"/>
+        </move>
+    </target>
+
+    <target name="compress-html" depends="init">
+        <apply executable="java" parallel="false" dest="${build}/${id}">
+            <fileset dir="${build}/${id}" includes="**/*.html"/>
+            <arg line="-jar"/>
+            <arg path="${lib}/htmlcompressor-0.9.1.jar"/>
+            <arg value="--remove-intertag-spaces"/>
+            <arg value="--compress-js"/>
+            <arg value="--compress-css"/>
+            <srcfile/>
+            <arg line="-o"/>
+            <targetfile/>
+            <mapper type="glob" from="*.html" to="*-min.html"/>
+        </apply>
+
+        <move todir="${build}/${id}" overwrite="true">
+            <fileset dir="${build}/${id}" />
+            <mapper type="glob" from="*-min.html" to="*.html"/>
+        </move>
+    </target>
+
+    <target name="app_dev" depends="init">
+        <copy file="${src}/manifest.app.json" tofile="${build}/${id}/manifest.json">
+            <filterset refid="filters"/>
+        </copy>
+    </target>
+
+    <target name="ext_dev" depends="init">
+        <copy file="${src}/manifest.extension.json" tofile="${build}/${id}/manifest.json">
+            <filterset refid="filters"/>
+        </copy>
+    </target>
+
+    <target name="app_dist" depends="init, compress-js, compress-css, compress-html, app_dev">
+        <zip destfile="${build}/${package}.zip" basedir="${build}/${id}" includes="**/*"/>
+    </target>
+
+    <target name="ext_dist" depends="init, compress-js, compress-css, compress-html, ext_dev">
+        <zip destfile="${build}/${package}.zip" basedir="${build}/${id}" includes="**/*"/>
+    </target>
+</project>
