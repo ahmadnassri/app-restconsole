@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <project name="REST Console" default="build.dev" basedir=".">
-    <property name="version" value="3.0.6"/>
+    <property name="version" value="3.0.7"/>
     <property name="id" value="rest-console"/>
     <property name="package" value="${id}-${version}"/>
 
@@ -41,7 +41,7 @@
         <apply executable="java" parallel="false" dest="${build}/${id}">
             <fileset dir="${build}/${id}" includes="**/*.js" />
             <arg line="-jar"/>
-            <arg path="${lib}/yuicompressor-2.4.2.jar"/>
+            <arg path="${lib}/yuicompressor-2.4.6.jar"/>
             <srcfile/>
             <arg line="-o"/>
             <targetfile/>
@@ -58,7 +58,7 @@
         <apply executable="java" parallel="false" dest="${build}/${id}">
             <fileset dir="${build}/${id}" includes="**/*.css" />
             <arg line="-jar"/>
-            <arg path="${lib}/yuicompressor-2.4.2.jar"/>
+            <arg path="${lib}/yuicompressor-2.4.6.jar"/>
             <arg line="--line-break 0"/>
             <srcfile/>
             <arg line="-o"/>
@@ -76,7 +76,7 @@
         <apply executable="java" parallel="false" dest="${build}/${id}">
             <fileset dir="${build}/${id}" includes="**/*.html"/>
             <arg line="-jar"/>
-            <arg path="${lib}/htmlcompressor-0.9.1.jar"/>
+            <arg path="${lib}/htmlcompressor-1.4.jar"/>
             <arg value="--remove-intertag-spaces"/>
             <arg value="--compress-js"/>
             <arg value="--compress-css"/>
