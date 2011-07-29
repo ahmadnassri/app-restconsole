@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <project name="REST Console" default="build.dev" basedir=".">
-    <property name="version" value="3.0.7"/>
+    <property name="version" value="3.0.8"/>
     <property name="id" value="rest-console"/>
     <property name="package" value="${id}-${version}"/>
 
