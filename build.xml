@@ -39,9 +39,9 @@
 
     <target name="compress-js" depends="init">
         <apply executable="java" parallel="false" dest="${build}/${id}">
-            <fileset dir="${build}/${id}" includes="**/*.js" />
+            <fileset dir="${build}/${id}" includes="**/*.js"/>
             <arg line="-jar"/>
-            <arg path="${lib}/yuicompressor-2.4.6.jar"/>
+            <arg path="${lib}/yuicompressor-2.4.2.jar"/>
             <srcfile/>
             <arg line="-o"/>
             <targetfile/>
@@ -49,16 +49,16 @@
         </apply>
 
         <move todir="${build}/${id}" overwrite="true">
-            <fileset dir="${build}/${id}" />
+            <fileset dir="${build}/${id}"/>
             <mapper type="glob" from="*-min.js" to="*.js"/>
         </move>
    </target>
 
     <target name="compress-css" depends="init">
         <apply executable="java" parallel="false" dest="${build}/${id}">
-            <fileset dir="${build}/${id}" includes="**/*.css" />
+            <fileset dir="${build}/${id}" includes="**/*.css"/>
             <arg line="-jar"/>
-            <arg path="${lib}/yuicompressor-2.4.6.jar"/>
+            <arg path="${lib}/yuicompressor-2.4.2.jar"/>
             <arg line="--line-break 0"/>
             <srcfile/>
             <arg line="-o"/>
@@ -67,7 +67,7 @@
         </apply>
 
         <move todir="${build}/${id}" overwrite="true">
-            <fileset dir="${build}/${id}" />
+            <fileset dir="${build}/${id}"/>
             <mapper type="glob" from="*-min.css" to="*.css"/>
         </move>
     </target>
@@ -87,7 +87,7 @@
         </apply>
 
         <move todir="${build}/${id}" overwrite="true">
-            <fileset dir="${build}/${id}" />
+            <fileset dir="${build}/${id}"/>
             <mapper type="glob" from="*-min.html" to="*.html"/>
         </move>
     </target>
