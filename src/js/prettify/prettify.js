@@ -194,14 +194,14 @@ window['PR_SHOULD_USE_CONTINUATION'] = true;
  * "in" keyword since it's not a keyword in many languages, and might be used
  * as a count of inches.
  *
- * <p>The link a above does not accurately describe EcmaScript rules since
+ * <p>The link above does not accurately describe EcmaScript rules since
  * it fails to distinguish between (a=++/b/i) and (a++/b/i) but it works
  * very well in practice.
  *
  * @private
  * @const
  */
-var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&&=|&=|\\(|\\*|\\*=|\\+=|\\,|\\-=|\\->|\\/|\\/=|:|::|\\;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\@|\\[|\\^|\\^=|\\^\\^|\\^\\^=|\\{|\\||\\|=|\\|\\||\\|\\|=|\\~|break|case|continue|delete|do|else|finally|instanceof|return|throw|try|typeof)\\s*';
+var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|[!=]=?=?|\\#|%=?|&&?=?|\\(|\\*=?|[+\\-]=|->|\\/=?|::?|<<?=?|>>?>?=?|,|;|\\?|@|\\[|~|{|\\^\\^?=?|\\|\\|?=?|break|case|continue|delete|do|else|finally|instanceof|return|throw|try|typeof)\\s*';
 
 // CAVEAT: this does not properly handle the case where a regular
 // expression immediately follows another since a regular expression may
@@ -267,10 +267,8 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
         return (charCode < 0x10 ? '\\x0' : '\\x') + charCode.toString(16);
       }
       var ch = String.fromCharCode(charCode);
-      if (ch === '\\' || ch === '-' || ch === '[' || ch === ']') {
-        ch = '\\' + ch;
-      }
-      return ch;
+      return (ch === '\\' || ch === '-' || ch === ']' || ch === '^')
+          ? "\\" + ch : ch;
     }
   
     function caseFoldCharset(charSet) {
@@ -284,13 +282,16 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
               + '|-'
               + '|[^-\\\\]',
               'g'));
-      var groups = [];
       var ranges = [];
       var inverse = charsetParts[0] === '^';
+  
+      var out = ['['];
+      if (inverse) { out.push('^'); }
+  
       for (var i = inverse ? 1 : 0, n = charsetParts.length; i < n; ++i) {
         var p = charsetParts[i];
         if (/\\[bdsw]/i.test(p)) {  // Don't muck with named groups.
-          groups.push(p);
+          out.push(p);
         } else {
           var start = decodeEscape(p);
           var end;
@@ -320,7 +321,7 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
       // -> [[1, 12], [14, 14], [16, 17]]
       ranges.sort(function (a, b) { return (a[0] - b[0]) || (b[1]  - a[1]); });
       var consolidatedRanges = [];
-      var lastRange = [NaN, NaN];
+      var lastRange = [];
       for (var i = 0; i < ranges.length; ++i) {
         var range = ranges[i];
         if (range[0] <= lastRange[1] + 1) {
@@ -330,9 +331,6 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
         }
       }
   
-      var out = ['['];
-      if (inverse) { out.push('^'); }
-      out.push.apply(out, groups);
       for (var i = 0; i < consolidatedRanges.length; ++i) {
         var range = consolidatedRanges[i];
         out.push(encodeEscape(range[0]));
@@ -358,7 +356,7 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
               + '|\\\\[0-9]+'  // a back-reference or octal escape
               + '|\\\\[^ux0-9]'  // other escape sequence
               + '|\\(\\?[:!=]'  // start of a non-capturing group
-              + '|[\\(\\)\\^]'  // start/emd of a group, or line start
+              + '|[\\(\\)\\^]'  // start/end of a group, or line start
               + '|[^\\x5B\\x5C\\(\\)\\^]+'  // run of other characters
               + ')',
               'g'));
@@ -378,8 +376,15 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
           ++groupIndex;
         } else if ('\\' === p.charAt(0)) {
           var decimalValue = +p.substring(1);
-          if (decimalValue && decimalValue <= groupIndex) {
-            capturedGroups[decimalValue] = -1;
+          if (decimalValue) {
+            if (decimalValue <= groupIndex) {
+              capturedGroups[decimalValue] = -1;
+            } else {
+              // Replace with an unambiguous escape sequence so that
+              // an octal escape sequence does not turn into a backreference
+              // to a capturing group from an earlier regex.
+              parts[i] = encodeEscape(decimalValue);
+            }
           }
         }
       }
@@ -395,7 +400,7 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
         var p = parts[i];
         if (p === '(') {
           ++groupIndex;
-          if (capturedGroups[groupIndex] === undefined) {
+          if (!capturedGroups[groupIndex]) {
             parts[i] = '(?:';
           }
         } else if ('\\' === p.charAt(0)) {
@@ -470,8 +475,8 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
    * <pre>
    * {
    *   sourceCode: "print 'Hello '\n  + 'World';",
-   *   //                 1         2
-   *   //       012345678901234 5678901234567
+   *   //                     1          2
+   *   //           012345678901234 5678901234567
    *   spans: [0, #1, 6, #2, 14, #3, 15, #4]
    * }
    * </pre>
@@ -1113,7 +1118,6 @@ var REGEXP_PRECEDER_PATTERN = '(?:^^\\.?|[+-]|\\!|\\!=|\\!==|\\#|\\%|\\%=|&|&&|&
       var spanStart = spans[spanIndex];
       var spanEnd = spans[spanIndex + 2] || sourceLength;
   
-      var decStart = decorations[decorationIndex];
       var decEnd = decorations[decorationIndex + 2] || sourceLength;
   
       var end = Math.min(spanEnd, decEnd);
