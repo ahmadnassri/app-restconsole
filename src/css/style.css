@@ -19,7 +19,7 @@ nav {
     position: fixed;
     left: 0px;
 
-    width: 270px;
+    width:180px;
     height: 100%;
 
     background-color: #eaeef3;
@@ -58,7 +58,7 @@ nav {
 }
 
 section[role="main"] {
-    margin-left: 270px;
+    margin-left: 180px;
     min-width: 800px;
     padding: 10px 15px;
 
@@ -69,14 +69,7 @@ section.main {
     height:30px;
     overflow:hidden;
 
-    margin-bottom:10px;
-
-    -webkit-transition: all 0.3s ease-out;
-    -khtml-transition: all 0.3s ease-out;
-    -moz-transition: all 0.3s ease-out;
-    -ms-transition: all 0.3s ease-out;
-    -o-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
+    margin-bottom:0px;
 }
 
 section.main section {
@@ -111,14 +104,7 @@ section.main section div table tr:not(:first-child) {
     display:none;
 }
 
-section.main h2:before {
-    content:'\25B8';
-    padding-right:5px;
-    text-align:left;
-}
 
-section.main.expand h2:before {
-}
 
 section#options ul li {
     display:inline-block;
@@ -176,7 +162,7 @@ section#controls {
 
     height: 31px;
     margin: 0;
-    padding:5px 0px 0px 275px;
+    padding:5px 0px 0px 190px;
 
     vertical-align: middle;
     width:100%;
@@ -184,7 +170,7 @@ section#controls {
 
 section#controls input[type="submit"] {
     float:right;
-    margin-right: 285px;
+    margin-right: 197px;
 }
 section#controls input[type="reset"] {
     float:right;
@@ -221,7 +207,6 @@ cursor:pointer;
 }
 
 h1 {
-    background: url('/icon/32.png') no-repeat 10px center;
     padding-right:15px;
     -webkit-user-select: none;
     color: #53637d;
@@ -528,7 +513,8 @@ license: MIT-style license
     border: 1px solid #CCC;
 
     overflow:auto;
-    height:350px;
+    height:500px;
+    width:99%;
     padding:5px;
     margin:10px 0px 0px 0px;
 
@@ -561,4 +547,19 @@ footer ol li a {
 
 #message.visible {
     top:0px;
+}
+pre.prettyprint {
+  height:450px;
+}
+pre span.str {
+  cursor:pointer;
+}
+pre span.str:hover {
+  text-decoration:underline;
+}
+#toggle-response-headers {
+  color:#999;
+  margin-top:2px;
+  position:absolute;
+  right:20px;
 }

@@ -123,6 +123,19 @@ var error = function(message, element) {
 };
 
 window.addEvent('domready', function() {
+
+    // RLM Custom:
+    document.addEvent('click:relay(pre.prettyprint span.str)', function(){
+      document.getElement('input[name=target[url]]').setProperty('value',this.get('text').replace(/"/g,''));
+      document.getElement('nav ul li a[href="#target"]').fireEvent('click')
+    });
+    $('toggle-response-headers').addEvent('click',function(){
+      var sec = $('response-headers');
+      if(sec.hasClass('hidden')) sec.removeClass('hidden');
+      else sec.addClass('hidden');
+      return false;
+    });
+
     new Keyboard({
         'defaultEventType': 'keyup',
         'events': {
@@ -184,7 +197,7 @@ window.addEvent('domready', function() {
         var name = this.get('href').split('#')[1];
         var target = document.id(name);
 
-        document.getElements('section.main').setStyle('height', '30px');
+        document.getElements('section.main').setStyle('height', '0px');
         this.getParent('ul').getElements('.active').removeClass('active');
 
         this.addClass('active');
