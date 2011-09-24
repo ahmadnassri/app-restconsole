@@ -1,0 +1,27 @@
+{
+    "version": "4.0.0",
+
+    "name": "REST Console",
+    "description": "REST Console is an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.",
+
+
+    "options_page": "index.html",
+    "background_page": "background.html",
+
+    "icons": {
+        "16": "images/logo/16.png",
+        "32": "images/logo/32.png",
+        "48": "images/logo/48.png",
+        "128": "images/logo/128.png"
+    },
+
+    "app": {
+        "launch": {
+            "local_path": "index.html"
+        }
+    },
+
+    "permissions": [
+        "*://*/*"
+    ]
+}
