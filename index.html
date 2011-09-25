@@ -12,16 +12,18 @@
 
         <link rel="stylesheet" href="css/bootstrap-1.3.0.css"/>
         <link rel="stylesheet" href="css/style.css"/>
+        <link id="theme" rel="stylesheet" href="css/prettify/default.css"/>
     </head>
 
     <body>
         <div class="topbar">
             <div class="fill">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="brand"><img src="images/logo/32.png" align="left"/> REST Console <small>version 4.0.0</small></div>
 
                     <ul class="nav">
-                        <li class="active"><a href="#request">Re<span>q</span>uest</a></li>
+                        <li><a href="#options"><span>O</span>ptions</a></li>
+                        <li><a href="#request">Re<span>q</span>uest</a></li>
                         <li><a href="#response"><span>R</span>esponse</a></li>
                     </ul>
 <!--
@@ -35,12 +37,19 @@
             </div>
         </div>
 
+        <div class="messages hide">
+            <div class="alert-message error hide">
+                <a class="close">×</a>
+                <p></p>
+            </div>
+        </div>
+
         <div class="modals hide">
             <div class="modal-backdrop"></div>
 
             <form class="form-stacked modal authorization basic hide" novalidate>
                 <div class="modal-header">
-                    <a href="#" class="close">×</a>
+                    <a class="close">×</a>
                     <h3>Basic Authorization</h3>
                 </div>
 
@@ -48,17 +57,17 @@
                     <div class="clearfix">
                         <label for="username">Username</label>
                         <div class="input">
-                            <input class="span9" type="text" name="username" autocomplete="on" placeholder="username" required/>
+                            <input class="span9" type="text" name="username" autocomplete="on" placeholder="username"/>
+                            <span class="help-block"></span>
                         </div>
-                        <span class="help-block"></span>
                     </div>
 
                     <div class="clearfix">
                         <label for="password">Password</label>
                         <div class="input">
-                            <input class="span9" type="text" name="password" autocomplete="on" placeholder="password" required/>
+                            <input class="span9" type="text" name="password" autocomplete="on" placeholder="password"/>
+                            <span class="help-block"></span>
                         </div>
-                        <span class="help-block"></span>
                     </div>
                 </div>
 
@@ -70,7 +79,7 @@
 
             <form class="form-stacked modal authorization oauth hide" novalidate>
                 <div class="modal-header">
-                    <a href="#" class="close">×</a>
+                    <a class="close">×</a>
                     <h3>oAuth Authorization</h3>
                 </div>
 
@@ -80,9 +89,9 @@
                             <div class="clearfix">
                                 <label for="version">Version</label>
                                 <div class="input">
-                                    <input class="span2" type="number" name="version" value="1.0" min="1" step="1" tabindex="4" autocomplete="on" placeholder="1.0" list="version" required/>
+                                    <input class="span2" type="number" name="version" value="1.0" min="1" step="1" autocomplete="on" placeholder="1.0" list="version" required/>
+                                    <span class="help-block"></span>
                                 </div>
-                                <span class="help-block"></span>
                             </div>
                         </div>
 
@@ -94,8 +103,8 @@
                                         <option value="header" selected>Header</option>
                                         <option value="query">Query Sliing</option>
                                     </select>
+                                    <span class="help-block"></span>
                                 </div>
-                                <span class="help-block"></span>
                             </div>
                         </div>
 
@@ -107,8 +116,8 @@
                                         <option value="PLAINTEXT">PLAINTEXT</option>
                                         <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
                                     </select>
+                                    <span class="help-block"></span>
                                 </div>
-                                <span class="help-block"></span>
                             </div>
                         </div>
                     </div>
@@ -118,9 +127,9 @@
                             <div class="clearfix">
                                 <label for="consumer_key">Consumer Key</label>
                                 <div class="input">
-                                    <input class="span4" type="text" name="consumer_key" tabindex="4" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                    <input class="span4" type="text" name="consumer_key" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                    <span class="help-block"></span>
                                 </div>
-                                <span class="help-block"></span>
                             </div>
                         </div>
 
@@ -128,9 +137,9 @@
                             <div class="clearfix">
                                 <label for="consumer_secret">Consumer Secret</label>
                                 <div class="input">
-                                    <input class="span5" type="text" name="consumer_secret" tabindex="4" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                    <input class="span5" type="text" name="consumer_secret" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                    <span class="help-block"></span>
                                 </div>
-                                <span class="help-block"></span>
                             </div>
                         </div>
                     </div>
@@ -140,9 +149,9 @@
                             <div class="clearfix">
                                 <label for="token_key">Token Key</label>
                                 <div class="input">
-                                    <input class="span4" type="text" name="token_key" tabindex="4" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                    <input class="span4" type="text" name="token_key" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                    <span class="help-block"></span>
                                 </div>
-                                <span class="help-block"></span>
                             </div>
                         </div>
 
@@ -150,9 +159,9 @@
                             <div class="clearfix">
                                 <label for="token_secret">Token Secret</label>
                                 <div class="input">
-                                    <input class="span5" type="text" name="token_secret" tabindex="4" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                    <input class="span5" type="text" name="token_secret" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                    <span class="help-block"></span>
                                 </div>
-                                <span class="help-block"></span>
                             </div>
                         </div>
                     </div>
@@ -165,466 +174,679 @@
             </form>
         </div>
 
-        <div class="container">
-            <div class="content">
-                <div class="page-header">
-                    <h1>Request <small></small></h1>
+        <div class="container-fluid">
+            <div class="sidebar">
+                <div class="page">
+                    <h5>Services</h5>
+                    <select class="span3">
+                        <option>Twitter</option>
+                        <option>Facebook</option>
+                        <option>LinkedIn</option>
+                    </select>
+
+                    <h5>History</h5>
                 </div>
-
-                <form class="form-stacked" name="request" novalidate>
-                    <div class="row">
-                        <div class="span8">
-                            <fieldset>
-                                <legend>Target</legend>
-
-                                <div class="clearfix">
-                                    <label for="uri">Request URI</label>
-                                    <div class="input">
-                                        <input class="span8" type="text" name="uri" tabindex="2" autocomplete="on" placeholder="http://example.com/resources/ef7d-xj36p" required/>
-                                    </div>
-                                    <span class="help-block">Universal Resource Identifier.</span>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="method">Request Method</label>
-                                    <div class="input">
-                                        <input class="span2" type="text" name="method" tabindex="2" autocomplete="on" placeholder="POST" list="methods" required/>
-                                    </div>
-                                    <span class="help-block">The desired action to be performed on the identified resource.</span>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="timeout">Request Timeout</label>
-                                    <div class="input">
-                                        <input class="span2" type="number" name="timeout" value="60" tabindex="2" min="1" step="1" required/>
-                                        <span>seconds</span>
-                                    </div>
-                                    <span class="help-block">Timeout in seconds before aborting.</span>
-                                </div>
-                            </fieldset>
-                        </div>
-
-                        <div class="span8">
-                            <fieldset>
-                                <legend>Accept</legend>
-
-                                <div class="clearfix">
-                                    <label for="accept">Content-Type</label>
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox" checked/></label>
-                                            <input class="span7" type="text" name="Accept" tabindex="3" autocomplete="on" placeholder="text/plain" list="mimetypes" required/>
-                                        </div>
-                                        <span class="help-block">Content-Types that are acceptable.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="charset">Charset</label>
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox" checked/></label>
-                                            <input class="span7" type="text" name="Accept-Charset" tabindex="3" autocomplete="on" placeholder="utf-8" list="charset" required/>
-                                        </div>
-                                        <span class="help-block">Character sets that are acceptable.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="encoding">Encoding</label>
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox" checked/></label>
-                                            <input class="span7" type="text" name="Accept-Encoding" tabindex="3" autocomplete="on" placeholder="identity" list="encoding" required/>
-                                        </div>
-                                        <span class="help-block">Acceptable encodings. <a href="http://en.wikipedia.org/wiki/HTTP_compression" target="_blank">See HTTP compression.</a></span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="language">Language</label>
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox" checked/></label>
-                                            <input class="span7" type="text" name="Accept-Language" tabindex="3" autocomplete="on" placeholder="en-US" list="language" required/>
-                                        </div>
-                                        <span class="help-block">Acceptable languages for response.</span>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="span16">
-                            <fieldset>
-                                <legend>Authorization</legend>
-
-                                <div class="clearfix">
-                                    <label for="version">Custom Authorization Header:</label>
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span13" type="text" name="Authorization" tabindex="4" autocomplete="on" placeholder="" disabled/>
-                                            <button class="btn authorization" data-type="basic">Basic</button>
-                                            <button class="btn authorization" data-type="oauth">oAuth</button>
-                                        </div>
-                                    </div>
-                                    <span class="help-block">Authentication credentials for HTTP authentication.</span>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="span8">
-                            <fieldset>
-                                <legend>Headers</legend>
-
-                                <div class="clearfix">
-                                    <label for="date">Date</label>
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Date" tabindex="5" autocomplete="off" placeholder="Tue, 15 Nov 1994 08:12:31 GMT" disabled/>
-                                        </div>
-                                        <span class="help-block">The date and time that the message was sent</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="connection">Connection</label>
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Connection" tabindex="5" autocomplete="off" placeholder="close" disabled/>
-                                        </div>
-                                        <span class="help-block">What type of connection the user-agent would prefer</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="expect">Expect</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Expect" tabindex="5" autocomplete="off" placeholder="100-continue" disabled/>
-                                        </div>
-                                        <span class="help-block">Indicates that particular server behaviors are required by the client</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="forwards">Max-Forwards</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Max-Forwards" tabindex="5" autocomplete="off" placeholder="10" disabled/>
-                                        </div>
-                                        <span class="help-block">Limit the number of times the message can be forwarded through proxies or gateways.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="range">Range</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Range" tabindex="5" autocomplete="off" placeholder="bytes=500-999" disabled/>
-                                        </div>
-                                        <span class="help-block">Request only part of an entity. Bytes are numbered from 0.   </span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="referer">Referer</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Referer" tabindex="5" autocomplete="off" placeholder="http://www.restconsole.com/" disabled/>
-                                        </div>
-                                        <span class="help-block">This address of the previous web page from which a link to the currently requested page was followed. </span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="agent">User-Agent</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="User-Agent" tabindex="5" autocomplete="off" placeholder="Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)" disabled/>
-                                        </div>
-                                        <span class="help-block">The user agent string of the user agent.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="From">From</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="From" tabindex="5" autocomplete="off" placeholder="user@example.com" disabled/>
-                                        </div>
-                                        <span class="help-block">The email address of the user making the request.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="via">Via</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Via" tabindex="5" autocomplete="off" placeholder="1.0 fred, 1.1 nowhere.com (Apache/1.1)" disabled/>
-                                        </div>
-                                        <span class="help-block">Informs the server of proxies through which the request was sent.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="Proxy-Authorization">Proxy-Authorization</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Proxy-Authorization" tabindex="5" autocomplete="off" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
-                                        </div>
-                                        <span class="help-block">Authorization credentials for connecting to a proxy.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="TE">Transfer-Encoding</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="TE" tabindex="5" autocomplete="off" placeholder="trailers, deflate" disabled/>
-                                        </div>
-                                        <span class="help-block">The transfer encodings the user agent is willing to accept.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="Upgrade">Upgrade</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Upgrade" tabindex="5" autocomplete="off" placeholder="HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11" disabled/>
-                                        </div>
-                                        <span class="help-block">Ask the server to upgrade to another protocol.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="Warning">Warning</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Warning" tabindex="5" autocomplete="off" placeholder="199 Miscellaneous warning" disabled/>
-                                        </div>
-                                        <span class="help-block">A general warning about possible problems with the entity body.</span>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-
-                        <div class="span8">
-                            <fieldset>
-                                <legend>Cache</legend>
-
-                                <div class="clearfix">
-                                    <label for="cache">Cache-Control</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Cache-Control" tabindex="6" autocomplete="off" placeholder="no-cache" disabled/>
-                                        </div>
-                                        <span class="help-block">Used to specify directives that MUST be obeyed by all caching mechanisms along the request/response chain</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="match">If-Match</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="If-Match" tabindex="6" autocomplete="off" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
-                                        </div>
-                                        <span class="help-block">Only perform the action if the client supplied entity matches the same entity on the server.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="url">If-None-Match</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="If-None-Match" tabindex="6" autocomplete="off" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
-                                        </div>
-                                        <span class="help-block">Allows a 304 Not Modified to be returned if content is unchanged</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="url">If-Modified-Since</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="If-Modified-Since" tabindex="6" autocomplete="off" placeholder="Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
-                                        </div>
-                                        <span class="help-block">Allows a 304 Not Modified to be returned if content is unchanged</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="url">If-Unmodified-Since</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="If-Unmodified-Since" tabindex="6" autocomplete="off" placeholder="Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
-                                        </div>
-                                        <span class="help-block">Only send the response if the entity has not been modified since a specific time.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="url">If-Range</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="If-Range" tabindex="6" autocomplete="off" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
-                                        </div>
-                                        <span class="help-block">If the entity is unchanged, send me the part(s) that I am missing; otherwise, send me the entire new entity</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="pragma">Pragma</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="Pragma" tabindex="6" autocomplete="off" placeholder="no-cache" disabled/>
-                                        </div>
-                                        <span class="help-block">Implementation-specific headers that may have various effects anywhere along the request-response chain. </span>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            <fieldset>
-                                <legend>Common non-standard request headers</legend>
-
-                                <div class="clearfix">
-                                    <label for="X-Requested-With">X-Requested-With</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="X-Requested-With" tabindex="7" autocomplete="off" placeholder="XMLHttpRequest" disabled/>
-                                        </div>
-                                        <span class="help-block">mainly used to identify Ajax requests.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="X-Do-Not-Track">X-Do-Not-Track</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="X-Do-Not-Track" tabindex="7" autocomplete="off" placeholder="1" disabled/>
-                                        </div>
-                                        <span class="help-block">Requests a web application to disable their tracking of a user.</span>
-                                    </div>
-                                </div>
-
-                                <div class="clearfix">
-                                    <label for="DNT">DNT</label>
-
-                                    <div class="input">
-                                        <div class="input-prepend">
-                                            <label class="add-on"><input type="checkbox"/></label>
-                                            <input class="span7" type="text" name="DNT" tabindex="7" autocomplete="off" placeholder="1" disabled/>
-                                        </div>
-                                        <span class="help-block">Requests a web application to disable their tracking of a user. (This is Mozilla's version of the X-Do-Not-Track header)</span>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="span8">
-                            <fieldset>
-                                <legend>Body</legend>
-
-                                <div class="clearfix">
-                                    <label for="url"></label>
-                                    <div class="input">
-                                        <span class="help-block">indicates the media type of the entity-body sent to the recipient.</span>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-
-                        <div class="span8">
-                            <fieldset>
-                                <legend>Headers</legend>
-
-                                <div class="clearfix">
-                                    <label for="url"></label>
-                                    <div class="input">
-                                        <span class="help-block"></span>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-
-                    <div class="actions">
-                        <button type="submit" class="btn primary">Send</button>
-                        <button type="button" class="btn danger">Reset</button>
-                        <button type="reset" class="btn success">Save Defaults</button>
-
-                        <div class="pull-right">
-                            <button type="submit" class="btn info">GET</button>
-                            <button type="submit" class="btn info">POST</button>
-                            <button type="submit" class="btn info">PUT</button>
-                            <button type="submit" class="btn info">DELETE</button>
-                        </div>
-                    </div>
-                </form>
             </div>
 
             <div class="content">
-                <div class="page-header">
-                    <h1>Response <small></small></h1>
+                <div class="page" id="options">
+                    <div class="page-header">
+                        <h1>Options</h1>
+                    </div>
 
-                    <pre class="prettyprint">
-                    </pre>
+                    <form class="form-stacked" name="options" novalidate>
+                        <div class="row">
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>General</legend>
+
+                                    <div class="clearfix">
+                                        <label>
+                                            <input type="checkbox" name="help" checked/>
+                                            <span>Show Help Lines</span>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Syntax Highlighting</legend>
+
+                                    <div class="clearfix">
+                                        <label>
+                                            <input type="checkbox" name="lines" checked/>
+                                            <span>Show Lines Numbers</span>
+                                        </label>
+                                        <span class="help-block">Results are not immediate, will affect next request.</span>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="theme">Theme</label>
+                                        <span class="help-block">Syntax highlighting color theme.</span>
+                                        <label>
+                                            <input type="radio" name="theme" value="default"/>
+                                            <span>Default</span>
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="theme" value="bootstrap" checked/>
+                                            <span>Bootstrap</span>
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="theme" value="sunburst"/>
+                                            <span>Sunburst</span>
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="theme" value="desert"/>
+                                            <span>Desert</span>
+                                        </label>
+
+                                        <label>
+                                            <input type="radio" name="theme" value="sons-of-obsidian"/>
+                                            <span>Sons of Obsidian</span>
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+
+
+                        <div class="actions">
+                            <input type="submit" class="btn primary" value="Save"/>
+                        </div>
+                    </form>
                 </div>
 
-            </div>
+                <div class="page" id="request">
+                    <div class="page-header">
+                        <h1>Request</h1>
+                    </div>
 
-            <footer>
-                <p>Developed by <a href="http://www.codeinchaos.com" target="_blank">Code in Chaos Inc.</a></p>
-                <p><a href="https://github.com/codeinchaos/rest-console" target="_blank">Source Code</a> | <a href="https://github.com/codeinchaos/rest-console/issues" target="_blank">Issues</a> | <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">License</a></p>
-            </footer>
+                    <form class="form-stacked" name="request" novalidate>
+                        <div class="row">
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Target</legend>
+
+                                    <div class="clearfix">
+                                        <label for="uri">Request URI</label>
+                                        <div class="input">
+                                            <input class="span8" type="text" name="uri" tabindex="2" autocomplete="on" placeholder="http://example.com/resources/ef7d-xj36p" required/>
+                                            <span class="help-block">Universal Resource Identifier.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="method">Request Method</label>
+                                        <div class="input">
+                                            <input class="span2" type="text" name="method" tabindex="2" autocomplete="on" placeholder="POST" list="methods" required/>
+                                            <span class="help-block">The desired action to be performed on the identified resource.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="timeout">Request Timeout</label>
+                                        <div class="input">
+                                            <input class="span2" type="number" name="timeout" value="60" tabindex="2" min="1" step="1" required/>
+                                            <span>seconds</span>
+                                            <span class="help-block">Timeout in seconds before aborting.</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Accept</legend>
+
+                                    <div class="clearfix">
+                                        <label for="accept">Content-Type</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Accept" tabindex="3" autocomplete="on" placeholder="text/plain" list="mimetypes" disabled/>
+                                            </div>
+                                            <span class="help-block">Content-Types that are acceptable.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="charset">Charset</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Accept-Charset" tabindex="3" autocomplete="on" placeholder="utf-8" list="charset" disabled/>
+                                            </div>
+                                            <span class="help-block">Character sets that are acceptable.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="encoding">Encoding</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Accept-Encoding" tabindex="3" autocomplete="on" placeholder="identity" list="encoding" disabled/>
+                                            </div>
+                                            <span class="help-block">Acceptable encodings. <a href="http://en.wikipedia.org/wiki/HTTP_compression" target="_blank">See HTTP compression.</a></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="language">Language</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Accept-Language" tabindex="3" autocomplete="on" placeholder="en-US" list="language" disabled/>
+                                            </div>
+                                            <span class="help-block">Acceptable languages for response.</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Content Headers</legend>
+
+                                    <div class="clearfix">
+                                        <label for="Content-Type">Content-Type</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Content-Type" tabindex="4" autocomplete="on" placeholder="application/x-www-form-urlencoded" list="mimetypes" disabled/>
+                                            </div>
+                                            <span class="help-block">The mime type of the body of the request (used with POST and PUT requests)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="encoding">Encoding</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="encoding" tabindex="4" autocomplete="on" placeholder="utf-8" list="encoding" disabled/>
+                                            </div>
+                                            <span class="help-block">Acceptable encodings. <a href="http://en.wikipedia.org/wiki/HTTP_compression" target="_blank">See HTTP compression.</a></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="Content-Length">Content-Length</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Content-Length" tabindex="4" autocomplete="on" placeholder="348" disabled/>
+                                            </div>
+                                            <span class="help-block">The length of the request body in octets (8-bit bytes).</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="Cookie">Cookie</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Cookie" tabindex="4" autocomplete="on" placeholder="UserID=JohnDoe; Max-Age=3600; Version=1" disabled/>
+                                            </div>
+                                            <span class="help-block">an HTTP cookie previously sent by the server</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="Content-MD5">Content-MD5</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Content-MD5" tabindex="4" autocomplete="on" placeholder="Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
+                                            </div>
+                                            <span class="help-block">A Base64-encoded binary MD5 sum of the content of the request body.</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Content Body</legend>
+
+                                    <div class="clearfix">
+                                        <label for="raw">RAW Body</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <textarea class="span7" name="raw" rows="13" tabindex="5" placeholder="XML, JSON, etc ..." disabled></textarea>
+                                            </div>
+                                            <span class="help-block">This will create a RAW body and treat the params below as query string params only.</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Content Body</legend>
+
+                                    <div class="clearfix">
+                                        <label for="raw">Request Parameters</label>
+                                        <div class="input">
+                                            <div class="input">
+                                                <ul class="unstyled params">
+                                                    <li>
+                                                        <input class="span3" type="text" name="key" tabindex="3" autocomplete="on" placeholder="key" disabled/>
+                                                        <input class="span4" type="text" name="value" tabindex="3" autocomplete="on" placeholder="value" disabled/>
+                                                        <input class="span1 btn danger" type="button" value="&mdash;"/>
+                                                        <input class="span1 btn success" type="button" value="+"/>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span class="help-block"> body and treat the params above as query string params only.</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Custom Headers</legend>
+
+                                    <div class="clearfix">
+                                        <label for="raw">Request Parameters</label>
+                                        <div class="input">
+                                            <div class="input">
+                                                <ul class="unstyled headers">
+                                                    <li>
+                                                        <input class="span3" type="text" name="key" tabindex="3" autocomplete="on" placeholder="header" disabled/>
+                                                        <input class="span4" type="text" name="value" tabindex="3" autocomplete="on" placeholder="value" disabled/>
+                                                        <input class="span1 btn danger" type="button" value="&mdash;"/>
+                                                        <input class="span1 btn success" type="button" value="+"/>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span class="help-block"> body and treat the params above as query string params only.</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="span16">
+                                <fieldset>
+                                    <legend>Attachements</legend>
+
+                                    <div class="clearfix">
+                                        <label for="files">File input</label>
+                                        <div class="input">
+                                            <input class="input-file" name="files" type="file"/>
+                                            <span class="help-block">Authentication credentials for HTTP authentication.</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="span16">
+                                <fieldset>
+                                    <legend>Authorization</legend>
+
+                                    <div class="clearfix">
+                                        <label for="version">Authorization Header:</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span13" type="text" name="Authorization" tabindex="4" autocomplete="on" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
+                                                <input class="btn authorization" type="button" data-type="basic" value="Basic"/>
+                                                <input class="btn authorization" type="button" data-type="oauth" value="oAuth"/>
+                                            </div>
+                                            <span class="help-block">Authentication credentials for HTTP authentication.</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Headers</legend>
+
+                                    <div class="clearfix disabled">
+                                        <label for="date">Date</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Date" tabindex="5" autocomplete="off" placeholder="Tue, 15 Nov 1994 08:12:31 GMT" disabled/>
+                                            </div>
+                                            <span class="help-block">The date and time that the message was sent</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="connection">Connection</label>
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Connection" tabindex="5" autocomplete="off" placeholder="keep-alive" disabled/>
+                                            </div>
+                                            <span class="help-block">What type of connection the user-agent would prefer</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="expect">Expect</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Expect" tabindex="5" autocomplete="off" placeholder="100-continue" disabled/>
+                                            </div>
+                                            <span class="help-block">Indicates that particular server behaviors are by the client</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="forwards">Max-Forwards</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Max-Forwards" tabindex="5" autocomplete="off" placeholder="10" disabled/>
+                                            </div>
+                                            <span class="help-block">Limit the number of times the message can be forwarded through proxies or gateways.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="range">Range</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Range" tabindex="5" autocomplete="off" placeholder="bytes=500-999" disabled/>
+                                            </div>
+                                            <span class="help-block">Request only part of an entity. Bytes are numbered from 0.   </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="referer">Referer</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Referer" tabindex="5" autocomplete="off" placeholder="http://www.restconsole.com/" disabled/>
+                                            </div>
+                                            <span class="help-block">This address of the previous web page from which a link to the currently requested page was followed. </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="agent">User-Agent</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="User-Agent" tabindex="5" autocomplete="off" placeholder="Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)" disabled/>
+                                            </div>
+                                            <span class="help-block">The user agent string of the user agent.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="From">From</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="From" tabindex="5" autocomplete="off" placeholder="user@example.com" disabled/>
+                                            </div>
+                                            <span class="help-block">The email address of the user making the request.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="via">Via</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Via" tabindex="5" autocomplete="off" placeholder="1.0 fred, 1.1 nowhere.com (Apache/1.1)" disabled/>
+                                            </div>
+                                            <span class="help-block">Informs the server of proxies through which the request was sent.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="Proxy-Authorization">Proxy-Authorization</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Proxy-Authorization" tabindex="5" autocomplete="off" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
+                                            </div>
+                                            <span class="help-block">Authorization credentials for connecting to a proxy.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="TE">Transfer-Encoding</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="TE" tabindex="5" autocomplete="off" placeholder="trailers, deflate" disabled/>
+                                            </div>
+                                            <span class="help-block">The transfer encodings the user agent is willing to accept.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix disabled">
+                                        <label for="Upgrade">Upgrade</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Upgrade" tabindex="5" autocomplete="off" placeholder="HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11" disabled/>
+                                            </div>
+                                            <span class="help-block">Ask the server to upgrade to another protocol.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="Warning">Warning</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Warning" tabindex="5" autocomplete="off" placeholder="199 Miscellaneous warning" disabled/>
+                                            </div>
+                                            <span class="help-block">A general warning about possible problems with the entity body.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="pragma">Pragma</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Pragma" tabindex="6" autocomplete="off" placeholder="no-cache" disabled/>
+                                            </div>
+                                            <span class="help-block">Implementation-specific headers that may have various effects anywhere along the request-response chain. </span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <div class="span8">
+                                <fieldset>
+                                    <legend>Cache</legend>
+
+                                    <div class="clearfix">
+                                        <label for="cache">Cache-Control</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="Cache-Control" tabindex="6" autocomplete="off" placeholder="no-cache" disabled/>
+                                            </div>
+                                            <span class="help-block">Used to specify directives that MUST be obeyed by all caching mechanisms along the request/response chain</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="match">If-Match</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="If-Match" tabindex="6" autocomplete="off" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
+                                            </div>
+                                            <span class="help-block">Only perform the action if the client supplied entity matches the same entity on the server.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="url">If-None-Match</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="If-None-Match" tabindex="6" autocomplete="off" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
+                                            </div>
+                                            <span class="help-block">Allows a 304 Not Modified to be returned if content is unchanged</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="url">If-Modified-Since</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="If-Modified-Since" tabindex="6" autocomplete="off" placeholder="Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
+                                            </div>
+                                            <span class="help-block">Allows a 304 Not Modified to be returned if content is unchanged</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="url">If-Unmodified-Since</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="If-Unmodified-Since" tabindex="6" autocomplete="off" placeholder="Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
+                                            </div>
+                                            <span class="help-block">Only send the response if the entity has not been modified since a specific time.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="url">If-Range</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="If-Range" tabindex="6" autocomplete="off" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
+                                            </div>
+                                            <span class="help-block">If the entity is unchanged, send me the part(s) that I am missing; otherwise, send me the entire new entity</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <fieldset>
+                                    <legend>Common non-standard request headers</legend>
+
+                                    <div class="clearfix">
+                                        <label for="X-Requested-With">X-Requested-With</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="X-Requested-With" tabindex="7" autocomplete="off" placeholder="XMLHttpRequest" disabled/>
+                                            </div>
+                                            <span class="help-block">mainly used to identify Ajax requests.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="X-Do-Not-Track">X-Do-Not-Track</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="X-Do-Not-Track" tabindex="7" autocomplete="off" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block">Requests a web application to disable their tracking of a user.</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix">
+                                        <label for="DNT">DNT</label>
+
+                                        <div class="input">
+                                            <div class="input-prepend">
+                                                <label class="add-on"><input type="checkbox"/></label>
+                                                <input class="span7" type="text" name="DNT" tabindex="7" autocomplete="off" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block">Requests a web application to disable their tracking of a user. (This is Mozilla's version of the X-Do-Not-Track header)</span>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <input type="submit" class="btn primary" value="Send"/>
+                            <input type="button" class="btn info" value="GET"/>
+                            <input type="button" class="btn info" value="POST"/>
+                            <input type="button" class="btn info" value="PUT"/>
+                            <input type="button" class="btn info" value="DELETE"/>
+
+                            <div class="pull-right">
+                                <input type="reset" class="btn danger" value="Reset"/>
+                                <input type="button" class="btn success defaults" value="Save Defaults"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="page" id="response">
+                    <div class="page-header">
+                        <h1>Response</h1>
+                    </div>
+
+                    <h2>Request Headers</h2>
+                    <pre id="requestHeaders" class="prettyprint"></pre>
+
+                    <h2>Request Body</h2>
+                    <pre id="requestText" class="prettyprint"></pre>
+
+                    <h2>Response Headers</h2>
+                    <pre id="responseHeaders" class="prettyprint"></pre>
+
+                    <h2>Response Body</h2>
+                    <pre id="responseText" class="prettyprint"></pre>
+
+                    <div class="clearfix"><br/></div>
+                </div>
+
+                <footer>
+                    <p>Developed by <a href="http://www.codeinchaos.com" target="_blank">Code in Chaos Inc.</a></p>
+                    <p><a href="https://github.com/codeinchaos/rest-console" target="_blank">Source Code</a> | <a href="https://github.com/codeinchaos/rest-console/issues" target="_blank">Issues</a> | <a href="http://www.opensource.org/licenses/mit-license.php" target="_blank">License</a></p>
+                </footer>
+            </div>
         </div>
 
         <datalist id="mimetypes">
@@ -805,6 +1027,7 @@
             <option value="text/x-sh"/>
             <option value="text/x-vcalendar"/>
             <option value="text/x-vcard"/>
+            <option value="text/xml"/>
             <option value="video/3gpp"/>
             <option value="video/fli"/>
             <option value="video/mpeg"/>
@@ -1020,9 +1243,13 @@
             <option value="2.0"/>
         </datalist>
 
+        <script src="js/beautify.js"></script>
+        <script src="js/OAuthSimple.js"></script>
+        <script src="js/prettify/prettify.js"></script>
+
         <script src="js/mootools-core-1.4.0.js"></script>
         <script src="js/mootools-more-1.4.0.1.js"></script>
 
-        <script src="js/OAuthSimple.js"></script>
+        <script src="js/request.js"></script>
         <script src="js/app.js"></script>
 </html>
