@@ -312,9 +312,6 @@ window.addEvent('domready', function() {
             } else if (data.uri == '' || !/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(data.uri)) {
                 Error('Invalid Input', 'Please enter a valid URI', this.getElement('input[name="uri"]'));
             } else {
-                // replace buttons with animation
-                document.getElement('form[name="request"] .actions').addClass('progress');
-
                 if (data.encoding) {
                 // special condition for encoding
                     data['Content-Type'] = data['Content-Type'] + '; charset=' + data.encoding;
@@ -329,9 +326,23 @@ window.addEvent('domready', function() {
                     'raw': data.raw,
                     'headers': headers,
 
+                    'onRequest': function() {
+                        // replace buttons with animation
+                        document.getElement('form[name="request"] .actions').addClass('progress');
+                    },
+
+                    'onProgress': function(event, xhr){
+                        var loaded = event.loaded, total = event.total;
+
+                        //console.log(parseInt(loaded / total * 100, 10));
+                    },
+
                     'onTimeout': function() {
                         // TODO replace with notice
                         Error('Error', 'Connection Timed-out');
+
+                        // remove loading animation
+                        document.getElement('form[name="request"] .actions').removeClass('progress');
                     },
 
                     'onCancel': function() {
