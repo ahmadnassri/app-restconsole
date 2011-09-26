@@ -10,7 +10,7 @@ var RESTRequest = this.RESTRequest = new Class({
     options: {
         url: '',
         raw: '',
-        data: '',
+        data: {},
         files: [],
         headers: {},
         async: true,
@@ -158,7 +158,7 @@ var RESTRequest = this.RESTRequest = new Class({
             url += (url.contains('?') ? '&' : '?') + String.uniqueID();
 
         // REST Console: if RAW data is present, treat `data` as query string
-        if (data && (method == 'get' || this.options.raw != '')) {
+        if (data && (method == 'get' || this.options.raw != undefined)) {
             url += (url.contains('?') ? '&' : '?') + data;
             data = null;
         }
@@ -198,7 +198,7 @@ var RESTRequest = this.RESTRequest = new Class({
             });
 
             xhr.send(upload);
-        } else if (this.options.raw != '') {
+        } else if (this.options.raw != undefined) {
             xhr.send(this.options.raw);
         } else {
             xhr.send(data);

@@ -22,9 +22,9 @@
                     <div class="brand"><img src="images/logo/32.png" align="left"/> REST Console <small>version 4.0.0</small></div>
 
                     <ul class="nav">
-                        <li><a href="#options"><span>O</span>ptions</a></li>
-                        <li><a href="#request">Re<span>q</span>uest</a></li>
-                        <li><a href="#response"><span>R</span>esponse</a></li>
+                        <li><a href="#options" scroll><span>O</span>ptions</a></li>
+                        <li><a href="#request" scroll>Re<span>q</span>uest</a></li>
+                        <li><a href="#response" scroll><span>R</span>esponse</a></li>
                     </ul>
 <!--
                     <form action="" class="pull-right">
@@ -224,36 +224,49 @@
                                     <div class="clearfix">
                                         <label for="theme">Theme</label>
                                         <span class="help-block">Syntax highlighting color theme.</span>
-                                        <label>
-                                            <input type="radio" name="theme" value="default"/>
-                                            <span>Default</span>
-                                        </label>
 
-                                        <label>
-                                            <input type="radio" name="theme" value="bootstrap" checked/>
-                                            <span>Bootstrap</span>
-                                        </label>
+                                        <div class="row">
+                                            <div class="span2">
+                                                <label>
+                                                    <input type="radio" name="theme" value="default"/>
+                                                    <span>Default</span>
+                                                </label>
+                                            </div>
 
-                                        <label>
-                                            <input type="radio" name="theme" value="sunburst"/>
-                                            <span>Sunburst</span>
-                                        </label>
+                                            <div class="span2">
+                                                <label>
+                                                    <input type="radio" name="theme" value="bootstrap" checked/>
+                                                    <span>Bootstrap</span>
+                                                </label>
+                                            </div>
 
-                                        <label>
-                                            <input type="radio" name="theme" value="desert"/>
-                                            <span>Desert</span>
-                                        </label>
+                                            <div class="span2">
+                                                <label>
+                                                    <input type="radio" name="theme" value="desert"/>
+                                                    <span>Desert</span>
+                                                </label>
+                                            </div>
+                                        </div>
 
-                                        <label>
-                                            <input type="radio" name="theme" value="sons-of-obsidian"/>
-                                            <span>Sons of Obsidian</span>
-                                        </label>
+                                        <div class="row">
+                                            <div class="span2">
+                                                <label>
+                                                    <input type="radio" name="theme" value="sunburst"/>
+                                                    <span>Sunburst</span>
+                                                </label>
+                                            </div>
+
+                                            <div class="span3">
+                                                <label>
+                                                    <input type="radio" name="theme" value="sons-of-obsidian"/>
+                                                    <span>Sons of Obsidian</span>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </fieldset>
                             </div>
                         </div>
-
-
 
                         <div class="actions">
                             <input type="submit" class="btn primary" value="Save"/>
@@ -807,7 +820,7 @@
                             </div>
                         </div>
 
-                        <div class="actions">
+                        <div class="actions fixed">
                             <input type="submit" class="btn primary" value="Send"/>
                             <input type="button" class="btn info" value="GET"/>
                             <input type="button" class="btn info" value="POST"/>
@@ -817,6 +830,8 @@
                             <div class="pull-right">
                                 <input type="reset" class="btn danger" value="Reset"/>
                                 <input type="button" class="btn success defaults" value="Save Defaults"/>
+
+                                <input type="button" class="btn danger stop" value="Stop"/>
                             </div>
                         </div>
                     </form>
@@ -827,17 +842,21 @@
                         <h1>Response</h1>
                     </div>
 
-                    <h2>Request Headers</h2>
-                    <pre id="requestHeaders" class="prettyprint"></pre>
+                    <ul class="pills">
+                        <li><a href="#responseBody">Response Body</a></li>
+                        <li><a href="#responseHeaders">Response Headers</a></li>
+                        <li><a href="#responsePreview">Response Preview</a></li>
+                        <li><a href="#requestBody">Request Body</a></li>
+                        <li><a href="#requestHeaders">Request Headers</a></li>
+                    </ul>
 
-                    <h2>Request Body</h2>
-                    <pre id="requestText" class="prettyprint"></pre>
-
-                    <h2>Response Headers</h2>
-                    <pre id="responseHeaders" class="prettyprint"></pre>
-
-                    <h2>Response Body</h2>
-                    <pre id="responseText" class="prettyprint"></pre>
+                    <ul class="unstyled">
+                        <li class="hide"><pre id="responseBody" class="prettyprint"></pre></li>
+                        <li class="hide"><pre id="responseHeaders" class="prettyprint"></pre></li>
+                        <li class="hide"><div id="responsePreview"></div></li>
+                        <li class="hide"><pre id="requestBody" class="prettyprint"></pre></li>
+                        <li class="hide"><pre id="requestHeaders" class="prettyprint"></pre></li>
+                    </ul>
 
                     <div class="clearfix"><br/></div>
                 </div>

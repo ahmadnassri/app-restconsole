@@ -11,14 +11,46 @@ Error = function(title, text, element) {
     }
 };
 
+// add events
 window.addEvent('domready', function() {
     // enable smooth scrolling
     new Fx.SmoothScroll({
-        offset: {
-            y: -50
-        },
-        links: 'a[href^="#"]',
-        wheelStops: false
+        'offset': { 'y': -50 },
+        'links': 'a[scroll][href^="#"]',
+        'wheelStops': true
+    });
+
+    document.addEvent('click:relay(.prettyprint span.str)', function(event) {
+        document.getElement('input[name="uri"]').set('value',this.get('text').replace(/"/g,''));
+        //document.getElement('nav ul li a[href="#target"]').fireEvent('click')
+    });
+
+    // special scroll listener for the request form actions bar
+    window.addEvent('scroll', function(event) {
+        var scroll = window.getSize().y + window.getScroll().y;
+        var coordinates = document.id('request').getCoordinates();
+
+        var element = document.getElement('form[name="request"] .actions');
+
+        if (scroll - 200 <= coordinates.top || scroll >= coordinates.bottom) {
+            element.removeClass('fixed');
+        } else {
+            element.addClass('fixed');
+        }
+    });
+
+    // pills actions
+    document.getElements('ul.pills li a').addEvent('click', function(event) {
+        event.preventDefault();
+
+        var ul = this.getParent('ul');
+
+        ul.getElements('.active').removeClass('active');
+        this.getParent().addClass('active');
+
+        // hide all then show the selected one
+        ul.getNext('ul').getElements(' > li').addClass('hide');
+        ul.getNext('ul').getElement(this.get('href')).getParent().removeClass('hide');
     });
 
     // remove errors
@@ -221,6 +253,13 @@ window.addEvent('domready', function() {
         localStorage.setItem('defaults', JSON.encode(defaults));
     });
 
+    // stop current xhr button
+    document.getElement('.stop').addEvent('click', function(event) {
+        if (window.XHR) {
+            window.XHR.cancel();
+        }
+    });
+
     // request form actions
     document.getElement('form[name="request"]').addEvents({
         'reset': function(event) {
@@ -273,6 +312,8 @@ window.addEvent('domready', function() {
             } else if (data.uri == '' || !/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(data.uri)) {
                 Error('Invalid Input', 'Please enter a valid URI', this.getElement('input[name="uri"]'));
             } else {
+                // replace buttons with animation
+                document.getElement('form[name="request"] .actions').addClass('progress');
 
                 if (data.encoding) {
                 // special condition for encoding
@@ -284,6 +325,7 @@ window.addEvent('domready', function() {
                     'method': data.method,
                     'encoding': data.encoding,
                     'timeout': data.timeout * 1000,
+                    'data': {},
                     'raw': data.raw,
                     'headers': headers,
 
@@ -292,7 +334,22 @@ window.addEvent('domready', function() {
                         Error('Error', 'Connection Timed-out');
                     },
 
+                    'onCancel': function() {
+                        // remove loading animation
+                        document.getElement('form[name="request"] .actions').removeClass('progress');
+                    },
+
                     'onComplete': function(responseText, responseXML) {
+                        // rest response fields
+                        document.id('responseBody').empty().set('class', 'prettyprint');
+                        document.id('responseHeaders').empty().set('class', 'prettyprint');
+                        document.id('responsePreview').empty();
+                        document.id('requestBody').empty().set('class', 'prettyprint');
+                        document.id('requestHeaders').empty().set('class', 'prettyprint');
+
+                        // trigger show/hide line numbers
+                        document.getElement('form[name="options"] input[name="lines"]').fireEvent('change');
+
                         if (this.xhr.status == 0) {
                             Error('Connection Failed!', 'Check your connectivity and try again');
                         } else {
@@ -323,7 +380,8 @@ window.addEvent('domready', function() {
                                 requestHeaders += key + ': ' + value + "\n";
                             });
 
-                            document.id('requestText').set('text', requestText);
+                            // setup response area
+                            document.id('requestBody').set('text', requestText);
                             document.id('requestHeaders').set('text', requestHeaders);
                             document.id('responseHeaders').set('text', 'Status Code: ' + this.xhr.status + "\n" + this.xhr.getAllResponseHeaders());
 
@@ -342,8 +400,8 @@ window.addEvent('domready', function() {
                                 case 'application/ecmascript':
                                 case 'application/javascript':
                                 case 'application/json':
-                                    responseText = beautify.js(this.xhr.responseText);
-                                    document.id('responseText').addClass('lang-js').set('text', responseText);
+                                    responseText = beautify.js(responseText);
+                                    document.id('responseBody').addClass('lang-js').set('text', responseText);
                                     break;
 
                                 case 'application/atom+xml':
@@ -354,34 +412,61 @@ window.addEvent('domready', function() {
                                 case 'application/docbook+xml':
                                 case 'application/rdf+xml':
                                 case 'application/rss+xml':
-                                case 'application/xhtml+xml':
                                 case 'application/xml':
                                 case 'application/xspf+xml':
                                 case 'application/vnd.google-earth.kml+xml':
                                 case 'application/vnd.mozilla.xul+xml':
                                 case 'image/svg+xml':
                                 case 'text/xml':
-                                    //responseXML = beautify.xml(this.xhr.responseXML);
+                                    responseXML = beautify.xml(responseXML);
 
-                                    //var declaration = this.xhr.responseText.match(/^(\s*)(<\?xml.+?\?>)/i);
-
-                                    //document.id('responseText').addClass('lang-xml');
-                                    //document.id('responseText').appendText(declaration[2] + "\n", 'top');
+                                    var declaration = responseText.match(/^(\s*)(<\?xml.+?\?>)/i);
+                                    document.id('responseBody').addClass('lang-xml').set('text', declaration[2] + "\n" + responseXML.firstChild.nodeValue);
                                     break;
 
                                 case 'text/html':
-                                    document.id('responseText').addClass('lang-html').set('text', this.xhr.responseText);
+                                case 'application/xhtml+xml':
+                                    document.id('responseBody').addClass('lang-html').set('text', responseText);
+
+                                    // create and inject the iframe object
+                                    var iframe = new IFrame();
+                                    document.id('responsePreview').adopt(iframe);
+
+                                    // start writing
+                                    var doc = iframe.contentWindow.document;
+                                    doc.open();
+                                    doc.write(responseText);
+                                    doc.close();
                                     break;
                             }
 
+                            // syntax highlighting
                             prettyPrint();
 
+                            // scroll to the response area
                             document.getElement('a[href="#response"]').fireEvent('click', new DOMEvent());
+
+                            // open the response body tab
+                            document.getElement('a[href="#responseBody"]').fireEvent('click', new DOMEvent());
+
+                            // remove loading animation
+                            document.getElement('form[name="request"] .actions').removeClass('progress');
                         }
                     }
                 };
 
-                new RESTRequest(options).send();
+                var params = {
+                    'keys': this.getElements('ul input[name="key"]'),
+                    'values': this.getElements('ul input[name="value"]')
+                };
+
+                params.keys.each(function(key, index) {
+                    if (key.get('value') != '') {
+                        options.data[key.get('value')] = params.values[index].get('value');
+                    }
+                });
+
+                window.XHR = new RESTRequest(options).send();
             }
         }
     }).fireEvent('reset', new DOMEvent);
