@@ -449,6 +449,37 @@ window.addEvent('domready', function() {
                                     doc.write(responseText);
                                     doc.close();
                                     break;
+/*
+ * requires xhr.responseType to be set BEFORE the request is sent
+ * this.xhr.responseType = 'blob' or this.xhr.responseType = 'arraybuffer'
+
+                                case 'image/jpeg':
+                                    // create and inject the iframe object
+                                    var iframe = new IFrame();
+                                    document.id('responsePreview').adopt(iframe);
+
+                                    // render the image blob
+                                    var bb = new window.WebKitBlobBuilder();
+                                    bb.append(this.xhr.response);
+
+                                    // if using arraybuffer do this
+                                    // other wise just use blob method
+                                    // but its not currently implemented in chrome
+                                    var blob = bb.getBlob('image/png');
+
+                                    //~ var img = document.createElement('img');
+                                    //~ img.onload = function(e) {
+                                      //~ window.webkitURL.revokeObjectURL(img.src); // Clean up after yourself.
+                                    //~ };
+                                    var src = window.webkitURL.createObjectURL(blob);
+
+                                    // start writing
+                                    var doc = iframe.contentWindow.document;
+                                    doc.open();
+                                    doc.write('<img src="' + src + '"/>');
+                                    doc.close();
+                                    break;
+ */
                             }
 
                             // syntax highlighting
@@ -466,9 +497,22 @@ window.addEvent('domready', function() {
                     }
                 };
 
+                // set custom headers
+                var headers = {
+                    'keys': this.getElements('ul.headers input[name="key"]'),
+                    'values': this.getElements('ul.headers input[name="value"]')
+                };
+
+                headers.keys.each(function(key, index) {
+                    if (key.get('value') != '') {
+                        options.headers[key.get('value')] = headers.values[index].get('value');
+                    }
+                });
+
+                // set custom params
                 var params = {
-                    'keys': this.getElements('ul input[name="key"]'),
-                    'values': this.getElements('ul input[name="value"]')
+                    'keys': this.getElements('ul.params input[name="key"]'),
+                    'values': this.getElements('ul.params input[name="value"]')
                 };
 
                 params.keys.each(function(key, index) {
