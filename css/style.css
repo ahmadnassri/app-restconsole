@@ -173,25 +173,78 @@ pre:empty:before {
     margin-left: 240px;
 }
 
+form[name="request"] {
+    position: relative;
+
+    padding-bottom: 50px;
+}
+
 form[name="request"] .actions {
+    padding: 10px;
+
+    height: 30px;
+
+    width: 940px;
+
+    position: absolute;
+    bottom: 0px;
+}
+
+form[name="request"] .actions.fixed {
     position: fixed;
 
     z-index: 100;
 
-    padding: 10px 20px;
-
-    left: 0px;
     bottom: 0px;
+}
+
+form[name="request"] .actions input.stop {
+    display: none;
+}
+
+form[name="request"] .actions.progress {
+    background-image: url('../images/progress.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+form[name="request"] .actions.progress input.stop {
+    display: inline-block;
+}
+
+form[name="request"] .actions.progress input:not(.stop) {
+    display: none;
+}
+
+#responsePreview {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+background: #FEFBF3;
+padding: 9px;
+border: 1px solid rgba(0, 0, 0, .2);
+-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+
+
+font-family: Monaco, Andale Mono, Courier New, monospace;
+line-height: 18px;
+font-size: 12px;
+}
+
+#responsePreview:empty:before {
+    content: 'No Preview Available';
+}
+
+#responsePreview iframe {
     width: 100%;
-}
-
-form[name="request"] .actions .pull-right {
-    margin-right: 20px;
-}
-
-#response h2 {
-    font-size: 19.5px;
-    line-height: 1;
-    color: #404040;
-    font-weight: normal;
+    height: 100%;
+    border: none;
 }
