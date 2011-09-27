@@ -526,9 +526,8 @@ window.addEvent('domready', function() {
                     },
 
                     'onCancel': function() {
-                        // remove loading animation
-                        document.getElement('form[name="request"] .actions').removeClass('progress');
-                    },
+                        this.fireEvent('stop');
+                    }.bind(this),
 
                     'onComplete': function() {
                         // for non-success
@@ -547,6 +546,8 @@ window.addEvent('domready', function() {
 
                         if (this.xhr.status == 0) {
                             Error('Connection Failed!', 'Check your connectivity and try again');
+
+                            document.getElement('form[name="request"]').fireEvent('stop');
                         } else {
                             // construct request text
                             var requestText = 'Request URL: {0}\nRequest Method: {1}\n'.substitute([this.options.url, this.options.method]);
@@ -738,6 +739,9 @@ window.addEvent('domready', function() {
             if (window.XHR) {
                 window.XHR.cancel();
             }
+
+            // remove loading animation
+            document.getElement('form[name="request"] .actions').removeClass('progress');
         }
     }).fireEvent('reset', new DOMEvent);
 });
