@@ -284,3 +284,6 @@ font-size: 12px;
     cursor: pointer;
 }
 
+.form-stacked label span {
+    font-weight: normal;
+}
