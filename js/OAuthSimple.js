@@ -250,7 +250,7 @@ if (OAuthSimple === undefined)
          *                   {action:, path:, parameters:, method:, signatures:}
          *                   all arguments are optional.
          */
-        self.sign = function (args) {
+        self.sign = function (args, separator) {
             if (args === undefined) {
                 args = {};
                 }
@@ -273,7 +273,7 @@ if (OAuthSimple === undefined)
                 parameters: this._parameters,
                 signature: this._oauthEscape(this._parameters['oauth_signature']),
                 signed_url: this._path + '?' + this._normalizedParameters(),
-                header: this.getHeaderString()
+                header: this.getHeaderString(args, separator)
             };
         };
 
@@ -285,12 +285,15 @@ if (OAuthSimple === undefined)
          *
          * @param args {object} see .sign
          */
-        self.getHeaderString = function(args) {
+        self.getHeaderString = function(args, separator) {
             if (this._parameters['oauth_signature'] === undefined) {
                 this.sign(args);
                 }
+            var sep = separator || ' ';
+            var j,pName,pLength;
 
-            var j,pName,pLength,result = 'OAuth ';
+            var result = [];
+
             for (pName in this._parameters)
             {
                 if (pName.match(/^oauth/) === undefined) {
@@ -301,15 +304,15 @@ if (OAuthSimple === undefined)
                     pLength = this._parameters[pName].length;
                     for (j=0;j<pLength;j++)
                     {
-                        result += pName +'="'+this._oauthEscape(this._parameters[pName][j])+'" ';
+                        result.push(pName +'="'+this._oauthEscape(this._parameters[pName][j])+'"');
                     }
                 }
                 else
                 {
-                    result += pName + '="'+this._oauthEscape(this._parameters[pName])+'" ';
+                    result.push(pName + '="'+this._oauthEscape(this._parameters[pName])+'"');
                 }
             }
-            return result;
+            return 'OAuth ' + result.join(sep);
         };
 
         // Start Private Methods.

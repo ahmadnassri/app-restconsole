@@ -90,7 +90,7 @@ form.modal {
 }
 
 .messages {
-    z-index: 100;
+    z-index: 20000;
     position: fixed;
     width: 100%;
     margin-top: 10px;
@@ -173,6 +173,10 @@ pre:empty:before {
     margin-left: 240px;
 }
 
+form .actions {
+    padding: 10px;
+}
+
 form[name="request"] {
     position: relative;
 
@@ -180,8 +184,6 @@ form[name="request"] {
 }
 
 form[name="request"] .actions {
-    padding: 10px;
-
     height: 30px;
 
     width: 940px;

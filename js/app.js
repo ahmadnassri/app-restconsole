@@ -7,7 +7,6 @@ Error = function(title, text, element) {
 
     if (element) {
         element.getParent('.clearfix').addClass('error');
-        element.focus();
     }
 };
 
@@ -18,11 +17,6 @@ window.addEvent('domready', function() {
         'offset': { 'y': -50 },
         'links': 'a[scroll][href^="#"]',
         'wheelStops': true
-    });
-
-    document.addEvent('click:relay(.prettyprint span.str)', function(event) {
-        document.getElement('input[name="uri"]').set('value',this.get('text').replace(/"/g,''));
-        //document.getElement('nav ul li a[href="#target"]').fireEvent('click')
     });
 
     // special scroll listener for the request form actions bar
@@ -58,37 +52,21 @@ window.addEvent('domready', function() {
         this.removeClass('error');
     });
 
-    // save options
-    document.getElement('form[name="options"]').addEvent('submit', function(event) {
-        event.preventDefault();
-
-        // get form data
-        var data = this.toQueryString().parseQueryString();
-
-        // store checkboxes
-        this.getElements('input[type="checkbox"]').each(function(element) {
-            localStorage.setItem(element.get('name'), element.get('checked'));
-        });
-
-        // store theme
-        localStorage.setItem('theme', data.theme);
-    });
-
     // show/hide help blocks
     document.getElement('form[name="options"] input[name="help"]').addEvent('change', function(event) {
         if (this.get('checked')) {
-            document.getElements('.help-block').removeClass('hide');
-        } else {
             document.getElements('.help-block').addClass('hide');
+        } else {
+            document.getElements('.help-block').removeClass('hide');
         }
     });
 
     // show/hide line numbers
     document.getElement('form[name="options"] input[name="lines"]').addEvent('change', function(event) {
         if (this.get('checked')) {
-            document.getElements('.prettyprint').addClass('linenums');
-        } else {
             document.getElements('.prettyprint').removeClass('linenums');
+        } else {
+            document.getElements('.prettyprint').addClass('linenums');
         }
     });
 
@@ -97,22 +75,39 @@ window.addEvent('domready', function() {
         if (this.get('checked')) {
             document.head.getElementById('theme').set('href', 'css/prettify/' + this.get('value') + '.css');
         }
-    });
+    }).fireEvent('change');
 
-    // load stored options
-    Object.each(localStorage, function(value, key) {
-        // start with checkboxes
-        var checkbox = document.getElement('form[name="options"] input[type="checkbox"][name="{0}"]'.substitute([key]));
-        var radio = document.getElement('form[name="options"] input[type="radio"][name="{0}"][value="{1}"]'.substitute([key, value]));
+    // options form
+    document.getElement('form[name="options"]').addEvents({
+        'click:relay(input[type="button"], input[type="submit"], input[type="reset"])': function(event) {
+            event.preventDefault();
 
-        if (checkbox) {
-            checkbox.set('checked', value == 'true' ? true : false)
-            checkbox.fireEvent('change');
-        } else if (radio) {
-            radio.set('checked', true)
-            radio.fireEvent('change');
+            this.getParent('form').fireEvent(this.dataset.action, event);
+        },
+
+        'submit': function(event) {
+            var data = this.toQueryString().parseQueryString();
+            localStorage.setItem('options', JSON.encode(data));
+        },
+
+        'reset': function(event) {
+            var defaults = JSON.decode(localStorage.getItem('options'));
+
+            Object.each(defaults, function(value, key) {
+                var input = document.getElement('input[name="{0}"]:not([type="radio"]), input[type="radio"][name="{0}"][value="{1}"]'.substitute([key, value]));
+
+                switch (input.get('type')) {
+                    case 'checkbox':
+                        input.set('checked', value == 'on' ? true : false).fireEvent('change');
+                        break;
+
+                    case 'radio':
+                        input.set('checked', true).fireEvent('change');
+                        break;
+                }
+            });
         }
-    });
+    }).fireEvent('reset', new DOMEvent);
 
     // messages close action
     document.getElements('.messages .alert-message a.close').addEvent('click', function(event) {
@@ -120,11 +115,6 @@ window.addEvent('domready', function() {
 
         this.getParent('.messages').addClass('hide').getElements('.alert-message').addClass('hide');
     });
-
-    // field checkboxes
-    document.getElements('div.input-prepend > label.add-on > input[type="checkbox"]').addEvent('change', function(event) {
-        this.getParent('div.input-prepend > input, div.input-prepend > textarea').set('disabled', !this.get('checked'));
-    }).fireEvent('change');
 
     // modals backdrop action
     document.getElements('.modals .modal-backdrop').addEvent('click', function(event) {
@@ -138,32 +128,26 @@ window.addEvent('domready', function() {
         this.getParent('.modals').getElement('.modal-backdrop').fireEvent('click');
     });
 
-    // headers & params insert
-    document.getElements('ul.params li:last-of-type .btn.success, ul.headers li:last-of-type .btn.success').addEvent('click', function(event) {
-        event.preventDefault();
+    // field checkboxes
+    document.getElements('div.input-prepend > label.add-on > input[type="checkbox"]').addEvent('change', function(event) {
+        this.getParent('div.input-prepend > input, div.input-prepend > textarea').set('disabled', !this.get('checked'));
+    }).fireEvent('change');
 
-        row = this.getParent().clone();
-        this.getParent().grab(row, 'before');
-        row.getElements('input').set('disabled', false)[0].focus();
-    });
+    // headers & params
+    document.getElements('ul.params, ul.headers').addEvents({
+        'click:relay(.btn.success)': function(event) {
+            event.preventDefault();
 
-    // headers & params remove
-    document.getElements('ul.params, ul.headers').addEvent('click:relay(.btn.danger)', function(event) {
-        event.preventDefault();
+            row = this.getParent().clone();
+            this.getParent().grab(row, 'before');
+            row.getElements('input').set('disabled', false)[0].focus();
+        },
 
-        this.getParent().dispose();
-    });
+        'click:relay(.btn.danger)': function(event) {
+            event.preventDefault();
 
-    // authorization modals
-    document.getElements('input[type="button"].authorization').addEvent('click', function(event) {
-        event.preventDefault();
-
-        if (this.dataset.type == 'oauth' && document.getElement('input[name="uri"]').get('value') == '') {
-            Error('Missing Data', 'Please provide a target URI before setting oAuth Authorization', document.getElement('input[name="uri"]'));
-            return;
+            this.getParent().dispose();
         }
-
-        document.getElement('.modals').removeClass('hide').getElement('.modal.authorization.' + this.dataset.type).removeClass('hide');
     });
 
     // basic auth submit event
@@ -173,7 +157,9 @@ window.addEvent('domready', function() {
 
             var auth = this.toQueryString().parseQueryString();
 
-            document.getElement('input[name="Authorization"]').set('value', 'Basic ' + btoa(auth.username + ':' + auth.password));
+            var input = document.getElement('input[name="Authorization"]');
+            input.set('value', 'Basic ' + btoa(auth.username + ':' + auth.password));
+            input.getPrevious('.add-on').getElement('input[type="checkbox"]').set('checked', true).fireEvent('change');
 
             this.getParent('.modals').getElement('.modal-backdrop').fireEvent('click');
         },
@@ -190,84 +176,233 @@ window.addEvent('domready', function() {
         this.set('value', parseInt(this.get('value')).toFixed(1));
     });
 
-    // oauth submit event
+    // oauth form
     document.getElement('form.authorization.oauth').addEvents({
+        'click:relay(input[type="button"], input[type="submit"], input[type="reset"])': function(event) {
+            event.preventDefault();
+
+            this.getParent('form').fireEvent(this.dataset.action, event);
+        },
+
         'submit': function(event) {
             event.preventDefault();
 
-            var request = document.getElement('form[name="request"]').toQueryString().parseQueryString();
-            var auth = this.toQueryString().parseQueryString();
+            var form = document.getElement('form[name="request"]');
+            var request = form.toQueryString().parseQueryString();
 
-            var request = {
+            var data = this.toQueryString().parseQueryString();
+
+            // oauth object
+            var oauth = {
                 'path': request.uri,
                 'action': request.method,
-                'method': auth.method,
+                'method': data.signature,
+                'parameters': {
+                    'oauth_version': data.version
+                },
                 'signatures': {
-                    'consumer_key': auth.consumer_key,
-                    'shared_secret': auth.consumer_secret,
-                    'access_token': auth.token_key,
-                    'access_secret': auth.token_secret
+                    'consumer_key': data.consumer_key,
+                    'shared_secret': data.consumer_secret,
+                    'access_token': data.token_key,
+                    'access_secret': data.token_secret
                 }
             };
 
-            var data_query = '';
-            //var data_query = Object.toQueryString(options.data);
+            // GET/POST params
+            var elements = {
+                'keys': form.getElements('ul.params input[name="key"]'),
+                'values': form.getElements('ul.params input[name="value"]')
+            };
 
-            if (data_query != '' && request['Content-Type'] == 'application/x-www-form-urlencoded') {
-                request.parameters = data_query + '&oauth_version=' + auth.version;
+            elements.keys.each(function(key, index) {
+                if (key.get('value') != '') {
+                    oauth.parameters[key.get('value')] = elements.values[index].get('value');
+                }
+            });
+
+            oauth.parameters = Object.toQueryString(oauth.parameters);
+
+            // sign oauth object
+            var oauth = OAuthSimple().sign(oauth, data.separator);
+
+            // params container
+            var container = document.getElement('ul.params');
+
+            // remove old rows if any
+            container.getElements('li').each(function(row) {
+                if (row.dataset.oauth) {
+                    row.destroy();
+                }
+            });
+
+            if (data.method == 'header') {
+                var input = document.getElement('input[name="Authorization"]').set('value', oauth.header);
+                input.getPrevious('.add-on').getElement('input[type="checkbox"]').set('checked', true).fireEvent('change');
             } else {
-                request.parameters = 'oauth_version=' + auth.version;
-            }
+                var input = document.getElement('input[name="Authorization"]').set('value', '');
+                input.getPrevious('.add-on').getElement('input[type="checkbox"]').set('checked', false).fireEvent('change');
 
-            var oauth = OAuthSimple().sign(request);
+                var oauth_params = oauth.signed_url.replace(request.uri + '?', '').parseQueryString();
 
-            if (auth.method == 'header') {
-                document.getElement('input[name="Authorization"]').set('value', oauth.header);
-            } else {
-                //options.url = oauth.signed_url;
-
-                // MooTools appends the same body twice
-                // TODO: Params!
-                //if (form.elements['body[type]'].get('value') == 'application/x-www-form-urlencoded') {
-                    //options.url = options.url.replace('&' + form.elements['body[type]'].get('value'), null);
-                //}
+                Object.each(oauth_params, function(value, key) {
+                    row = container.getElement('li:last-of-type').clone();
+                    row.dataset.oauth = true;
+                    row.getElement('input[name="key"]').set('value', key);
+                    row.getElement('input[name="value"]').set('value', value);
+                    row.getElements('input').set('disabled', false)[0].focus();
+                    row.inject(container, 'top');
+                });
             }
 
             this.getParent('.modals').getElement('.modal-backdrop').fireEvent('click');
         },
 
         'reset': function(event) {
-            document.getElement('input[name="Authorization"]').set('value', null);
+            // clear oAuth tokens
+            chrome.extension.getBackgroundPage().oAuth.clear();
 
-            this.getParent('.modals').getElement('.modal-backdrop').fireEvent('click');
+            // load stored defaults
+            defaults = JSON.decode(localStorage.getItem('oauth-defaults'));
+
+            Object.each(defaults, function(value, key) {
+                var input = document.getElement('input[name="{0}"]'.substitute([key]));
+
+                // set the value
+                if (input) {
+                    input.set('value', value).fireEvent('change', new DOMEvent);
+                }
+            });
+        },
+
+        'save': function(event) {
+            // get all form data
+            var defaults = {};
+
+            defaults = this.toQueryString().parseQueryString();
+
+            localStorage.setItem('oauth-defaults', JSON.encode(defaults));
+        },
+
+        'authorize': function(event) {
+            var oAuth = chrome.extension.getBackgroundPage().oAuth;
+
+            var data = this.toQueryString().parseQueryString();
+
+            var missing = false;
+
+            this.getElements('*[required], *[required-authorize]').each(function(element) {
+                if (element.get('value') == '') {
+                    Error('Missing Data', 'Please Fill out all the required fields', element);
+                    missing = true;
+                }
+            }.bind(this));
+
+            if (missing) {
+                return;
+            } else {
+                oAuth.initialize({
+                    'request_url': data.request_url,
+                    'authorize_url': data.authorize_url,
+                    'access_url': data.access_url,
+                    'consumer_key': data.consumer_key,
+                    'consumer_secret': data.consumer_secret,
+                    'scope' : data.scope,
+                    'app_name' : 'REST Console'
+                });
+                oAuth.authorize();
+            }
         }
-    });
+    }).fireEvent('reset', new DOMEvent);
 
-    // save defaults
-    document.getElement('form[name="request"] input[type="button"].defaults').addEvent('click', function(event) {
-        // get all form data
-        var defaults = {};
+    // disable the authorize button when an access token is present
+    document.getElements('form.authorization.oauth input[name="token_key"], form.authorization.oauth input[name="token_secret"]').addEvent('change', function(event) {
+        var form = this.getParent('form');
+        var token_key = form.getElement('input[name="token_key"]').get('value');
+        var token_secret = form.getElement('input[name="token_secret"]').get('value');
 
-        defaults = this.getParent('form').toQueryString().parseQueryString();
-
-        localStorage.setItem('defaults', JSON.encode(defaults));
-    });
-
-    // stop current xhr button
-    document.getElement('.stop').addEvent('click', function(event) {
-        if (window.XHR) {
-            window.XHR.cancel();
+        if (token_key.length > 0 && token_secret.length > 0) {
+            form.getElement('input[data-action="authorize"]').set('disabled', true);
+        } else {
+            form.getElement('input[data-action="authorize"]').set('disabled', false);
         }
-    });
+    })
 
     // request form actions
     document.getElement('form[name="request"]').addEvents({
+        'click:relay(input[type="button"], input[type="submit"], input[type="reset"])': function(event) {
+            event.preventDefault();
+
+            this.getParent('form').fireEvent(this.dataset.action, event);
+        },
+
+        'auth': function(event) {
+            var element = document.getElement('input[name="uri"]');
+
+            // special
+            if (event.target.dataset.type == 'oauth') {
+                document.getElement('.modal.authorization.' + event.target.dataset.type).getElement('input[name="token_secret"]').fireEvent('change');
+            }
+
+            if (event.target.dataset.type == 'oauth' && element.get('value') == '') {
+                element.focus();
+                Error('Missing Data', 'Please provide a target URI before setting oAuth Authorization', element);
+                return;
+            }
+
+            document.getElement('.modals').removeClass('hide').getElement('.modal.authorization.' + event.target.dataset.type).removeClass('hide');
+        },
+
+        'save': function(event) {
+            // get all form data
+            var defaults = {};
+
+            defaults = this.toQueryString().parseQueryString();
+
+            delete defaults.key;
+            delete defaults.value;
+
+            var params = {};
+            var headers = {};
+
+            // save custom headers
+            var elements = {
+                'keys': this.getElements('ul.headers input[name="key"]:not(:last-of-type)'),
+                'values': this.getElements('ul.headers input[name="value"]:not(:last-of-type)')
+            };
+
+            elements.keys.each(function(key, index) {
+                if (key.get('value') != '') {
+                    headers[key.get('value')] = elements.values[index].get('value');
+                }
+            });
+
+            // set custom params
+            var elements = {
+                'keys': this.getElements('ul.params input[name="key"]:not(:last-of-type)'),
+                'values': this.getElements('ul.params input[name="value"]:not(:last-of-type)')
+            };
+
+            elements.keys.each(function(key, index) {
+                if (key.get('value') != '') {
+                    params[key.get('value')] = elements.values[index].get('value');
+                }
+            });
+
+            localStorage.setItem('request-headers-defaults', JSON.encode(headers));
+            localStorage.setItem('request-params-defaults', JSON.encode(params));
+            localStorage.setItem('request-defaults', JSON.encode(defaults));
+        },
+
         'reset': function(event) {
             event.preventDefault();
 
-            defaults = JSON.decode(localStorage.getItem('defaults'));
+            var defaults = {
+                'request': JSON.decode(localStorage.getItem('request-defaults')),
+                'params': JSON.decode(localStorage.getItem('request-params-defaults')),
+                'headers': JSON.decode(localStorage.getItem('request-headers-defaults'))
+            }
 
-            Object.each(defaults, function(value, key) {
+            Object.each(defaults.request, function(value, key) {
                 var input = document.getElement('input[name="{0}"]'.substitute([key]));
 
                 // set the value
@@ -275,9 +410,40 @@ window.addEvent('domready', function() {
 
                 // enabled if a disabled field
                 if (input.get('disabled')) {
+                    var label = input.getPrevious('.add-on');
+
                     input.set('disabled', false);
-                    input.getPrevious('.add-on').getElement('input[type="checkbox"]').set('checked', true);
+
+                    if (label) {
+                        label.getElement('input[type="checkbox"]').set('checked', true);
+                    }
                 }
+            });
+
+            var container = document.getElement('ul.params');
+
+            // cleanup
+            container.getElements('li:not(:last-of-type)').destroy();
+
+            Object.each(defaults.params, function(value, key) {
+                row = container.getElement('li:last-of-type').clone();
+                row.getElement('input[name="key"]').set('value', key);
+                row.getElement('input[name="value"]').set('value', value);
+                row.getElements('input').set('disabled', false);
+                row.inject(container, 'top');
+            });
+
+            var container = document.getElement('ul.headers');
+
+            // cleanup
+            container.getElements('li:not(:last-of-type)').destroy();
+
+            Object.each(defaults.headers, function(value, key) {
+                row = container.getElement('li:last-of-type').clone();
+                row.getElement('input[name="key"]').set('value', key);
+                row.getElement('input[name="value"]').set('value', value);
+                row.getElements('input').set('disabled', false);
+                row.inject(container, 'top');
             });
         },
 
@@ -302,13 +468,13 @@ window.addEvent('domready', function() {
 
             this.getElements('*[required]').each(function(element) {
                 if (element.get('value') == '') {
-                    element.getParent('.clearfix').addClass('error');
+                    Error('Missing Data', 'Please Fill out all the required fields', element);
                     missing = true;
                 }
             });
 
             if (missing) {
-                Error('Missing Data', 'Please Fill out all the required fields');
+                return false;
             } else if (data.uri == '' || !/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(data.uri)) {
                 Error('Invalid Input', 'Please enter a valid URI', this.getElement('input[name="uri"]'));
             } else {
@@ -350,7 +516,11 @@ window.addEvent('domready', function() {
                         document.getElement('form[name="request"] .actions').removeClass('progress');
                     },
 
-                    'onComplete': function(responseText, responseXML) {
+                    'onComplete': function() {
+                        // for non-success
+                        var responseText = this.xhr.responseText;
+                        var responseXML = this.xhr.responseXML;
+
                         // rest response fields
                         document.id('responseBody').empty().set('class', 'prettyprint');
                         document.id('responseHeaders').empty().set('class', 'prettyprint');
@@ -522,6 +692,32 @@ window.addEvent('domready', function() {
                 });
 
                 window.XHR = new RESTRequest(options).send();
+            }
+        },
+
+        'get': function(event) {
+            this.getElement('input[name="method"]').set('value', 'GET');
+            this.fireEvent('submit', event);
+        },
+
+        'post': function(event) {
+            this.getElement('input[name="method"]').set('value', 'POST');
+            this.fireEvent('submit', event);
+        },
+
+        'put': function(event) {
+            this.getElement('input[name="method"]').set('value', 'PUT');
+            this.fireEvent('submit', event);
+        },
+
+        'delete': function(event) {
+            this.getElement('input[name="method"]').set('value', 'DELETE');
+            this.fireEvent('submit', event);
+        },
+
+        'stop': function(event) {
+            if (window.XHR) {
+                window.XHR.cancel();
             }
         }
     }).fireEvent('reset', new DOMEvent);

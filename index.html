@@ -85,11 +85,24 @@
 
                 <div class="modal-body">
                     <div class="row">
-                        <div class="span2">
+                        <div class="span1">
                             <div class="clearfix">
                                 <label for="version">Version</label>
                                 <div class="input">
-                                    <input class="span2" type="number" name="version" value="1.0" min="1" step="1" autocomplete="on" placeholder="1.0" list="version" required/>
+                                    <input class="span1" type="number" name="version" value="1.0" min="1" step="1" autocomplete="on" placeholder="1.0" list="version" required/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span3">
+                            <div class="clearfix">
+                                <label for="signature">Signature Method:</label>
+                                <div class="input">
+                                    <select class="span3" name="signature" tabindex="4">
+                                        <option value="PLAINTEXT">PLAINTEXT</option>
+                                        <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
+                                    </select>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -108,14 +121,11 @@
                             </div>
                         </div>
 
-                        <div class="span3">
+                        <div class="span2">
                             <div class="clearfix">
-                                <label for="signature">Signature Method:</label>
+                                <label for="separator">Separator</label>
                                 <div class="input">
-                                    <select class="span3" name="signature" tabindex="4">
-                                        <option value="PLAINTEXT">PLAINTEXT</option>
-                                        <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
-                                    </select>
+                                    <input class="span2" type="text" name="separator" autocomplete="on" value=" " placeholder=","/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -165,11 +175,60 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="span4">
+                            <div class="clearfix">
+                                <label for="request_url">Request token URL</label>
+                                <div class="input">
+                                    <input class="span4" type="text" name="request_url" autocomplete="on" placeholder="https://api.provider.com/oauth/request_token" required-authorize/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span5">
+                            <div class="clearfix">
+                                <label for="access_url">Access token URL</label>
+                                <div class="input">
+                                    <input class="span5" type="text" name="access_url" autocomplete="on" placeholder="https://api.provider.com/oauth/access_token" required-authorize/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="span4">
+                            <div class="clearfix">
+                                <label for="authorize_url">Authorize URL</label>
+                                <div class="input">
+                                    <input class="span4" type="text" name="authorize_url" autocomplete="on" placeholder="https://api.provider.com/oauth/authorize" required-authorize/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="span5">
+                            <div class="clearfix">
+                                <label for="scope">Scope</label>
+                                <div class="input">
+                                    <input class="span5" type="text" name="scope" autocomplete="on" placeholder=""/>
+                                    <span class="help-block"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="modal-footer">
-                    <input class="btn danger" type="reset" value="Reset"/>
-                    <input class="btn primary" type="submit" value="Set Header"/>
+                    <div class="pull-left">
+                        <input class="btn info" type="button" data-action="authorize" value="Authorize"/>
+                        <input class="btn primary" type="submit" data-action="submit" value="Insert"/>
+                    </div>
+
+                    <input class="btn success" type="button" data-action="save" value="Save Defaults"/>
+                    <input class="btn danger" type="reset" data-action="reset" value="Reset"/>
                 </div>
             </form>
         </div>
@@ -202,8 +261,8 @@
 
                                     <div class="clearfix">
                                         <label>
-                                            <input type="checkbox" name="help" checked/>
-                                            <span>Show Help Lines</span>
+                                            <input type="checkbox" name="help"/>
+                                            <span>Hide Help Lines</span>
                                         </label>
                                     </div>
                                 </fieldset>
@@ -215,8 +274,8 @@
 
                                     <div class="clearfix">
                                         <label>
-                                            <input type="checkbox" name="lines" checked/>
-                                            <span>Show Lines Numbers</span>
+                                            <input type="checkbox" name="lines"/>
+                                            <span>Hide Lines Numbers</span>
                                         </label>
                                         <span class="help-block">Results are not immediate, will affect next request.</span>
                                     </div>
@@ -269,7 +328,8 @@
                         </div>
 
                         <div class="actions">
-                            <input type="submit" class="btn primary" value="Save"/>
+                            <input type="submit" data-action="submit" class="btn success" value="Save"/>
+                            <input type="reset" data-action="reset" class="btn danger" value="Reset"/>
                         </div>
                     </form>
                 </div>
@@ -454,8 +514,8 @@
                                             <div class="input">
                                                 <ul class="unstyled params">
                                                     <li>
-                                                        <input class="span3" type="text" name="key" tabindex="3" autocomplete="on" placeholder="key" disabled/>
-                                                        <input class="span4" type="text" name="value" tabindex="3" autocomplete="on" placeholder="value" disabled/>
+                                                        <input class="span3" type="text" name="key" tabindex="3" autocomplete="on" value="" placeholder="key" disabled/>
+                                                        <input class="span4" type="text" name="value" tabindex="3" autocomplete="on" value="" placeholder="value" disabled/>
                                                         <input class="span1 btn danger" type="button" value="&mdash;"/>
                                                         <input class="span1 btn success" type="button" value="+"/>
                                                     </li>
@@ -518,8 +578,8 @@
                                             <div class="input-prepend">
                                                 <label class="add-on"><input type="checkbox"/></label>
                                                 <input class="span13" type="text" name="Authorization" tabindex="4" autocomplete="on" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
-                                                <input class="btn authorization" type="button" data-type="basic" value="Basic"/>
-                                                <input class="btn authorization" type="button" data-type="oauth" value="oAuth"/>
+                                                <input class="btn authorization" type="button" data-type="basic" data-action="auth" value="Basic"/>
+                                                <input class="btn authorization" type="button" data-type="oauth" data-action="auth" value="oAuth"/>
                                             </div>
                                             <span class="help-block">Authentication credentials for HTTP authentication.</span>
                                         </div>
@@ -821,17 +881,17 @@
                         </div>
 
                         <div class="actions fixed">
-                            <input type="submit" class="btn primary" value="Send"/>
-                            <input type="button" class="btn info" value="GET"/>
-                            <input type="button" class="btn info" value="POST"/>
-                            <input type="button" class="btn info" value="PUT"/>
-                            <input type="button" class="btn info" value="DELETE"/>
+                            <input type="submit" data-action="submit" class="btn primary" value="Send"/>
+                            <input type="button" data-action="get" class="btn" value="GET"/>
+                            <input type="button" data-action="post" class="btn" value="POST"/>
+                            <input type="button" data-action="put" class="btn" value="PUT"/>
+                            <input type="button" data-action="delete" class="btn" value="DELETE"/>
 
                             <div class="pull-right">
-                                <input type="reset" class="btn danger" value="Reset"/>
-                                <input type="button" class="btn success defaults" value="Save Defaults"/>
+                                <input type="reset" data-action="reset" class="btn danger" value="Reset"/>
+                                <input type="button" data-action="save" class="btn success defaults" value="Save Defaults"/>
 
-                                <input type="button" class="btn danger stop" value="Stop"/>
+                                <input type="button" data-action="stop" class="btn danger stop" value="Stop"/>
                             </div>
                         </div>
                     </form>
@@ -1263,7 +1323,10 @@
         </datalist>
 
         <script src="js/beautify.js"></script>
-        <script src="js/OAuthSimple.js"></script>
+
+        <script type="text/javascript" src="js/OAuthSimple.js"></script>
+        <script type="text/javascript" src="js/chrome_ex_oauth.js"></script>
+
         <script src="js/prettify/prettify.js"></script>
 
         <script src="js/mootools-core-1.4.0.js"></script>
