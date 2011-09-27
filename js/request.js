@@ -186,16 +186,21 @@ var RESTRequest = this.RESTRequest = new Class({
 
         // REST Console: special handling of files
         if (this.options.files.length > 0) {
+            var upload = new FormData();
 
-            // TODO: change this to match above
-            files = document.getElement(this.options.files.element);
-
-            upload = new FormData();
-            upload.append(this.options.files.name, files.files[0]);
-
+            // restructure the upload object with the request params
             Object.each(this.options.data, function(value, key) {
                 upload.append(key, value);
             });
+
+            // add files
+            for (var i = 0, file; file = this.options.files[i]; ++i) {
+                if (this.options.file_key) {
+                    upload.append(this.options.file_key, file);
+                } else {
+                    upload.append(file.name, file);
+                }
+            };
 
             xhr.send(upload);
         } else if (this.options.raw != undefined) {

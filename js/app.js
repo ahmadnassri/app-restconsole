@@ -33,6 +33,11 @@ window.addEvent('domready', function() {
         }
     });
 
+    // setup autocomplete
+    if ('options' in document.createElement('datalist') == false) {
+        new AutoComplete();
+    }
+
     // pills actions
     document.getElements('ul.pills li a').addEvent('click', function(event) {
         event.preventDefault();
@@ -463,6 +468,7 @@ window.addEvent('domready', function() {
             delete headers.encoding;
             delete headers.key;
             delete headers.value;
+            delete headers.file_key;
 
             var missing = false;
 
@@ -488,8 +494,10 @@ window.addEvent('domready', function() {
                     'method': data.method,
                     'encoding': data.encoding,
                     'timeout': data.timeout * 1000,
-                    'data': {},
                     'raw': data.raw,
+                    'data': {},
+                    'files': this.getElement('input[name="files"]').files,
+                    'file_key': data.file_key,
                     'headers': headers,
 
                     'onRequest': function() {
@@ -517,6 +525,9 @@ window.addEvent('domready', function() {
                     },
 
                     'onComplete': function() {
+                        console.log(this.xhr)
+                        console.log(this.xhr.requestHeaders)
+
                         // for non-success
                         var responseText = this.xhr.responseText;
                         var responseXML = this.xhr.responseXML;
@@ -538,9 +549,9 @@ window.addEvent('domready', function() {
                             var requestText = 'Request URL: {0}\nRequest Method: {1}\n'.substitute([this.options.url, this.options.method]);
 
                             // uploaded files?
-                            //if (document.getElement('[name="file[data]"]').get('value') != '' && document.getElement('[name="file[name]"]').get('value') != '') {
-                              //  requestText += 'Files: {0}\n'.substitute([JSON.encode(document.getElement('[name="file[data]"]').files[0])]);
-                            //}
+                            if (this.options.files.length > 0) {
+                                requestText += 'Files: {0}\n'.substitute([beautify.js(JSON.encode(this.options.files))]);
+                            }
 
                             // data
                             if (this.options.data != '') {
@@ -550,7 +561,7 @@ window.addEvent('domready', function() {
                                         break;
 
                                     case 'object':
-                                        requestText += 'Params: ' + JSON.encode(this.options.data)  ;
+                                        requestText += 'Params: ' + beautify.js(JSON.encode(this.options.data));
                                         break;
                                 }
                             }
@@ -690,6 +701,11 @@ window.addEvent('domready', function() {
                         options.data[key.get('value')] = params.values[index].get('value');
                     }
                 });
+
+                // don't force the content-type header
+                if (options.files.length > 0) {
+                    delete options.headers['Content-Type'];
+                }
 
                 window.XHR = new RESTRequest(options).send();
             }
