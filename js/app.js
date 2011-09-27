@@ -339,6 +339,12 @@ window.addEvent('domready', function() {
     })
 
     // request form actions
+    document.getElement('form[name="request"] input[name="uri"]').addEvent('change', function(event) {
+        if (this.get('value').length > 0 && this.get('value').substr(0, 4) != 'http') {
+            this.set('value', 'http://' + this.get('value'));
+        }
+    });
+
     document.getElement('form[name="request"]').addEvents({
         'click:relay(input[type="button"], input[type="submit"], input[type="reset"])': function(event) {
             event.preventDefault();
@@ -489,8 +495,6 @@ window.addEvent('domready', function() {
 
             if (missing) {
                 return false;
-            } else if (data.uri == '' || !/(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/.test(data.uri)) {
-                Error('Invalid Input', 'Please enter a valid URI', this.getElement('input[name="uri"]'));
             } else {
                 if (data.encoding) {
                 // special condition for encoding
