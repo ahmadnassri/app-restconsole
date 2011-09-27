@@ -50,6 +50,8 @@ window.addEvent('domready', function() {
         // hide all then show the selected one
         ul.getNext('ul').getElements(' > li').addClass('hide');
         ul.getNext('ul').getElement(this.get('href')).getParent().removeClass('hide');
+
+        _gaq.push(['_trackEvent', this.get('text'), 'clicked']);
     });
 
     // remove errors
@@ -79,6 +81,8 @@ window.addEvent('domready', function() {
     document.getElements('form[name="options"] input[name="theme"]').addEvent('change', function(event) {
         if (this.get('checked')) {
             document.head.getElementById('theme').set('href', 'css/prettify/' + this.get('value') + '.css');
+
+            _gaq.push(['_trackEvent', 'Theme', this.get('value')]);
         }
     }).fireEvent('change');
 
@@ -187,6 +191,8 @@ window.addEvent('domready', function() {
             event.preventDefault();
 
             this.getParent('form').fireEvent(this.dataset.action, event);
+
+            _gaq.push(['_trackEvent', 'oAuth Form', this.dataset.action]);
         },
 
         'submit': function(event) {
@@ -338,6 +344,8 @@ window.addEvent('domready', function() {
             event.preventDefault();
 
             this.getParent('form').fireEvent(this.dataset.action, event);
+
+            _gaq.push(['_trackEvent', 'Request Form', this.dataset.action]);
         },
 
         'auth': function(event) {
