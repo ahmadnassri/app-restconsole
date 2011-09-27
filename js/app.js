@@ -506,9 +506,7 @@ window.addEvent('domready', function() {
                     },
 
                     'onProgress': function(event, xhr){
-                        var loaded = event.loaded, total = event.total;
-
-                        //console.log(parseInt(loaded / total * 100, 10));
+                        //var loaded = event.loaded, total = event.total;
                     },
 
                     'onTimeout': function() {
@@ -525,9 +523,6 @@ window.addEvent('domready', function() {
                     },
 
                     'onComplete': function() {
-                        console.log(this.xhr)
-                        console.log(this.xhr.requestHeaders)
-
                         // for non-success
                         var responseText = this.xhr.responseText;
                         var responseXML = this.xhr.responseXML;
