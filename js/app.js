@@ -554,7 +554,7 @@ window.addEvent('domready', function() {
                             document.getElement('form[name="request"]').fireEvent('stop');
                         } else {
                             // construct request text
-                            var requestText = 'Request URL: {0}\nRequest Method: {1}\n'.substitute([this.options.url, this.options.method]);
+                            var requestText = 'Request Url: {0}\nRequest Method: {1}\nStatus Code: {2}\n'.substitute([this.options.url, this.options.method, this.xhr.status]);
 
                             // uploaded files?
                             if (this.options.files.length > 0) {
@@ -579,6 +579,26 @@ window.addEvent('domready', function() {
                             Object.each(this.options.headers, function(value, key) {
                                 requestHeaders += key + ': ' + value + "\n";
                             });
+
+                            var defaultHeaders = {
+                                'Accept': '*/\*',
+                                //'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
+                                //'Accept-Encoding': 'gzip,deflate,sdch',
+                                //'Accept-Language': 'en-US,en;q=0.8',
+                                'Connection': 'keep-alive',
+                                //'Content-Length': '34',
+                                'Content-Type': 'application/xml',
+                                //'Cookie': '__qca=P0-2074128619-1316995740016; __utma=71985868.1147819601.1316995740.1317068965.1317073948.4; __utmc=71985868; __utmz=71985868.1316995740.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)',
+                                //'Host': 'www.codeinchaos.com',
+                                'Origin': 'chrome-extension: //rest-console-id',
+                                'User-Agent': navigator.userAgent
+                            };
+
+                            Object.each(defaultHeaders, function(value, key) {
+                                if (this.options.headers[key] == undefined) {
+                                    requestHeaders += key + ': ' + value + "\n";
+                                }
+                            }.bind(this));
 
                             // setup response area
                             document.id('requestBody').set('text', requestText);
@@ -676,9 +696,6 @@ window.addEvent('domready', function() {
 
                             // scroll to the response area
                             document.getElement('a[href="#response"]').fireEvent('click', new DOMEvent());
-
-                            // open the response body tab
-                            document.getElement('a[href="#responseBody"]').fireEvent('click', new DOMEvent());
 
                             // remove loading animation
                             document.getElement('form[name="request"] .actions').removeClass('progress');
