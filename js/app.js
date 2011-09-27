@@ -338,13 +338,37 @@ window.addEvent('domready', function() {
         }
     })
 
-    // request form actions
+    // syntax highlighting
+    document.getElements('input[name="highlight"]').addEvents({
+        'change': function(event) {
+            if (this.get('checked')) {
+                var value = this.get('value');
+
+                var responseBody = document.id('responseBody');
+
+                responseBody.set('text', responseBody.retrieve('unstyled'));
+
+                responseBody.set('class', 'prettyprint lang-' + value);
+
+                document.getElement('form[name="options"] input[name="lines"]').fireEvent('change');
+
+                prettyPrint();
+            }
+        },
+
+        'click': function(event) {
+            this.set('checked', true);
+            this.fireEvent('change', event);
+        }
+    });
+
     document.getElement('form[name="request"] input[name="uri"]').addEvent('change', function(event) {
         if (this.get('value').length > 0 && this.get('value').substr(0, 4) != 'http') {
             this.set('value', 'http://' + this.get('value'));
         }
     });
 
+    // request form actions
     document.getElement('form[name="request"]').addEvents({
         'click:relay(input[type="button"], input[type="submit"], input[type="reset"])': function(event) {
             event.preventDefault();
@@ -539,6 +563,7 @@ window.addEvent('domready', function() {
                         var responseXML = this.xhr.responseXML;
 
                         // rest response fields
+                        document.id('rawBody').empty().set('class');
                         document.id('responseBody').empty().set('class', 'prettyprint');
                         document.id('responseHeaders').empty().set('class', 'prettyprint');
                         document.id('responsePreview').empty();
@@ -601,9 +626,11 @@ window.addEvent('domready', function() {
                             }.bind(this));
 
                             // setup response area
+                            document.id('rawBody').set('text', responseText);
+                            document.id('responseBody').set('text', responseText);
+                            document.id('responseHeaders').set('text', 'Status Code: ' + this.xhr.status + "\n" + this.xhr.getAllResponseHeaders());
                             document.id('requestBody').set('text', requestText);
                             document.id('requestHeaders').set('text', requestHeaders);
-                            document.id('responseHeaders').set('text', 'Status Code: ' + this.xhr.status + "\n" + this.xhr.getAllResponseHeaders());
 
                             // extract content type
                             var contentType = this.xhr.getResponseHeader('Content-Type');
@@ -616,12 +643,16 @@ window.addEvent('domready', function() {
                                 }
                             }
 
+                            var style = 'auto';
+
                             switch (contentType) {
                                 case 'application/ecmascript':
                                 case 'application/javascript':
                                 case 'application/json':
+                                    style = 'js';
+
                                     responseText = beautify.js(responseText);
-                                    document.id('responseBody').addClass('lang-js').set('text', responseText);
+                                    document.id('responseBody').set('text', responseText);
                                     break;
 
                                 case 'application/atom+xml':
@@ -638,15 +669,21 @@ window.addEvent('domready', function() {
                                 case 'application/vnd.mozilla.xul+xml':
                                 case 'image/svg+xml':
                                 case 'text/xml':
-                                    responseXML = beautify.xml(responseXML);
+                                    style = 'xml';
 
                                     var declaration = responseText.match(/^(\s*)(<\?xml.+?\?>)/i);
-                                    document.id('responseBody').addClass('lang-xml').set('text', declaration[2] + "\n" + responseXML.firstChild.nodeValue);
+
+                                    responseText = declaration[2] + "\n" + beautify.xml(responseXML).firstChild.nodeValue;
+
+                                    document.id('responseBody').set('text', responseText);
                                     break;
 
                                 case 'text/html':
                                 case 'application/xhtml+xml':
-                                    document.id('responseBody').addClass('lang-html').set('text', responseText);
+                                    style = 'html';
+
+                                    document.id('responseBody').set('text', responseText);
+                                    document.getElement('input[name="highlight"][value="html"]').fireEvent('click');
 
                                     // create and inject the iframe object
                                     var iframe = new IFrame();
@@ -691,8 +728,11 @@ window.addEvent('domready', function() {
  */
                             }
 
-                            // syntax highlighting
-                            prettyPrint();
+                            // store the text for later use
+                            document.id('responseBody').store('unstyled', responseText);
+
+                            // trigger syntax highlighting
+                            document.getElement('input[name="highlight"][value="' + style + '"]').fireEvent('click');
 
                             // scroll to the response area
                             document.getElement('a[href="#response"]').fireEvent('click', new DOMEvent());

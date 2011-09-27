@@ -920,6 +920,7 @@
 
                     <ul class="pills">
                         <li class="active"><a href="#responseBody">Response Body</a></li>
+                        <li><a href="#rawBody">RAW Body</a></li>
                         <li><a href="#responseHeaders">Response Headers</a></li>
                         <li><a href="#responsePreview">Response Preview</a></li>
                         <li><a href="#requestBody">Request Body</a></li>
@@ -927,7 +928,38 @@
                     </ul>
 
                     <ul class="unstyled">
-                        <li><pre id="responseBody" class="prettyprint"></pre></li>
+                        <li>
+                            <form class="form-stacked">
+                                <div class="clearfix">
+                                    <label for="theme">Force Syntax Highlighting</label>
+
+                                    <div class="row">
+                                        <div class="span">
+                                            <label><input type="radio" name="highlight" value="auto"/> <span>Auto</span></label>
+                                        </div>
+
+                                        <div class="span">
+                                            <label><input type="radio" name="highlight" value="js"/> <span>JSON</span></label>
+                                        </div>
+
+                                        <div class="span">
+                                            <label><input type="radio" name="highlight" value="xml"/> <span>XML</span></label>
+                                        </div>
+
+                                        <div class="span">
+                                            <label><input type="radio" name="highlight" value="html"/> <span>HTML</span></label>
+                                        </div>
+
+                                        <div class="span">
+                                            <label><input type="radio" name="highlight" value="xml"/> <span>CSS</span></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <pre id="responseBody" class="prettyprint"></pre>
+                        </li>
+                        <li class="hide"><pre id="rawBody"></pre></li>
                         <li class="hide"><pre id="responseHeaders" class="prettyprint"></pre></li>
                         <li class="hide"><div id="responsePreview"></div></li>
                         <li class="hide"><pre id="requestBody" class="prettyprint"></pre></li>
