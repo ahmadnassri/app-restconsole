@@ -245,6 +245,9 @@
                     </select>
 
                     <h5>History</h5>
+                    <p>Coming Soon...</p>
+
+                    <br/>
                 </div>
             </div>
 
@@ -282,8 +285,8 @@
                                     </div>
 
                                     <div class="clearfix">
-                                        <label for="theme">Theme</label>
-                                        <span class="help-block">Syntax highlighting color theme.</span>
+                                        <label for="theme">Color Theme</label>
+                                        <span class="help-block">Syntax highlighting default color theme.</span>
 
                                         <div class="row">
                                             <div class="span2">
@@ -930,28 +933,51 @@
                     <ul class="unstyled">
                         <li>
                             <form class="form-stacked">
-                                <div class="clearfix">
-                                    <label for="theme">Force Syntax Highlighting</label>
+                                <div class="row">
+                                    <div class="span">
+                                        <div class="clearfix">
+                                            <label for="theme">Color Theme</label>
 
-                                    <div class="row">
-                                        <div class="span">
-                                            <label><input type="radio" name="highlight" value="auto"/> <span>Auto</span></label>
+                                            <div class="input">
+                                                <div class="input-prepend">
+                                                    <select class="span2" name="theme">
+                                                        <option value="default">Default</option>
+                                                        <option value="bootstrap">Bootstrap</option>
+                                                        <option value="desert">Desert</option>
+                                                        <option value="sunburst">Sunburst</option>
+                                                        <option value="sons-of-obsidian">Sons of Obsidian</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
+                                    </div>
 
-                                        <div class="span">
-                                            <label><input type="radio" name="highlight" value="js"/> <span>JSON</span></label>
-                                        </div>
+                                    <div class="span">
+                                        <div class="clearfix">
+                                            <label for="theme">Force Syntax Highlighting</label>
+                                            <span class="help-block"></span>
 
-                                        <div class="span">
-                                            <label><input type="radio" name="highlight" value="xml"/> <span>XML</span></label>
-                                        </div>
+                                            <div class="row">
+                                                <div class="span">
+                                                    <label><input type="radio" name="highlight" value="auto"/> <span>Auto</span></label>
+                                                </div>
 
-                                        <div class="span">
-                                            <label><input type="radio" name="highlight" value="html"/> <span>HTML</span></label>
-                                        </div>
+                                                <div class="span">
+                                                    <label><input type="radio" name="highlight" value="js"/> <span>JSON</span></label>
+                                                </div>
 
-                                        <div class="span">
-                                            <label><input type="radio" name="highlight" value="xml"/> <span>CSS</span></label>
+                                                <div class="span">
+                                                    <label><input type="radio" name="highlight" value="xml"/> <span>XML</span></label>
+                                                </div>
+
+                                                <div class="span">
+                                                    <label><input type="radio" name="highlight" value="html"/> <span>HTML</span></label>
+                                                </div>
+
+                                                <div class="span">
+                                                    <label><input type="radio" name="highlight" value="xml"/> <span>CSS</span></label>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
