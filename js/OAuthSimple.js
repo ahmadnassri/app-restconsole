@@ -237,6 +237,7 @@ if (OAuthSimple === undefined)
             if (method.toUpperCase().match(/(PLAINTEXT|HMAC-SHA1)/) === undefined) {
                 throw ('Unknown signing method specified for OAuthSimple.setSignatureMethod');
                 }
+                console.log(method);
             this._parameters['oauth_signature_method']= method.toUpperCase();
             return this;
         };
