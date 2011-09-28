@@ -217,7 +217,8 @@ window.addEvent('domready', function() {
                 'action': request.method,
                 'method': data.signature,
                 'parameters': {
-                    'oauth_version': data.version
+                    'oauth_version': data.version,
+                    'oauth_method': data.signature
                 },
                 'signatures': {
                     'consumer_key': data.consumer_key,
@@ -383,9 +384,11 @@ window.addEvent('domready', function() {
         'click:relay(input[type="button"], input[type="submit"], input[type="reset"])': function(event) {
             event.preventDefault();
 
-            this.getParent('form').fireEvent(this.dataset.action, event);
+            if (this.dataset.action) {
+                this.getParent('form').fireEvent(this.dataset.action, event);
 
-            _gaq.push(['_trackEvent', 'Request Form', this.dataset.action]);
+                _gaq.push(['_trackEvent', 'Request Form', this.dataset.action]);
+            }
         },
 
         'auth': function(event) {
