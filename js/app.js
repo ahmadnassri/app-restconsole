@@ -80,11 +80,19 @@ window.addEvent('domready', function() {
     // theme changer
     document.getElements('form[name="options"] input[name="theme"]').addEvent('change', function(event) {
         if (this.get('checked')) {
-            document.head.getElementById('theme').set('href', 'css/prettify/' + this.get('value') + '.css');
+            var theme = this.get('value');
+            document.getElement('select[name="theme"] option[value="' + theme + '"]').set('selected', true);
+            document.head.getElementById('theme').set('href', 'css/prettify/' + theme + '.css');
 
-            _gaq.push(['_trackEvent', 'Theme', this.get('value')]);
+            _gaq.push(['_trackEvent', 'Theme', theme]);
         }
     }).fireEvent('change');
+
+    document.getElements('select[name="theme"]').addEvent('change', function(event) {
+        document.head.getElementById('theme').set('href', 'css/prettify/' + this.get('value') + '.css');
+
+        _gaq.push(['_trackEvent', 'Theme Swap', this.get('value')]);
+    });
 
     // options form
     document.getElement('form[name="options"]').addEvents({
@@ -341,12 +349,14 @@ window.addEvent('domready', function() {
     // syntax highlighting
     document.getElements('input[name="highlight"]').addEvents({
         'change': function(event) {
+            document.getElements('.prettyprint').each(function (element) {
+                element.set('text', element.retrieve('unstyled'));
+            });
+
             if (this.get('checked')) {
                 var value = this.get('value');
 
                 var responseBody = document.id('responseBody');
-
-                responseBody.set('text', responseBody.retrieve('unstyled'));
 
                 responseBody.set('class', 'prettyprint lang-' + value);
 
@@ -625,12 +635,14 @@ window.addEvent('domready', function() {
                                 }
                             }.bind(this));
 
+                            var responseHeaders = 'Status Code: {0}\n{1}'.substitute([this.xhr.status, this.xhr.getAllResponseHeaders()]);
+
                             // setup response area
-                            document.id('rawBody').set('text', responseText);
+                            document.id('rawBody').set('text', responseText)
                             document.id('responseBody').set('text', responseText);
-                            document.id('responseHeaders').set('text', 'Status Code: ' + this.xhr.status + "\n" + this.xhr.getAllResponseHeaders());
-                            document.id('requestBody').set('text', requestText);
-                            document.id('requestHeaders').set('text', requestHeaders);
+                            document.id('responseHeaders').set('text', responseHeaders).store('unstyled', responseHeaders);
+                            document.id('requestBody').set('text', requestText).store('unstyled', requestText);
+                            document.id('requestHeaders').set('text', requestHeaders).store('unstyled', requestHeaders);
 
                             // extract content type
                             var contentType = this.xhr.getResponseHeader('Content-Type');
