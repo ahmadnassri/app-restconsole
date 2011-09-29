@@ -56,6 +56,13 @@ var AutoComplete = new Class({
             'focus': function(event) {
                 var list = this.getNext('[for={0}]'.substitute([this.get('name')])).show().scrollTo(0, 0);
 
+                // reposition the list
+                list.position({
+                    'relativeTo': this,
+                    'position': 'bottomLeft',
+                    'edge': 'upperLeft'
+                });
+
                 list.dataset.current = -1;
                 list.getElements('div').hide().removeClass('enabled').removeClass('active');
 

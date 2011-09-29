@@ -363,7 +363,16 @@ window.addEvent('domready', function() {
 
                 document.getElement('form[name="options"] input[name="lines"]').fireEvent('change');
 
+                // init google prettify
                 prettyPrint();
+
+                // find links
+                // TODO parse query string params into fields
+                var body = responseBody.get('html');
+                var exp = new RegExp('\\b((https?|ftp|file)://[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])', 'gim');
+                body = body.replace(exp, '<a target="_blank" href="$1">$1</a>');
+                responseBody.set('html', body);
+                responseBody.scrollTo(0, 0);
             }
         },
 
@@ -371,6 +380,14 @@ window.addEvent('domready', function() {
             this.set('checked', true);
             this.fireEvent('change', event);
         }
+    });
+
+    document.id('responseBody').addEvent('click:relay(a[href])', function(event) {
+        event.preventDefault();
+
+        document.getElement('input[name="uri"]').set('value', this.get('href'));
+        document.getElement('input[name="method"]').set('value', 'GET');
+        document.getElement('form[name="request"]').fireEvent('submit', new DOMEvent);
     });
 
     document.getElement('form[name="request"] input[name="uri"]').addEvent('change', function(event) {
@@ -506,48 +523,102 @@ window.addEvent('domready', function() {
         'submit': function(event) {
             event.preventDefault();
 
-            // get all form data
-            var data = this.toQueryString().parseQueryString();
+            var error = false;
 
-            var headers = Object.clone(data);
+            // get all form data
+            var request = this.toQueryString().parseQueryString();
+
+            // extract the headers
+            request.headers = Object.clone(request);
 
             // delete none headers
-            delete headers.uri;
-            delete headers.method;
-            delete headers.timeout;
-            delete headers.raw;
-            delete headers.encoding;
-            delete headers.key;
-            delete headers.value;
-            delete headers.file_key;
+            delete request.headers.uri;
+            delete request.headers.method;
+            delete request.headers.timeout;
+            delete request.headers.raw;
+            delete request.headers.encoding;
+            delete request.headers.key;
+            delete request.headers.value;
+            delete request.headers.file_key;
 
-            var missing = false;
+            // unsecure headers:
+            var unsafe = [
+                'accept-charset',
+                'accept-encoding',
+                'content-length',
+                'cookie',
+                'date',
+                'connection',
+                'expect',
+                'referer',
+                'user-agent',
+                'via',
+                'proxy-authorization',
+                'te',
+                'upgrade'
+            ];
 
-            this.getElements('*[required]').each(function(element) {
-                if (element.get('value') == '') {
-                    Error('Missing Data', 'Please Fill out all the required fields', element);
-                    missing = true;
+            // get custom fields
+            var custom = {
+                'headers': {
+                    'keys': this.getElements('ul.headers input[name="key"]').get('value'),
+                    'values': this.getElements('ul.headers input[name="value"]').get('value')
+                },
+
+                'data': {
+                    'keys': this.getElements('ul.params input[name="key"]').get('value'),
+                    'values': this.getElements('ul.params input[name="value"]').get('value')
+                }
+            }
+
+            // init variables
+            request.data = {};
+            request.headers = {};
+
+            // set custom params data
+            custom.data.keys.each(function(key, index) {
+                if (key.length > 0) {
+                    request.data[key] = custom.data.values[index];
                 }
             });
 
-            if (missing) {
+            // validate headers
+            custom.headers.keys.each(function(key, index) {
+                if (unsafe.contains(key.toLowerCase())) {
+                    Error('Unsafe Header', 'Refused to set unsafe header "' + key +'"', this.getElement('ul.headers input[name="key"]:nth-of-type(' + (index + 1) + ')'));
+                    error = true;
+                } else if (key.length > 0) {
+                    request.headers[key] = custom.headers.values[index];
+                }
+            }.bind(this));
+
+            // check for required fields
+            this.getElements('*[required]').each(function(element) {
+                if (element.get('value').length == 0) {
+                    Error('Missing Data', 'Please Fill out all the required fields', element);
+                    error = true;
+                }
+            });
+
+            if (error) {
+                // stop on error
                 return false;
             } else {
-                if (data.encoding) {
                 // special condition for encoding
-                    data['Content-Type'] = data['Content-Type'] + '; charset=' + data.encoding;
+                if (request.encoding) {
+                    request['Content-Type'] = request['Content-Type'] + '; charset=' + request.encoding;
                 }
 
                 var options = {
-                    'url': data.uri,
-                    'method': data.method,
-                    'encoding': data.encoding,
-                    'timeout': data.timeout * 1000,
-                    'raw': data.raw,
-                    'data': {},
+                    'url': request.uri,
+                    'method': request.method,
+                    'encoding': request.encoding,
+                    'timeout': request.timeout * 1000,
+                    'raw': request.raw,
+                    'data': request.data,
                     'files': this.getElement('input[name="files"]').files,
-                    'file_key': data.file_key,
-                    'headers': headers,
+                    'file_key': request.file_key,
+                    'headers': request.headers,
 
                     'onRequest': function() {
                         // replace buttons with animation
@@ -661,6 +732,13 @@ window.addEvent('domready', function() {
                             var style = 'auto';
 
                             switch (contentType) {
+                                case 'text/css':
+                                    style = 'css';
+
+                                    //responseText = beautify.css(responseText);
+                                    //document.id('responseBody').set('text', responseText);
+                                    break;
+
                                 case 'application/ecmascript':
                                 case 'application/javascript':
                                 case 'application/json':
@@ -757,30 +835,6 @@ window.addEvent('domready', function() {
                         }
                     }
                 };
-
-                // set custom headers
-                var headers = {
-                    'keys': this.getElements('ul.headers input[name="key"]'),
-                    'values': this.getElements('ul.headers input[name="value"]')
-                };
-
-                headers.keys.each(function(key, index) {
-                    if (key.get('value') != '') {
-                        options.headers[key.get('value')] = headers.values[index].get('value');
-                    }
-                });
-
-                // set custom params
-                var params = {
-                    'keys': this.getElements('ul.params input[name="key"]'),
-                    'values': this.getElements('ul.params input[name="value"]')
-                };
-
-                params.keys.each(function(key, index) {
-                    if (key.get('value') != '') {
-                        options.data[key.get('value')] = params.values[index].get('value');
-                    }
-                });
 
                 // don't force the content-type header
                 if (options.files.length > 0) {
