@@ -1,0 +1,24 @@
+{
+    "version": "4.0.1.1",
+
+    "name": "REST Console Launcher",
+    "description": "This is a toolbar launcher for REST Console. get the REST Console App at http://www.restconsole.com",
+
+    "background_page": "background.html",
+
+    "icons": {
+        "16": "images/logo/16.png",
+        "32": "images/logo/32.png",
+        "48": "images/logo/48.png",
+        "128": "images/logo/128.png"
+    },
+
+    "browser_action": {
+        "default_icon": "images/logo/32.png"
+    },
+
+    "permissions": [
+        "tabs",
+        "management"
+    ]
+}
