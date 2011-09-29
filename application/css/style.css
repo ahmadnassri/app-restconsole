@@ -293,3 +293,11 @@ font-size: 12px;
 .sidebar {
     display: none;
 }
+
+.paypal {
+    box-shadow: none;
+    padding: 0px;
+    border: none;
+    width: auto;
+    height: auto;
+}
