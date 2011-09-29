@@ -63,7 +63,6 @@ var RESTRequest = this.RESTRequest = new Class({
     },
 
     processScripts: function(text){
-        if (this.options.evalResponse || (/(ecma|java)script/).test(this.getHeader('Content-type'))) return Browser.exec(text);
         return text.stripScripts(this.options.evalScripts);
     },
 

@@ -760,8 +760,8 @@ window.addEvent('domready', function() {
                                 case 'text/css':
                                     style = 'css';
 
-                                    //responseText = beautify.css(responseText);
-                                    //document.id('responseBody').set('text', responseText);
+                                    responseText = beautify.css(responseText);
+                                    document.id('responseBody').set('text', responseText);
                                     break;
 
                                 case 'application/ecmascript':
