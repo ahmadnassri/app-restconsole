@@ -228,6 +228,15 @@ window.addEvent('domready', function() {
                 }
             };
 
+            // optional params
+            if (data.scope.length > 0) {
+                oauth.parameters.scope = data.scope;
+            }
+
+            if (data.oauth_verifier.length > 0) {
+                oauth.parameters.oauth_verifier = data.oauth_verifier;
+            }
+
             // params container
             var container = document.getElement('ul.params');
 
@@ -270,9 +279,18 @@ window.addEvent('domready', function() {
                     row.dataset.oauth = true;
                     row.getElement('input[name="key"]').set('value', key);
                     row.getElement('input[name="value"]').set('value', value);
-                    row.getElements('input').set('disabled', false)[0].focus();
+                    row.getElements('input').set('disabled', false);
                     row.inject(container, 'top');
                 });
+            }
+
+            if (data.oauth_callback.length > 0) {
+                row = container.getElement('li:last-of-type').clone();
+                row.dataset.oauth = true;
+                row.getElement('input[name="key"]').set('value', 'oauth_callback');
+                row.getElement('input[name="value"]').set('value', data.oauth_callback);
+                row.getElements('input').set('disabled', false);
+                row.inject(container, 'top');
             }
 
             this.getParent('.modals').getElement('.modal-backdrop').fireEvent('click');
