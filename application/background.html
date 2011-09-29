@@ -1,56 +1,8 @@
 <html>
     <body>
-        <script type="text/javascript" src="js/OAuthSimple.js"></script>
-        <script type="text/javascript" src="js/chrome_ex_oauth.js"></script>
-        <script type="text/javascript" src="js/analytics.js"></script>
-        <script>
-            chrome.browserAction.onClicked.addListener(function (tab) {
-                chrome.tabs.create({url: 'index.html'});
-            });
-
-            var oAuth = {
-                'instance': null,
-
-                'hasInstance': function() {
-                    return this.instance ? true : false;
-                },
-
-                'initialize': function(options) {
-                    this.instance = ChromeExOAuth.initBackgroundPage(options);
-                },
-
-                'hasToken': function() {
-                    return this.instance.hasToken();
-                },
-
-                'authorize': function() {
-                    if (this.hasInstance()) {
-                        this.instance.authorize(function() {
-                            chrome.extension.getViews().forEach(function(view) {
-                                dialog = view.document.querySelector('form.authorization.oauth');
-
-                                if (dialog) {
-                                    var token_key = dialog.querySelector('input[name="token_key"]');
-                                    var token_secret = dialog.querySelector('input[name="token_secret"]');
-
-                                    token_key.value = oAuth.instance.getToken();
-                                    token_key.fireEvent('change');
-
-                                    token_secret.value = oAuth.instance.getTokenSecret();
-                                    token_secret.fireEvent('change');
-                                }
-                            });
-                        });
-                    }
-                },
-
-                'clear': function() {
-                    if (this.hasInstance()) {
-                        this.instance.clearTokens();
-                        this.instance = null;
-                    }
-                }
-            }
-        </script>
+        <script src="js/OAuthSimple.js"></script>
+        <script src="js/chrome_ex_oauth.js"></script>
+        <script src="js/analytics.js"></script>
+        <script src="js/background.js"></script>
     </body>
 </html>
