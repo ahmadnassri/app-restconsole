@@ -126,7 +126,7 @@ if (OAuthSimple === undefined)
             if (this._parameters['oauth_timestamp'] === undefined) {
                 this._getTimestamp();
                 }
-            if (this._parameters['oauth_method'] === undefined) {
+            if (this._parameters['oauth_signature_method'] === undefined) {
                 this.setSignatureMethod();
                 }
             if (this._parameters['oauth_consumer_key'] === undefined) {
@@ -237,7 +237,6 @@ if (OAuthSimple === undefined)
             if (method.toUpperCase().match(/(PLAINTEXT|HMAC-SHA1)/) === undefined) {
                 throw ('Unknown signing method specified for OAuthSimple.setSignatureMethod');
                 }
-                console.log(method);
             this._parameters['oauth_signature_method']= method.toUpperCase();
             return this;
         };
