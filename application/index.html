@@ -93,7 +93,7 @@
                             <div class="clearfix">
                                 <label for="version">Version</label>
                                 <div class="input">
-                                    <input class="span1" type="number" name="version" value="1.0" min="1" step="1" autocomplete="on" placeholder="1.0" list="version" required/>
+                                    <input class="span1" type="number" name="version" value="1.0" min="1" step="1" autocomplete="on" placeholder="1.0" required/>
                                     <span class="help-block"></span>
                                 </div>
                             </div>
@@ -547,8 +547,8 @@
                                             <div class="input">
                                                 <ul class="unstyled headers">
                                                     <li>
-                                                        <input class="span3" type="text" name="key" tabindex="3" autocomplete="on" placeholder="header" disabled/>
-                                                        <input class="span4" type="text" name="value" tabindex="3" autocomplete="on" placeholder="value" disabled/>
+                                                        <input class="span3" type="text" name="key" tabindex="3" autocomplete="on" value="" placeholder="header" disabled/>
+                                                        <input class="span4" type="text" name="value" tabindex="3" autocomplete="on" value="" placeholder="value" disabled/>
                                                         <input class="span1 btn danger" type="button" value="&mdash;"/>
                                                         <input class="span1 btn success" type="button" value="+"/>
                                                     </li>
@@ -981,7 +981,7 @@
                                                 </div>
 
                                                 <div class="span">
-                                                    <label><input type="radio" name="highlight" value="xml"/> <span>CSS</span></label>
+                                                    <label><input type="radio" name="highlight" value="css"/> <span>CSS</span></label>
                                                 </div>
                                             </div>
                                         </div>
@@ -1446,11 +1446,6 @@
             <option value="OPTIONS">OPTIONS</option>
             <option value="CONNET">CONNET</option>
             <option value="PATCH">PATCH</option>
-        </datalist>
-
-        <datalist id="version">
-            <option value="1.0">1.0</option>
-            <option value="2.0">2.0</option>
         </datalist>
 
         <script src="js/beautify.js"></script>
