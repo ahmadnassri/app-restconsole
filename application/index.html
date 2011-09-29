@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8"/>
-        <title>REST Console v4.0.0</title>
+        <title>REST Console v@VERSION@</title>
         <link rel="stylesheet" type="text/css" media="all" href="css/style.css"/>
 
         <link rel="shortcut icon" href="images/favicon.ico"/>
@@ -10,17 +10,20 @@
         <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png"/>
         <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"/>
 
+        <link id="theme" rel="stylesheet" href="css/prettify/default.css"/>
+
         <link rel="stylesheet" href="css/bootstrap-1.3.0.css"/>
         <link rel="stylesheet" href="css/style.css"/>
-
-        <link id="theme" rel="stylesheet" href="css/prettify/default.css"/>
     </head>
 
     <body>
         <div class="topbar">
             <div class="fill">
+                <div class="container">
+<!--
                 <div class="container-fluid">
-                    <div class="brand"><img src="images/logo/32.png" align="left"/> REST Console <small>version 4.0.0</small></div>
+-->
+                    <div class="brand"><img src="images/logo/32.png" align="left"/> REST Console <small>version @VERSION@</small></div>
 
                     <ul class="nav">
                         <li><a href="#options" scroll><span>O</span>ptions</a></li>
@@ -234,7 +237,10 @@
             </form>
         </div>
 
+        <div class="container">
+<!--
         <div class="container-fluid">
+-->
             <div class="sidebar">
                 <div class="page">
                     <h5>Services</h5>

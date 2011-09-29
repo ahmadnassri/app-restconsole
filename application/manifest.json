@@ -1,5 +1,5 @@
 {
-    "version": "4.0.0",
+    "version": "@VERSION@",
 
     "name": "REST Console",
     "description": "REST Console is an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.",

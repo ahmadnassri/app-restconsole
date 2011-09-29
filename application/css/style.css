@@ -275,15 +275,21 @@ font-size: 12px;
     padding: 3px;
 }
 
-.autocomplete div.active {
-    background-color: rgba(82, 168, 236, 0.8);
-}
-
+.autocomplete div.active,
 .autocomplete div:hover {
-    background-color: rgba(82, 168, 236, 0.5);
+    color: white;
+    background-color: #3875D7;
     cursor: pointer;
 }
 
 .form-stacked label span {
     font-weight: normal;
+}
+
+.container {
+    width: 960px
+}
+
+.sidebar {
+    display: none;
 }
