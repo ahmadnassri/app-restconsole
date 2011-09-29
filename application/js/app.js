@@ -218,7 +218,7 @@ window.addEvent('domready', function() {
                 'method': data.signature,
                 'parameters': {
                     'oauth_version': data.version,
-                    'oauth_method': data.signature
+                    'oauth_signature_method': data.signature
                 },
                 'signatures': {
                     'consumer_key': data.consumer_key,
@@ -227,23 +227,6 @@ window.addEvent('domready', function() {
                     'access_secret': data.token_secret
                 }
             };
-
-            // GET/POST params
-            var elements = {
-                'keys': form.getElements('ul.params input[name="key"]'),
-                'values': form.getElements('ul.params input[name="value"]')
-            };
-
-            elements.keys.each(function(key, index) {
-                if (key.get('value') != '') {
-                    oauth.parameters[key.get('value')] = elements.values[index].get('value');
-                }
-            });
-
-            oauth.parameters = Object.toQueryString(oauth.parameters);
-
-            // sign oauth object
-            var oauth = OAuthSimple().sign(oauth, data.separator);
 
             // params container
             var container = document.getElement('ul.params');
@@ -254,6 +237,24 @@ window.addEvent('domready', function() {
                     row.destroy();
                 }
             });
+
+            // GET/POST params
+            var elements = {
+                'keys': container.getElements('input[name="key"]').get('value'),
+                'values': container.getElements('input[name="value"]').get('value')
+            };
+
+            elements.keys.each(function(key, index) {
+                if (key.length > 0) {
+                    oauth.parameters[key] = elements.values[index];
+                }
+            });
+
+            // convert to query string
+            oauth.parameters = Object.toQueryString(oauth.parameters);
+
+            // sign oauth object
+            var oauth = OAuthSimple().sign(oauth, data.separator);
 
             if (data.method == 'header') {
                 var input = document.getElement('input[name="Authorization"]').set('value', oauth.header);
@@ -408,21 +409,27 @@ window.addEvent('domready', function() {
             }
         },
 
-        'auth': function(event) {
+        'basic-auth': function(event) {
+            document.getElement('.modals').removeClass('hide').getElement('.modal.authorization.basic').removeClass('hide');
+        },
+
+        'oauth-setup': function(event) {
             var element = document.getElement('input[name="uri"]');
 
             // special
-            if (event.target.dataset.type == 'oauth') {
-                document.getElement('.modal.authorization.' + event.target.dataset.type).getElement('input[name="token_secret"]').fireEvent('change');
-            }
+            document.getElement('.modal.authorization.oauth').getElement('input[name="token_secret"]').fireEvent('change');
 
-            if (event.target.dataset.type == 'oauth' && element.get('value') == '') {
+            if (element.get('value').length == 0) {
                 element.focus();
                 Error('Missing Data', 'Please provide a target URI before setting oAuth Authorization', element);
                 return;
             }
 
-            document.getElement('.modals').removeClass('hide').getElement('.modal.authorization.' + event.target.dataset.type).removeClass('hide');
+            document.getElement('.modals').removeClass('hide').getElement('.modal.authorization.oauth').removeClass('hide');
+        },
+
+        'oauth-refresh': function(event) {
+            document.getElement('form.authorization.oauth').fireEvent('submit', new DOMEvent);
         },
 
         'save': function(event) {
