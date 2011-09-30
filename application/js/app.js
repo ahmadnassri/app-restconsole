@@ -478,25 +478,25 @@ window.addEvent('domready', function() {
 
             // save custom headers
             var elements = {
-                'keys': this.getElements('ul.headers input[name="key"]:not(:last-of-type)'),
-                'values': this.getElements('ul.headers input[name="value"]:not(:last-of-type)')
+                'keys': this.getElements('ul.headers input[name="key"]:not(:last-of-type)').get('value'),
+                'values': this.getElements('ul.headers input[name="value"]:not(:last-of-type)').get('value')
             };
 
             elements.keys.each(function(key, index) {
-                if (key.get('value') != '') {
-                    headers[key.get('value')] = elements.values[index].get('value');
+                if (key.length > 0) {
+                    headers[key] = elements.values[index];
                 }
             });
 
             // set custom params
             var elements = {
-                'keys': this.getElements('ul.params input[name="key"]:not(:last-of-type)'),
-                'values': this.getElements('ul.params input[name="value"]:not(:last-of-type)')
+                'keys': this.getElements('ul.params input[name="key"]:not(:last-of-type)').get('value'),
+                'values': this.getElements('ul.params input[name="value"]:not(:last-of-type)').get('value')
             };
 
             elements.keys.each(function(key, index) {
-                if (key.get('value') != '') {
-                    params[key.get('value')] = elements.values[index].get('value');
+                if (key.length > 0) {
+                    params[key] = elements.values[index];
                 }
             });
 
@@ -568,17 +568,17 @@ window.addEvent('domready', function() {
             var request = this.toQueryString().parseQueryString();
 
             // extract the headers
-            request.headers = Object.clone(request);
+            var headers = Object.clone(request);
 
             // delete none headers
-            delete request.headers.uri;
-            delete request.headers.method;
-            delete request.headers.timeout;
-            delete request.headers.raw;
-            delete request.headers.encoding;
-            delete request.headers.key;
-            delete request.headers.value;
-            delete request.headers.file_key;
+            delete headers.uri;
+            delete headers.method;
+            delete headers.timeout;
+            delete headers.raw;
+            delete headers.encoding;
+            delete headers.key;
+            delete headers.value;
+            delete headers.file_key;
 
             // unsecure headers:
             var unsafe = [
@@ -612,7 +612,6 @@ window.addEvent('domready', function() {
 
             // init variables
             request.data = {};
-            request.headers = {};
 
             // set custom params data
             custom.data.keys.each(function(key, index) {
@@ -627,7 +626,7 @@ window.addEvent('domready', function() {
                     Error('Unsafe Header', 'Refused to set unsafe header "' + key +'"', this.getElement('ul.headers input[name="key"]:nth-of-type(' + (index + 1) + ')'));
                     error = true;
                 } else if (key.length > 0) {
-                    request.headers[key] = custom.headers.values[index];
+                    headers[key] = custom.headers.values[index];
                 }
             }.bind(this));
 
@@ -657,7 +656,7 @@ window.addEvent('domready', function() {
                     'data': request.data,
                     'files': this.getElement('input[name="files"]').files,
                     'file_key': request.file_key,
-                    'headers': request.headers,
+                    'headers': headers,
 
                     'onRequest': function() {
                         // replace buttons with animation
@@ -874,7 +873,7 @@ window.addEvent('domready', function() {
                         }
                     }
                 };
-
+console.log(options);
                 // don't force the content-type header
                 if (options.files.length > 0) {
                     delete options.headers['Content-Type'];
