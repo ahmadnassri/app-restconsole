@@ -23,7 +23,7 @@
 <!--
                 <div class="container-fluid">
 -->
-                    <div class="brand"><img src="images/logo/32.png" align="left"/> REST Console <small>version 4.0.1</small></div>
+                    <div class="brand"><img src="images/logo/32.png" align="left"/> REST Console <small>version 4.0.2</small></div>
 
                     <ul class="nav">
                         <li><a href="#options" scroll><span>O</span>ptions</a></li>
@@ -983,6 +983,9 @@
                     <ul class="pills">
                         <li class="active"><a href="#responseBody">Response Body</a></li>
                         <li><a href="#rawBody">RAW Body</a></li>
+<!--
+                        <li><a href="#har">HTTP Archive (HAR)</a></li>
+-->
                         <li><a href="#responseHeaders">Response Headers</a></li>
                         <li><a href="#responsePreview">Response Preview</a></li>
                         <li><a href="#requestBody">Request Body</a></li>
@@ -1045,6 +1048,9 @@
                             <pre id="responseBody" class="prettyprint"></pre>
                         </li>
                         <li class="hide"><pre id="rawBody"></pre></li>
+<!--
+                        <li class="hide"><pre id="har" class="prettyprint lang-json"></pre></li>
+-->
                         <li class="hide"><pre id="responseHeaders" class="prettyprint"></pre></li>
                         <li class="hide"><div id="responsePreview"></div></li>
                         <li class="hide"><pre id="requestBody" class="prettyprint"></pre></li>
@@ -1508,9 +1514,15 @@
 
         <script src="js/mootools-core-1.4.0.js"></script>
         <script src="js/mootools-more-1.4.0.1.js"></script>
+<!--
+        <script src="js/powertools-1.1.0.js"></script>
+-->
 
         <script src="js/AutoComplete.js"></script>
         <script src="js/request.js"></script>
+<!--
+        <script src="js/HAR.js"></script>
+-->
         <script src="js/app.js"></script>
 
         <script src="js/analytics.js"></script>
