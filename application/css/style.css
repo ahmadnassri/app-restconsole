@@ -71,18 +71,13 @@ body > .container-fluid {
     margin-bottom: 10px;
 }
 
-.page form .actions {
+.form-stacked .actions {
     margin: 0px -10px;
-    padding-left: 170px;
+    padding: 10px;
 }
 
 .btn.authorization {
     padding-bottom: 5px;
-}
-
-.page form .actions {
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 form.modal {
@@ -173,10 +168,6 @@ pre:empty:before {
     margin-left: 240px;
 }
 
-form .actions {
-    padding: 10px;
-}
-
 form[name="request"] {
     position: relative;
 
@@ -188,8 +179,6 @@ form[name="request"] .actions {
 
     width: 940px;
 
-    position: absolute;
-    bottom: 0px;
 }
 
 form[name="request"] .actions.fixed {
@@ -300,4 +289,20 @@ font-size: 12px;
     border: none;
     width: auto;
     height: auto;
+}
+
+form[name="request"] {
+    padding:0px;
+}
+
+form[name="request"] > div {
+    padding-left: 10px;
+}
+
+form[name="request"] #actions {
+    margin-top: 10px;
+}
+
+form[name="request"].form-stacked > .actions {
+    margin-left: 0px;
 }
