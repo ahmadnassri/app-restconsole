@@ -685,6 +685,7 @@ window.addEvent('domready', function() {
                         var responseXML = this.xhr.responseXML;
 
                         // rest response fields
+                        //document.id('har').empty();
                         document.id('rawBody').empty().set('class');
                         document.id('responseBody').empty().set('class', 'prettyprint');
                         document.id('responseHeaders').empty().set('class', 'prettyprint');
@@ -873,7 +874,7 @@ window.addEvent('domready', function() {
                         }
                     }
                 };
-console.log(options);
+
                 // don't force the content-type header
                 if (options.files.length > 0) {
                     delete options.headers['Content-Type'];
