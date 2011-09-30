@@ -22,14 +22,28 @@ window.addEvent('domready', function() {
     // special scroll listener for the request form actions bar
     window.addEvent('scroll', function(event) {
         var scroll = window.getSize().y + window.getScroll().y;
-        var coordinates = document.id('request').getCoordinates();
+        var form = document.getElement('form[name="request"]');
+        var coordinates = form.getCoordinates();
 
-        var element = document.getElement('form[name="request"] .actions');
+        var element = form.getElement('.actions');
 
         if (scroll - 200 <= coordinates.top || scroll >= coordinates.bottom) {
             element.removeClass('fixed');
         } else {
             element.addClass('fixed');
+        }
+    });
+
+    // sections
+    document.getElements('a.minimize').addEvent('click', function(event) {
+        event.preventDefault();
+
+        var section = this.getParent('.page').getElement('section');
+
+        if (section.isDisplayed()) {
+            section.hide();
+        } else {
+            section.show();
         }
     });
 
