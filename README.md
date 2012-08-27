@@ -50,6 +50,6 @@ we don't collect any personal data and we don't want access to your data on all 
 ## Resources
 
 * Follow us on Twitter: http://twitter.com/restconsole
-* Get the source code: https://github.com/codeinchaos/rest-console
-* Report issues: https://github.com/codeinchaos/rest-console/issues
+* Get the source code: https://github.com/codeinchaos/restconsole
+* Report issues: https://github.com/codeinchaos/restconsole/issues
 * Donate: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UJ2B2BTK9VLRS
