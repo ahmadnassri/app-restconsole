@@ -1,17 +1,23 @@
 {
-    "version": "4.0.2",
+    "version": "4.1.0",
 
-    "name": "REST Console",
+    "manifest_version": 2,
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+    "name": "__MSG_name__",
     "description": "REST Console is an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.",
 
+    "default_locale": "en",
 
     "options_page": "index.html#options",
-    "background_page": "background.html",
+    //"background_page": "background.html",
 
     "icons": {
+        // favicon
         "16": "images/logo/16.png",
-        "32": "images/logo/32.png",
+        // chrome://extensions
         "48": "images/logo/48.png",
+        // webstore
         "128": "images/logo/128.png"
     },
 
@@ -21,8 +27,16 @@
         }
     },
 
+    "offline_enabled": true,
+
     "permissions": [
         "tabs",
-        "*://*/*"
+        "*://*/*",
+        "contextMenus",
+        "unlimitedStorage"
+    ],
+
+    "optional_permissions": [
+        "cookies"
     ]
 }
