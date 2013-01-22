@@ -1,5 +1,5 @@
 name	:= rest-console-launcher
-json	:= $(shell find dist -type f -name "*.json")
+#json	:= $(shell find dist -type f -name "*.json")
 
 chrome := $(which google-chrome)
 zip    := zip -9 -q
