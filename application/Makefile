@@ -12,38 +12,38 @@ all: clean setup css js
 
 setup:
 	@echo "[SETUP] copying files"
-	@mkdir -p bin
+	@mkdir -p dist
 
-	@cp *.html *.json bin
-	@cp -r _locales bin
-	@cp -r images bin
+	@cp *.html *.json dist
+	@cp -r _locales dist
+	@cp -r images dist
 
 # target: css - minify CSS with LESSC
 css:
 	@echo "[CSS] compiling CSS"
-	@lessc --yui-compress less/app.less bin/app.css
+	@lessc --yui-compress less/app.less dist/app.css
 
 # target: js minify JavaScript with UgilifyJS
 js:
 	@echo "[JS] compressing JavaScript"
-	@cat js/libs/*.js js/app.js | uglifyjs -o bin/app.js
-#	yuicompressor --type js src/scripts/$(notdir $@) -o bin/scripts/$(notdir $@)
+	@cat js/libs/*.js js/app.js | uglifyjs -o dist/app.js
+#	yuicompressor --type js src/scripts/$(notdir $@) -o dist/scripts/$(notdir $@)
 
 # target: crx - Build .crx extension
 crx:
 	@$(if $(shell pidof $(chrome)),$(error $(chrome) running, cannot create extension) $(exit 1),)
 	@echo "[CRX] building CRX"
-	@ln -s bin $(name)
+	@ln -s dist $(name)
 	$(chrome) --pack-extension=$(name)
 	@rm $(name)
 
 #dist: css javascript
 #	@echo "[SETUP] copying files..."
-#	@mkdir -p bin
+#	@mkdir -p dist
 
-#	@cp *.html *.json bin
-#	@cp -r _locales bin
-#	@cp -r images bin
+#	@cp *.html *.json dist
+#	@cp -r _locales dist
+#	@cp -r images dist
 
 #	@echo "[DIST] crushing images and icons..."
 #	@${crush} -d $(build_dir)/icons src/icons/*.png 2>&1>/dev/null
@@ -57,7 +57,7 @@ crx:
 # target: clean - Removes minified CSS and JS files.
 clean:
 	@echo "[CLEAN] cleaning up"
-	@rm -rf bin
+	@rm -rf dist
 
 
 # target: help - Displays help.
