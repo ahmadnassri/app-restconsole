@@ -21,6 +21,7 @@ css:
 # target: js minify JavaScript with UgilifyJS
 js:
 	@echo "[JS] compressing JavaScript"
+	@uglifyjs js/background.js -o dist/background.js
 	@cat js/libs/*.js js/app.js | uglifyjs -o dist/app.js
 
 # TODO: figure out what UglifyJS doesn't wory with JSON

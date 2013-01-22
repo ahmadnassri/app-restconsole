@@ -47,6 +47,7 @@
         "*://*/*"
     ],
 
+    // TODO: experimental + infobars?
     "optional_permissions": [
         "tabs",
         "history",
@@ -57,8 +58,6 @@
         "webNavigation",
         "clipboardRead",
         "clipboardWrite",
-        "chrome://favicon/",
-
-        // TODO: experimental + infobars?
+        "chrome://favicon/"
     ]
 }
