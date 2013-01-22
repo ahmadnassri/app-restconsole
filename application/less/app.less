@@ -1,5 +1,5 @@
-@import "/css/fonts.less";
-@import "/css/bootstrap/bootstrap.less";
+@import "fonts.less";
+@import "bootstrap/bootstrap.less";
 
 @gridBlue: #1b69a1;
 @fluidSidebarWidth: 225px;
@@ -57,10 +57,10 @@ html {
         background-color: @gridBlue;
         background-image: url('/images/bg.png');
 
-        .user-select(none);
+        //.user-select(none);
 
         .selectable {
-            .user-select(text);
+            //.user-select(text);
         }
 
         p.help-text {
@@ -741,7 +741,7 @@ html {
                     font-family: @monoFontFamily;
                     font-size: @baseFontSize;
 
-                    .user-select(text);
+                    //.user-select(text);
 
                     white-space: pre;
                     word-wrap: normal;
