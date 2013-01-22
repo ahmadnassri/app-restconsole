@@ -1,16 +1,14 @@
 {
-    "version": "4.1.0",
+    "version": "5.0.0",
     "manifest_version": 2,
 
     "name": "__MSG_name__",
     "description": "__MSG_description__",
 
     "icons": {
-        // favicon
         "16": "images/logo/16.png",
-        // chrome://extensions
+        "32": "images/logo/32.png",
         "48": "images/logo/48.png",
-        // webstore
         "128": "images/logo/128.png"
     },
 
@@ -46,7 +44,7 @@
     "options_page": "options.html",
 
     "permissions": [
-        "*://*/*",
+        "*://*/*"
     ],
 
     "optional_permissions": [

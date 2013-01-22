@@ -4,10 +4,7 @@
     },
 
     "description": {
+        // TODO: URL should be a param
         "message": "REST Console is an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs."
-    },
-
-    "browser_action_title": {
-        "message": "Launch or Install REST Console"
     }
 }

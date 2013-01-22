@@ -1,0 +1,14 @@
+{
+    "name": {
+        "message": "REST Console Launcher"
+    },
+
+    "description": {
+        // TODO: URL should be a param
+        "message": "This is a toolbar launcher for REST Console. get the REST Console App at http://www.restconsole.com"
+    },
+
+    "title": {
+        "message": "Launch or Install REST Console"
+    }
+}

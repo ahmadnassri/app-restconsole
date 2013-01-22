@@ -1,10 +1,9 @@
 {
-    "version": "4.1.0",
+    "version": "5.0.0",
+    "manifest_version": 2,
 
-    "name": "REST Console Launcher",
-    "description": "This is a toolbar launcher for REST Console. get the REST Console App at http://www.restconsole.com",
-
-    "background_page": "background.html",
+    "name": "__MSG_name__",
+    "description": "__MSG_description__",
 
     "icons": {
         "16": "images/16.png",
@@ -12,10 +11,21 @@
         "48": "images/48.png"
     },
 
+    "default_locale": "en",
+
     "browser_action": {
         "default_icon": "images/19.png",
-        "default_title": "Launch REST Console"
+        "default_title": "__MSG_title__"
     },
+
+    "background": {
+        "persistent": false,
+        "scripts": ["background.js"]
+    },
+
+    "homepage_url": "http://www.restconsole.com",
+
+    "offline_enabled": true,
 
     "permissions": [
         "tabs",
