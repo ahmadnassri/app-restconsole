@@ -1,16 +1,9 @@
 {
     "version": "4.1.0",
-
     "manifest_version": 2,
-    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
 
     "name": "__MSG_name__",
-    "description": "REST Console is an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.",
-
-    "default_locale": "en",
-
-    "options_page": "index.html#options",
-    //"background_page": "background.html",
+    "description": "__MSG_description__",
 
     "icons": {
         // favicon
@@ -21,22 +14,53 @@
         "128": "images/logo/128.png"
     },
 
+    "default_locale": "en",
+
     "app": {
         "launch": {
             "local_path": "index.html"
         }
     },
 
+    "background": {
+        "persistent": false,
+        "scripts": ["background.js"]
+    },
+
+    // TODO: do we need this?
+    // http://developer.chrome.com/extensions/sandboxingEval.html
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+
+    "homepage_url": "http://www.restconsole.com",
+
+    "incognito": "spanning",
+
+    // TODO: add intents?
+
     "offline_enabled": true,
 
+    // TODO: Omnibox integration
+    "omnibox": { "keyword" : "REST" },
+
+    // TODO: crbug.com/25317
+    "options_page": "options.html",
+
     "permissions": [
-        "tabs",
         "*://*/*",
-        "contextMenus",
-        "unlimitedStorage"
     ],
 
     "optional_permissions": [
-        "cookies"
+        "tabs",
+        "history",
+        "storage",
+        "cookies",
+        "webRequest",
+        "contextMenus",
+        "webNavigation",
+        "clipboardRead",
+        "clipboardWrite",
+        "chrome://favicon/",
+
+        // TODO: experimental + infobars?
     ]
 }
