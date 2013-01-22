@@ -1,9 +1,6 @@
 name	:= rest-console-launcher
 #json	:= $(shell find dist -type f -name "*.json")
 
-chrome := $(which google-chrome)
-zip    := zip -9 -q
-
 .PHONY: all setup js crx dist clean ${json}
 
 all: clean setup js $(json)
