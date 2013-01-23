@@ -13,11 +13,12 @@ setup:
 	@cp *.html *.json $(path)
 	@cp -r _locales $(path)
 	@cp -r images $(path)
+	@cp -r fonts $(path)
 
 # target: css - minify CSS with LESSC
 css:
 	@echo "[CSS] compiling CSS"
-	@lessc --yui-compress less/app.less dist/app.css
+	@lessc --yui-compress less/app.less $(path)/app.css
 
 # target: js minify JavaScript with UgilifyJS
 js:
@@ -34,7 +35,6 @@ js:
 crx:
 	@echo "[CRX] building CRX"
 	@google-chrome --pack-extension=$(path)
-	@mv dist.crx $(name).crx
 
 # target: clean - Removes minified CSS and JS files.
 clean:

@@ -28,7 +28,6 @@ js:
 crx:
 	@echo "[CRX] building CRX"
 	@google-chrome --pack-extension=$(path)
-	@mv dist.crx $(name).crx
 
 # target: clean - Removes minified CSS and JS files.
 clean:
