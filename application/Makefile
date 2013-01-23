@@ -10,8 +10,9 @@ setup:
 	@echo "[SETUP] copying files"
 	@mkdir -p $(path)
 
-	@cp *.html *.json $(path)
+	@cp *.json $(path)
 	@cp -r _locales $(path)
+	@cp -r pages $(path)
 	@cp -r images $(path)
 	@cp -r fonts $(path)
 

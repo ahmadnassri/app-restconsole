@@ -16,7 +16,7 @@
 
     "app": {
         "launch": {
-            "local_path": "index.html"
+            "local_path": "pages/index.html"
         }
     },
 
@@ -41,7 +41,7 @@
     "omnibox": { "keyword" : "REST" },
 
     // TODO: crbug.com/25317
-    "options_page": "options.html",
+    "options_page": "pages/options.html",
 
     "permissions": [
         "*://*/*"

@@ -596,11 +596,6 @@ var App = new Class({
 
                                         if (checked) {
                                             input.set('disabled', false).fireEvent('highlight').fireEvent('focus').focus();
-
-                                            // prevent autoComplete
-                                            if (event) {
-                                                event.stopPropagation();
-                                            }
                                         } else {
                                             input.set('disabled', true).fireEvent('highlight');
                                             this.getParent('.control-group').removeClass('success').removeClass('error').removeClass('warning');
@@ -986,12 +981,12 @@ var App = new Class({
         }),
 
         'social': new Template(function(data) {
+            /*
             li(a({'tabindex': -1, 'href': 'https://twitter.com/share', 'class': 'twitter-share-button', 'data-url': 'https://chrome.google.com/webstore/detail/cokgbflfommojglbmbpenpphppikmonn', 'data-text': 'Checkout @RESTConsole App for Google #Chrome for #REST #API development', 'data-via': 'CodeInChaos', 'data-related': 'CodeInChaos,AhmadNassri', 'data-hashtags': 'HTTP,RESTful'}, 'Tweet')),
             li(iframe({'allowtransparency': true, 'frameborder': 0, 'scrolling': 'no', 'src': 'http://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fcokgbflfommojglbmbpenpphppikmonn&send=false&layout=button_count&width=450&show_faces=false&action=like&amp&height=21&appId=199139246805784'})),
             li(iframe({'allowtransparency': true, 'frameborder': 0, 'scrolling': 'no', 'src': 'https://plusone.google.com/_/+1/fastbutton?url=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fcokgbflfommojglbmbpenpphppikmonn&size=medium&count=true&annotation=&hl=en-US&jsh=m%3B%2F_%2Fapps-static%2F_%2Fjs%2Fwidget%2F__features__%2Frt%3Dj%2Fver%3DXsa0GTewdqg.en.%2Fsv%3D1%2Fam%3D!KW4lzGmbF_KIhSW8Og%2Fd%3D1%2F#id=I1_1327261815981&parent=chrome-extension%3A%2F%2Fbjdlekdiiieofkpjfhpcmlhalmbnpjnh&rpctoken=858197945&_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe'})),
             li(script({'type': 'IN/Share', 'data-url': 'https://chrome.google.com/webstore/detail/cokgbflfommojglbmbpenpphppikmonn', 'data-counter': 'right'})),
             li(iframe({'allowtransparency': true, 'frameborder': 0, 'scrolling': 'no', 'src': 'http://markdotto.github.com/github-buttons/github-btn.html?user=codeinchaos&repo=restconsole&type=watch&count=true'}))
-            /*
             li(a({'tabindex': -1, 'href': 'https://twitter.com/CodeInChaos', 'class': 'twitter-follow-button', 'data-width': '155px', 'data-link-color': '#0069D6', 'data-show-count': false}, 'Follow @CodeInChaos')),
 
             li(iframe({'src': 'http://markdotto.github.com/github-buttons/github-btn.html?user=codeinchaos&repo=restconsole&type=fork&count=true', 'allowtransparency': true, 'frameborder': 0, 'scrolling': 0, 'width': '60px', 'height': '20px'})),
@@ -2441,12 +2436,6 @@ var App = new Class({
 
         // fix sizing
         window.addEvent('resize', this.resizeEvent).fireEvent('resize');
-
-        // setup autocomplete
-        if ('options' in document.createElement('datalist') == false) {
-            debug.group('setting up autocomplete');
-            new AutoComplete();
-        }
 
         this.initInterface(defaults);
 
