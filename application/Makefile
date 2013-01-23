@@ -2,7 +2,7 @@ name	:= rest-console
 path	:= ../dist/application
 #json	:= $(shell find dist -type f -name "*.json")
 
-.PHONY: all setup css js crx dist clean ${json}
+.PHONY: all setup css js crx build clean ${json}
 
 all: clean setup css js ${json}
 
@@ -18,7 +18,7 @@ setup:
 # target: css - minify CSS with LESSC
 css:
 	@echo "[CSS] compiling CSS"
-	@lessc --yui-compress less/app.less $(path)/app.css
+	@lessc --yui-compress styles/app.less $(path)/app.css
 
 # target: js minify JavaScript with UgilifyJS
 js:

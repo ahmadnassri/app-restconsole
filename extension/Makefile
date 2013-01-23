@@ -2,7 +2,7 @@ name	:= rest-console-launcher
 path	:= ../dist/extension
 #json	:= $(shell find dist -type f -name "*.json")
 
-.PHONY: all setup js crx dist clean ${json}
+.PHONY: all setup js crx build clean ${json}
 
 all: clean setup js $(json)
 
