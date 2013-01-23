@@ -1,4 +1,5 @@
 name	:= rest-console-launcher
+path	:= ../dist/extension
 #json	:= $(shell find dist -type f -name "*.json")
 
 .PHONY: all setup js crx dist clean ${json}
@@ -7,16 +8,16 @@ all: clean setup js $(json)
 
 setup:
 	@echo "[SETUP] copying files"
-	@mkdir -p dist
+	@mkdir -p $(path)
 
-	@cp *.json dist
-	@cp -r _locales dist
-	@cp -r images dist
+	@cp *.json $(path)
+	@cp -r _locales $(path)
+	@cp -r images $(path)
 
 # target: js minify JavaScript with UgilifyJS
 js:
 	@echo "[JS] compressing JavaScript"
-	@uglifyjs background.js -o dist/background.js
+	@uglifyjs background.js -o $(path)/background.js
 
 # TODO: figure out what UglifyJS doesn't wory with JSON
 # ${json}:
@@ -26,13 +27,13 @@ js:
 # target: crx - Build .crx extension
 crx:
 	@echo "[CRX] building CRX"
-	@google-chrome --pack-extension=dist
+	@google-chrome --pack-extension=$(path)
 	@mv dist.crx $(name).crx
 
 # target: clean - Removes minified CSS and JS files.
 clean:
 	@echo "[CLEAN] cleaning up"
-	@rm -rf dist
+	@rm -rf $(path)
 	@rm -rf *.crx
 	@rm -rf *.pem
 

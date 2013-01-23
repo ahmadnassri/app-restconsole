@@ -1,4 +1,2 @@
 .DS_Store
-*/dist
-*/*.crx
-*/*.pem
+dist

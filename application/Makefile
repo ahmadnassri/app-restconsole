@@ -1,4 +1,5 @@
 name	:= rest-console
+path	:= ../dist/application
 #json	:= $(shell find dist -type f -name "*.json")
 
 .PHONY: all setup css js crx dist clean ${json}
@@ -7,11 +8,11 @@ all: clean setup css js ${json}
 
 setup:
 	@echo "[SETUP] copying files"
-	@mkdir -p dist
+	@mkdir -p $(path)
 
-	@cp *.html *.json dist
-	@cp -r _locales dist
-	@cp -r images dist
+	@cp *.html *.json $(path)
+	@cp -r _locales $(path)
+	@cp -r images $(path)
 
 # target: css - minify CSS with LESSC
 css:
@@ -21,8 +22,8 @@ css:
 # target: js minify JavaScript with UgilifyJS
 js:
 	@echo "[JS] compressing JavaScript"
-	@uglifyjs js/background.js -o dist/background.js
-	@cat js/libs/*.js js/app.js | uglifyjs -o dist/app.js
+	@uglifyjs js/background.js -o $(path)/background.js
+	@cat js/libs/*.js js/app.js | uglifyjs -o $(path)/app.js
 
 # TODO: figure out what UglifyJS doesn't wory with JSON
 # ${json}:
@@ -32,13 +33,13 @@ js:
 # target: crx - Build .crx extension
 crx:
 	@echo "[CRX] building CRX"
-	@google-chrome --pack-extension=dist
+	@google-chrome --pack-extension=$(path)
 	@mv dist.crx $(name).crx
 
 # target: clean - Removes minified CSS and JS files.
 clean:
 	@echo "[CLEAN] cleaning up"
-	@rm -rf dist
+	@rm -rf $(path)
 	@rm -rf *.crx
 	@rm -rf *.pem
 
