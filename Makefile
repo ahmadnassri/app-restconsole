@@ -1,14 +1,16 @@
 .PHONY: application extension help
 
-all: application extension
+all: app ext
 
 # target: application - Build Application.
-application:
-	$(MAKE) -C application
+app:
+	@echo "[APPLICATION] building application"
+	@make --no-print-directory --directory application
 
 # target: extension - Build Extension.
-extension:
-	$(MAKE) -C extension
+ext:
+	@echo "[APPLICATION] building application"
+	@make --no-print-directory --directory extension
 
 # target: help - Displays help.
 help:
