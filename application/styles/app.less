@@ -1,6 +1,6 @@
-@import "fonts.less";
+//@import "fonts.less";
 @import "../../vendor/bootstrap/less/bootstrap.less";
-
+/*
 @gridBlue: #1b69a1;
 @fluidSidebarWidth: 225px;
 @baseFontFamily: "Ubuntu", Helvetica, Arial, sans-serif;
@@ -11,9 +11,9 @@
     padding: 10px;
     margin-bottom: 20px;
 
-    background-color: @white;
+    //background-color: @white;
 
-    .border-radius(5px);
+    //.border-radius(5px);
     .box-shadow(0 3px 7px rgba(0, 0, 0, 0.3));
 }
 
@@ -37,7 +37,7 @@
 
     ::-webkit-scrollbar-thumb {
         background-color: rgba(0,0,0,0.2);
-        .border-radius(4px);
+        //.border-radius(4px);
     }
 
     ::-webkit-scrollbar-button:start:decrement,
@@ -47,7 +47,7 @@
 }
 
 .prependInputColumns(@columnSpan: 1, @prepend: 26) {
-    width: ((@gridColumnWidth) * @columnSpan) + (@gridGutterWidth * (@columnSpan - 1)) - (10 + @prepend);
+    //width: ((@gridColumnWidth) * @columnSpan) + (@gridGutterWidth * (@columnSpan - 1)) - (10 + @prepend);
 }
 
 html {
@@ -172,7 +172,7 @@ html {
 
         .navbar {
             .navbar-inner {
-                height: @navbarHeight;
+                //height: @navbarHeight;
             }
 
             .brand {
@@ -194,7 +194,7 @@ html {
                 small {
                     display: block;
                     margin-top: -5px;
-                    font-size: @baseFontSize - 3;
+                    //font-size: @baseFontSize - 3;
                     font-family: @baseFontFamily;
                 }
             }
@@ -204,7 +204,7 @@ html {
                     &.active {
                         a {
                             span {
-                                border-color: @white;
+                                //border-color: @white;
                             }
                         }
                     }
@@ -212,7 +212,7 @@ html {
                     a {
                         &:hover {
                             span {
-                                border-color: @white;
+                                //border-color: @white;
                             }
                         }
 
@@ -318,12 +318,12 @@ html {
                     a {
                         &:hover {
                             span {
-                                border-color: @white;
+                                //border-color: @white;
                             }
                         }
 
                         span {
-                            border-color: @white;
+                            //border-color: @white;
                         }
                     }
                 }
@@ -351,7 +351,7 @@ html {
             input,
             select,
             textarea {
-                font-size: @baseFontSize + 1;
+                //font-size: @baseFontSize + 1;
                 font-family: @monoFontFamily;
                 margin-bottom: 5px;
 
@@ -373,7 +373,7 @@ html {
             }
 
             select {
-                background-color: @white;
+                //background-color: @white;
             }
 
             .control-group {
@@ -418,7 +418,7 @@ html {
                 &.control-group {
                     .input-append {
                         &.error {
-                            .formFieldState(#b94a48, #ee5f5b, lighten(#ee5f5b, 30%));
+                            //.formFieldState(#b94a48, #ee5f5b, lighten(#ee5f5b, 30%));
                         }
 
                         &:last-of-type {
@@ -437,11 +437,11 @@ html {
                             margin-bottom: 0px;
 
                             &:nth-of-type(1) {
-                                .prependInputColumns(3, 9)
+                                //.prependInputColumns(3, 9)
                             }
 
                             &:nth-of-type(2) {
-                                .border-radius(0);
+                                //.border-radius(0);
                                 border-left: none;
                             }
                         }
@@ -482,7 +482,7 @@ html {
                 padding: 5px 10px;
                 margin: -18px 0px 0px 0px;
 
-                .border-radius(0px 0px 4px 4px);
+                //.border-radius(0px 0px 4px 4px);
             }
         }
 
@@ -535,7 +535,7 @@ html {
 
                     min-height: 530px;
                     position: fixed;
-                    top: @navbarHeight + 20px;
+                    //top: @navbarHeight + 20px;
 
                     .well {
                         padding: 8px 0px;
@@ -580,34 +580,6 @@ html {
 
                 > .fluid-content {
                     padding-top: 20px;
-                }
-            }
-        }
-
-        .input-prepend {
-            input {
-                &.span1 {
-                    .prependInputColumns(1, 26);
-                }
-
-                &.span2 {
-                    .prependInputColumns(2, 26);
-                }
-
-                &.span5 {
-                    .prependInputColumns(5, 26);
-                }
-
-                &.span6 {
-                    .prependInputColumns(6, 26);
-                }
-
-                &.span12 {
-                    .prependInputColumns(12, 26);
-
-                    &.padded {
-                        .prependInputColumns(11.75, 26);
-                    }
                 }
             }
         }
@@ -676,7 +648,7 @@ html {
 
                                 .span3 {
                                     &:nth-of-type(2) {
-                                        .prependInputColumns(3, 26);
+                                        //.prependInputColumns(3, 26);
                                     }
                                 }
                             }
@@ -686,25 +658,25 @@ html {
                             input[type="file"] {
                                 display: inline-block;
                                 width: 210px;
-                                height: @baseLineHeight + 4;
+                                //height: @baseLineHeight + 4;
                                 padding: 4px;
-                                font-size: @baseFontSize;
-                                line-height: @baseLineHeight + 4;
+                                //font-size: @baseFontSize;
+                                //line-height: @baseLineHeight + 4;
                                 color: @gray;
                                 border: 1px solid #ccc;
-                                .border-radius(0px 3px 3px 0px);
+                                //.border-radius(0px 3px 3px 0px);
                                 .box-shadow(inset 0 1px 3px rgba(0,0,0,.1));
                             }
 
                             input[type="text"] {
-                                height: @baseLineHeight + 4;
-                                line-height: @baseLineHeight + 4;
+                                //height: @baseLineHeight + 4;
+                                //line-height: @baseLineHeight + 4;
                                 border-right: none;
                             }
 
                             .add-on {
                                 padding-top: 6px;
-                                height: @baseLineHeight + 2;
+                                //height: @baseLineHeight + 2;
                             }
                         }
 
@@ -730,7 +702,7 @@ html {
 
                         textarea {
                             min-height: 150px;
-                            max-width: ((@gridColumnWidth) * 5.75) + (@gridGutterWidth * (5.75 - 1)) - 10;
+                            //max-width: ((@gridColumnWidth) * 5.75) + (@gridGutterWidth * (5.75 - 1)) - 10;
                         }
                     }
                 }
@@ -739,7 +711,7 @@ html {
             &#response {
                 pre {
                     font-family: @monoFontFamily;
-                    font-size: @baseFontSize;
+                    //font-size: @baseFontSize;
 
                     //.user-select(text);
 
@@ -778,16 +750,16 @@ html {
                     padding: 8px;
                     background-color: #F7F7F9;
                     border: 1px solid #E1E1E8;
-                    .border-radius(4px);
+                    //.border-radius(4px);
                     .scrollbar(vertical);
 
                     &:empty {
                         font-family: @baseFontFamily;
-                        font-size: @baseFontSize;
+                        //font-size: @baseFontSize;
 
                         padding: 8px;
 
-                        .border-radius(4px);
+                        //.border-radius(4px);
                         background-color: #F7F7F9;
                         border: 1px solid #E1E1E8;
 
@@ -805,7 +777,7 @@ html {
                         width: 100%;
                         height: 100%;
                         border: none;
-                        .border-radius(6px);
+                        //.border-radius(6px);
                     }
 
                     img {
@@ -872,21 +844,21 @@ html {
             border: 1px solid #CCC;
             border-top: none;
 
-            .border-radius(0px 0px 3px 3px);
+            //.border-radius(0px 0px 3px 3px);
 
             min-height: 19px;
             max-height: 100px;
 
-            background-color: @white;
+            //background-color: @white;
 
-            .scrollbar(vertical);
+            //.scrollbar(vertical);
 
             div {
                 padding: 3px;
 
                 &.active,
                 &:hover {
-                    color: @white;
+                    //color: @white;
                     background-color: #3875D7;
                     cursor: pointer;
                 }
@@ -894,3 +866,4 @@ html {
         }
     }
 }
+*/
