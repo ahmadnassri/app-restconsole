@@ -1,5 +1,4 @@
 name	:= rest-console
-tmp		:= ../dist/tmp
 path	:= ../dist/application
 vendor	:= ../vendor
 #json	:= $(shell find dist -type f -name "*.json")
@@ -10,7 +9,6 @@ all: clean setup css js ${json}
 
 setup:
 	@echo "[SETUP] copying files"
-	@mkdir -p $(tmp)
 	@mkdir -p $(path)
 
 	@cp *.json $(path)
@@ -26,12 +24,9 @@ css:
 
 # target: js minify JavaScript with UgilifyJS
 js:
-	@echo "[MooTools] Building MooTools"
-	@$(vendor)/mootools-core/build > $(tmp)/mootools.js
-	@$(vendor)/mootools-more/build >> $(tmp)/mootools.js
 	@echo "[JS] compressing JavaScript"
 	@uglifyjs js/background.js -o $(path)/background.js
-	@cat $(tmp)/mootools.js $(vendor)/mooml/Source/mooml.js ../libs/*.js js/app.js js/ui.js | uglifyjs -o $(path)/app.js
+	@cat js/app.js js/ui.js | uglifyjs -o $(path)/app.js
 
 # TODO: figure out what UglifyJS doesn't wory with JSON
 # ${json}:
@@ -47,7 +42,6 @@ crx:
 clean:
 	@echo "[CLEAN] cleaning up"
 	@rm -rf $(path)
-	@rm -rf $(tmp)
 	@rm -rf *.crx
 	@rm -rf *.pem
 
