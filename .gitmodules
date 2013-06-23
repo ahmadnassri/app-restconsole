@@ -7,12 +7,3 @@
 [submodule "vendor/highlight.js"]
 	path = vendor/highlight.js
 	url = git://github.com/isagalaev/highlight.js.git
-[submodule "vendor/mooml"]
-	path = vendor/mooml
-	url = git://github.com/codeinchaos/mooml.git
-[submodule "vendor/mootools-core"]
-	path = vendor/mootools-core
-	url = git://github.com/mootools/mootools-core.git
-[submodule "vendor/mootools-more"]
-	path = vendor/mootools-more
-	url = https://github.com/mootools/mootools-more
