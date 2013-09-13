@@ -1,3 +1,7 @@
+$(window).on('load', function () {
+    $().tab();
+})
+
 window.URL = window.webkitURL || window.URL;
 window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
 
@@ -3097,8 +3101,4 @@ var App = new Class({
             new Alert('warning', 'Connection Failed!', 'Check your connectivity and try again');
         }
     }
-});
-
-window.addEvent('domready', function(event) {
-    $RESTConsole = new App;
 });

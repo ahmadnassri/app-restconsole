@@ -15,7 +15,7 @@ setup:
 	@cp -r _locales $(path)
 	@cp -r pages $(path)
 	@cp -r images $(path)
-	@cp -r fonts $(path)
+	#@cp -r fonts $(path)
 
 # target: css - minify CSS with LESSC
 css:
@@ -25,8 +25,9 @@ css:
 # target: js minify JavaScript with UgilifyJS
 js:
 	@echo "[JS] compressing JavaScript"
-	@uglifyjs js/background.js -o $(path)/background.js
-	@cat js/app.js js/ui.js | uglifyjs -o $(path)/app.js
+	#@uglifyjs js/background.js -o $(path)/background.js
+	#@cat js/app.js js/ui.js | uglifyjs -o $(path)/app.js
+	@cat $(vendor)/jquery.js $(vendor)/bootstrap/js/tab.js js/app.js | uglifyjs -o $(path)/app.js
 
 # TODO: figure out what UglifyJS doesn't wory with JSON
 # ${json}:
