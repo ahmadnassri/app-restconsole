@@ -46,6 +46,9 @@ clean:
 	@rm -rf *.crx
 	@rm -rf *.pem
 
+watch:
+	inotifywait --recursive --monitor --event modify . | while read dir ev file; do make all; done
+
 # target: help - Displays help.
 help:
 	@egrep "^# target:" Makefile
