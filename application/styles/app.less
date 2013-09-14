@@ -1,74 +1,74 @@
 @import "../../vendor/bootstrap/less/bootstrap.less";
 
 .column(@xs: 1, @sm: 1, @md: 1, @lg: 1) {
-	.make-xs-column(@xs);
-	.make-sm-column(@sm);
-	.make-md-column(@md);
-	.make-lg-column(@lg);
+    .make-xs-column(@xs);
+    .make-sm-column(@sm);
+    .make-md-column(@md);
+    .make-lg-column(@lg);
 }
 
 .fluid-container {
-	padding-right: (@grid-gutter-width / 2);
-	padding-left: (@grid-gutter-width / 2);
-	*zoom: 1;
+    padding-right: (@grid-gutter-width / 2);
+    padding-left: (@grid-gutter-width / 2);
+    *zoom: 1;
 
-	.clearfix();
+    .clearfix();
 }
 
 .height() {
-	height: 100%;
-	max-height: 100%;
+    height: 100%;
+    max-height: 100%;
 }
 
 .scroll() {
-	overflow-y: scroll;
+    overflow-y: scroll;
 }
 
 html {
-	.height();
+    .height();
 
-	body {
-		.height();
-		
-		//.make-row();
-		//.fluid-container();
+    body {
+        .height();
 
-		//position: fixed;
-		overflow: hidden;
+        //.make-row();
+        //.fluid-container();
 
-		#navigation {
-			.height();
-			.column(1, 1, 1, 1);
+        //position: fixed;
+        overflow: hidden;
 
-			background-color: #333333;
-		}
+        #navigation {
+            .height();
+            .column(1, 1, 1, 1);
 
-		#content {
-			.height();
-			.column(11, 11, 11, 11);
+            background-color: #333333;
+        }
 
-			background-color: #FFFFFF;
+        #content {
+            .height();
+            .column(11, 11, 11, 11);
 
-			#main {
-				.height();
-				.make-row();		
+            background-color: #FFFFFF;
 
-				#request {
-					.height();
-					.scroll();
-					.column(6, 6, 6, 6);
+            #main {
+                .height();
+                .make-row();
 
-					background-color: #F7F7F7;
-				}
+                #request {
+                    .height();
+                    .scroll();
+                    .column(6, 6, 6, 6);
 
-				#response {
-					.height();
-					.scroll();
-					.column(6, 6, 6, 6);
+                    background-color: #F7F7F7;
+                }
 
-					background-color: #FFFFFF;
-				}
-			}
-		}
-	}
+                #response {
+                    .height();
+                    .scroll();
+                    .column(6, 6, 6, 6);
+
+                    background-color: #FFFFFF;
+                }
+            }
+        }
+    }
 }
