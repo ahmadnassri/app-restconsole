@@ -56,15 +56,31 @@ html {
                 #request {
                     .height();
                     .scroll();
-                    .column(6, 6, 6, 6);
+                    .column(5, 5, 5, 5);
 
                     background-color: #F7F7F7;
+
+                    section {
+                        padding-top: 45px;
+
+                        &#target:after {
+                            content: "Example";
+                            position: absolute;
+                            top: 15px;
+                            left: 15px;
+                            font-size: 12px;
+                            font-weight: bold;
+                            color: #BBB;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                        }
+                    }
                 }
 
                 #response {
                     .height();
                     .scroll();
-                    .column(6, 6, 6, 6);
+                    .column(7, 7, 7, 7);
 
                     background-color: #FFFFFF;
                 }
