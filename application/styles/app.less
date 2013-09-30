@@ -43,6 +43,21 @@ html {
             background-color: #333333;
         }
 
+        .form-control {
+            border-radius: 0;
+
+            &:focus {
+                .box-shadow(none);
+            }
+        }
+
+        .help-block {
+            margin: 0px;
+            color: #BBBBBB;
+            font-size: 12px;
+            font-style: italic;
+        }
+
         #content {
             .height();
             .column(11, 11, 11, 11);
@@ -61,16 +76,13 @@ html {
                     background-color: #F7F7F7;
 
                     section {
-                        padding-top: 45px;
+                        position: relative;
 
-                        &#target:after {
-                            content: "Example";
-                            position: absolute;
-                            top: 15px;
-                            left: 15px;
+                        header {
+                            padding: 10px 0;
                             font-size: 12px;
                             font-weight: bold;
-                            color: #BBB;
+                            color: #737373;
                             text-transform: uppercase;
                             letter-spacing: 1px;
                         }
