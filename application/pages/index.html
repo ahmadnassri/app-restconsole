@@ -75,17 +75,15 @@
                             <header>Headers</header>
 
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#headers-standard">Standard Headers</a></li>
-                                <li><a data-toggle="tab" href="#headers-cache">Cache</a></li>
-                                <li><a data-toggle="tab" href="#headers-common">Common non-standard headers</a></li>
+                                <li class="active"><a data-toggle="tab" data-target="#headers-standard">Standard Headers</a></li>
+                                <li><a data-toggle="tab" data-target="#headers-cache">Cache</a></li>
+                                <li><a data-toggle="tab" data-target="#headers-common">Common non-standard headers</a></li>
                             </ul>
 
                             <div class="tab-content">
                                 <div id="headers-standard" class="tab-pane active">
                                     <fieldset>
-                                        <label for="Accept">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1">
-                                        </a>Accept</label>
+                                        <label for="Accept"><a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1"></a>Accept</label>
                                         <div class="controls">
                                             <div class="input-prepend">
                                                 <label class="add-on">
@@ -181,6 +179,7 @@
                                         </div>
                                     </fieldset>
                                 </div>
+
                                 <div id="headers-cache" class="tab-pane">
                                     <fieldset>
                                         <label for="Cache-Control">
@@ -267,6 +266,7 @@
                                         </div>
                                     </fieldset>
                                 </div>
+
                                 <div id="headers-common" class="tab-pane">
                                     <fieldset>
                                         <label for="X-HTTP-Method-Override">X-HTTP-Method-Override</label>
@@ -361,122 +361,90 @@
                         <section id="payload">
                             <header>Payload</header>
 
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" data-target="#payload-raw">RAW Body</a></li>
+                                    <li><a data-toggle="tab" data-target="#payload-form">Form Data</a></li>
+                                </ul>
+
                                 <div class="form-group">
-                                        <label for="Content-Type">Content-Type</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-6" type="text" data-storage="header" name="Content-Type" tabindex="2" autocomplete="false" placeholder="ex: application/x-www-form-urlencoded" list="mimetypes" disabled>
-                                                <p class="help-block">The mime type of the body of the request</p>
-                                            </div>
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><input tabindex="-1" type="checkbox"></span>
+                                            <input type="text" class="form-control" name="Content-Type" tabindex="1" autocomplete="true" list="methods" placeholder="application/x-www-form-urlencoded" list="mimetypes" disabled/>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="content-encoding">Content-Type Encoding</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-6" type="text" data-storage="extra" name="content-encoding" tabindex="2" autocomplete="false" placeholder="ex: utf-8" list="charset" disabled>
-                                                <p class="help-block">Acceptable encodings</p>
-                                            </div>
+                                        <span class="help-block">Content-Type</span>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><input tabindex="-1" type="checkbox"></span>
+                                            <input type="text" class="form-control" name="Content-Encoding" tabindex="1" autocomplete="true" list="charset" placeholder="utf-8" disabled/>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="Content-MD5">Content-MD5</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-6" type="text" data-storage="header" name="Content-MD5" tabindex="2" autocomplete="true" placeholder="ex: Q2hlY2sgSW50ZWdyaXR5IQ==" disabled>
-                                                <p class="help-block">A Base64-encoded binary MD5 sum of the content of the request body.</p>
-                                            </div>
+                                        <span class="help-block">Content-Type Encoding</span>
+                                    </div>
+
+                                    <div class="col-lg-6">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><input tabindex="-1" type="checkbox"></span>
+                                            <input type="text" class="form-control" name="Content-MD5" tabindex="1" autocomplete="false" placeholder="Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
                                         </div>
-                                    </fieldset>
+                                        <span class="help-block">Content-MD5</span>
+                                    </div>
                                 </div>
-                                <div class="col col-lg-6">
-                                    <div class="tabbable" data-name="payload">
-                                        <ul class="nav tabs">
-                                            <li class="active">
-                                                <a data-toggle="tab">RAW Body</a>
-                                            </li>
-                                            <li>
-                                                <a data-toggle="tab">Form Data</a>
-                                            </li>
-                                            <li>
-                                                <a data-toggle="tab">Attachments</a>
-                                            </li>
-                                        </ul>
-                                        <div class="tab-content">
-                                            <div class="tab-pane active">
-                                                <fieldset>
-                                                    <div class="controls">
-                                                        <textarea class="col col-lg-6 padded" name="payload" data-storage="post-text" rows="5" tabindex="2" placeholder="ex: XML, JSON, etc ..."></textarea>
-                                                        <p class="help-block">Remember to set the Content-Type header.</p>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-                                            <div class="tab-pane urlencoded">
-                                                <p class="help-block">Only Enabled for Content-Type: application/x-www-form-urlencoded</p>
-                                                <fieldset class="control-group col col-lg-6 pairs payload">
-                                                    <label for="payload">
-                                                    </label>
-                                                    <div class="controls">
-                                                        <div class="input-append pair">
-                                                            <input class="col col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key">
-                                                            <input class="col col-lg-3" type="text" name="value" tabindex="0" autocomplete="true" placeholder="ex: value">
-                                                            <span class="add-on btn add success">
-                                                            </span>
-                                                            <span class="add-on btn remove danger">
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-                                            <div class="tab-pane attachments">
-                                                <fieldset class="control-group col col-lg-6 pairs files">
-                                                    <label for="files">
-                                                    </label>
-                                                    <div class="controls">
-                                                        <div class="input-append pair">
-                                                            <input class="col col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key">
-                                                            <input class="col col-lg-3" type="file" name="file" tabindex="0" autocomplete="false">
-                                                            <span class="add-on btn add success">
-                                                            </span>
-                                                            <span class="add-on btn remove danger">
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
+
+                                <div class="tab-content">
+                                    <div id="payload-raw" class="tab-pane active">
+                                        <textarea class="" name="payload" data-storage="post-text" rows="5" tabindex="2" placeholder="ex: XML, JSON, etc ..."></textarea>
+                                        <p class="help-block">Remember to set the Content-Type header.</p>
+                                    </div>
+
+                                    <div id="payload-form" class="tab-pane">
+                                        <p>Only Enabled for Content-Type: application/x-www-form-urlencoded</p>
+
+                                        <div class="col-lg-5">
+                                            <input type="text" class="form-control col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key"/>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <input type="text" class="form-control col-lg-3" type="text" name="value" tabindex="0" autocomplete="true" placeholder="ex: value"/>
+                                        </div>
+
+                                        <div class="col-lg-1">
+                                            <button class="btn btn-danger" type="button">-</button>
                                         </div>
                                     </div>
                                 </div>
+
+
+
+                                                                        <fieldset class="control-group col col-lg-6 pairs files">
+                                            <label for="files">
+                                            </label>
+                                            <div class="controls">
+                                                <div class="input-append pair">
+                                                    <input class="col col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key">
+                                                    <input class="col col-lg-3" type="file" name="file" tabindex="0" autocomplete="false">
+                                                    <span class="add-on btn add success">
+                                                    </span>
+                                                    <span class="add-on btn remove danger">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
                             </div>
                         </section>
 
                         <section id="authorization">
                             <header>Authorization</header>
 
-                            <div class="tabbable" data-name="authorization">
-                                <ul class="nav tabs">
-                                    <li class="active">
-                                        <a data-toggle="tab">Custom</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab">Basic</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab">Digest</a>
-                                    </li>
-                                    <li>
-                                        <a data-toggle="tab">oAuth</a>
-                                    </li>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" data-target="#authorization-custom">Custom</a></li>
+                                    <li><a data-toggle="tab" data-target="#authorization-basic">Basic</a></li>
+                                    <li><a data-toggle="tab" data-target="#authorization-digest">Digest</a></li>
+                                    <li><a data-toggle="tab" data-target="#authorization-oauth">oAuth</a></li>
                                 </ul>
+
                                 <div class="tab-content">
                                     <div class="tab-pane active">
                                         <fieldset>
@@ -742,7 +710,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                         </section>
 
                     </form>
@@ -751,9 +718,9 @@
                 <div id="response">
                     <div class="tabbable" data-name="response">
                         <ul class="nav nav-tabs">
-                            <li><a accesskey="n" data-toggle="tab" href="#response-body">Respo<span>n</span>se</a></li>
-                            <li><a accesskey="v" data-toggle="tab" href="#response-preview">Pre<span>v</span>iew</a></li>
-                            <li><a accesskey="c" data-toggle="tab" href="#response-har">HTTP Ar<span>c</span>hive</a></li>
+                            <li><a accesskey="n" data-toggle="tab" data-target="#response-body">Respo<span>n</span>se</a></li>
+                            <li><a accesskey="v" data-toggle="tab" data-target="#response-preview">Pre<span>v</span>iew</a></li>
+                            <li><a accesskey="c" data-toggle="tab" data-target="#response-har">HTTP Ar<span>c</span>hive</a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -780,11 +747,7 @@
             <div id="settings" class="tab-pane">
                 <section id="display"></section>
                 <section id="general">
-                    <header>
-                        <a>
-                        </a>
-                        <h2>General</h2>
-                    </header>
+                    <header>General</header>
                     <a>Install Extension</a>
                     <form name="options" class="form-stacked" novalidate="true">
                         <div class="row">

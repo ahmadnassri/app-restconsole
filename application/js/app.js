@@ -2,347 +2,13 @@ $(window).on('load', function () {
     $().tab();
 })
 
+
+/*
 window.URL = window.webkitURL || window.URL;
 window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder;
 
-/**
- * Main App logic
- */
 var App = new Class({
     'Implements': [Events, Templates],
-
-    // autocomplete values
-    'datalists': {
-        'mimetypes': [
-            '*/*',
-            'application/atom+xml',
-            'application/docbook+xml',
-            'application/ecmascript',
-            'application/http',
-            'application/javascript',
-            'application/json',
-            'application/octet-stream',
-            'application/ogg',
-            'application/pdf',
-            'application/rar',
-            'application/rdf+xml',
-            'application/rss+xml',
-            'application/rtf',
-            'application/sgml',
-            'application/xhtml+xml',
-            'application/xml',
-            'application/xml-dtd',
-            'application/zip',
-            'application/vnd.android.package-archive',
-            'application/vnd.google-earth.kml+xml',
-            'application/vnd.google-earth.kmz',
-            'application/vnd.mozilla.xul+xml',
-            'application/vnd.wap.wbxml',
-            'application/x-7z-compressed',
-            'application/x-bittorrent',
-            'application/x-cab',
-            'application/x-cbr',
-            'application/x-cbz',
-            'application/x-font',
-            'application/x-freemind',
-            'application/x-httpd-php',
-            'application/x-httpd-php-source',
-            'application/x-httpd-php3',
-            'application/x-httpd-php3-preprocessed',
-            'application/x-httpd-php4',
-            'application/x-httpd-php5',
-            'application/x-ruby',
-            'application/x-shockwave-flash',
-            'application/x-silverlight',
-            'application/x-tar',
-            'application/x-www-form-urlencoded',
-            'audio/3gpp',
-            'audio/amr',
-            'audio/basic',
-            'audio/flac',
-            'audio/g.722.1',
-            'audio/midi',
-            'audio/mp4a-latm',
-            'audio/mpa-robust',
-            'audio/mpeg',
-            'audio/mpegurl',
-            'audio/ogg',
-            'audio/tone',
-            'audio/x-aiff',
-            'audio/x-gsm',
-            'audio/x-mpegurl',
-            'audio/x-ms-wma',
-            'audio/x-ms-wax',
-            'audio/x-realaudio',
-            'audio/x-wav',
-            'image/gif',
-            'image/jpeg',
-            'image/png',
-            'image/svg+xml',
-            'image/tiff',
-            'image/x-canon-cr2',
-            'image/x-canon-crw',
-            'image/x-icon',
-            'image/x-photoshop',
-            'image/x-rgb',
-            'multipart/alternative',
-            'multipart/digest',
-            'multipart/encrypted',
-            'multipart/form-data',
-            'multipart/header-set',
-            'multipart/mixed',
-            'multipart/parallel',
-            'multipart/related',
-            'multipart/report',
-            'multipart/signed',
-            'text/cache-manifest',
-            'text/calendar',
-            'text/css',
-            'text/csv',
-            'text/directory',
-            'text/html',
-            'text/mathml',
-            'text/plain',
-            'text/rfc822-headers',
-            'text/richtext',
-            'text/rtf',
-            'text/tab-separated-values',
-            'text/uri-list',
-            'text/x-java',
-            'text/x-vcalendar',
-            'text/x-vcard',
-            'text/xml',
-            'video/3gpp',
-            'video/fli',
-            'video/mpeg',
-            'video/mp4',
-            'video/quicktime',
-            'video/mp4v-es',
-            'video/ogg',
-            'video/x-flv',
-            'video/x-ms-asf',
-            'video/x-ms-wm',
-            'video/x-ms-wmv',
-            'video/x-ms-wmx',
-            'video/x-ms-wvx',
-            'video/x-msvideo'
-        ],
-
-        'charset': ["*",
-            "Big5",
-            "EUC-JP",
-            "EUC-KR",
-            "GB2312",
-            "ISO-2022-JP",
-            "ISO-2022-JP-2",
-            "ISO-2022-KR",
-            "ISO-8859-1",
-            "ISO-8859-2",
-            "ISO-8859-3",
-            "ISO-8859-4",
-            "ISO-8859-5",
-            "ISO-8859-6",
-            "ISO-8859-6-E",
-            "ISO-8859-6-I",
-            "ISO-8859-7",
-            "ISO-8859-8",
-            "ISO-8859-8-E",
-            "ISO-8859-8-I",
-            "ISO-8859-9",
-            "ISO-8859-10",
-            "ISO-8859-11",
-            "ISO-8859-12",
-            "ISO-8859-13",
-            "ISO-8859-14",
-            "ISO-8859-15",
-            "ISO-8859-16",
-            "KOI7",
-            "KOI8-R",
-            "KOI8-U",
-            "Shift_JIS",
-            "US-ASCII",
-            "UTF-8",
-            "UTF-16",
-            "UTF-32",
-            "Windows-1250",
-            "Windows-1251",
-            "Windows-1252",
-            "Windows-1253",
-            "Windows-1254",
-            "Windows-1255",
-            "Windows-1256",
-            "Windows-1257",
-            "Windows-1258"
-        ],
-
-        'encoding': [
-            'compress',
-            'deflate',
-            'exi',
-            'gzip',
-            'identity',
-            'pack200-gzip',
-            'sdch',
-            'bzip2',
-            'peerdist'
-        ],
-
-        'methods': [
-            'HEAD',
-            'GET',
-            'POST',
-            'PUT',
-            'DELETE',
-            'TRACE',
-            'OPTIONS',
-            'LINK',
-            'UNLINK',
-            'CONNET',
-            'PATCH'
-        ],
-
-        'languages': [
-            ['aa', 'Afar'],
-            ['ab', 'Abkhazian'],
-            ['af', 'Afrikaans'],
-            ['am', 'Amharic'],
-            ['ar', 'Arabic'],
-            ['as', 'Assamese'],
-            ['ay', 'Aymara'],
-            ['az', 'Azerbaijani'],
-            ['ba', 'Bashkir'],
-            ['be', 'Byelorussian'],
-            ['bg', 'Bulgarian'],
-            ['bh', 'Bihari'],
-            ['bi', 'Bislama'],
-            ['bn', 'Bengali; Bangla'],
-            ['bo', 'Tibetan'],
-            ['br', 'Breton'],
-            ['ca', 'Catalan'],
-            ['co', 'Corsican'],
-            ['cs', 'Czech'],
-            ['cy', 'Welsh'],
-            ['da', 'Danish'],
-            ['de', 'German'],
-            ['dz', 'Bhutani'],
-            ['el', 'Greek'],
-            ['en', 'English'],
-            ['eo', 'Esperanto'],
-            ['es', 'Spanish'],
-            ['et', 'Estonian'],
-            ['eu', 'Basque'],
-            ['fa', 'Persian'],
-            ['fi', 'Finnish'],
-            ['fj', 'Fiji'],
-            ['fo', 'Faroese'],
-            ['fr', 'French'],
-            ['fy', 'Frisian'],
-            ['ga', 'Irish'],
-            ['gd', 'Scots Gaelic'],
-            ['gl', 'Galician'],
-            ['gn', 'Guarani'],
-            ['gu', 'Gujarati'],
-            ['ha', 'Hausa'],
-            ['he', 'Hebrew'],
-            ['hi', 'Hindi'],
-            ['hr', 'Croatian'],
-            ['hu', 'Hungarian'],
-            ['hy', 'Armenian'],
-            ['ia', 'Interlingua'],
-            ['id', 'Indonesian'],
-            ['ie', 'Interlingue'],
-            ['ik', 'Inupiak'],
-            ['is', 'Icelandic'],
-            ['it', 'Italian'],
-            ['iu', 'Inuktitut'],
-            ['ja', 'Japanese'],
-            ['jw', 'Javanese'],
-            ['ka', 'Georgian'],
-            ['kk', 'Kazakh'],
-            ['kl', 'Greenlandic'],
-            ['km', 'Cambodian'],
-            ['kn', 'Kannada'],
-            ['ko', 'Korean'],
-            ['ks', 'Kashmiri'],
-            ['ku', 'Kurdish'],
-            ['ky', 'Kirghiz'],
-            ['la', 'Latin'],
-            ['ln', 'Lingala'],
-            ['lo', 'Laothian'],
-            ['lt', 'Lithuanian'],
-            ['lv', 'Latvian, Lettish'],
-            ['mg', 'Malagasy'],
-            ['mi', 'Maori'],
-            ['mk', 'Macedonian'],
-            ['ml', 'Malayalam'],
-            ['mn', 'Mongolian'],
-            ['mo', 'Moldavian'],
-            ['mr', 'Marathi'],
-            ['ms', 'Malay'],
-            ['mt', 'Maltese'],
-            ['my', 'Burmese'],
-            ['na', 'Nauru'],
-            ['ne', 'Nepali'],
-            ['nl', 'Dutch'],
-            ['no', 'Norwegian'],
-            ['oc', 'Occitan'],
-            ['om', 'Oromo'],
-            ['or', 'Oriya'],
-            ['pa', 'Punjabi'],
-            ['pl', 'Polish'],
-            ['ps', 'Pashto, Pushto'],
-            ['pt', 'Portuguese'],
-            ['qu', 'Quechua'],
-            ['rm', 'Rhaeto-Romance'],
-            ['rn', 'Kirundi'],
-            ['ro', 'Romanian'],
-            ['ru', 'Russian'],
-            ['rw', 'Kinyarwanda'],
-            ['sa', 'Sanskrit'],
-            ['sd', 'Sindhi'],
-            ['sg', 'Sangho'],
-            ['sh', 'Serbo-Croatian'],
-            ['si', 'Sinhalese'],
-            ['sk', 'Slovak'],
-            ['sl', 'Slovenian'],
-            ['sm', 'Samoan'],
-            ['sn', 'Shona'],
-            ['so', 'Somali'],
-            ['sq', 'Albanian'],
-            ['sr', 'Serbian'],
-            ['ss', 'Siswati'],
-            ['st', 'Sesotho'],
-            ['su', 'Sundanese'],
-            ['sv', 'Swedish'],
-            ['sw', 'Swahili'],
-            ['ta', 'Tamil'],
-            ['te', 'Telugu'],
-            ['tg', 'Tajik'],
-            ['th', 'Thai'],
-            ['ti', 'Tigrinya'],
-            ['tk', 'Turkmen'],
-            ['tl', 'Tagalog'],
-            ['tn', 'Setswana'],
-            ['to', 'Tonga'],
-            ['tr', 'Turkish'],
-            ['ts', 'Tsonga'],
-            ['tt', 'Tatar'],
-            ['tw', 'Twi'],
-            ['ug', 'Uighur'],
-            ['uk', 'Ukrainian'],
-            ['ur', 'Urdu'],
-            ['uz', 'Uzbek'],
-            ['vi', 'Vietnamese'],
-            ['vo', 'Volapuk'],
-            ['wo', 'Wolof'],
-            ['xh', 'Xhosa'],
-            ['yi', 'Yiddish'],
-            ['yo', 'Yoruba'],
-            ['za', 'Zhuang'],
-            ['zh', 'Chinese'],
-            ['zu', 'Zulu']
-        ]
-    },
 
     // presets
     'presets': [{
@@ -654,11 +320,9 @@ var App = new Class({
                                 }},
 
                                 li({'class': 'active'}, a({'accesskey': 'm', 'data-target': 'main'}, i({'class': 'icon white home'}), span('M'), 'ain'))
-                                /*,
                                 li(a({'accesskey': 's', 'data-target': 'settings'}, i({'class': 'icon settings'}), span('S'), 'ettings')),
                                 li(a({'data-target': 'help'}, i({'class': 'icon question'}), 'Help')),
                                 li(a({'data-target': 'about'}, i({'class': 'icon info'}), 'About'))
-                                */
                             ),
 
                             ul({'class': 'social pull-right'})
@@ -738,7 +402,6 @@ var App = new Class({
                                 )
                             )
 
-                            /*
                             div({'class': 'tab-pane active'},
                                 ul({'class': 'nav list presets'},
                                     li({'class': 'nav-header'}, 'User'),
@@ -767,7 +430,6 @@ var App = new Class({
                                     this.renderTemplate('presets', this.presets)
                                 )
                             ),
-                            */
                         )
                     ),
 
@@ -985,7 +647,6 @@ var App = new Class({
         }),
 
         'social': new Template(function(data) {
-            /*
             li(a({'tabindex': -1, 'href': 'https://twitter.com/share', 'class': 'twitter-share-button', 'data-url': 'https://chrome.google.com/webstore/detail/cokgbflfommojglbmbpenpphppikmonn', 'data-text': 'Checkout @RESTConsole App for Google #Chrome for #REST #API development', 'data-via': 'CodeInChaos', 'data-related': 'CodeInChaos,AhmadNassri', 'data-hashtags': 'HTTP,RESTful'}, 'Tweet')),
             li(iframe({'allowtransparency': true, 'frameborder': 0, 'scrolling': 'no', 'src': 'http://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fcokgbflfommojglbmbpenpphppikmonn&send=false&layout=button_count&width=450&show_faces=false&action=like&amp&height=21&appId=199139246805784'})),
             li(iframe({'allowtransparency': true, 'frameborder': 0, 'scrolling': 'no', 'src': 'https://plusone.google.com/_/+1/fastbutton?url=https%3A%2F%2Fchrome.google.com%2Fwebstore%2Fdetail%2Fcokgbflfommojglbmbpenpphppikmonn&size=medium&count=true&annotation=&hl=en-US&jsh=m%3B%2F_%2Fapps-static%2F_%2Fjs%2Fwidget%2F__features__%2Frt%3Dj%2Fver%3DXsa0GTewdqg.en.%2Fsv%3D1%2Fam%3D!KW4lzGmbF_KIhSW8Og%2Fd%3D1%2F#id=I1_1327261815981&parent=chrome-extension%3A%2F%2Fbjdlekdiiieofkpjfhpcmlhalmbnpjnh&rpctoken=858197945&_methods=onPlusOne%2C_ready%2C_close%2C_open%2C_resizeMe'})),
@@ -995,7 +656,6 @@ var App = new Class({
 
             li(iframe({'src': 'http://markdotto.github.com/github-buttons/github-btn.html?user=codeinchaos&repo=restconsole&type=fork&count=true', 'allowtransparency': true, 'frameborder': 0, 'scrolling': 0, 'width': '60px', 'height': '20px'})),
             li(iframe({'src': 'http://markdotto.github.com/github-buttons/github-btn.html?user=codeinchaos&type=follow&count=true', 'allowtransparency': true, 'frameborder': 0, 'scrolling': 0, 'width': '150px', 'height': '20px'}))
-            */
         }),
 
         'scripts': new Template(function(data) {
@@ -1251,7 +911,7 @@ var App = new Class({
                                     'disabled': true
                                 }
                             },
-/*
+
                             {
                                 'label': 'Content-Length',
                                 'help': 'The length of the request body in octets (8-bit bytes).',
@@ -1266,7 +926,7 @@ var App = new Class({
                                     'disabled': true
                                 }
                             },
-*/
+
                             {
                                 'label': 'Content-MD5',
                                 'help': 'A Base64-encoded binary MD5 sum of the content of the request body.',
@@ -1844,7 +1504,7 @@ var App = new Class({
                                         'disabled': true
                                     }
                                 },
-*/
+
 
                                 {
                                     'rfc': '14.4',
@@ -1862,7 +1522,7 @@ var App = new Class({
                                         'disabled': true
                                     }
                                 },
-/*
+
                                 {
                                     'rfc': '14.10',
                                     'label': 'Connection',
@@ -1925,7 +1585,7 @@ var App = new Class({
                                         'disabled': true
                                     }
                                 },
-*/
+
                                 {
                                     'rfc': '14.22',
                                     'label': 'From',
@@ -1989,7 +1649,7 @@ var App = new Class({
                                         'disabled': true
                                     }
                                 },
-/*
+
                                 {
                                     'rfc': '14.36',
                                     'label': 'Referer',
@@ -2069,7 +1729,7 @@ var App = new Class({
                                         'disabled': true
                                     }
                                 },
-*/
+
                                 {
                                     'rfc': '14.64',
                                     'label': 'Warning',
@@ -2190,7 +1850,6 @@ var App = new Class({
 
                         div({'class': 'tab-pane'},
                             this.renderTemplate('optional-input', [
-/*
                                 {
                                     'label': 'Origin',
                                     'help': '',
@@ -2205,7 +1864,7 @@ var App = new Class({
                                         'disabled': true
                                     }
                                 },
-*/
+
                                 {
                                     'label': 'X-HTTP-Method-Override',
                                     'help': 'mainly used bypass firewalls and browsers limitations.',
@@ -3102,3 +2761,4 @@ var App = new Class({
         }
     }
 });
+*/
