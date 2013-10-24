@@ -30,43 +30,49 @@
                         <section id="target">
                             <header>Target</header>
 
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    <select class="form-control" name="protocol">
-                                        <option>HTTP/1.0</option>
-                                        <option>HTTP/1.1</option>
-                                    </select>
+                            <div class="panel">
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        <label for="Protocol">Protocol Version</label>
+                                        <select class="form-control" name="Protocol">
+                                            <option>HTTP/1.0</option>
+                                            <option selected>HTTP/1.1</option>
+                                        </select>
 
-                                    <span class="help-block">Protocol Version</span>
+                                        <span class="help-block"></span>
+                                    </div>
+
+                                    <div class="col-lg-5">
+                                        <label for="Host">Host Name</label>
+                                        <input class="form-control" type="text" name="Host" placeholder="www.example.com"/>
+                                        <span class="help-block"></span>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <label for="Port"></label>
+                                        <input class="form-control" type="text" name="Port" placeholder="80" value="80"/>
+                                        <span class="help-block"></span>
+                                    </div>
+
+                                    <div class="col-lg-2">
+                                        <label for="Timeout"></label>
+                                        <input type="number" class="form-control" name="Timeout" tabindex="1" min="1" step="1" value="3" required="true"/>
+                                        <span class="help-block"></span>
+                                    </div>
                                 </div>
 
-                                <div class="col-lg-7">
-                                    <input type="text" class="form-control" name="host" placeholder="www.example.com"/>
-                                    <span class="help-block">Host Name</span>
-                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        <label for="Method"></label>
+                                        <input class="form-control" type="text" name="Method" tabindex="1" autocomplete="true" list="methods" placeholder="GET" required="true"/>
+                                        <span class="help-block"></span>
+                                    </div>
 
-                                <div class="col-lg-2">
-                                    <input type="text" class="form-control" name="port" placeholder="80" value="80"/>
-                                    <span class="help-block">Port</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    <input type="text" class="form-control" name="method" tabindex="1" autocomplete="true" list="methods" placeholder="GET" required="true"/>
-                                    <span class="help-block">Method</span>
-                                </div>
-
-                                <div class="col-lg-9">
-                                    <input type="text" class="form-control" name="uri" tabindex="1" autocomplete="true" placeholder="/hello.txt" required="true"/>
-                                    <span class="help-block">URI</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    <input type="number" class="form-control" name="timeout" tabindex="1" min="1" step="1" value="3" required="true"/>
-                                    <span class="help-block">timeout in seconds</span>
+                                    <div class="col-lg-9">
+                                        <label for="Path"></label>
+                                        <input class="form-control" type="text" name="Path" tabindex="1" autocomplete="true" placeholder="/hello.txt" required="true"/>
+                                        <span class="help-block"></span>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -75,643 +81,484 @@
                             <header>Headers</header>
 
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" data-target="#headers-standard">Standard Headers</a></li>
+                                <li class="active"><a data-toggle="tab" data-target="#headers-payload">Payload</a></li>
+                                <li><a data-toggle="tab" data-target="#headers-authorization">Authorization</a></li>
+                                <li><a data-toggle="tab" data-target="#headers-standard">Standard</a></li>
                                 <li><a data-toggle="tab" data-target="#headers-cache">Cache</a></li>
-                                <li><a data-toggle="tab" data-target="#headers-common">Common non-standard headers</a></li>
+                                <li><a data-toggle="tab" data-target="#headers-other">Other</a></li>
                             </ul>
 
                             <div class="tab-content">
-                                <div id="headers-standard" class="tab-pane active">
-                                    <fieldset>
-                                        <label for="Accept"><a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.1"></a>Accept</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="Accept" tabindex="4" autocomplete="false" placeholder="ex: text/plain" list="mimetypes" disabled>
-                                                <p class="help-block">Content-Types that are acceptable.</p>
+                                <div id="headers-payload" class="tab-pane active">
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="Contet-Type"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Content-Type" tabindex="1" autocomplete="true" list="methods" placeholder="application/x-www-form-urlencoded" list="mimetypes" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Content-Type Encoding"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Content-Encoding" tabindex="1" autocomplete="true" list="charset" placeholder="utf-8" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <label for="Content-MD5"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Content-MD5" tabindex="1" autocomplete="false" placeholder="Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
+                                                <span class="input-group-btn"><button class="btn btn-default" type="button" data-toggle="button" >Auto Generate</button></span>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="headers-authorization" class="tab-pane">
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="Authorization"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Authorization" tabindex="1" autocomplete="true" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Proxy-Authorization"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Proxy-Authorization" tabindex="1" autocomplete="true" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" data-target="#authorization-basic">Basic</a></li>
+                                        <li><a data-toggle="tab" data-target="#authorization-digest">Digest</a></li>
+                                        <li><a data-toggle="tab" data-target="#authorization-oauth">oAuth</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div id="authorization-basic" class="tab-pane active">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="Username"></label>
+                                                        <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="true" placeholder="username"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="Password"></label>
+                                                        <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="true" placeholder="password"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer">
+                                                <button class="btn btn-primary">Generate</button>
                                             </div>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="Accept-Language">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4">
-                                        </a>Accept Language</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="Accept-Language" tabindex="4" autocomplete="false" placeholder="ex: en-US" list="languages" disabled>
-                                                <p class="help-block">Acceptable languages for response.</p>
+
+                                        <div id="authorization-digest" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="Username">Digest Username</label>
+                                                        <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="true" placeholder="username"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="Password">Digest Password</label>
+                                                        <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="true" placeholder="password"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer">
+                                                <button class="btn btn-primary">Generate</button>
                                             </div>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="From">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.22">
-                                        </a>From</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="From" tabindex="4" autocomplete="true" placeholder="ex: user@example.com" disabled>
-                                                <p class="help-block">The email address of the user making the request.</p>
+
+                                        <div id="authorization-oauth" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-lg-2">
+                                                        <label for="Version"></label>
+                                                        <input class="form-control" type="number" name="Version" tabindex="3" autocomplete="true" placeholder="1.0" required="true"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <label for="Signature">Signature Method</label>
+                                                        <select class="form-control" name="Signature">
+                                                            <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
+                                                            <option value="PLAINTEXT">PLAINTEXT</option>
+                                                        </select>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-4">
+                                                        <label for="Method"> Method</label>
+                                                        <select class="form-control" name="Method">
+                                                            <option value="header">Header</option>
+                                                            <option value="query">Query String</option>
+                                                        </select>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-2">
+                                                        <label for="Separator"></label>
+                                                        <select class="form-control" name="Separator">
+                                                            <option value="space">White Space</option>
+                                                            <option value="dash">Dash</option>
+                                                        </select>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="consumer_key">Consumer Key</label>
+                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d" required="true"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="consumer_secret">Consumer Secret</label>
+                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d" required="true"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="token_key">Token Key</label>
+                                                        <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="token_secret">Token Secret</label>
+                                                        <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="scope">Scope</label>
+                                                        <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="true" placeholder=""/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="realm">Realm</label>
+                                                        <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="true" placeholder=""/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer">
+                                                <button class="btn btn-primary">Generate</button>
+                                            </div>
+
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="request_url">Request Token URL</label>
+                                                        <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="true" placeholder="https://api.provider.com/oauth/request_token"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="access_url">Request Token URL</label>
+                                                        <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="true" placeholder="https://api.provider.com/oauth/access_token"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="authorize_url">Authorize URL</label>
+                                                        <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="true" placeholder="https://api.provider.com/oauth/authorize"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="oauth_callback">Callback URL</label>
+                                                        <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="true" placeholder="https://www.domain.com"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="oauth_verifier">Oauth Verifier</label>
+                                                        <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer">
+                                                <button class="btn btn-success" disabled>Authorize</button>
                                             </div>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="Max-Forwards">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.31">
-                                        </a>Max-Forwards</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="Max-Forwards" tabindex="4" autocomplete="true" placeholder="ex: 10" disabled>
-                                                <p class="help-block">Limit the number of times the message can be forwarded through proxies or gateways.</p>
+                                    </div>
+                                </div>
+
+                                <div id="headers-standard" class="tab-pane">
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="Accept"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Accept" tabindex="1" autocomplete="true" list="mimetypes" placeholder="text/plain" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="Pragma">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32">
-                                        </a>Pragma</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="Pragma" tabindex="4" autocomplete="true" placeholder="ex: no-cache" disabled>
-                                                <p class="help-block">Implementation-specific headers that may have various effects anywhere along the request-response chain.</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="Accept-Language"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Accept-Language" tabindex="1" autocomplete="true" list="languages" placeholder="en-US" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="Range">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35">
-                                        </a>Range</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="Range" tabindex="4" autocomplete="true" placeholder="ex: bytes=500-999" disabled>
-                                                <p class="help-block">Request only part of an entity. Bytes are numbered from 0.</p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="From"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="From" tabindex="1" autocomplete="true" placeholder="user@example.com" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="Warning">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.64">
-                                        </a>Warning</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="Warning" tabindex="4" autocomplete="true" placeholder="ex: 199 Miscellaneous warning" disabled>
-                                                <p class="help-block">A general warning about possible problems with the entity body.</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="Max-Forwards"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Max-Forwards" tabindex="1" autocomplete="true" placeholder="10" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="Pragma"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Pragma" tabindex="1" autocomplete="true" placeholder="no-cache" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Range"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Range" tabindex="1" autocomplete="true" placeholder="bytes=500-999" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="Warning"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Warning" tabindex="1" autocomplete="true" placeholder="199 Miscellaneous warning" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div id="headers-cache" class="tab-pane">
-                                    <fieldset>
-                                        <label for="Cache-Control">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">
-                                        </a>Cache-Control</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="Cache-Control" tabindex="4" autocomplete="true" placeholder="ex: no-cache" disabled>
-                                                <p class="help-block">Used to specify caching mechanisms along the request/response chain</p>
+                                     <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="If-Match"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="If-Match" tabindex="1" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="If-Match">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.24">
-                                        </a>If-Match</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="If-Match" tabindex="4" autocomplete="true" placeholder="ex: 737060cd8c284d8af7ad3082f209582d" disabled>
-                                                <p class="help-block">Only perform the action if the client supplied entity matches the same entity on the server.</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="If-None-Match"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="If-None-Match" tabindex="1" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="If-Modified-Since">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.25">
-                                        </a>If-Modified-Since</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="If-Modified-Since" tabindex="4" autocomplete="true" placeholder="ex: Sat, 29 Oct 1994 19:43:31 GMT" disabled>
-                                                <p class="help-block">Allows a 304 Not Modified to be returned if content is unchanged</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="If-Modified-Since"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="If-Modified-Since" tabindex="1" autocomplete="true" placeholder="Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="If-None-Match">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.26">
-                                        </a>If-None-Match</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="If-None-Match" tabindex="4" autocomplete="true" placeholder="ex: 737060cd8c284d8af7ad3082f209582d" disabled>
-                                                <p class="help-block">Allows a 304 Not Modified to be returned if content is unchanged</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="If-Unmodified-Since"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="If-Unmodified-Since" tabindex="1" autocomplete="true" placeholder="Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="If-Range">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.27">
-                                        </a>If-Range</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="If-Range" tabindex="4" autocomplete="true" placeholder="ex: 737060cd8c284d8af7ad3082f209582d" disabled>
-                                                <p class="help-block">If the entity is unchanged, send the missing part(s); otherwise, send the entire new entity</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="If-Range"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="If-Range" tabindex="1" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="If-Unmodified-Since">
-                                        <a tabindex="-1" data-type="panel" href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.28">
-                                        </a>If-Unmodified-Since</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="If-Unmodified-Since" tabindex="4" autocomplete="true" placeholder="ex: Sat, 29 Oct 1994 19:43:31 GMT" disabled>
-                                                <p class="help-block">Only send the response if the entity has not been modified since a specific time.</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="Cache-Control"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Cache-Control" tabindex="1" autocomplete="true" placeholder="no-cache" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
+                                    </div>
                                 </div>
 
-                                <div id="headers-common" class="tab-pane">
-                                    <fieldset>
-                                        <label for="X-HTTP-Method-Override">X-HTTP-Method-Override</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="X-HTTP-Method-Override" tabindex="4" autocomplete="true" placeholder="ex: PUT" disabled>
-                                                <p class="help-block">mainly used bypass firewalls and browsers limitations.</p>
+                                <div id="headers-other" class="tab-pane">
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="X-HTTP-Method-Override"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="X-HTTP-Method-Override" tabindex="1" autocomplete="true" placeholder="PUT" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="X-Requested-With">X-Requested-With</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="X-Requested-With" tabindex="4" autocomplete="true" placeholder="ex: XMLHttpRequest" disabled>
-                                                <p class="help-block">mainly used to identify Ajax requests.</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="X-Requested-With"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="X-Requested-With" tabindex="1" autocomplete="true" placeholder="XMLHttpRequest" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="X-Forwarded-For">X-Forwarded-For</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="X-Forwarded-For" tabindex="4" autocomplete="true" placeholder="ex: " disabled>
-                                                <p class="help-block"></p>
+
+                                        <div class="col-lg-6">
+                                            <label for="X-Forwarded-For"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="X-Forwarded-For" tabindex="1" autocomplete="true" placeholder="" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="X-Do-Not-Track">X-Do-Not-Track</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="X-Do-Not-Track" tabindex="4" autocomplete="true" placeholder="ex: 1" disabled>
-                                                <p class="help-block">Requests a web application to disable their tracking of a user.</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="X-Do-Not-Track"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="X-Do-Not-Track" tabindex="1" autocomplete="true" placeholder="1" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <label for="DNT">DNT</label>
-                                        <div class="controls">
-                                            <div class="input-prepend">
-                                                <label class="add-on">
-                                                <input tabindex="-1" type="checkbox">
-                                                </label>
-                                                <input class="col col-lg-12 padded" type="text" data-storage="header" name="DNT" tabindex="4" autocomplete="true" placeholder="ex: 1" disabled>
-                                                <p class="help-block">Requests a web application to disable their tracking of a user. (This is Mozilla's version of the X-Do-Not-Track header</p>
+
+                                        <div class="col-lg-6">
+                                            <label for="DNT"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="DNT" tabindex="1" autocomplete="true" placeholder="1" disabled/>
                                             </div>
+                                            <span class="help-block"></span>
                                         </div>
-                                    </fieldset>
+                                    </div>
                                 </div>
                             </div>
-
-                            <!--
-                                    <label for="query">Query String</label>
-                                    <div class="controls">
-                                        <div class="input-append pair">
-                                            <input class="col col-lg-3" type="text" name="key" data-storage="queryString" tabindex="0" autocomplete="true" placeholder="ex: key">
-                                            <input class="col col-lg-3" type="text" name="value" data-storage="queryString" tabindex="0" autocomplete="true" placeholder="ex: value">
-                                            <span class="add-on btn add success">
-                                            </span>
-                                            <span class="add-on btn remove danger">
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <label for="headers">Headers</label>
-                                    <div class="controls">
-                                        <div class="input-append pair">
-                                            <input class="col col-lg-3" type="text" name="key" data-storage="headerCollection" tabindex="0" autocomplete="true" placeholder="ex: key">
-                                            <input class="col col-lg-3" type="text" name="value" data-storage="headerCollection" tabindex="0" autocomplete="true" placeholder="ex: value">
-                                            <span class="add-on btn add success">
-                                            </span>
-                                            <span class="add-on btn remove danger">
-                                            </span>
-                                        </div>
-                                    </div>
-                            -->
                         </section>
 
                         <section id="payload">
                             <header>Payload</header>
 
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" data-target="#payload-raw">RAW Body</a></li>
-                                    <li><a data-toggle="tab" data-target="#payload-form">Form Data</a></li>
-                                </ul>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" data-target="#payload-raw">RAW Body</a></li>
+                                <li><a data-toggle="tab" data-target="#payload-form">Form Data</a></li>
+                                <li><a data-toggle="tab" data-target="#payload-attachments">Attachments</a></li>
+                            </ul>
 
-                                <div class="form-group">
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><input tabindex="-1" type="checkbox"></span>
-                                            <input type="text" class="form-control" name="Content-Type" tabindex="1" autocomplete="true" list="methods" placeholder="application/x-www-form-urlencoded" list="mimetypes" disabled/>
-                                        </div>
-                                        <span class="help-block">Content-Type</span>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><input tabindex="-1" type="checkbox"></span>
-                                            <input type="text" class="form-control" name="Content-Encoding" tabindex="1" autocomplete="true" list="charset" placeholder="utf-8" disabled/>
-                                        </div>
-                                        <span class="help-block">Content-Type Encoding</span>
-                                    </div>
-
-                                    <div class="col-lg-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><input tabindex="-1" type="checkbox"></span>
-                                            <input type="text" class="form-control" name="Content-MD5" tabindex="1" autocomplete="false" placeholder="Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
-                                        </div>
-                                        <span class="help-block">Content-MD5</span>
-                                    </div>
-                                </div>
-
-                                <div class="tab-content">
-                                    <div id="payload-raw" class="tab-pane active">
-                                        <textarea class="" name="payload" data-storage="post-text" rows="5" tabindex="2" placeholder="ex: XML, JSON, etc ..."></textarea>
-                                        <p class="help-block">Remember to set the Content-Type header.</p>
-                                    </div>
-
-                                    <div id="payload-form" class="tab-pane">
-                                        <p>Only Enabled for Content-Type: application/x-www-form-urlencoded</p>
-
-                                        <div class="col-lg-5">
-                                            <input type="text" class="form-control col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key"/>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <input type="text" class="form-control col-lg-3" type="text" name="value" tabindex="0" autocomplete="true" placeholder="ex: value"/>
-                                        </div>
-
-                                        <div class="col-lg-1">
-                                            <button class="btn btn-danger" type="button">-</button>
+                            <div class="tab-content">
+                                <div id="payload-raw" class="tab-pane active">
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <textarea class="form-control" name="payload" rows="5" tabindex="2" placeholder="ex: XML, JSON, etc ..."></textarea>
+                                            <span class="help-block">Remember to set the Content-Type header.</span>
                                         </div>
                                     </div>
                                 </div>
 
+                                <div id="payload-form" class="tab-pane">
 
+                                    <div class="alert alert-block alert-danger">
+                                        <h4>Invalid Content-Type</h4>
+                                        <p>This form is only enabled for one Content-Type in particular: <strong>application/x-www-form-urlencoded</strong></p>
+                                        <p>Clicking "Enable" below will update your Content-Type header above.</p>
+                                        <p><button class="btn btn-danger" type="button">Enable</button></p>
+                                    </div>
 
-                                                                        <fieldset class="control-group col col-lg-6 pairs files">
-                                            <label for="files">
-                                            </label>
-                                            <div class="controls">
-                                                <div class="input-append pair">
-                                                    <input class="col col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key">
-                                                    <input class="col col-lg-3" type="file" name="file" tabindex="0" autocomplete="false">
-                                                    <span class="add-on btn add success">
-                                                    </span>
-                                                    <span class="add-on btn remove danger">
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </fieldset>
+                                    <div class="col-lg-5">
+                                        <input type="text" class="form-control col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key"/>
+                                    </div>
 
+                                    <div class="col-lg-6">
+                                        <input type="text" class="form-control col-lg-3" type="text" name="value" tabindex="0" autocomplete="true" placeholder="ex: value"/>
+                                    </div>
+
+                                    <div class="col-lg-1">
+                                        <button class="btn btn-danger" type="button">-</button>
+                                    </div>
+                                </div>
+
+                                <div id="payload-attachments" class="tab-pane">
+                                        <div class="input-append pair">
+                                            <input class="col col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key">
+                                            <input class="col col-lg-3" type="file" name="file" tabindex="0" autocomplete="false">
+                                            <span class="add-on btn add success">
+                                            </span>
+                                            <span class="add-on btn remove danger">
+                                            </span>
+                                        </div>
+                                </div>
                             </div>
                         </section>
-
-                        <section id="authorization">
-                            <header>Authorization</header>
-
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" data-target="#authorization-custom">Custom</a></li>
-                                    <li><a data-toggle="tab" data-target="#authorization-basic">Basic</a></li>
-                                    <li><a data-toggle="tab" data-target="#authorization-digest">Digest</a></li>
-                                    <li><a data-toggle="tab" data-target="#authorization-oauth">oAuth</a></li>
-                                </ul>
-
-                                <div class="tab-content">
-                                    <div class="tab-pane active">
-                                        <fieldset>
-                                            <label for="Authorization">Authorization</label>
-                                            <div class="controls">
-                                                <div class="input-prepend">
-                                                    <label class="add-on">
-                                                    <input tabindex="-1" type="checkbox">
-                                                    </label>
-                                                    <input class="col col-lg-12 padded" type="text" data-storage="header" name="Authorization" tabindex="3" autocomplete="true" placeholder="ex: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled>
-                                                    <p class="help-block">Authentication credentials for HTTP authentication.</p>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <label for="Proxy-Authorization">Proxy-Authorization</label>
-
-                                            <div class="controls">
-                                                <div class="input-prepend">
-                                                    <label class="add-on">
-                                                    <input tabindex="-1" type="checkbox">
-                                                    </label>
-                                                    <input class="col col-lg-12 padded" type="text" data-storage="header" name="Proxy-Authorization" tabindex="3" autocomplete="true" placeholder="ex: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled>
-                                                    <p class="help-block">Authorization credentials for connecting to a proxy.</p>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-
-                                    <div class="tab-pane">
-                                        <input name="Authorization" type="hidden" disabled/>
-                                        <fieldset>
-                                            <label for="basic-username">Username</label>
-                                            <div class="controls">
-                                                <div class="input-prepend">
-                                                    <label class="add-on">
-                                                    <input tabindex="-1" type="checkbox">
-                                                    </label>
-                                                    <input class="col col-lg-12 padded" type="text" data-storage="authorization" name="basic-username" tabindex="3" autocomplete="true" placeholder="ex: username" required="true" disabled>
-                                                    <p class="help-block"></p>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <label for="basic-password">Password</label>
-                                            <div class="controls">
-                                                <div class="input-prepend">
-                                                    <label class="add-on">
-                                                    <input tabindex="-1" type="checkbox">
-                                                    </label>
-                                                    <input class="col col-lg-12 padded" type="password" data-storage="authorization" name="basic-password" tabindex="3" autocomplete="true" placeholder="ex: password" disabled>
-                                                    <p class="help-block"></p>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                    <div class="tab-pane">
-                                        <input name="Authorization" type="hidden" disabled>
-                                        <fieldset>
-                                            <label for="digest-username">Username</label>
-                                            <div class="controls">
-                                                <div class="input-prepend">
-                                                    <label class="add-on">
-                                                    <input tabindex="-1" type="checkbox">
-                                                    </label>
-                                                    <input class="col col-lg-12 padded" type="text" name="digest-username" tabindex="3" autocomplete="true" placeholder="ex: username" required="true" disabled>
-                                                    <p class="help-block"></p>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <label for="digest-password">Password</label>
-                                            <div class="controls">
-                                                <div class="input-prepend">
-                                                    <label class="add-on">
-                                                    <input tabindex="-1" type="checkbox">
-                                                    </label>
-                                                    <input class="col col-lg-12 padded" type="password" name="digest-password" tabindex="3" autocomplete="true" placeholder="ex: password" disabled>
-                                                    <p class="help-block"></p>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                    <div class="tab-pane oauth">
-                                        <div class="row">
-                                            <div class="col col-lg-6">
-                                                <div class="row">
-                                                    <div class="col col-lg-2">
-                                                        <fieldset>
-                                                            <label for="version">Version</label>
-                                                            <div class="controls">
-                                                                <div class="input-prepend">
-                                                                    <label class="add-on">
-                                                                    <input tabindex="-1" type="checkbox">
-                                                                    </label>
-                                                                    <input class="col col-lg-2" type="number" data-storage="authorization" name="version" tabindex="3" autocomplete="true" placeholder="ex: 1.0" required="true" disabled>
-                                                                    <p class="help-block"></p>
-                                                                </div>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col col-lg-2">
-                                                        <fieldset>
-                                                            <label for="signature">Signature Method</label>
-                                                            <div class="controls">
-                                                                <select class="col col-lg-2" name="signature" data-storage="authorization" tabindex="3" disabled>
-                                                                    <option value="HMAC-SHA1">HMAC-SHA1</option>
-                                                                    <option value="PLAINTEXT">PLAINTEXT</option>
-                                                                </select>
-                                                                <p class="help-block"></p>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col col-lg-2">
-                                                        <fieldset>
-                                                            <label for="method">Preferred Method</label>
-                                                            <div class="controls">
-                                                                <select class="col col-lg-2" name="method" data-storage="authorization" tabindex="3" disabled>
-                                                                    <option value="header">Header</option>
-                                                                    <option value="query">Query String</option>
-                                                                </select>
-                                                                <p class="help-block"></p>
-                                                            </div>
-                                                        </fieldset>
-                                                    </div>
-                                                </div>
-                                                <fieldset>
-                                                    <label for="consumer_key">Consumer Key</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-6" type="text" data-storage="authorization" name="consumer_key" tabindex="3" autocomplete="true" placeholder="ex: 737060cd8c284d8af7ad3082f209582d" required="true" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="consumer_secret">Consumer Secret</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-6" type="text" data-storage="authorization" name="consumer_secret" tabindex="3" autocomplete="true" placeholder="ex: 737060cd8c284d8af7ad3082f209582d" required="true" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="token_key">Token Key</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-6" type="text" data-storage="authorization" name="token_key" tabindex="3" autocomplete="true" placeholder="ex: 737060cd8c284d8af7ad3082f209582d" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="token_secret">Token Secret</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-6" type="text" data-storage="authorization" name="token_secret" tabindex="3" autocomplete="true" placeholder="ex: 737060cd8c284d8af7ad3082f209582d" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="scope">Scope</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-6" type="text" data-storage="authorization" name="scope" tabindex="3" autocomplete="true" placeholder="ex: " disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="realm">Realm</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-6" type="text" data-storage="authorization" name="realm" tabindex="3" autocomplete="true" placeholder="ex: " disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                            </div>
-                                            <div class="col col-lg-5">
-                                                <fieldset>
-                                                    <label for="request_url">Request token URL</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-5" type="text" data-storage="authorization" name="request_url" tabindex="3" autocomplete="true" placeholder="ex: https://api.provider.com/oauth/request_token" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="access_url">Access token URL</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-5" type="text" data-storage="authorization" name="access_url" tabindex="3" autocomplete="true" placeholder="ex: https://api.provider.com/oauth/access_token" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="authorize_url">Authorize URL</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-5" type="text" data-storage="authorization" name="authorize_url" tabindex="3" autocomplete="true" placeholder="ex: https://api.provider.com/oauth/authorize" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="oauth_callback">Oauth Callback</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-5" type="text" data-storage="authorization" name="oauth_callback" tabindex="3" autocomplete="true" placeholder="ex: https://www.domain.com" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <fieldset>
-                                                    <label for="oauth_verifier">Oauth Verifier</label>
-                                                    <div class="controls">
-                                                        <div class="input-prepend">
-                                                            <label class="add-on">
-                                                            <input tabindex="-1" type="checkbox">
-                                                            </label>
-                                                            <input class="col col-lg-5" type="text" data-storage="authorization" name="oauth_verifier" tabindex="3" autocomplete="true" placeholder="ex: 737060cd8c284d8af7ad3082f209582d" disabled>
-                                                            <p class="help-block"></p>
-                                                        </div>
-                                                    </div>
-                                                </fieldset>
-                                                <button class="btn info" disabled>Authorize</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </section>
-
                     </form>
                 </div>
 

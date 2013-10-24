@@ -1,5 +1,18 @@
-$(window).on('load', function () {
+$(window).on("load", function () {
     $().tab();
+    $().button("toggle");
+
+    $("#request").on("click", ".input-group-addon input[type=checkbox]", function() {
+        var input = $(this).parents(".input-group").find(".form-control");
+
+        var checked = $(this).prop("checked");
+
+        if (checked) {
+            input.prop("disabled", false);
+        } else {
+            input.prop("disabled", true);
+        }
+    });
 })
 
 

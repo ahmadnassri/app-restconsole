@@ -1,5 +1,7 @@
 @import "../../vendor/bootstrap/less/bootstrap.less";
 
+@panel-border-radius: 0;
+
 .column(@xs: 1, @sm: 1, @md: 1, @lg: 1) {
     .make-xs-column(@xs);
     .make-sm-column(@sm);
@@ -43,19 +45,71 @@ html {
             background-color: #333333;
         }
 
-        .form-control {
+        .panel {
+            .panel;
+            .panel-default;
+            padding: 10px 15px;
+        }
+
+        .panel-footer:not(:last-of-type) {
+            border-bottom: 1px solid @panel-inner-border;
+        }
+
+        .btn,
+        .form-control,
+        .input-group-addon,
+        .input-group-btn > .btn,
+        .input-group-btn > .dropdown-toggle {
             border-radius: 0;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            color: #737373;
+            font-size: 12px;
+            font-weight: 400;
+
+            &:empty:after {
+                content: attr(for);
+            }
+        }
+
+        .form-control {
+            padding: 6px 6px;
 
             &:focus {
                 .box-shadow(none);
             }
         }
 
+        [type="checkbox"][tabindex="-1"] {
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
         .help-block {
-            margin: 0px;
-            color: #BBBBBB;
-            font-size: 12px;
+            .text-muted;
+            margin-bottom: 0px;
+            font-size: 10px;
             font-style: italic;
+        }
+
+        .nav-tabs {
+            li {
+                a {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        [data-toggle="button"] {
+            &.active {
+                .btn-success;
+            }
         }
 
         #content {
@@ -63,10 +117,6 @@ html {
             .column(11, 11, 11, 11);
 
             background-color: #FFFFFF;
-
-            .nav-tabs {
-                margin-bottom: 10px;
-            }
 
             #main {
                 .height();
@@ -89,6 +139,18 @@ html {
                             color: #737373;
                             text-transform: uppercase;
                             letter-spacing: 1px;
+                        }
+
+                        .tab-pane {
+                            .panel;
+                            .panel-default;
+                            border-top: none;
+
+                            &#headers-authorization {
+                                .tab-pane {
+                                    padding: 0;
+                                }
+                            }
                         }
                     }
                 }
