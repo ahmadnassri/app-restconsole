@@ -23,7 +23,7 @@
 }
 
 .scroll() {
-    overflow-y: scroll;
+    overflow-y: auto4;
 }
 
 html {
@@ -37,13 +37,6 @@ html {
 
         //position: fixed;
         overflow: hidden;
-
-        #navigation {
-            .height();
-            .column(1, 1, 1, 1);
-
-            background-color: #333333;
-        }
 
         .panel {
             .panel;
@@ -116,11 +109,16 @@ html {
             }
         }
 
+        #navigation {
+            .height();
+            .column(1, 1, 1, 1);
+
+            background-color: #3D3D3D;
+        }
+
         #content {
             .height();
             .column(11, 11, 11, 11);
-
-            background-color: #FFFFFF;
 
             #main {
                 .height();
@@ -131,7 +129,8 @@ html {
                     .scroll();
                     .column(5, 5, 5, 5);
 
-                    background-color: #F7F7F7;
+                    background-color: #EEEEEE;
+                    border-right: 1px solid #CCCCCC;
 
                     .panel {
                         .panel;
@@ -173,6 +172,10 @@ html {
                     padding-top: 20px;
 
                     background-color: #FFFFFF;
+                    background-image: url("images/tiny_grid.png");
+
+                    background-position: initial;
+                    background-repeat: repeat;
 
                     .tab-pane {
                         .panel;
