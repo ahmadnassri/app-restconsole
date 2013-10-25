@@ -48,7 +48,7 @@ html {
         .panel {
             .panel;
             .panel-default;
-            padding: 10px 15px;
+            box-shadow: none;
         }
 
         .panel-footer:not(:last-of-type) {
@@ -72,6 +72,8 @@ html {
             font-size: 12px;
             font-weight: 400;
 
+            min-height: 14px;
+
             &:empty:after {
                 content: attr(for);
             }
@@ -79,6 +81,8 @@ html {
 
         .form-control {
             padding: 6px 6px;
+
+            .box-shadow(none);
 
             &:focus {
                 .box-shadow(none);
@@ -129,6 +133,12 @@ html {
 
                     background-color: #F7F7F7;
 
+                    .panel {
+                        .panel;
+                        .panel-default;
+                        padding: 10px 15px;
+                    }
+
                     section {
                         position: relative;
 
@@ -160,7 +170,22 @@ html {
                     .scroll();
                     .column(7, 7, 7, 7);
 
+                    padding-top: 20px;
+
                     background-color: #FFFFFF;
+
+                    .tab-pane {
+                        .panel;
+                        .panel-default;
+                        border-top: none;
+                    }
+
+                    pre {
+                        background-color: transparent;
+                        border: none;
+                        padding: 0;
+                        margin: 0;
+                    }
                 }
             }
         }
