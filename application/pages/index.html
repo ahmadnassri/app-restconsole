@@ -25,11 +25,11 @@
         <div id="content" class="tab-content">
             <div id="main" class="tab-pane active">
                 <div id="request">
-                    <form name="main" class="form-horizontal" novalidate="true">
-                        <section id="target">
-                            <header>Target</header>
+                    <section id="target">
+                        <header>Target</header>
 
-                            <div class="panel">
+                        <div class="panel">
+                            <form name="target" class="form-horizontal" novalidate="true">
                                 <div class="form-group">
                                     <div class="col-lg-3">
                                         <label for="Protocol">Protocol Version</label>
@@ -73,22 +73,24 @@
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
-                            </div>
-                        </section>
+                            </form>
+                        </div>
+                    </section>
 
-                        <section id="headers">
-                            <header>Headers</header>
+                    <section id="headers">
+                        <header>Headers</header>
 
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" data-target="#headers-payload">Payload</a></li>
-                                <li><a data-toggle="tab" data-target="#headers-authorization">Authorization</a></li>
-                                <li><a data-toggle="tab" data-target="#headers-standard">Standard</a></li>
-                                <li><a data-toggle="tab" data-target="#headers-cache">Cache</a></li>
-                                <li><a data-toggle="tab" data-target="#headers-other">Other</a></li>
-                            </ul>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" data-target="#headers-payload">Payload</a></li>
+                            <li><a data-toggle="tab" data-target="#headers-authorization">Authorization</a></li>
+                            <li><a data-toggle="tab" data-target="#headers-standard">Standard</a></li>
+                            <li><a data-toggle="tab" data-target="#headers-cache">Cache</a></li>
+                            <li><a data-toggle="tab" data-target="#headers-other">Other</a></li>
+                        </ul>
 
-                            <div class="tab-content">
-                                <div id="headers-payload" class="tab-pane active">
+                        <div class="tab-content">
+                            <div id="headers-payload" class="tab-pane active">
+                                <form name="headers" class="form-horizontal" novalidate="true">
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="Contet-Type"></label>
@@ -120,9 +122,11 @@
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+                            </div>
 
-                                <div id="headers-authorization" class="tab-pane">
+                            <div id="headers-authorization" class="tab-pane">
+                                <form name="authorization" class="form-horizontal" novalidate="true">
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="Authorization"></label>
@@ -146,7 +150,8 @@
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a data-toggle="tab" data-target="#authorization-basic">Basic</a></li>
                                         <li><a data-toggle="tab" data-target="#authorization-digest">Digest</a></li>
-                                        <li><a data-toggle="tab" data-target="#authorization-oauth">oAuth</a></li>
+                                        <li><a data-toggle="tab" data-target="#authorization-oauth-1">oAuth 1.0a</a></li>
+                                        <li><a data-toggle="tab" data-target="#authorization-oauth-2">oAuth 2.0</a></li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -194,43 +199,8 @@
                                             </div>
                                         </div>
 
-                                        <div id="authorization-oauth" class="tab-pane">
+                                        <div id="authorization-oauth-1" class="tab-pane">
                                             <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="col-lg-2">
-                                                        <label for="Version"></label>
-                                                        <input class="form-control" type="number" name="Version" tabindex="3" autocomplete="true" placeholder="1.0" required="true"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-4">
-                                                        <label for="Signature">Signature Method</label>
-                                                        <select class="form-control" name="Signature">
-                                                            <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
-                                                            <option value="PLAINTEXT">PLAINTEXT</option>
-                                                        </select>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-4">
-                                                        <label for="Method"> Method</label>
-                                                        <select class="form-control" name="Method">
-                                                            <option value="header">Header</option>
-                                                            <option value="query">Query String</option>
-                                                        </select>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-2">
-                                                        <label for="Separator"></label>
-                                                        <select class="form-control" name="Separator">
-                                                            <option value="space">White Space</option>
-                                                            <option value="dash">Dash</option>
-                                                        </select>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="consumer_key">Consumer Key</label>
@@ -269,6 +239,138 @@
                                                     <div class="col-lg-6">
                                                         <label for="realm">Realm</label>
                                                         <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="true" placeholder=""/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="Signature">Signature Method</label>
+                                                        <select class="form-control" name="Signature">
+                                                            <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
+                                                            <option value="PLAINTEXT">PLAINTEXT</option>
+                                                        </select>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="Method"> Method</label>
+                                                        <select class="form-control" name="Method">
+                                                            <option value="header">Header</option>
+                                                            <option value="query">Query String</option>
+                                                        </select>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer">
+                                                <button class="btn btn-primary">Generate</button>
+                                            </div>
+
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="request_url">Request Token URL</label>
+                                                        <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="true" placeholder="https://api.provider.com/oauth/request_token"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="access_url">Request Token URL</label>
+                                                        <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="true" placeholder="https://api.provider.com/oauth/access_token"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="authorize_url">Authorize URL</label>
+                                                        <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="true" placeholder="https://api.provider.com/oauth/authorize"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="oauth_callback">Callback URL</label>
+                                                        <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="true" placeholder="https://www.domain.com"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="oauth_verifier">Oauth Verifier</label>
+                                                        <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel-footer">
+                                                <button class="btn btn-success" disabled>Authorize</button>
+                                            </div>
+                                        </div>
+
+                                        <div id="authorization-oauth-2" class="tab-pane">
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="consumer_key">Consumer Key</label>
+                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d" required="true"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="consumer_secret">Consumer Secret</label>
+                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d" required="true"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="token_key">Token Key</label>
+                                                        <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="token_secret">Token Secret</label>
+                                                        <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="true" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="scope">Scope</label>
+                                                        <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="true" placeholder=""/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="realm">Realm</label>
+                                                        <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="true" placeholder=""/>
+                                                        <span class="help-block"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-lg-6">
+                                                        <label for="Signature">Signature Method</label>
+                                                        <select class="form-control" name="Signature">
+                                                            <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
+                                                            <option value="PLAINTEXT">PLAINTEXT</option>
+                                                        </select>
+                                                        <span class="help-block"></span>
+                                                    </div>
+
+                                                    <div class="col-lg-6">
+                                                        <label for="Method"> Method</label>
+                                                        <select class="form-control" name="Method">
+                                                            <option value="header">Header</option>
+                                                            <option value="query">Query String</option>
+                                                        </select>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -321,9 +423,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+                            </div>
 
-                                <div id="headers-standard" class="tab-pane">
+                            <div id="headers-standard" class="tab-pane">
+                                <form name="headers" class="form-horizontal" novalidate="true">
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="Accept"></label>
@@ -394,9 +498,11 @@
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+                            </div>
 
-                                <div id="headers-cache" class="tab-pane">
+                            <div id="headers-cache" class="tab-pane">
+                                <form name="headers" class="form-horizontal" novalidate="true">
                                      <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="If-Match"></label>
@@ -452,9 +558,11 @@
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
+                            </div>
 
-                                <div id="headers-other" class="tab-pane">
+                            <div id="headers-other" class="tab-pane">
+                                <form name="headers" class="form-horizontal" novalidate="true">
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="X-HTTP-Method-Override"></label>
@@ -501,18 +609,21 @@
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                        </section>
+                        </div>
+                    </section>
 
-                        <section id="payload">
-                            <header>Payload</header>
+                    <section id="payload">
+                        <header>Payload</header>
 
-                            <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" data-target="#payload-raw">RAW Body</a></li>
-                                <li><a data-toggle="tab" data-target="#payload-form">Form Data</a></li>
-                                <li><a data-toggle="tab" data-target="#payload-attachments">Attachments</a></li>
-                            </ul>
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" data-target="#payload-raw">RAW Body</a></li>
+                            <li><a data-toggle="tab" data-target="#payload-form">Form Data</a></li>
+                            <li><a data-toggle="tab" data-target="#payload-attachments">Attachments</a></li>
+                        </ul>
+
+                        <form name="payload" class="form-horizontal" novalidate="true">
 
                             <div class="tab-content">
                                 <div id="payload-raw" class="tab-pane active">
@@ -574,23 +685,17 @@
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                    </form>
+                        </form>
+                    </section>
                 </div>
 
                 <div id="response">
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <header>HTTP Request</header>
-                            <pre><code>HTTP/1.1 200 OK
-Date: Mon, 23 May 2005 22:38:34 GMT
-Server: Apache/1.3.3.7 (Unix) (Red-Hat/Linux)
-Last-Modified: Wed, 08 Jan 2003 23:11:55 GMT
-ETag: "3f80f-1b6-3e1cb03b"
-Content-Type: text/html; charset=UTF-8
-Content-Length: 131
-Connection: close</code></pre>
+                            <pre><code name="request"></code></pre>
                         </div>
+
                         <div class="panel-footer">
                             <header>HTTP Response</header>
 
@@ -627,7 +732,7 @@ Connection: close</code></pre>
                 <section id="general">
                     <header>General</header>
                     <a>Install Extension</a>
-                    <form name="options" class="form-stacked" novalidate="true">
+                    <form name="settings" class="form-stacked" novalidate="true">
                         <div class="row">
                             <div class="col col-lg-6">
                                 <fieldset>

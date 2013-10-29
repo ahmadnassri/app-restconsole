@@ -8,12 +8,64 @@ $(window).on("load", function () {
         var checked = $(this).prop("checked");
 
         if (checked) {
-            input.prop("disabled", false);
+            input.prop("disabled", false).trigger('change');
         } else {
-            input.prop("disabled", true);
+            input.prop("disabled", true).trigger('change');
         }
     });
+
+    $("#request").on("change", "input:not([type=checkbox])", function() {
+        var data = {};
+
+        $.each($('#request form'), function(_, form) {
+            if (data[form.name] === undefined) {
+                data[form.name] = {};
+            }
+
+            $.each($(form).serializeArray(), function(_, input) {
+                data[form.name][input.name] = input.value;
+            });
+        });
+
+        // construct HAR object
+        var requestHAR = {
+            "method": data["target"].Method,
+            "url": 'http://' + data["target"].Host + ':' + data["target"].Port + '/' + data["target"].Path,
+            "httpVersion": data["target"].Protocol,
+            "headers": data["headers"],
+            "queryString": [],
+            "cookies": [],
+            "headersSize": 0,
+            "bodySize": 0
+        }
+
+        $("#response code[name=request]").html(constructHTTPRequestText(data));
+
+        console.log(data);
+    });
 })
+
+function toggleAllOptionalFields() {
+    $("#request .input-group-addon input[type=checkbox]").trigger('click');
+}
+
+function constructHTTPRequestText(data) {
+    data.headers_string = "";
+
+    $.each(data["headers"], function(name, value) {
+         data.headers_string += name + ": " + value + "\n";
+    });
+
+    return jQuery.substitute("{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}", data);
+}
+
+jQuery.substitute = function(template, data) {
+    return template.replace(/\{([\w\.]*)\}/g, function(str, key) {
+        var keys = key.split("."), v = data[keys.shift()];
+        for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
+        return (typeof v !== "undefined" && v !== null) ? v : "";
+    });
+};
 
 
 /*
