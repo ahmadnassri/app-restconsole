@@ -23,7 +23,7 @@
 }
 
 .scroll() {
-    overflow-y: auto4;
+    overflow-y: auto;
 }
 
 html {
@@ -32,32 +32,13 @@ html {
     body {
         .height();
 
-        //.make-row();
-        //.fluid-container();
-
-        //position: fixed;
         overflow: hidden;
 
-        .panel {
-            .panel;
-            .panel-default;
-            box-shadow: none;
-        }
 
-        .panel-footer:not(:last-of-type) {
-            border-bottom: 1px solid @panel-inner-border;
-        }
-
-        .btn,
-        .form-control,
-        .input-group-addon,
-        .input-group-btn > .btn,
-        .input-group-btn > .dropdown-toggle {
-            border-radius: 0;
-        }
-
-        .form-group {
-            margin-bottom: 10px;
+        // general rules
+        a,
+        input[type=file] {
+            cursor: pointer;
         }
 
         label {
@@ -72,6 +53,35 @@ html {
             }
         }
 
+        // class overrides
+        .panel {
+            .panel;
+            .panel-default;
+            box-shadow: none;
+        }
+
+        .panel-footer:not(:last-of-type) {
+            border-bottom: 1px solid @panel-inner-border;
+        }
+
+        .list-group {
+            .list-group-item {
+                border-radius: 0;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .btn,
+        .form-control,
+        .input-group-addon,
+        .input-group-btn > .btn,
+        .input-group-btn > .dropdown-toggle {
+            border-radius: 0;
+        }
+
         .form-control {
             padding: 6px 6px;
 
@@ -82,12 +92,6 @@ html {
             }
         }
 
-        [type="checkbox"][tabindex="-1"] {
-            width: 15px;
-            height: 15px;
-            cursor: pointer;
-        }
-
         .help-block {
             .text-muted;
             margin-bottom: 0px;
@@ -95,12 +99,11 @@ html {
             font-style: italic;
         }
 
-        .nav-tabs {
-            li {
-                a {
-                    cursor: pointer;
-                }
-            }
+        // specifics
+        [type="checkbox"][tabindex="-1"] {
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
         }
 
         [data-toggle="button"] {
@@ -114,6 +117,16 @@ html {
             .column(1, 1, 1, 1);
 
             background-color: #3D3D3D;
+
+            .logo {
+                padding: 10px 0;
+
+                h1 {
+                    color: white;
+                    font-size: 15px;
+                    margin: 0 0 0 35px;
+                }
+            }
         }
 
         #content {

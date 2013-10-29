@@ -10,8 +10,14 @@
 
     <body>
         <div id="navigation">
+            <div class="logo">
+                <img class="pull-left" src="/images/logo/32.png"/>
+                <h1>REST Console</h1>
+            </div>
+
             <div class="list-group">
                 <a class="list-group-item" data-toggle="tab" data-target="#main">Main</a>
+                <a class="list-group-item" data-toggle="tab" data-target="#presets">Presets</a>
                 <a class="list-group-item" data-toggle="tab" data-target="#settings">settings</a>
             </div>
         </div>
@@ -519,12 +525,8 @@
                                 </div>
 
                                 <div id="payload-form" class="tab-pane">
-
-                                    <div class="alert alert-block alert-danger">
-                                        <h4>Invalid Content-Type</h4>
-                                        <p>This form is only enabled for one Content-Type in particular: <strong>application/x-www-form-urlencoded</strong></p>
-                                        <p>Clicking "Enable" below will update your Content-Type header above.</p>
-                                        <p><button class="btn btn-danger" type="button">Enable</button></p>
+                                    <div class="alert alert-block alert-warning">
+                                        <p>Content-Type will be overwritten to: <strong>application/x-www-form-urlencoded</strong></p>
                                     </div>
 
                                     <div class="form-group">
@@ -545,24 +547,30 @@
                                             <button class="btn btn-danger form-control" type="button">-</button>
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <div class="col-lg-12">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key"/>
-                                                <input type="text" class="form-control" type="text" name="value" tabindex="0" autocomplete="true" placeholder="ex: value"/>
-                                                <span class="input-group-btn"></span>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div id="payload-attachments" class="tab-pane">
-                                    <div class="input-append pair">
-                                        <input class="col col-lg-3" type="text" name="key" tabindex="0" autocomplete="true" placeholder="ex: key">
-                                        <input class="col col-lg-3" type="file" name="file" tabindex="0" autocomplete="false">
-                                        <span class="add-on btn add success"></span>
-                                        <span class="add-on btn remove danger"></span>
+                                    <div class="alert alert-block alert-warning">
+                                        <p>Content-Type will be overwritten to: <strong>multipart/form-data</strong></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-4">
+                                            <label for="Key"></label>
+                                            <input class="form-control" type="text" name="key" tabindex="0" autocomplete="true" placeholder="foo"/>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="File"></label>
+                                            <input class="form-control" type="file" name="file" tabindex="0" autocomplete="false"/>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-2">
+                                            <label for=""></label>
+                                            <button class="btn btn-danger form-control" type="button">-</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
