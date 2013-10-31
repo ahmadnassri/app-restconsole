@@ -1,5 +1,5 @@
 $(window).on("load", function () {
-    $().tab();
+    $("a[data-toggle=tab]").tab();
     $().button("toggle");
 
     $("#request").on("click", ".input-group-addon input[type=checkbox]", function() {

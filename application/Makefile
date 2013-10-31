@@ -27,7 +27,7 @@ js:
 	@echo "[JS] compressing JavaScript"
 	#@uglifyjs js/background.js -o $(path)/background.js
 	#@cat js/app.js js/ui.js | uglifyjs -o $(path)/app.js
-	@cat $(vendor)/jquery.js $(vendor)/bootstrap/js/tab.js $(vendor)/bootstrap/js/button.js js/app.js | uglifyjs -o $(path)/app.js
+	@cat $(vendor)/jquery.js $(vendor)/bootstrap/js/transition.js $(vendor)/bootstrap/js/tab.js $(vendor)/bootstrap/js/button.js js/app.js | uglifyjs -o $(path)/app.js
 
 # TODO: figure out what UglifyJS doesn't wory with JSON
 # ${json}:
