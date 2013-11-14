@@ -1,69 +1,84 @@
-$(window).on("load", function () {
-    $("a[data-toggle=tab]").tab();
-    $().button("toggle");
+// TODO: best way to execute?
+$(window).on('load', function () {
+    // enable tabs
+    $('a[data-toggle=tab]').tab();
 
-    $("#request").on("click", ".input-group-addon input[type=checkbox]", function() {
-        var input = $(this).parents(".input-group").find(".form-control");
+    // enable toggling buttons
+    $().button('toggle');
 
-        var checked = $(this).prop("checked");
+    // enable/disable optional fields
+    $('#request').on('click', '.input-group-addon input[type=checkbox]', function() {
+        var input = $(this).parents('.input-group').find('.form-control');
+
+        var checked = $(this).prop('checked');
 
         if (checked) {
-            input.prop("disabled", false).trigger('change');
+            input.prop('disabled', false).trigger('change');
         } else {
-            input.prop("disabled", true).trigger('change');
+            input.prop('disabled', true).trigger('change');
         }
     });
 
-    $("#request").on("change", "input:not([type=checkbox])", function() {
+    // construct request object listener
+    $('#request').on('change', 'input:not([type=checkbox])', function() {
         var data = {};
 
+        // cycle through all the individual forms
         $.each($('#request form'), function(_, form) {
+            // initiate grouping
             if (data[form.name] === undefined) {
                 data[form.name] = {};
             }
 
+            //~ $.each($(form).get('[required]'), function(_, input) {
+            //~ }
+
+            // create key-value array
             $.each($(form).serializeArray(), function(_, input) {
+                //if () {
+                  //  $('#response code[name=request]').html('<em class="warning"4>required fields missing</em>');
+                    //return;
+                //}
+
                 data[form.name][input.name] = input.value;
             });
         });
 
         // construct HAR object
         var requestHAR = {
-            "method": data["target"].Method,
-            "url": 'http://' + data["target"].Host + ':' + data["target"].Port + '/' + data["target"].Path,
-            "httpVersion": data["target"].Protocol,
-            "headers": data["headers"],
-            "queryString": [],
-            "cookies": [],
-            "headersSize": 0,
-            "bodySize": 0
+            'method': data['target'].Method,
+            'url': 'http://' + data['target'].Host + ':' + data['target'].Port + '/' + data['target'].Path,
+            'httpVersion': data['target'].Protocol,
+            'headers': data['headers'],
+            'queryString': [],
+            'cookies': [],
+            'headersSize': 0,
+            'bodySize': 0
         }
 
-        $("#response code[name=request]").html(constructHTTPRequestText(data));
-
-        console.log(data);
+        $('#response code[name=request]').html(constructHTTPRequestText(data));
     });
 })
 
 function toggleAllOptionalFields() {
-    $("#request .input-group-addon input[type=checkbox]").trigger('click');
+    $('#request .input-group-addon input[type=checkbox]').trigger('click');
 }
 
 function constructHTTPRequestText(data) {
-    data.headers_string = "";
+    data.headers_string = '';
 
-    $.each(data["headers"], function(name, value) {
-         data.headers_string += name + ": " + value + "\n";
+    $.each(data['headers'], function(name, value) {
+         data.headers_string += name + ': ' + value + '\n';
     });
 
-    return jQuery.substitute("{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}", data);
+    return jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}', data);
 }
 
 jQuery.substitute = function(template, data) {
     return template.replace(/\{([\w\.]*)\}/g, function(str, key) {
-        var keys = key.split("."), v = data[keys.shift()];
+        var keys = key.split('.'), v = data[keys.shift()];
         for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
-        return (typeof v !== "undefined" && v !== null) ? v : "";
+        return (typeof v !== 'undefined' && v !== null) ? v : '';
     });
 };
 
