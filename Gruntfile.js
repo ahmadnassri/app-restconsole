@@ -10,6 +10,11 @@ module.exports = function(grunt) {
         application: '',
         extension: '',
 
+        clean: {
+            dist: ['dist'],
+            all: ['bower_components', 'node_modules']
+        },
+
         concat: {
             dist: {
                 files: {
