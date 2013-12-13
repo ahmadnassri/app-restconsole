@@ -1,8 +1,7 @@
 module.exports = function(grunt) {
-    // Displays the elapsed execution time of grunt tasks
+    // show elapsed time at the end
     require('time-grunt')(grunt);
-
-    // Load NPM Tasks
+    // load all grunt tasks
     require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
@@ -15,10 +14,10 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     'dist/application/app.js': [
-                        'vendor/jquery.js',
-                        'vendor/bootstrap/js/transition.js',
-                        'vendor/bootstrap/js/tab.js',
-                        'vendor/bootstrap/js/button.js',
+                        'bower_components/jquery/jquery.js',
+                        'bower_components/bootstrap/js/transition.js',
+                        'bower_components/bootstrap/js/tab.js',
+                        'bower_components/bootstrap/js/button.js',
 
                         'application/js/app.js',
                     ],
@@ -127,28 +126,7 @@ module.exports = function(grunt) {
             beforeconcat: ['Gruntfile.js', 'application/js/*.js'],
             afterconcat: ['dist/application/app.js'],
             options: {
-                curly:   true,
-                eqeqeq:  true,
-                immed:   true,
-                latedef: true,
-                newcap:  true,
-                noarg:   true,
-                sub:     true,
-                undef:   true,
-                boss:    true,
-                eqnull:  true,
-                browser: true,
-
-                globals: {
-                    // AMD
-                    require:    true,
-                    module:     true,
-
-                    // Environments
-                    $:          true,
-                    console:    true,
-                    jQuery:     true,
-                }
+                jshintrc: '.jshintrc'
             }
         },
 
@@ -180,10 +158,33 @@ module.exports = function(grunt) {
                     spawn: false,
                 }
             }
+        },
+
+        bump: {
+            options: {
+                // Task-specific options go here.
+            },
+
+            files: ['package.json', 'bower.json', 'application/manifest.json']
         }
     });
 
-    grunt.registerTask('default', ['htmlmin', 'minjson', 'less:dev', 'jshint:beforeconcat', 'concat']);
+    grunt.registerTask('default', [
+        'htmlmin',
+        'minjson',
+        'less:dev',
+        'jshint:beforeconcat',
+        'concat'
+    ]);
 
-    grunt.registerTask('release', ['htmlmin', 'minjson', 'less:dist', 'jshint:beforeconcat', 'concat', /*'jshint:afterconcat',*/ 'uglify', 'imagemin']);
+    grunt.registerTask('release', [
+        'htmlmin',
+        'minjson',
+        'less:dist',
+        'jshint:beforeconcat',
+        'concat',
+        /*'jshint:afterconcat',*/
+        'uglify',
+        'imagemin'
+    ]);
 };

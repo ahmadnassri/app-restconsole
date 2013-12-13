@@ -1,12 +1,12 @@
-function toggleAllOptionalFields() {
+/*function toggleAllOptionalFields() {
     $('#request .input-group-addon input[type=checkbox]').trigger('click');
 }
-
+*/
 function constructHTTPRequestText(data) {
     data.headers_string = '';
 
     $.each(data['headers'], function(name, value) {
-         data.headers_string += name + ': ' + value + '\n';
+        data.headers_string += name + ': ' + value + '\n';
     });
 
     return jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}', data);
@@ -57,7 +57,7 @@ $(window).on('load', function () {
                 data[form.name][input.name] = input.value;
             });
         });
-
+/*
         // construct HAR object
         var requestHAR = {
             'method': data['target'].Method,
@@ -69,7 +69,7 @@ $(window).on('load', function () {
             'headersSize': 0,
             'bodySize': 0
         };
-
+*/
         $('#response code[name=request]').html(constructHTTPRequestText(data));
     });
 });

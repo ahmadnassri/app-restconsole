@@ -1,9 +1,0 @@
-[submodule "vendor/beautify"]
-	path = vendor/beautify
-	url = git://github.com/einars/js-beautify.git
-[submodule "vendor/bootstrap"]
-	path = vendor/bootstrap
-	url = git://github.com/twbs/bootstrap.git
-[submodule "vendor/highlight.js"]
-	path = vendor/highlight.js
-	url = git://github.com/isagalaev/highlight.js.git
