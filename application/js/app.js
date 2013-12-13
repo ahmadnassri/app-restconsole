@@ -1,3 +1,17 @@
+function toggleAllOptionalFields() {
+    $('#request .input-group-addon input[type=checkbox]').trigger('click');
+}
+
+function constructHTTPRequestText(data) {
+    data.headers_string = '';
+
+    $.each(data['headers'], function(name, value) {
+         data.headers_string += name + ': ' + value + '\n';
+    });
+
+    return jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}', data);
+}
+
 // TODO: best way to execute?
 $(window).on('load', function () {
     // enable tabs
@@ -54,30 +68,20 @@ $(window).on('load', function () {
             'cookies': [],
             'headersSize': 0,
             'bodySize': 0
-        }
+        };
 
         $('#response code[name=request]').html(constructHTTPRequestText(data));
     });
-})
-
-function toggleAllOptionalFields() {
-    $('#request .input-group-addon input[type=checkbox]').trigger('click');
-}
-
-function constructHTTPRequestText(data) {
-    data.headers_string = '';
-
-    $.each(data['headers'], function(name, value) {
-         data.headers_string += name + ': ' + value + '\n';
-    });
-
-    return jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}', data);
-}
+});
 
 jQuery.substitute = function(template, data) {
     return template.replace(/\{([\w\.]*)\}/g, function(str, key) {
         var keys = key.split('.'), v = data[keys.shift()];
-        for (var i = 0, l = keys.length; i < l; i++) v = v[keys[i]];
+
+        for (var i = 0, l = keys.length; i < l; i++) {
+            v = v[keys[i]];
+        }
+
         return (typeof v !== 'undefined' && v !== null) ? v : '';
     });
 };
