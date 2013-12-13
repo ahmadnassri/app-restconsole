@@ -43,8 +43,8 @@
                                     </div>
 
                                     <div class="col-lg-5">
-                                        <label for="Host">Host Name</label>
-                                        <input class="form-control" type="text" name="Host" placeholder="www.example.com"/>
+                                        <label for="Host">Host Names</label>
+                                        <input class="form-control" type="text" name="Host" placeholder="e.g. www.example.com"/>
                                         <span class="help-block"></span>
                                     </div>
 
@@ -56,7 +56,7 @@
 
                                     <div class="col-lg-2">
                                         <label for="Timeout"></label>
-                                        <input type="number" class="form-control" name="Timeout" tabindex="1" min="1" step="1" value="3" required="true"/>
+                                        <input class="form-control" type="number" name="Timeout" tabindex="1" min="1" step="1" value="3" required="true"/>
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="form-group">
                                     <div class="col-lg-3">
                                         <label for="Method"></label>
-                                        <input class="form-control" type="text" name="Method" tabindex="1" autocomplete="true" list="methods" placeholder="GET" required="true"/>
+                                        <input class="form-control" type="text" name="Method" tabindex="1" autocomplete="true" list="methods" placeholder="e.g. GET" required="true" value="GET"/>
                                         <span class="help-block"></span>
                                     </div>
 
@@ -776,33 +776,7 @@
                 </section>
             </div>
         </div>
-<!--
-        <footer class="navbar navbar-fixed">
-            <div class="navbar-inner">
-                <div class="fluid-container sidebar-left">
-                    <div class="fluid-content controls">
-                        <div class="row">
-                            <div class="col col-lg-10">
-                                <div class="progress info striped active">
-                                    <div class="bar" style="width: 0%;"></div>
-                                </div>
-                                <button tabindex="-1" data-action="submit" class="btn primary">Send</button>
-                                <button tabindex="-1" data-action="get" class="btn">GET</button>
-                                <button tabindex="-1" data-action="post" class="btn">POST</button>
-                                <button tabindex="-1" data-action="put" class="btn">PUT</button>
-                                <button tabindex="-1" data-action="delete" class="btn">DELETE</button>
-                            </div>
 
-                            <div class="pull-right">
-                                <button tabindex="-1" data-action="stop" class="btn danger">Stop</button>
-                                <button tabindex="-1" data-action="save" class="btn success">Save Request</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
--->
         <datalist id="mimetypes">
             <option value="*/*">*/*</option>
             <option value="application/atom+xml">application/atom+xml</option>
@@ -1134,12 +1108,7 @@
             <option value="zu">Zulu</option>
         </datalist>
 
-        <!--
-        <script type="text/javascript" src="http://platform.twitter.com/widgets.js" async="true"></script>
-        <script type="text/javascript" src="http://platform.linkedin.com/in.js" async="true"></script>
-        <script type="text/javascript" src="https://ssl.google-analytics.com/ga.js" async="true"></script>
-        -->
-
         <script type="text/javascript" src="/app.js"></script>
+        <script type="text/javascript" async src="https://ssl.google-analytics.com/ga.js"></script>
     </body>
 </html>

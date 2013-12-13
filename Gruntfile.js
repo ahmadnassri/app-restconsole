@@ -157,7 +157,7 @@ module.exports = function(grunt) {
             },
 
             html: {
-                files: ['application/*.html'],
+                files: ['application/pages/*.html'],
                 tasks: ['htmlmin'],
                 options: {
                     spawn: false,

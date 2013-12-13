@@ -1,7 +1,8 @@
-/*function toggleAllOptionalFields() {
-    $('#request .input-group-addon input[type=checkbox]').trigger('click');
-}
-*/
+// Google Analytics
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-598217-26']);
+_gaq.push(['_trackPageview']);
+
 function constructHTTPRequestText(data) {
     data.headers_string = '';
 
@@ -12,7 +13,7 @@ function constructHTTPRequestText(data) {
     return jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}', data);
 }
 
-// TODO: best way to execute?
+// sTODO: best way to execute?
 $(window).on('load', function () {
     // enable tabs
     $('a[data-toggle=tab]').tab();

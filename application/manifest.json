@@ -1,6 +1,7 @@
 {
-    "version": "5.0.0",
     "manifest_version": 2,
+
+    "version": "5.0.0",
     "name": "__MSG_name__",
     "description": "__MSG_description__",
     "icons": {
@@ -36,5 +37,7 @@
         "clipboardRead",
         "clipboardWrite",
         "chrome://favicon/"
-    ]
+    ],
+
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
 }
