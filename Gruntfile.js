@@ -15,6 +15,24 @@ module.exports = function(grunt) {
             all: ['bower_components', 'node_modules']
         },
 
+        copy: {
+            fonts: {
+                files: [{
+                    expand: true,
+                    src: ['application/fonts/**'],
+                    dest: 'dist/'
+                }]
+            },
+
+            images: {
+                files: [{
+                    expand: true,
+                    src: ['application/images/**'],
+                    dest: 'dist/'
+                }]
+            }
+        },
+
         concat: {
             dist: {
                 files: {
@@ -179,7 +197,9 @@ module.exports = function(grunt) {
         'minjson',
         'less:dev',
         'jshint:beforeconcat',
-        'concat'
+        'concat',
+        'copy:images',
+        'copy:fonts'
     ]);
 
     grunt.registerTask('release', [
@@ -190,6 +210,7 @@ module.exports = function(grunt) {
         'concat',
         /*'jshint:afterconcat',*/
         'uglify',
-        'imagemin'
+        'imagemin',
+        'copy:fonts'
     ]);
 };
