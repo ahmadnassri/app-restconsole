@@ -5,6 +5,7 @@
         "jquery": "~2.0.3",
         "bootstrap": "~3.0.3",
         "js-beautify": "~1.4.2",
-        "highlightjs": "~7.5.0"
+        "highlightjs": "~7.5.0",
+        "uri.js": "~1.11.2"
     }
 }

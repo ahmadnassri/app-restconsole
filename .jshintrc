@@ -24,6 +24,7 @@
         "module":   true,
         "require":  true,
 
-        "chrome":   true
+        "chrome":   true,
+        "URI":      true
     }
 }

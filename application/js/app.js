@@ -1,41 +1,66 @@
 // Google Analytics
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-598217-26']);
+//_gaq.push(['_setAccount', 'UA-598217-26']);
 _gaq.push(['_trackPageview']);
 
-function constructHTTPRequestText(data) {
-    data.headers_string = '';
+var Utilities = {
+    constructHTTPRequestText: function(data) {
+        data.headers_string = '';
 
-    $.each(data['headers'], function(name, value) {
-        data.headers_string += name + ': ' + value + '\n';
-    });
+        $.each(data['headers'], function(name, value) {
+            data.headers_string += name + ': ' + value + '\n';
+        });
 
-    return jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}', data);
-}
+        return jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}', data);
+    }
+};
 
-// sTODO: best way to execute?
-$(window).on('load', function () {
-    // enable tabs
-    $('a[data-toggle=tab]').tab();
+var Handlers = {
+    parseHost: function() {
+        // construct URI object
+        var uri = new URI($(this).val());
 
-    // enable toggling buttons
-    $().button('toggle');
+        if (uri.hostname() !== '') {
+            // default to port 80 unless its HTTPS
+            if (uri.protocol() === 'https') {
+                uri.port(443);
+            } else if(uri.port() === '') {
+                uri.port(80);
+            }
 
-    // enable/disable optional fields
-    $('#request').on('click', '.input-group-addon input[type=checkbox]', function() {
+            // populate fields
+            $('input[name=Port]').val(uri.port());
+            $('input[name=Path]').val(uri.path());
+            $('input[name=Host]').val(uri.hostname());
+
+            // handle basic authentication
+            if (uri.username() !== '') {
+                $('a[data-target="#headers-authorization"]').trigger('click').find('a[data-target="#authorization-basic"]').trigger('click');
+                $('#authorization-basic input[name="Username"]').val(uri.username());
+                $('#authorization-basic input[name="Password"]').val(uri.password()).trigger('change');
+            }
+
+            // TEMP! TODO: convert into query string form
+            $('textarea[name="payload"]').val(uri.query());
+        }
+
+    },
+
+    /**
+     * checkbox listener for enabling/disabling optional input fields
+     */
+    checkBoxToggle: function() {
+        // go up, then go down
         var input = $(this).parents('.input-group').find('.form-control');
 
-        var checked = $(this).prop('checked');
+        // change it
+        input.prop('disabled', !$(this).prop('checked')).trigger('change');
+    },
 
-        if (checked) {
-            input.prop('disabled', false).trigger('change');
-        } else {
-            input.prop('disabled', true).trigger('change');
-        }
-    });
-
-    // construct request object listener
-    $('#request').on('change', 'input:not([type=checkbox])', function() {
+    /**
+     * input fields listener for generating the HTTP Request output
+     */
+    changeInput: function() {
         var data = {};
 
         // cycle through all the individual forms
@@ -58,7 +83,7 @@ $(window).on('load', function () {
                 data[form.name][input.name] = input.value;
             });
         });
-/*
+    /*
         // construct HAR object
         var requestHAR = {
             'method': data['target'].Method,
@@ -70,9 +95,41 @@ $(window).on('load', function () {
             'headersSize': 0,
             'bodySize': 0
         };
-*/
-        $('#response code[name=request]').html(constructHTTPRequestText(data));
-    });
+    */
+        $('#response code[name="request"]').html(Utilities.constructHTTPRequestText(data));
+
+    }
+};
+
+var AuthorizationProcessors = {
+    basic: function () {
+        var container = $(this).parents('.input-group');
+        var base64 = btoa(container.find('input[name="Username"]').val(), container.find('input[name="Password"]').val());
+
+        // set the header value and enable the field
+        $('input[name="Authorization"]').val('Basic ' + base64).prev('.input-group-addon').find('input[type="checkbox"]').trigger('click');
+    }
+};
+
+// sTODO: best way to execute?
+$(window).on('load', function () {
+    // enable tabs
+    $('a[data-toggle="tab"]').tab();
+
+    // enable toggling buttons
+    $().button('toggle');
+
+
+    // attach global listeners
+    $('#request')
+        .on('click', '.input-group-addon input[type="checkbox"]', Handlers.checkBoxToggle)
+        .on('change', 'input:not([type="checkbox"]), select', Handlers.changeInput);
+
+    // attach special listeners
+    $('input[name="Host"').on('change', Handlers.parseHost);
+    $('#authorization-basic').on('change', 'input', AuthorizationProcessors.basic);
+
+    Handlers.changeInput();
 });
 
 jQuery.substitute = function(template, data) {
