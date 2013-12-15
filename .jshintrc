@@ -21,10 +21,11 @@
     "trailing": true,
 
     "globals": {
-        "module":   true,
-        "require":  true,
+        "module":       true,
+        "require":      true,
 
-        "chrome":   true,
-        "URI":      true
+        "chrome":       true,
+        "URI":          true,
+        "harToCurl":    true
     }
 }

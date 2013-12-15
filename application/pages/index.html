@@ -694,33 +694,53 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <header>HTTP Request</header>
-                            <pre><code name="request"><em>pending input</em></code></pre>
+
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" data-target="#request-raw">RAW</a></li>
+                                <li><a data-toggle="tab" data-target="#request-curl">cURL</li>
+                                <li><a data-toggle="tab" data-target="#request-har">HTTP Archive</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="request-raw" class="tab-pane fade in active">
+                                    <pre><code></code></pre>
+                                </div>
+
+                                <div id="request-curl" class="tab-pane fade">
+                                    <pre><code></code></pre>
+                                </div>
+
+                                <div id="request-har" class="tab-pane fade">
+                                    <pre><code></code></pre>
+                                    <a class="btn btn-primary disabled" download="har"><i class="icon download-alt"></i>Download</a>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="panel-footer">
                             <header>HTTP Response</header>
 
                             <ul class="nav nav-tabs">
-                                <li class="active"><a accesskey="n" data-toggle="tab" data-target="#response-body">Respo<span>n</span>se</a></li>
-                                <li><a accesskey="v" data-toggle="tab" data-target="#response-preview">Pre<span>v</span>iew</a></li>
-                                <li><a accesskey="c" data-toggle="tab" data-target="#response-har">HTTP Ar<span>c</span>hive</a></li>
+                                <li class="active"><a data-toggle="tab" data-target="#response-raw">RAW</a></li>
+                                <li><a data-toggle="tab" data-target="#response-preview">Preview</a></li>
+                                <li><a data-toggle="tab" data-target="#response-har">HTTP Archive</a></li>
                             </ul>
 
                             <div class="tab-content">
-                                <div id="response-body" class="tab-pane fade in active">
-                                    <pre class="prettyprint linenums response"><code></code></pre>
-                                    <a class="har btn disabled" download="response"><i class="icon download-alt"></i>Download HTTP Response</a>
-                                    <a class="har btn disabled" download="responseBody"><i class="icon download-alt"></i>Download Body</a>
+                                <div id="response-raw" class="tab-pane fade in active">
+                                    <pre><code></code></pre>
+                                    <a class="btn btn-primary disabled" download="response"><i class="icon download-alt"></i>Download HTTP Response</a>
+                                    <a class="btn btn-primary disabled" download="responseBody"><i class="icon download-alt"></i>Download Body</a>
                                 </div>
 
                                 <div id="response-preview" class="tab-pane fade">
                                     <div id="preview"></div>
-                                    <a class="har btn disabled" download="preview"><i class="icon download-alt"></i>Download</a>
+                                    <a class="btn btn-primary disabled" download="preview"><i class="icon download-alt"></i>Download</a>
                                 </div>
 
                                 <div id="response-har" class="tab-pane fade">
-                                    <pre class="prettyprint linenums har"><code class="language-js"></code></pre>
-                                    <a class="har btn disabled" download="har"><i class="icon download-alt"></i>Download</a>
+                                    <pre><code></code></pre>
+                                    <a class="btn btn-primary disabled" download="har"><i class="icon download-alt"></i>Download</a>
                                 </div>
                             </div>
                         </div>

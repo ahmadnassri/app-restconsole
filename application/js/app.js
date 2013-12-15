@@ -3,22 +3,92 @@ var _gaq = _gaq || [];
 //_gaq.push(['_setAccount', 'UA-598217-26']);
 _gaq.push(['_trackPageview']);
 
-var Utilities = {
-    constructHTTPRequestText: function(data) {
-        data.headers_string = '';
+// TODO move to localStorage;
+var DATA = {};
 
-        $.each(data['headers'], function(name, value) {
-            data.headers_string += name + ': ' + value + '\n';
+var Utilities = {
+    processAllForms: function () {
+        console.log('Utilities.processAllForms');
+
+        // cycle through all the individual forms
+        $.each($('#request form'), function(_, form) {
+            // initiate grouping
+            var name = $(form).prop('name');
+
+            if (DATA[name] === undefined) {
+                DATA[name] = {};
+            }
+
+            // create key-value array
+            $.each($(form).serializeArray(), function(_, input) {
+                DATA[name][input.name] = input.value;
+            });
         });
 
-        return jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n{headers_string}', data);
+        Utilities.constructHTTPRequestText(DATA);
+    },
+
+    updateInputData: function(el) {
+        console.log('Utilities.updateInputData');
+
+        DATA[el.parents('form').prop('name')][el.prop('name')] = el.val();
+
+        Utilities.constructHTTPRequestText(DATA);
+    },
+
+    constructHTTPRequestText: function (data) {
+        console.log('Utilities.constructHTTPRequestText');
+
+        var headers_string = '';
+
+        // construct HAR object
+        var HAR = {
+            startedDateTime: 0,
+            time: 0,
+            request: {
+                method: data.target.Method,
+                url: jQuery.substitute('http://{target.Host}:{target.Port}{target.Path}', data),
+                httpVersion: data.target.Protocol,
+                headers: [],
+                queryString: [],
+                cookies: [],
+                headersSize: 0,
+                bodySize: 0
+            }
+        };
+
+        // construct headers
+        $.each(data.headers, function(name, value) {
+            headers_string += name + ': ' + value + '\n';
+            HAR.request.headers.push({name: name, value: value});
+        });
+
+        // add Authorization header
+        if (data.authorization['Authorization']) {
+            headers_string += 'Authorization: ' + data.authorization['Authorization'] + '\n';
+            HAR.request.headers.push({name: 'Authorization', value: data.authorization['Authorization']});
+        }
+
+        // add Proxy-Authorization header
+        if (data.authorization['Proxy-Authorization']) {
+            headers_string += 'Proxy-Authorization: ' + data.authorization['Proxy-Authorization'] + '\n';
+            HAR.request.headers.push({name: 'Proxy-Authorization', value: data.authorization['Proxy-Authorization']});
+        }
+
+        console.log(data);
+
+        // write outputs
+        $('#request-curl code').html(harToCurl(HAR));
+        $('#request-har code').html(JSON.stringify(HAR.request));
+        $('#request-raw code').html(jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n', data) + headers_string);
     }
 };
 
 var Handlers = {
-    parseHost: function() {
+    parseHost: function () {
+        console.log('Handlers.parseHost');
         // construct URI object
-        var uri = new URI($(this).val());
+        var uri = new URI($(this).val().trim());
 
         if (uri.hostname() !== '') {
             // default to port 80 unless its HTTPS
@@ -49,7 +119,8 @@ var Handlers = {
     /**
      * checkbox listener for enabling/disabling optional input fields
      */
-    checkBoxToggle: function() {
+    checkBoxToggle: function () {
+        console.log('Handlers.checkBoxToggle');
         // go up, then go down
         var input = $(this).parents('.input-group').find('.form-control');
 
@@ -58,56 +129,46 @@ var Handlers = {
     },
 
     /**
-     * input fields listener for generating the HTTP Request output
+     * listener on input changes to clean up and set default values
      */
-    changeInput: function() {
-        var data = {};
+    inputChange: function () {
+        console.log('Handlers.inputChange');
 
-        // cycle through all the individual forms
-        $.each($('#request form'), function(_, form) {
-            // initiate grouping
-            if (data[form.name] === undefined) {
-                data[form.name] = {};
-            }
+        var el = $(this);
 
-            //~ $.each($(form).get('[required]'), function(_, input) {
-            //~ }
+        // trim (anything other than username / password fields)
+        // TODO: ensure query/post values are not trimmed
+        if ($.inArray(el.prop('name'), ['Username', 'Password']) === -1) {
+            el.val(el.val().trim());
+        }
 
-            // create key-value array
-            $.each($(form).serializeArray(), function(_, input) {
-                //if () {
-                  //  $('#response code[name=request]').html('<em class="warning"4>required fields missing</em>');
-                    //return;
-                //}
+        // if empty set default value
+        if (el.val() === '' && el.data('default') !== '') {
+            el.val(el.data('default'));
+        }
 
-                data[form.name][input.name] = input.value;
-            });
-        });
-    /*
-        // construct HAR object
-        var requestHAR = {
-            'method': data['target'].Method,
-            'url': 'http://' + data['target'].Host + ':' + data['target'].Port + '/' + data['target'].Path,
-            'httpVersion': data['target'].Protocol,
-            'headers': data['headers'],
-            'queryString': [],
-            'cookies': [],
-            'headersSize': 0,
-            'bodySize': 0
-        };
-    */
-        $('#response code[name="request"]').html(Utilities.constructHTTPRequestText(data));
-
+        Utilities.updateInputData(el);
     }
 };
 
 var AuthorizationProcessors = {
     basic: function () {
-        var container = $(this).parents('.input-group');
-        var base64 = btoa(container.find('input[name="Username"]').val(), container.find('input[name="Password"]').val());
+        console.log('AuthorizationProcessors.basic');
 
-        // set the header value and enable the field
-        $('input[name="Authorization"]').val('Basic ' + base64).prev('.input-group-addon').find('input[type="checkbox"]').trigger('click');
+        var input = $('input[name="Authorization"]').first();
+        var container = $(this).parents('.form-group');
+        var base64 = btoa(container.find('input[name="Username"]').val() + ':' + container.find('input[name="Password"]').val());
+
+        // set the header value
+        input.val('Basic ' + base64);
+
+        // enable the field
+        if (input.is(':disabled')) {
+            input.prev('.input-group-addon').find('input[type="checkbox"]').trigger('click');
+        }
+
+        // update
+        input.trigger('change');
     }
 };
 
@@ -119,21 +180,21 @@ $(window).on('load', function () {
     // enable toggling buttons
     $().button('toggle');
 
-
     // attach global listeners
     $('#request')
         .on('click', '.input-group-addon input[type="checkbox"]', Handlers.checkBoxToggle)
-        .on('change', 'input:not([type="checkbox"]), select', Handlers.changeInput);
+        .on('change', 'input:not([type="checkbox"], [name="Username"], [name="Password"]), select', Handlers.inputChange);
 
     // attach special listeners
     $('input[name="Host"').on('change', Handlers.parseHost);
     $('#authorization-basic').on('change', 'input', AuthorizationProcessors.basic);
 
-    Handlers.changeInput();
+    // generate the first output on load
+    Utilities.processAllForms();
 });
 
-jQuery.substitute = function(template, data) {
-    return template.replace(/\{([\w\.]*)\}/g, function(str, key) {
+jQuery.substitute = function (template, data) {
+    return template.replace(/\{([\w\.]*)\}/g, function (str, key) {
         var keys = key.split('.'), v = data[keys.shift()];
 
         for (var i = 0, l = keys.length; i < l; i++) {
