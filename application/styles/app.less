@@ -142,7 +142,7 @@ html {
                 .height();
                 .make-row();
 
-                #request {
+                #editor {
                     .height();
                     .scroll();
                     .column(5, 5, 5, 5);
@@ -185,7 +185,7 @@ html {
                     }
                 }
 
-                #response {
+                #view {
                     .height();
                     .scroll();
                     .column(7, 7, 7, 7);
@@ -201,7 +201,6 @@ html {
                     .tab-content {
                         .panel;
                         .panel-default;
-                        padding: 10px 15px;
                         border-top: none;
                     }
 
@@ -220,6 +219,10 @@ html {
                         color: #737373;
                         text-transform: uppercase;
                         letter-spacing: 1px;
+                    }
+
+                    #response {
+                        display: none;
                     }
                 }
             }

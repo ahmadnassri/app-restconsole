@@ -25,7 +25,7 @@
 
         <div id="content" class="tab-content">
             <div id="main" class="tab-pane active">
-                <div id="request">
+                <div id="editor">
                     <section id="target">
                         <header>Target</header>
 
@@ -690,57 +690,118 @@
                     </section>
                 </div>
 
-                <div id="response">
+                <div id="view">
                     <div class="panel panel-default">
-                        <div class="panel-body">
+                        <div id="request" class="panel-body">
                             <header>HTTP Request</header>
 
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" data-target="#request-raw">RAW</a></li>
-                                <li><a data-toggle="tab" data-target="#request-curl">cURL</li>
                                 <li><a data-toggle="tab" data-target="#request-har">HTTP Archive</a></li>
+                                <li><a data-toggle="tab" data-target="#request-curl">cURL</a></li>
                             </ul>
 
                             <div class="tab-content">
                                 <div id="request-raw" class="tab-pane fade in active">
-                                    <pre><code></code></pre>
-                                </div>
+                                    <div class="panel-body">
+                                        <pre><code></code></pre>
+                                    </div>
 
-                                <div id="request-curl" class="tab-pane fade">
-                                    <pre><code></code></pre>
+                                    <div class="panel-footer">
+                                        <a class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Run</a>
+
+                                        <div class="pull-right">
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div id="request-har" class="tab-pane fade">
-                                    <pre><code></code></pre>
-                                    <a class="btn btn-primary disabled" download="har"><i class="icon download-alt"></i>Download</a>
+                                    <div class="panel-body">
+                                        <pre><code></code></pre>
+                                    </div>
+
+                                    <div class="panel-footer">
+                                        <a class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Run</a>
+
+                                        <div class="pull-right">
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="request-curl" class="tab-pane fade">
+                                    <div class="panel-body">
+                                        <pre><code></code></pre>
+                                    </div>
+
+                                    <div class="panel-footer">
+                                        <div class="pull-right">
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="panel-footer">
+                        <div id="response" class="panel-footer">
                             <header>HTTP Response</header>
 
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" data-target="#response-raw">RAW</a></li>
-                                <li><a data-toggle="tab" data-target="#response-preview">Preview</a></li>
                                 <li><a data-toggle="tab" data-target="#response-har">HTTP Archive</a></li>
+                                <li><a data-toggle="tab" data-target="#response-preview">Preview</a></li>
                             </ul>
 
                             <div class="tab-content">
                                 <div id="response-raw" class="tab-pane fade in active">
-                                    <pre><code></code></pre>
-                                    <a class="btn btn-primary disabled" download="response"><i class="icon download-alt"></i>Download HTTP Response</a>
-                                    <a class="btn btn-primary disabled" download="responseBody"><i class="icon download-alt"></i>Download Body</a>
+                                    <div class="panel-body">
+                                        <pre><code></code></pre>
+                                    </div>
+
+                                    <div class="panel-footer">
+                                        <div class="pull-right">
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
                                 </div>
 
                                 <div id="response-preview" class="tab-pane fade">
-                                    <div id="preview"></div>
-                                    <a class="btn btn-primary disabled" download="preview"><i class="icon download-alt"></i>Download</a>
+                                    <div class="panel-body">
+                                        <div id="preview-body"></div>
+                                    </div>
+
+                                    <div class="panel-footer">
+                                        <div class="pull-right">
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
                                 </div>
 
                                 <div id="response-har" class="tab-pane fade">
-                                    <pre><code></code></pre>
-                                    <a class="btn btn-primary disabled" download="har"><i class="icon download-alt"></i>Download</a>
+                                    <div class="panel-body">
+                                        <pre><code></code></pre>
+                                    </div>
+
+                                    <div class="panel-footer">
+                                        <div class="pull-right">
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
+                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
