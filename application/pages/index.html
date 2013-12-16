@@ -70,8 +70,31 @@
 
                                     <div class="col-lg-9">
                                         <label for="Path"></label>
-                                        <input class="form-control" type="text" name="Path" autocomplete="on" tabindex="1" value="/" data-default="/" placeholder="e.g. /hello.txt" required/>
+
+                                        <div class="input-group">
+                                            <input class="form-control" type="text" name="Path" autocomplete="on" tabindex="1" value="/" data-default="/" placeholder="e.g. /hello.txt" required/>
+                                            <span class="input-group-btn"><button class="btn btn-default" type="button" data-action="query-builder" data-toggle="button">Query Builder</button></span>
+                                        </div>
+
                                         <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <section id="query">
+                        <header>Query Builder</header>
+
+                        <div class="panel">
+                            <form name="query" class="form-horizontal input-pairs" novalidate="true">
+                                <div class="form-group">
+                                    <div class="col-lg-8">
+                                        <div class="input-group">
+                                            <span class="input-group-input"><input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/></span>
+                                            <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="e.g. bar"/>
+                                            <span class="input-group-btn"><button class="btn btn-danger form-control disabled" type="button"><span class="glyphicon glyphicon-remove"></span></button></span>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
@@ -650,7 +673,7 @@
 
                                         <div class="col-lg-6">
                                             <label for="Key"></label>
-                                            <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="e.g. foobar"/>
+                                            <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="e.g. bar"/>
                                             <span class="help-block"></span>
                                         </div>
 

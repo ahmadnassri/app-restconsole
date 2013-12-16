@@ -85,6 +85,16 @@ html {
             border-radius: 0;
         }
 
+        .input-group-input {
+            .input-group-btn;
+
+            width: 200px;
+
+            input {
+                border-right: none;
+            }
+        }
+
         .form-control {
             padding: 6px 6px;
 
@@ -111,7 +121,7 @@ html {
 
         [data-toggle="button"] {
             &.active {
-                .btn-success;
+                .btn-warning;
             }
         }
 
@@ -181,6 +191,10 @@ html {
                                     }
                                 }
                             }
+                        }
+
+                        &#query {
+                            display: none;
                         }
                     }
                 }

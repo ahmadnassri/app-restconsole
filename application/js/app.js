@@ -101,7 +101,7 @@ var Handlers = {
 
             // populate fields
             $('input[name=Port]').val(uri.port());
-            $('input[name=Path]').val(uri.path());
+            $('input[name=Path]').val(uri.resource());
             $('input[name=Host]').val(uri.hostname());
 
             // handle basic authentication
@@ -149,6 +149,54 @@ var Handlers = {
         }
 
         Utilities.updateInputData(el);
+    },
+
+    inputPairs: {
+        focus: function() {
+            var container = $(this).parents('.form-group');
+
+            container.clone().insertAfter(container).find('input').val('');
+
+            container.find('button').toggleClass('disabled');
+        },
+
+        remove: function() {
+            $(this).parents('.form-group').remove();
+
+            // re-construct
+            Handlers.inputPairs.change();
+        },
+
+        change: function() {
+            var path = $('input[name=Path]');
+            var uri = new URI(path.val());
+
+            // clear the existing string
+            uri.query('');
+
+            // create key-value array
+            $.each($('form[name="query"] .form-group:not(:last-of-type)'), function(_, group) {
+                uri.addQuery($(group).find('input[name="key"]').val(), $(group).find('input[name="value"]').val());
+            });
+
+            path.val(uri.resource()).trigger('change');
+        },
+
+        toggle: function() {
+            $('#query').toggle();
+
+            var path = $('input[name=Path]');
+            var uri = new URI(path.val());
+
+            // clear inputs
+            $('.input-pairs .form-group:not(:last-of-type)').remove();
+
+            $.each(URI.parseQuery(uri.query()), function(key, value) {
+                var container = $('.input-pairs .form-group:last-of-type');
+                container.find('input[name="key"]').val(key);
+                container.find('input[name="value"]').val(value).trigger('focus');
+            });
+        }
     }
 };
 
@@ -184,7 +232,15 @@ $(window).on('load', function () {
     // attach global listeners
     $('#editor')
         .on('click', '.input-group-addon input[type="checkbox"]', Handlers.checkBoxToggle)
-        .on('change', 'input:not([type="checkbox"], [name="Username"], [name="Password"]), select', Handlers.inputChange);
+        .on('change', 'input:not([type="checkbox"], [name="Username"], [name="Password"], [name="key"], [name="value"]), select', Handlers.inputChange);
+
+    $('.input-pairs')
+        .on('focus', '.form-group:last-of-type input', Handlers.inputPairs.focus)
+        .on('change', '.form-group:not(:last-of-type) input', Handlers.inputPairs.change)
+        .on('click', '.form-group:not(:last-of-type) button', Handlers.inputPairs.remove);
+
+    // all the buttons
+    $('button[data-action="query-builder"]').on('click', Handlers.inputPairs.toggle);
 
     // attach special listeners
     $('input[name="Host"').on('change', Handlers.parseHost);
