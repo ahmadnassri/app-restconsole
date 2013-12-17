@@ -162,12 +162,20 @@ module.exports = function(grunt) {
                 livereload: true,
             },
 
+            json: {
+                files: ['application/manifest.json', 'application/_locales/**/*.json'],
+                tasks: ['minjson'],
+                options: {
+                    spawn: false,
+                }
+            },
+
             scripts: {
                 files: ['application/js/*.js'],
                 tasks: ['jshint:beforeconcat', 'concat'],
                 options: {
                     spawn: false,
-                },
+                }
             },
 
             css: {

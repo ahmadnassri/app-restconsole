@@ -12,16 +12,18 @@ var Utilities = {
         console.log('Utilities.processAllForms');
 
         // cycle through all the individual forms
-        $.each($('#editor form'), function(_, form) {
+        $('#editor form').each(function() {
+            var form = $(this);
+
             // initiate grouping
-            var name = $(form).prop('name');
+            var name = form.prop('name');
 
             if (DATA[name] === undefined) {
                 DATA[name] = {};
             }
 
             // create key-value array
-            $.each($(form).serializeArray(), function(_, input) {
+            $.each(form.serializeArray(), function(_, input) {
                 DATA[name][input.name] = input.value;
             });
         });
@@ -82,6 +84,28 @@ var Utilities = {
         $('#request-curl code').html(harToCurl(HAR));
         $('#request-har code').html(JSON.stringify(HAR.request));
         $('#request-raw code').html(jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n', data) + headers_string);
+    },
+
+    translate: function() {
+        var el = $(this);
+        var message = chrome.i18n.getMessage(el.attr('i18n'));
+
+        switch (el.data('i18nTarget')) {
+            case 'value':
+                el.val(message);
+                break;
+
+            case 'title':
+                el.attr('title', message);
+                break;
+
+            case 'placeholder':
+                el.attr('placeholder', message);
+                break;
+
+            default:
+                el.html(message);
+        }
     }
 };
 
@@ -175,8 +199,9 @@ var Handlers = {
             uri.query('');
 
             // create key-value array
-            $.each($('form[name="query"] .form-group:not(:last-of-type)'), function(_, group) {
-                uri.addQuery($(group).find('input[name="key"]').val(), $(group).find('input[name="value"]').val());
+            $('form[name="query"] .form-group:not(:last-of-type)').each(function() {
+                var group = $(this);
+                uri.addQuery(group.find('input[name="key"]').val(), group.find('input[name="value"]').val());
             });
 
             path.val(uri.resource()).trigger('change');
@@ -221,8 +246,11 @@ var AuthorizationProcessors = {
     }
 };
 
-// sTODO: best way to execute?
+// TODO: best way to execute?
 $(window).on('load', function () {
+    // translate page
+    $('[i18n]').each(Utilities.translate);
+
     // enable tabs
     $('a[data-toggle="tab"]').tab();
 

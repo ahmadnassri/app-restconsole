@@ -4,7 +4,30 @@
     },
 
     "description": {
-        // TODO: URL should be a param
         "message": "REST Console is an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs."
+    },
+
+    "navigation_main": {
+        "message": "Main"
+    },
+
+    "navigation_history": {
+        "message": "History"
+    },
+
+    "navigation_presets": {
+        "message": "Presets"
+    },
+
+    "navigation_settings": {
+        "message": "Settings"
+    },
+
+    "target_header": {
+        "message": "Target"
+    },
+
+    "field_protocol": {
+        "message": "Protocol Version"
     }
 }

@@ -12,14 +12,14 @@
         <div id="navigation">
             <div class="logo">
                 <img class="pull-left" src="/images/logo/32.png"/>
-                <h1>REST Console</h1>
+                <h1 i18n="name"></h1>
             </div>
 
             <div class="list-group">
-                <a class="list-group-item" data-toggle="tab" data-target="#main">Main</a>
-                <a class="list-group-item" data-toggle="tab" data-target="#history">History</a>
-                <a class="list-group-item" data-toggle="tab" data-target="#presets">Presets</a>
-                <a class="list-group-item" data-toggle="tab" data-target="#settings">settings</a>
+                <a class="list-group-item" data-toggle="tab" data-target="#main" i18n="navigation_main"></a>
+                <a class="list-group-item" data-toggle="tab" data-target="#history" i18n="navigation_history"></a>
+                <a class="list-group-item" data-toggle="tab" data-target="#presets" i18n="navigation_presets"></a>
+                <a class="list-group-item" data-toggle="tab" data-target="#settings" i18n="navigation_settings"></a>
             </div>
         </div>
 
@@ -27,13 +27,13 @@
             <div id="main" class="tab-pane active">
                 <div id="editor">
                     <section id="target">
-                        <header>Target</header>
+                        <header i18n="target_header"></header>
 
                         <div class="panel">
                             <form name="target" class="form-horizontal" novalidate="true">
                                 <div class="form-group">
                                     <div class="col-lg-3">
-                                        <label for="Protocol">Protocol Version</label>
+                                        <label for="Protocol" i18n="field_protocol"></label>
                                         <select class="form-control" name="Protocol">
                                             <option value="HTTP/1.0">HTTP/1.0</option>
                                             <option value="HTTP/1.1" selected>HTTP/1.1</option>
