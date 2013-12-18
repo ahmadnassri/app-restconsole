@@ -196,10 +196,6 @@ module.exports = function(grunt) {
         },
 
         bump: {
-            options: {
-                // Task-specific options go here.
-            },
-
             files: ['package.json', 'bower.json', 'application/manifest.json']
         }
     });
