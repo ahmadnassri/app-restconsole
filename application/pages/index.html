@@ -11,7 +11,7 @@
     <body>
         <div id="navigation">
             <div class="logo">
-                <img class="pull-left" src="/images/logo/32.png"/>
+                <img class="pull-left" src="/images/logo/32.png" alt="Logo"/>
                 <h1 i18n="name"></h1>
             </div>
 
@@ -30,7 +30,7 @@
                         <header i18n="target_header"></header>
 
                         <div class="panel">
-                            <form name="target" class="form-horizontal" novalidate="true">
+                            <form name="target" class="form-horizontal" novalidate>
                                 <div class="form-group">
                                     <div class="col-lg-3">
                                         <label for="Protocol" i18n="field_protocol"></label>
@@ -87,7 +87,7 @@
                         <header>Query Builder</header>
 
                         <div class="panel">
-                            <form name="query" class="form-horizontal input-pairs" novalidate="true">
+                            <form name="query" class="form-horizontal input-pairs" novalidate>
                                 <div class="form-group">
                                     <div class="col-lg-8">
                                         <div class="input-group">
@@ -114,7 +114,7 @@
 
                         <div class="tab-content">
                             <div id="headers-payload" class="tab-pane fade in active">
-                                <form name="headers" class="form-horizontal" novalidate="true">
+                                <form name="headers" class="form-horizontal" novalidate>
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="Contet-Type"></label>
@@ -126,7 +126,7 @@
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <label for="Content-Type Encoding"></label>
+                                            <label for="Content-Encoding"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
                                                 <input class="form-control" type="text" name="Content-Encoding" autocomplete="on" list="charset" tabindex="2" placeholder="e.g. utf-8" disabled/>
@@ -150,7 +150,7 @@
                             </div>
 
                             <div id="headers-authorization" class="tab-pane fade">
-                                <form name="authorization" class="form-horizontal" novalidate="true">
+                                <form name="authorization" class="form-horizontal" novalidate>
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="Authorization"></label>
@@ -228,13 +228,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="consumer_key">Consumer Key</label>
-                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required="true"/>
+                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="consumer_secret">Consumer Secret</label>
-                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required="true"/>
+                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -340,13 +340,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="consumer_key">Consumer Key</label>
-                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required="true"/>
+                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="consumer_secret">Consumer Secret</label>
-                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required="true"/>
+                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -451,7 +451,7 @@
                             </div>
 
                             <div id="headers-standard" class="tab-pane fade">
-                                <form name="headers" class="form-horizontal" novalidate="true">
+                                <form name="headers" class="form-horizontal" novalidate>
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="Accept"></label>
@@ -526,7 +526,7 @@
                             </div>
 
                             <div id="headers-cache" class="tab-pane fade">
-                                <form name="headers" class="form-horizontal" novalidate="true">
+                                <form name="headers" class="form-horizontal" novalidate>
                                      <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="If-Match"></label>
@@ -586,7 +586,7 @@
                             </div>
 
                             <div id="headers-other" class="tab-pane fade">
-                                <form name="headers" class="form-horizontal" novalidate="true">
+                                <form name="headers" class="form-horizontal" novalidate>
                                     <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="X-HTTP-Method-Override"></label>
@@ -647,7 +647,7 @@
                             <li><a data-toggle="tab" data-target="#payload-attachments">Attachments</a></li>
                         </ul>
 
-                        <form name="payload" class="form-horizontal" novalidate="true">
+                        <form name="payload" class="form-horizontal" novalidate>
 
                             <div class="tab-content">
                                 <div id="payload-raw" class="tab-pane fade in active">
@@ -678,7 +678,7 @@
                                         </div>
 
                                         <div class="col-lg-2">
-                                            <label for=""></label>
+                                            <label for="-"></label>
                                             <button class="btn btn-danger form-control" type="button">-</button>
                                         </div>
                                     </div>
@@ -698,12 +698,12 @@
 
                                         <div class="col-lg-6">
                                             <label for="File"></label>
-                                            <input class="form-control" type="file" name="file" tabindex="0" autocomplete="off"/>
+                                            <input class="form-control" type="file" name="file" tabindex="0"/>
                                             <span class="help-block"></span>
                                         </div>
 
                                         <div class="col-lg-2">
-                                            <label for=""></label>
+                                            <label for="-"></label>
                                             <button class="btn btn-danger form-control" type="button">-</button>
                                         </div>
                                     </div>
@@ -843,7 +843,7 @@
                 <section id="general">
                     <header>General</header>
                     <a>Install Extension</a>
-                    <form name="settings" class="form-stacked" novalidate="true">
+                    <form name="settings" class="form-stacked" novalidate>
                         <div class="row">
                             <div class="col col-lg-6">
                                 <fieldset>

@@ -1,8 +1,6 @@
-# REST Console
+# [REST Console](http://restconsole.com) [![Build Status](https://travis-ci.org/codeinchaos/restconsole.png?branch=development)](https://travis-ci.org/codeinchaos/restconsole) [![devDependency Status](https://david-dm.org/codeinchaos/restconsole.png)](https://david-dm.org/codeinchaos/restconsole#info=devDependencies)
 
 an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.
-
-[![Build Status](https://travis-ci.org/codeinchaos/restconsole.png?branch=development)](https://travis-ci.org/codeinchaos/restconsole)
 
 ## Permissions Breakdown:
 

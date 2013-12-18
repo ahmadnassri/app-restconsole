@@ -1,4 +1,9 @@
 module.exports = function(grunt) {
+    'use strict';
+
+    // Force use of Unix newlines
+    grunt.util.linefeed = '\n';
+
     // show elapsed time at the end
     require('time-grunt')(grunt);
     // load all grunt tasks
@@ -7,12 +12,15 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        application: '',
-        extension: '',
+        banner: '/*!\n' +
+              ' * REST Console v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+              ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+              ' * Licensed under <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
+              ' */\n\n',
 
         clean: {
             dist: ['dist'],
-            all: ['bower_components', 'node_modules']
+            all: ['dist', 'bower_components', 'node_modules']
         },
 
         copy: {
@@ -36,6 +44,10 @@ module.exports = function(grunt) {
         },
 
         concat: {
+            options: {
+                banner: '<%= banner %>'
+            },
+
             dist: {
                 files: {
                     'dist/application/app.js': [
@@ -54,8 +66,9 @@ module.exports = function(grunt) {
 
         uglify: {
             options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                banner: '<%= banner %>'
             },
+
             dist: {
                 files: {
                     'dist/application/app.js': 'dist/application/app.js'
@@ -94,11 +107,25 @@ module.exports = function(grunt) {
             dist: {
                 options: {
                     paths: ['application/styles'],
+                    strictMath: true,
                     cleancss: true
                 },
 
                 files: {
                     'dist/application/app.css': 'application/styles/app.less'
+                }
+            }
+        },
+
+        usebanner: {
+            dist: {
+                options: {
+                    position: 'top',
+                    banner: '<%= banner %>'
+                },
+
+                files: {
+                    src: ['dist/application/app.css']
                 }
             }
         },
@@ -150,15 +177,55 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            beforeconcat: ['Gruntfile.js', 'application/js/*.js'],
-            afterconcat: ['dist/application/app.js'],
             options: {
                 jshintrc: '.jshintrc'
+            },
+
+            development: ['Gruntfile.js', 'application/js/*.js'],
+            //'tests/test.js'
+            production: ['dist/application/app.js'],
+        },
+
+        lesslint: {
+            dist: {
+                files: {
+                    src: ['application/styles/*.less']
+                },
+                options: {
+                    csslint: {
+                        'ids': false,
+                        'box-model': false,
+                        'duplicate-properties': false,
+                        'compatible-vendor-prefixes': false,
+                        'qualified-headings': false,
+                        'unique-headings': false,
+                        'unqualified-attributes': false
+                    }
+                }
             }
         },
 
         qunit: {
             all: ['tests/*.html']
+        },
+
+        validation: {
+            options: {
+                charset: 'utf-8',
+                doctype: 'HTML5',
+                failHard: true,
+                reset: true,
+                relaxerror: [
+                    'The for attribute of the label element must refer to a form control.',
+                    'Attribute i18n not allowed on element [a-z1-9]+ at this point.'
+                    //'Bad value X-UA-Compatible for attribute http-equiv on element meta.',
+                    //'Element img is missing required attribute src.'
+                ]
+            },
+
+            files: {
+                src: ['application/pages/*.html']
+            }
         },
 
         watch: {
@@ -176,7 +243,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 files: ['application/js/*.js'],
-                tasks: ['jshint:beforeconcat', 'concat'],
+                tasks: ['jshint:development', 'concat'],
                 options: {
                     spawn: false,
                 }
@@ -184,7 +251,7 @@ module.exports = function(grunt) {
 
             css: {
                 files: ['application/styles/*.less'],
-                tasks: ['less'],
+                tasks: ['less', 'lesslint', 'usebanner'],
                 options: {
                     spawn: false,
                 }
@@ -192,7 +259,7 @@ module.exports = function(grunt) {
 
             html: {
                 files: ['application/pages/*.html'],
-                tasks: ['htmlmin'],
+                tasks: ['validation', 'htmlmin'],
                 options: {
                     spawn: false,
                 }
@@ -205,22 +272,27 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', [
+        'validation',
         'htmlmin',
         'minjson',
         'less:dev',
-        'jshint:beforeconcat',
+        'usebanner',
+        'lesslint',
+        'jshint:development',
         'concat',
         'copy:images',
         'copy:fonts'
     ]);
 
     grunt.registerTask('release', [
+        'validation',
         'htmlmin',
         'minjson',
         'less:dist',
-        'jshint:beforeconcat',
+        'lesslint',
+        'jshint:development',
         'concat',
-        /*'jshint:afterconcat',*/
+        /*'jshint:prodution',*/
         'uglify',
         'imagemin',
         'copy:fonts'

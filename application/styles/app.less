@@ -13,7 +13,6 @@
 .fluid-container {
     padding-right: (@grid-gutter-width / 2);
     padding-left: (@grid-gutter-width / 2);
-    *zoom: 1;
 
     .clearfix();
 }
@@ -60,7 +59,7 @@ html {
         .panel {
             .panel;
             .panel-default;
-            box-shadow: none;
+            .box-shadow(none);
         }
 
         .panel-footer:not(:last-of-type) {
@@ -107,7 +106,7 @@ html {
 
         .help-block {
             .text-muted;
-            margin-bottom: 0px;
+            margin-bottom: 0;
             font-size: 10px;
             font-style: italic;
         }
@@ -192,10 +191,10 @@ html {
                                 }
                             }
                         }
+                    }
 
-                        &#query {
-                            display: none;
-                        }
+                    #query {
+                        display: none;
                     }
                 }
 
@@ -209,7 +208,6 @@ html {
                     background-color: #FFFFFF;
                     background-image: url("images/tiny_grid.png");
 
-                    background-position: initial;
                     background-repeat: repeat;
 
                     .tab-content {
