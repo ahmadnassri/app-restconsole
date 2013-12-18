@@ -157,6 +157,10 @@ module.exports = function(grunt) {
             }
         },
 
+        qunit: {
+            all: ['tests/*.html']
+        },
+
         watch: {
             options: {
                 livereload: true,
