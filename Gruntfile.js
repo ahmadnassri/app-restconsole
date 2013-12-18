@@ -225,4 +225,6 @@ module.exports = function(grunt) {
         'imagemin',
         'copy:fonts'
     ]);
+
+    grunt.registerTask('travis', 'release');
 };
