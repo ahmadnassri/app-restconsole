@@ -11,6 +11,7 @@
         "Chrome"
     ],
     "devDependencies": {
+        "bower": "~1.2.8",
         "grunt": "~0.4.1",
         "grunt-contrib-concat": "~0.3.0",
         "grunt-contrib-uglify": "~0.2.7",
