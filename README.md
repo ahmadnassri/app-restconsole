@@ -2,6 +2,8 @@
 
 an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.
 
+[![Build Status](https://travis-ci.org/codeinchaos/restconsole.png?branch=development)](https://travis-ci.org/codeinchaos/restconsole)
+
 ## Permissions Breakdown:
 
 * Your tabs and browsing activity: The only access to tabs we need is for launching the oAuth Authorization page to the 3rd party oAuth provider.
