@@ -53,3 +53,6 @@ we don't collect any personal data and we don't want access to your data on all 
 * Get the source code: https://github.com/codeinchaos/restconsole
 * Report issues: https://github.com/codeinchaos/restconsole/issues
 * Donate: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UJ2B2BTK9VLRS
+
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/6a1039412502fb7030eef6ae24a3ca37 "githalytics.com")](http://githalytics.com/codeinchaos/restconsole)
