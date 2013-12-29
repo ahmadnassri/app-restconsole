@@ -107,7 +107,6 @@ module.exports = function(grunt) {
             dist: {
                 options: {
                     paths: ['application/styles'],
-                    strictMath: true,
                     cleancss: true
                 },
 
