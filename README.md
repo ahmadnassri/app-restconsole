@@ -1,4 +1,4 @@
-# [REST Console](http://restconsole.com) [![Build Status](https://travis-ci.org/codeinchaos/restconsole.png?branch=development)](https://travis-ci.org/codeinchaos/restconsole) [![devDependency Status](https://david-dm.org/codeinchaos/restconsole.png)](https://david-dm.org/codeinchaos/restconsole#info=devDependencies) [![Views in the last 24 hours](https://sourcegraph.com/api/repos/github.com/codeinchaos/restconsole/counters/views-24h.png)](https://sourcegraph.com/github.com/codeinchaos/restconsole)
+# [REST Console](http://restconsole.com) [![Build Status](https://travis-ci.org/codeinchaos/restconsole.png?branch=development)](https://travis-ci.org/codeinchaos/restconsole) [![devDependency Status](https://david-dm.org/codeinchaos/restconsole.png)](https://david-dm.org/codeinchaos/restconsole#info=devDependencies) [![Total views](https://sourcegraph.com/api/repos/github.com/codeinchaos/restconsole/counters/views.png)](https://sourcegraph.com/github.com/codeinchaos/restconsole)
 
 an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.
 
