@@ -1,8 +1,7 @@
 // Google Analytics
-var _gaq = _gaq || [];
-//_gaq.push(['_setAccount', 'UA-598217-26']);
-_gaq.push(['_trackPageview']);
-_gaq.push(['_trackPageLoadTime']);
+var GA = analytics.getService('restconsole').getTracker('UA-598217-26');
+
+GA.sendAppView('MainView');
 
 // TODO move to localStorage;
 var DATA = {};

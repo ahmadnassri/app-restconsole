@@ -58,6 +58,8 @@ module.exports = function(grunt) {
                         'bower_components/bootstrap/js/tab.js',
                         'bower_components/bootstrap/js/button.js',
 
+                        'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
+
                         'application/js/app.js',
                     ],
                 }

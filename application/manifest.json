@@ -24,6 +24,8 @@
     },
     "options_page": "options.html",
     "permissions": [
+        "https://www.google-analytics.com/",
+        "storage",
         "*://*/*"
     ],
     "optional_permissions": [

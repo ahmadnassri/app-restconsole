@@ -25,6 +25,7 @@
         "require":      true,
 
         "chrome":       true,
+        "analytics":    true,
         "URI":          true,
         "harToCurl":    true
     }
