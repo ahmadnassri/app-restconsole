@@ -8,6 +8,7 @@
         "js-beautify": "~1.4.2",
         "highlightjs": "~7.5.0",
         "uri.js": "~1.11.2",
-        "chrome-platform-analytics": "*"
+        "chrome-platform-analytics": "*",
+        "crypto-js": "https://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip"
     }
 }

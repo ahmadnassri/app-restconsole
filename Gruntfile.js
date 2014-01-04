@@ -59,7 +59,12 @@ module.exports = function(grunt) {
 
                         'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
 
-                        'application/js/app.js',
+                        'bower_components/crypto-js/rollups/md5.js',
+
+                        'application/js/handlers.js',
+                        'application/js/utilities.js',
+                        'application/js/authorization.js',
+                        'application/js/main.js',
                     ],
                 }
             }
@@ -181,7 +186,7 @@ module.exports = function(grunt) {
                 jshintrc: '.jshintrc'
             },
 
-            development: ['Gruntfile.js', 'application/js/*.js'],
+            development: ['Gruntfile.js', 'dist/application/js/app.js'],
             //'tests/test.js'
             production: ['dist/application/app.js'],
         },
@@ -243,7 +248,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 files: ['application/js/*.js'],
-                tasks: ['jshint:development', 'concat'],
+                tasks: ['concat', 'jshint:development'],
                 options: {
                     spawn: false,
                 }
@@ -278,8 +283,8 @@ module.exports = function(grunt) {
         'less:dev',
         'usebanner',
         'lesslint',
-        'jshint:development',
         'concat',
+        'jshint:development',
         'copy:images',
         'copy:fonts'
     ]);
@@ -290,8 +295,8 @@ module.exports = function(grunt) {
         'minjson',
         'less:dist',
         'lesslint',
-        'jshint:development',
         'concat',
+        'jshint:development',
         /*'jshint:prodution',*/
         'uglify',
         'imagemin',
