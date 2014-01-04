@@ -44,13 +44,21 @@ module.exports = function(grunt) {
         },
 
         concat: {
-            options: {
-                banner: '<%= banner %>'
+            app: {
+                options: {
+                    banner: '<%= banner %>'
+                },
+
+                files: {
+                    'dist/application/js/app.js': [
+                        'application/js/*.js',
+                    ]
+                }
             },
 
-            dist: {
+            libs: {
                 files: {
-                    'dist/application/app.js': [
+                    'dist/application/js/libs.js': [
                         'bower_components/jquery/jquery.js',
                         'bower_components/uri.js/src/URI.js',
                         'bower_components/bootstrap/js/transition.js',
@@ -59,9 +67,7 @@ module.exports = function(grunt) {
 
                         'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
 
-                        'bower_components/crypto-js/rollups/md5.js',
-
-                        'application/js/*.js',
+                        'bower_components/crypto-js/rollups/md5.js'
                     ],
                 }
             }
@@ -74,7 +80,8 @@ module.exports = function(grunt) {
 
             dist: {
                 files: {
-                    'dist/application/app.js': 'dist/application/app.js'
+                    'dist/application/js/libs.js': 'dist/application/js/libs.js',
+                    'dist/application/js/app.js': 'dist/application/js/app.js'
                 }
             }
         },
@@ -184,8 +191,7 @@ module.exports = function(grunt) {
             },
 
             development: ['Gruntfile.js', 'application/js/*.js'],
-            //'tests/test.js'
-            production: ['dist/application/app.js'],
+            production: ['dist/application/js/app.js'],
         },
 
         lesslint: {
@@ -245,7 +251,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 files: ['application/js/*.js'],
-                tasks: ['jshint:development', 'concat'],
+                tasks: ['jshint:development', 'concat:app'],
                 options: {
                     spawn: false,
                 }
@@ -293,7 +299,7 @@ module.exports = function(grunt) {
         'lesslint',
         'jshint:development',
         'concat',
-        'jshint:prodution',
+        'jshint:production',
         'uglify',
         'imagemin',
         'copy:fonts'
