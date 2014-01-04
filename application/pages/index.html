@@ -43,19 +43,19 @@
                                     </div>
 
                                     <div class="col-lg-5">
-                                        <label for="Host">Host Names</label>
-                                        <input class="form-control" type="text" name="Host" autocomplete="on" tabindex="1" value="localhost" data-default="localhost" placeholder="e.g. www.example.com" required/>
+                                        <label for="Host" i18n="field_host"></label>
+                                        <input class="form-control" type="text" name="Host" autocomplete="on" tabindex="1" value="localhost" data-default="localhost" placeholder="www.example.com" required/>
                                         <span class="help-block"></span>
                                     </div>
 
                                     <div class="col-lg-2">
-                                        <label for="Port"></label>
-                                        <input class="form-control" type="number" name="Port" autocomplete="on" tabindex="1" value="80" data-default="80" placeholder="e.g. 80" required/>
+                                        <label for="Port" i18n="field_port"></label>
+                                        <input class="form-control" type="number" name="Port" autocomplete="on" tabindex="1" value="80" data-default="80" placeholder="80" required/>
                                         <span class="help-block"></span>
                                     </div>
 
                                     <div class="col-lg-2">
-                                        <label for="Timeout"></label>
+                                        <label for="Timeout" i18n="field_timeout"></label>
                                         <input class="form-control" type="number" name="Timeout" tabindex="1" min="1" step="1" value="3" required/>
                                         <span class="help-block"></span>
                                     </div>
@@ -63,17 +63,17 @@
 
                                 <div class="form-group">
                                     <div class="col-lg-3">
-                                        <label for="Method"></label>
-                                        <input class="form-control" type="text" name="Method" autocomplete="on" list="methods" tabindex="1" value="GET" data-default="GET" placeholder="e.g. GET" required/>
+                                        <label for="Method" i18n="field_method"></label>
+                                        <input class="form-control" type="text" name="Method" autocomplete="on" list="methods" tabindex="1" value="GET" data-default="GET" placeholder="GET" required/>
                                         <span class="help-block"></span>
                                     </div>
 
                                     <div class="col-lg-9">
-                                        <label for="Path"></label>
+                                        <label for="Path" i18n="field_path"></label>
 
                                         <div class="input-group">
-                                            <input class="form-control" type="text" name="Path" autocomplete="on" tabindex="1" value="/" data-default="/" placeholder="e.g. /hello.txt" required/>
-                                            <span class="input-group-btn"><button class="btn btn-default" type="button" data-action="query-builder" data-toggle="button">Query Builder</button></span>
+                                            <input class="form-control" type="text" name="Path" autocomplete="on" tabindex="1" value="/" data-default="/" placeholder="/hello.txt" required/>
+                                            <span class="input-group-btn"><button class="btn btn-default" type="button" data-action="query-builder" data-toggle="button" i18n="btn_query_builder"></button></span>
                                         </div>
 
                                         <span class="help-block"></span>
@@ -84,7 +84,7 @@
                     </section>
 
                     <section id="query">
-                        <header>Query Builder</header>
+                        <header i18n="header_query_builder"></header>
 
                         <div class="panel">
                             <form name="query" class="form-horizontal input-pairs" novalidate>
@@ -92,11 +92,11 @@
                                     <div class="col-lg-12">
                                         <div class="input-group">
                                             <span class="input-group-input">
-                                                <label for="Key"><br/></label>
-                                                <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/>
+                                                <label for="Key" i18n="field_key"><br/></label>
+                                                <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="foo"/>
                                             </span>
-                                            <label for="Value"><br/></label>
-                                            <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="e.g. bar"/>
+                                            <label for="Value" i18n="field_value"><br/></label>
+                                            <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="bar"/>
 
                                             <span class="input-group-btn">
                                                 <label for="&nbsp;"><br/></label>
@@ -110,14 +110,14 @@
                     </section>
 
                     <section id="headers">
-                        <header>Headers</header>
+                        <header i18n="header_headers"></header>
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" data-target="#headers-payload">Payload</a></li>
-                            <li><a data-toggle="tab" data-target="#headers-authorization">Authorization</a></li>
-                            <li><a data-toggle="tab" data-target="#headers-standard">Standard</a></li>
-                            <li><a data-toggle="tab" data-target="#headers-cache">Cache</a></li>
-                            <li><a data-toggle="tab" data-target="#headers-other">Other</a></li>
+                            <li class="active"><a data-toggle="tab" data-target="#headers-payload" i18n="tab_headers_payload"></a></li>
+                            <li><a data-toggle="tab" data-target="#headers-authorization" i18n="tab_headers_authorization"></a></li>
+                            <li><a data-toggle="tab" data-target="#headers-standard" i18n="tab_headers_standard"></a></li>
+                            <li><a data-toggle="tab" data-target="#headers-cache" i18n="tab_headers_cache"></a></li>
+                            <li><a data-toggle="tab" data-target="#headers-other" i18n="tab_headers_other"></a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -125,19 +125,19 @@
                                 <form name="headers" class="form-horizontal" novalidate>
                                     <div class="form-group">
                                         <div class="col-lg-6">
-                                            <label for="Contet-Type"></label>
+                                            <label for="Contet-Type" i18n="field_content_type"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Content-Type" autocomplete="on" list="mimetypes" tabindex="2" placeholder="e.g. application/x-www-form-urlencoded" disabled/>
+                                                <input class="form-control" type="text" name="Content-Type" autocomplete="on" list="mimetypes" tabindex="2" placeholder="application/x-www-form-urlencoded" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <label for="Content-Encoding"></label>
+                                            <label for="Content-Encoding" i18n="field_content_encoding"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Content-Encoding" autocomplete="on" list="charset" tabindex="2" placeholder="e.g. utf-8" disabled/>
+                                                <input class="form-control" type="text" name="Content-Encoding" autocomplete="on" list="charset" tabindex="2" placeholder="utf-8" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -145,11 +145,11 @@
 
                                     <div class="form-group">
                                         <div class="col-lg-12">
-                                            <label for="Content-MD5"></label>
+                                            <label for="Content-MD5" i18n="field_content_md5"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Content-MD5" autocomplete="off" tabindex="2" placeholder="e.g. Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
-                                                <span class="input-group-btn"><button class="btn btn-default" type="button" data-action="auto-md5" data-toggle="button">Auto Generate</button></span>
+                                                <input class="form-control" type="text" name="Content-MD5" autocomplete="off" tabindex="2" placeholder="Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
+                                                <span class="input-group-btn"><button class="btn btn-default" type="button" data-action="auto-md5" data-toggle="button" i18n="btn_auto_generate"></button></span>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -164,7 +164,7 @@
                                             <label for="Authorization"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Authorization" tabindex="1" autocomplete="on" placeholder="e.g. Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
+                                                <input class="form-control" type="text" name="Authorization" tabindex="1" autocomplete="on" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -173,17 +173,17 @@
                                             <label for="Proxy-Authorization"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Proxy-Authorization" tabindex="1" autocomplete="on" placeholder="e.g. Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
+                                                <input class="form-control" type="text" name="Proxy-Authorization" tabindex="1" autocomplete="on" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
 
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" data-target="#authorization-basic">Basic</a></li>
-                                        <li><a data-toggle="tab" data-target="#authorization-digest">Digest</a></li>
-                                        <li><a data-toggle="tab" data-target="#authorization-oauth-1">oAuth 1.0a</a></li>
-                                        <li><a data-toggle="tab" data-target="#authorization-oauth-2">oAuth 2.0</a></li>
+                                        <li class="active"><a data-toggle="tab" data-target="#authorization-basic" i18n="tab_authorization_basic"></a></li>
+                                        <li><a data-toggle="tab" data-target="#authorization-digest" i18n="tab_authorization_digest"></a></li>
+                                        <li><a data-toggle="tab" data-target="#authorization-oauth-1" i18n="tab_authorization_oauth_1"></a></li>
+                                        <li><a data-toggle="tab" data-target="#authorization-oauth-2" i18n="tab_authorization_oauth_2"></a></li>
                                     </ul>
 
                                     <div class="tab-content">
@@ -192,20 +192,20 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="Username"></label>
-                                                        <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="on" placeholder="e.g. username"/>
+                                                        <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="on" placeholder="username"/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="Password"></label>
-                                                        <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="on" placeholder="e.g. password"/>
+                                                        <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="on" placeholder="password"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="panel-footer">
-                                                <button class="btn btn-primary">Generate</button>
+                                                <button class="btn btn-primary" i18n="btn_generate"></button>
                                             </div>
                                         </div>
 
@@ -213,21 +213,21 @@
                                             <div class="panel-body">
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
-                                                        <label for="Username">Digest Username</label>
-                                                        <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="on" placeholder="e.g. username"/>
+                                                        <label for="Username" i18n="field_digest_username"></label>
+                                                        <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="on" placeholder="username"/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
-                                                        <label for="Password">Digest Password</label>
-                                                        <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="on" placeholder="e.g. password"/>
+                                                        <label for="Password" i18n="field_digest_password"></label>
+                                                        <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="on" placeholder="password"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="panel-footer">
-                                                <button class="btn btn-primary">Generate</button>
+                                                <button class="btn btn-primary" i18n="btn_generate"></button>
                                             </div>
                                         </div>
 
@@ -236,13 +236,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="consumer_key">Consumer Key</label>
-                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required/>
+                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="consumer_secret">Consumer Secret</label>
-                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required/>
+                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -250,13 +250,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="token_key">Token Key</label>
-                                                        <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d"/>
+                                                        <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="token_secret">Token Secret</label>
-                                                        <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d"/>
+                                                        <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -264,13 +264,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="scope">Scope</label>
-                                                        <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="on" placeholder="e.g. "/>
+                                                        <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="on" placeholder=""/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="realm">Realm</label>
-                                                        <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="on" placeholder="e.g. "/>
+                                                        <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="on" placeholder=""/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -297,20 +297,20 @@
                                             </div>
 
                                             <div class="panel-footer">
-                                                <button class="btn btn-primary">Generate</button>
+                                                <button class="btn btn-primary" i18n="btn_generate"></button>
                                             </div>
 
                                             <div class="panel-body">
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="request_url">Request Token URL</label>
-                                                        <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="on" placeholder="e.g. https://api.provider.com/oauth/request_token"/>
+                                                        <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/request_token"/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="access_url">Request Token URL</label>
-                                                        <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="on" placeholder="e.g. https://api.provider.com/oauth/access_token"/>
+                                                        <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/access_token"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -318,13 +318,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="authorize_url">Authorize URL</label>
-                                                        <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="on" placeholder="e.g. https://api.provider.com/oauth/authorize"/>
+                                                        <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/authorize"/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="oauth_callback">Callback URL</label>
-                                                        <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="on" placeholder="e.g. https://www.domain.com"/>
+                                                        <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="on" placeholder="https://www.domain.com"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -332,7 +332,7 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="oauth_verifier">Oauth Verifier</label>
-                                                        <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d"/>
+                                                        <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -348,13 +348,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="consumer_key">Consumer Key</label>
-                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required/>
+                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="consumer_secret">Consumer Secret</label>
-                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" required/>
+                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -362,13 +362,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="token_key">Token Key</label>
-                                                        <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d"/>
+                                                        <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="token_secret">Token Secret</label>
-                                                        <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d"/>
+                                                        <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -376,13 +376,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="scope">Scope</label>
-                                                        <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="on" placeholder="e.g. "/>
+                                                        <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="on" placeholder=""/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="realm">Realm</label>
-                                                        <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="on" placeholder="e.g. "/>
+                                                        <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="on" placeholder=""/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -409,20 +409,20 @@
                                             </div>
 
                                             <div class="panel-footer">
-                                                <button class="btn btn-primary">Generate</button>
+                                                <button class="btn btn-primary" i18n="btn_generate"></button>
                                             </div>
 
                                             <div class="panel-body">
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="request_url">Request Token URL</label>
-                                                        <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="on" placeholder="e.g. https://api.provider.com/oauth/request_token"/>
+                                                        <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/request_token"/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="access_url">Request Token URL</label>
-                                                        <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="on" placeholder="e.g. https://api.provider.com/oauth/access_token"/>
+                                                        <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/access_token"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -430,13 +430,13 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="authorize_url">Authorize URL</label>
-                                                        <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="on" placeholder="e.g. https://api.provider.com/oauth/authorize"/>
+                                                        <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/authorize"/>
                                                         <span class="help-block"></span>
                                                     </div>
 
                                                     <div class="col-lg-6">
                                                         <label for="oauth_callback">Callback URL</label>
-                                                        <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="on" placeholder="e.g. https://www.domain.com"/>
+                                                        <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="on" placeholder="https://www.domain.com"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -444,7 +444,7 @@
                                                 <div class="form-group">
                                                     <div class="col-lg-6">
                                                         <label for="oauth_verifier">Oauth Verifier</label>
-                                                        <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d"/>
+                                                        <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
                                                         <span class="help-block"></span>
                                                     </div>
                                                 </div>
@@ -465,7 +465,7 @@
                                             <label for="Accept"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Accept" tabindex="1" autocomplete="on" list="mimetypes" placeholder="e.g. text/plain" disabled/>
+                                                <input class="form-control" type="text" name="Accept" tabindex="1" autocomplete="on" list="mimetypes" placeholder="text/plain" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -474,7 +474,7 @@
                                             <label for="Accept-Language"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Accept-Language" tabindex="1" autocomplete="on" list="languages" placeholder="e.g. en-US" disabled/>
+                                                <input class="form-control" type="text" name="Accept-Language" tabindex="1" autocomplete="on" list="languages" placeholder="en-US" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -485,7 +485,7 @@
                                             <label for="From"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="From" tabindex="1" autocomplete="on" placeholder="e.g. user@example.com" disabled/>
+                                                <input class="form-control" type="text" name="From" tabindex="1" autocomplete="on" placeholder="user@example.com" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -494,7 +494,7 @@
                                             <label for="Max-Forwards"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Max-Forwards" tabindex="1" autocomplete="on" placeholder="e.g. 10" disabled/>
+                                                <input class="form-control" type="text" name="Max-Forwards" tabindex="1" autocomplete="on" placeholder="10" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -505,7 +505,7 @@
                                             <label for="Pragma"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Pragma" tabindex="1" autocomplete="on" placeholder="e.g. no-cache" disabled/>
+                                                <input class="form-control" type="text" name="Pragma" tabindex="1" autocomplete="on" placeholder="no-cache" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -514,7 +514,7 @@
                                             <label for="Range"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Range" tabindex="1" autocomplete="on" placeholder="e.g. bytes=500-999" disabled/>
+                                                <input class="form-control" type="text" name="Range" tabindex="1" autocomplete="on" placeholder="bytes=500-999" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -525,7 +525,7 @@
                                             <label for="Warning"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Warning" tabindex="1" autocomplete="on" placeholder="e.g. 199 Miscellaneous warning" disabled/>
+                                                <input class="form-control" type="text" name="Warning" tabindex="1" autocomplete="on" placeholder="199 Miscellaneous warning" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -540,7 +540,7 @@
                                             <label for="If-Match"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="If-Match" tabindex="1" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" disabled/>
+                                                <input class="form-control" type="text" name="If-Match" tabindex="1" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -549,7 +549,7 @@
                                             <label for="If-None-Match"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="If-None-Match" tabindex="1" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" disabled/>
+                                                <input class="form-control" type="text" name="If-None-Match" tabindex="1" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -558,7 +558,7 @@
                                             <label for="If-Modified-Since"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="If-Modified-Since" tabindex="1" autocomplete="on" placeholder="e.g. Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
+                                                <input class="form-control" type="text" name="If-Modified-Since" tabindex="1" autocomplete="on" placeholder="Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -567,7 +567,7 @@
                                             <label for="If-Unmodified-Since"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="If-Unmodified-Since" tabindex="1" autocomplete="on" placeholder="e.g. Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
+                                                <input class="form-control" type="text" name="If-Unmodified-Since" tabindex="1" autocomplete="on" placeholder="Sat, 29 Oct 1994 19:43:31 GMT" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -576,7 +576,7 @@
                                             <label for="If-Range"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="If-Range" tabindex="1" autocomplete="on" placeholder="e.g. 737060cd8c284d8af7ad3082f209582d" disabled/>
+                                                <input class="form-control" type="text" name="If-Range" tabindex="1" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -585,7 +585,7 @@
                                             <label for="Cache-Control"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Cache-Control" tabindex="1" autocomplete="on" placeholder="e.g. no-cache" disabled/>
+                                                <input class="form-control" type="text" name="Cache-Control" tabindex="1" autocomplete="on" placeholder="no-cache" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -600,7 +600,7 @@
                                             <label for="X-HTTP-Method-Override"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="X-HTTP-Method-Override" tabindex="1" autocomplete="on" placeholder="e.g. PUT" disabled/>
+                                                <input class="form-control" type="text" name="X-HTTP-Method-Override" tabindex="1" autocomplete="on" placeholder="PUT" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -609,7 +609,7 @@
                                             <label for="X-Requested-With"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="X-Requested-With" tabindex="1" autocomplete="on" placeholder="e.g. XMLHttpRequest" disabled/>
+                                                <input class="form-control" type="text" name="X-Requested-With" tabindex="1" autocomplete="on" placeholder="XMLHttpRequest" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -618,7 +618,7 @@
                                             <label for="X-Forwarded-For"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="X-Forwarded-For" tabindex="1" autocomplete="on" placeholder="e.g. " disabled/>
+                                                <input class="form-control" type="text" name="X-Forwarded-For" tabindex="1" autocomplete="on" placeholder="" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -627,7 +627,7 @@
                                             <label for="X-Do-Not-Track"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="X-Do-Not-Track" tabindex="1" autocomplete="on" placeholder="e.g. 1" disabled/>
+                                                <input class="form-control" type="text" name="X-Do-Not-Track" tabindex="1" autocomplete="on" placeholder="1" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -636,7 +636,7 @@
                                             <label for="DNT"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="DNT" tabindex="1" autocomplete="on" placeholder="e.g. 1" disabled/>
+                                                <input class="form-control" type="text" name="DNT" tabindex="1" autocomplete="on" placeholder="1" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -661,7 +661,7 @@
                                 <div id="payload-raw" class="tab-pane fade in active">
                                     <div class="form-group">
                                         <div class="col-lg-12">
-                                            <textarea class="form-control" name="payload" rows="5" tabindex="2" placeholder="e.g. XML, JSON, etc ..."></textarea>
+                                            <textarea class="form-control" name="payload" rows="5" tabindex="2" placeholder="XML, JSON, etc ..."></textarea>
                                             <span class="help-block">Remember to set the Content-Type header.</span>
                                         </div>
                                     </div>
@@ -677,10 +677,10 @@
                                             <div class="input-group">
                                                 <span class="input-group-input">
                                                     <label for="Key"><br/></label>
-                                                    <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/>
+                                                    <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="foo"/>
                                                 </span>
                                                 <label for="Value"><br/></label>
-                                                <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="e.g. bar"/>
+                                                <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="bar"/>
 
                                                 <span class="input-group-btn">
                                                     <label for="&nbsp;"><br/></label>
@@ -701,7 +701,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-input">
                                                     <label for="Key"><br/></label>
-                                                    <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/>
+                                                    <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="foo"/>
                                                 </span>
 
                                                 <label for="File"><br/></label>

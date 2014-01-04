@@ -6,7 +6,8 @@ GA.sendAppView('MainView');
 // TODO: best way to execute?
 $(window).on('load', function () {
     // translate page
-    $('[i18n]').each(Utilities.translate);
+    Utilities.translate.elements();
+    Utilities.translate.placeholders();
 
     // enable tabs
     $('a[data-toggle="tab"]').tab();

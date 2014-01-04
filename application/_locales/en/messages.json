@@ -7,6 +7,10 @@
         "message": "REST Console is an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs."
     },
 
+    "placeholder_example_prefix": {
+        "message": "e.g."
+    },
+
     "navigation_main": {
         "message": "Main"
     },
@@ -29,5 +33,109 @@
 
     "field_protocol": {
         "message": "Protocol Version"
+    },
+
+    "field_host": {
+        "message": "Host Name"
+    },
+
+    "btn_query_builder": {
+        "message": "Query Builder"
+    },
+
+    "header_query_builder": {
+        "message": "Query Builder"
+    },
+
+    "tab_headers_payload": {
+        "message": "Payload"
+    },
+
+    "tab_headers_authorization": {
+        "message": "Authorization"
+    },
+
+    "tab_headers_standard": {
+        "message": "Standard"
+    },
+
+    "tab_headers_cache": {
+        "message": "Cache"
+    },
+
+    "tab_headers_other": {
+        "message": "Other"
+    },
+
+    "header_headers": {
+        "message": "Headers"
+    },
+
+    "tab_authorization_basic": {
+        "message": "Basic"
+    },
+
+    "tab_authorization_digest": {
+        "message": "Digest"
+    },
+
+    "tab_authorization_oauth_1": {
+        "message": "oAuth 1.0a"
+    },
+
+    "tab_authorization_oauth_2": {
+        "message": "oAuth 2.0"
+    },
+
+    "field_digest_username": {
+        "message": "Digest Username"
+    },
+
+    "field_digest_password": {
+        "message": "Digest Password"
+    },
+
+    "btn_generate": {
+        "message": "Generate"
+    },
+
+    "btn_auto_generate": {
+        "message": "Auto Generate"
+    },
+
+    "field_path": {
+        "message": "Path"
+    },
+
+    "field_port": {
+        "message": "Port"
+    },
+
+    "field_timeout": {
+        "message": "Timeout"
+    },
+
+    "field_method": {
+        "message": "Method"
+    },
+
+    "field_key": {
+        "message": "Key"
+    },
+
+    "field_value": {
+        "message": "Value"
+    },
+
+    "field_content_type": {
+        "message": "Content-Type"
+    },
+
+    "field_content_encoding": {
+        "message": "Content-Encoding"
+    },
+
+    "field_content_md5": {
+        "message": "Content-MD5"
     }
 }

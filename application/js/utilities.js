@@ -80,25 +80,38 @@ var Utilities = {
         $('#request-raw code').html(jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n', data) + headers_string);
     },
 
-    translate: function() {
-        var el = $(this);
-        var message = chrome.i18n.getMessage(el.attr('i18n'));
+    translate: {
+        placeholders: function() {
+            var message = chrome.i18n.getMessage('placeholder_example_prefix');
 
-        switch (el.data('i18nTarget')) {
-            case 'value':
-                el.val(message);
-                break;
+            $('[placeholder]').each(function() {
+                var element = $(this);
+                element.attr('placeholder', message + ' ' + element.prop('placeholder'));
+            });
+        },
 
-            case 'title':
-                el.attr('title', message);
-                break;
+        elements: function() {
+            $('[i18n]').each(function() {
+                var element = $(this);
+                var message = chrome.i18n.getMessage(element.attr('i18n'));
 
-            case 'placeholder':
-                el.attr('placeholder', message);
-                break;
+                switch (element.data('i18nTarget')) {
+                    case 'value':
+                        element.val(message);
+                        break;
 
-            default:
-                el.html(message);
+                    case 'title':
+                        element.attr('title', message);
+                        break;
+
+                    case 'placeholder':
+                        element.attr('placeholder', message);
+                        break;
+
+                    default:
+                        element.html(message);
+                }
+            });
         }
     }
 };
