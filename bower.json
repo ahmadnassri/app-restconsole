@@ -8,7 +8,6 @@
         "js-beautify": "~1.4.2",
         "highlightjs": "~7.5.0",
         "uri.js": "~1.11.2",
-        "har-to-curl": "~0.4.1",
         "chrome-platform-analytics": "*"
     }
 }

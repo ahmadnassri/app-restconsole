@@ -53,7 +53,6 @@ module.exports = function(grunt) {
                     'dist/application/app.js': [
                         'bower_components/jquery/jquery.js',
                         'bower_components/uri.js/src/URI.js',
-                        'bower_components/har-to-curl/lib/har-to-curl.js',
                         'bower_components/bootstrap/js/transition.js',
                         'bower_components/bootstrap/js/tab.js',
                         'bower_components/bootstrap/js/button.js',

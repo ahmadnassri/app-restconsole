@@ -80,7 +80,7 @@ var Utilities = {
         console.log(data);
 
         // write outputs
-        $('#request-curl code').html(harToCurl(HAR));
+        //$('#request-curl code').html(harToCurl(HAR));
         $('#request-har code').html(JSON.stringify(HAR.request));
         $('#request-raw code').html(jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n', data) + headers_string);
     },
