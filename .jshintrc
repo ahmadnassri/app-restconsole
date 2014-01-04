@@ -15,7 +15,6 @@
     "noarg":    true,
     "sub":      true,
     "undef":    true,
-    "unused":   true,
     "eqnull":   true,
     "bitwise":  true,
     "trailing": true,
@@ -27,6 +26,6 @@
         "chrome":       true,
         "analytics":    true,
         "URI":          true,
-        "harToCurl":    true
+        "CryptoJS":     true
     }
 }

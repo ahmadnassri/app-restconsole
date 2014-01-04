@@ -61,10 +61,7 @@ module.exports = function(grunt) {
 
                         'bower_components/crypto-js/rollups/md5.js',
 
-                        'application/js/handlers.js',
-                        'application/js/utilities.js',
-                        'application/js/authorization.js',
-                        'application/js/main.js',
+                        'application/js/*.js',
                     ],
                 }
             }
@@ -186,7 +183,7 @@ module.exports = function(grunt) {
                 jshintrc: '.jshintrc'
             },
 
-            development: ['Gruntfile.js', 'dist/application/js/app.js'],
+            development: ['Gruntfile.js', 'application/js/*.js'],
             //'tests/test.js'
             production: ['dist/application/app.js'],
         },
@@ -248,7 +245,7 @@ module.exports = function(grunt) {
 
             scripts: {
                 files: ['application/js/*.js'],
-                tasks: ['concat', 'jshint:development'],
+                tasks: ['jshint:development', 'concat'],
                 options: {
                     spawn: false,
                 }
@@ -282,8 +279,8 @@ module.exports = function(grunt) {
         'less:dev',
         'usebanner',
         'lesslint',
-        'concat',
         'jshint:development',
+        'concat',
         'copy:images',
         'copy:fonts'
     ]);
@@ -294,9 +291,9 @@ module.exports = function(grunt) {
         'minjson',
         'less:dist',
         'lesslint',
-        'concat',
         'jshint:development',
-        /*'jshint:prodution',*/
+        'concat',
+        'jshint:prodution',
         'uglify',
         'imagemin',
         'copy:fonts'

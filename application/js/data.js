@@ -1,43 +1,8 @@
 // TODO move to localStorage;
 var DATA = {};
 
-var Utilities = {
-    processAllForms: function () {
-        // cycle through all the individual forms
-        $('#editor form').each(function() {
-            var form = $(this);
-
-            // initiate grouping
-            var name = form.prop('name');
-
-            if (DATA[name] === undefined) {
-                DATA[name] = {};
-            }
-
-            // create key-value array
-            $.each(form.serializeArray(), function(_, input) {
-                DATA[name][input.name] = input.value;
-            });
-        });
-
-        Utilities.constructHTTPRequestText(DATA);
-    },
-
-    updateInputData: function(el) {
-        var form = el.parents('form').prop('name');
-        var name = el.prop('name');
-
-        // only works on enabled elements
-        if (el.prop('disabled')) {
-            delete DATA[form][name];
-        } else {
-            DATA[form][name] = el.val();
-        }
-
-        Utilities.constructHTTPRequestText(DATA);
-    },
-
-    constructHTTPRequestText: function (data) {
+$(function () {
+    function constructHTTPRequestText (data) {
         var headers_string = '';
 
         // construct HAR object
@@ -78,43 +43,65 @@ var Utilities = {
         //$('#request-curl code').html(harToCurl(HAR));
         $('#request-har code').html(JSON.stringify(HAR.request));
         $('#request-raw code').html(jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n', data) + headers_string);
-    },
-
-    translate: {
-        placeholders: function() {
-            var message = chrome.i18n.getMessage('placeholder_example_prefix');
-
-            $('[placeholder]').each(function() {
-                var element = $(this);
-                element.attr('placeholder', message + ' ' + element.prop('placeholder'));
-            });
-        },
-
-        elements: function() {
-            $('[i18n]').each(function() {
-                var element = $(this);
-                var message = chrome.i18n.getMessage(element.attr('i18n'));
-
-                switch (element.data('i18nTarget')) {
-                    case 'value':
-                        element.val(message);
-                        break;
-
-                    case 'title':
-                        element.attr('title', message);
-                        break;
-
-                    case 'placeholder':
-                        element.attr('placeholder', message);
-                        break;
-
-                    default:
-                        element.html(message);
-                }
-            });
-        }
     }
-};
+
+    /**
+     * listener on input changes to clean up and set default values
+     */
+    $('#editor').on('change', 'input:not([type="checkbox"], [name="Username"], [name="Password"], [name="key"], [name="value"]), select', function (event, enable) {
+        var el = $(this);
+        var form = el.parents('form').prop('name');
+        var name = el.prop('name');
+        var data = el.data('default');
+
+        // ensure the the field is enabled (if triggered by a change event)
+        if (enable) {
+            // enable the field
+            if (el.is(':disabled')) {
+                el.prop('disabled', false);
+                el.prev('.input-group-addon').find('input[type="checkbox"]').prop('checked', true);
+            }
+        }
+
+        // trim (anything other than username / password fields)
+        if ($.inArray(name, ['Username', 'Password']) === -1) {
+            el.val(el.val().trim());
+        }
+
+        // if empty set default value
+        if (el.val() === '' && data !== '') {
+            el.val(data);
+        }
+
+        // only store enabled elements
+        if (el.is(':disabled')) {
+            delete DATA[form][name];
+        } else {
+            DATA[form][name] = el.val();
+        }
+
+        constructHTTPRequestText(DATA);
+    });
+
+    // onload cycle through all the individual forms and generate output
+    $('#editor form').each(function() {
+        var form = $(this);
+
+        // initiate grouping
+        var name = form.prop('name');
+
+        if (DATA[name] === undefined) {
+            DATA[name] = {};
+        }
+
+        // create key-value array
+        $.each(form.serializeArray(), function(_, input) {
+            DATA[name][input.name] = input.value;
+        });
+    });
+
+    constructHTTPRequestText(DATA);
+});
 
 // jQuery plugins
 jQuery.substitute = function (template, data) {
