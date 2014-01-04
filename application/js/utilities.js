@@ -24,7 +24,15 @@ var Utilities = {
     },
 
     updateInputData: function(el) {
-        DATA[el.parents('form').prop('name')][el.prop('name')] = el.val();
+        var form = el.parents('form').prop('name');
+        var name = el.prop('name');
+
+        // only works on enabled elements
+        if (el.prop('disabled')) {
+            delete DATA[form][name];
+        } else {
+            DATA[form][name] = el.val();
+        }
 
         Utilities.constructHTTPRequestText(DATA);
     },

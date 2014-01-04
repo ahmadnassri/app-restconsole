@@ -43,11 +43,21 @@ var Handlers = {
     /**
      * listener on input changes to clean up and set default values
      */
-    inputChange: function () {
+    inputChange: function (event, enable) {
         var el = $(this);
 
+        // ensure the the field is enabled (if triggered by a change event)
+        if (enable) {
+            // enable
+            el.prop('disabled', false);
+
+            var checkbox = el.parents('.input-group').find('input[type="checkbox"]');
+
+            // change it
+            checkbox.prop('checked', !el.prop('disabled'));
+        }
+
         // trim (anything other than username / password fields)
-        // TODO: ensure query/post values are not trimmed
         if ($.inArray(el.prop('name'), ['Username', 'Password']) === -1) {
             el.val(el.val().trim());
         }
@@ -124,6 +134,10 @@ var Handlers = {
 
     payloadForm: {
         pairs: function() {
+            if (!Handlers.payloadForm.confirm()) {
+                return;
+            }
+
             var payload = $('textarea[name="payload"]');
             var uri = new URI(payload.val());
 
@@ -141,31 +155,49 @@ var Handlers = {
         },
 
         confirm: function(e) {
-            var r = confirm('Press a button');
+            var type = $('input[name="Content-Type"]');
 
-            if (r !== true) {
-                e.preventDefault();
+            if ($.inArray(type.val(), ['application/x-www-form-urlencoded', 'multipart/form-data']) === -1) {
+                var result = confirm('Content-Type needs to be set to either "application/x-www-form-urlencoded" or "multipart/form-data", press ok to overwrite the current value now.');
+
+                if (result === true) {
+                    type.val('application/x-www-form-urlencoded').trigger('change', [true]);
+                }
+
+                return result;
             }
+
+            return true;
         },
 
         text: function(event, skip) {
-            if (!skip) {
-                var payload = $(this);
-
-                // TODO: handle duplicate keys => array values
-                var uri = new URI().query(payload.val());
-
-                // clear inputs
-                $('#payload-form .form-group:not(:last-of-type)').remove();
-
-                $.each(URI.parseQuery(uri.query()), function(key, value) {
-                    var container = $('#payload-form .form-group:last-of-type');
-                    container.find('input[name="key"]').val(key);
-
-                    // triggering focus does not work here becuase the tab will not be in view
-                    Handlers.inputPairs.focus.call(container.find('input[name="value"]').val(value));
-                });
+            if (skip) {
+                return;
             }
+
+            // should only work for the correct Content-Type
+            var type = $('input[name="Content-Type"]').val();
+            if ($.inArray(type, ['application/x-www-form-urlencoded', 'multipart/form-data']) === -1) {
+                // clear the pairs
+                $('#payload-form .form-group:not(:last-of-type)').remove();
+                return;
+            }
+
+            var payload = $(this);
+
+            // TODO: handle duplicate keys => array values
+            var uri = new URI().query(payload.val());
+
+            // clear inputs
+            $('#payload-form .form-group:not(:last-of-type)').remove();
+
+            $.each(URI.parseQuery(uri.query()), function(key, value) {
+                var container = $('#payload-form .form-group:last-of-type');
+                container.find('input[name="key"]').val(key);
+
+                // triggering focus does not work here becuase the tab will not be in view
+                Handlers.inputPairs.focus.call(container.find('input[name="value"]').val(value));
+            });
         }
     },
 

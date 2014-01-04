@@ -31,7 +31,6 @@ $(window).on('load', function () {
 
     // form builder
     $('#payload')
-        //.on('focus', '#payload-form .input-pairs .form-group:last-of-type input', Handlers.payloadForm.confirm)
         .on('change', '#payload-form .form-group:not(:last-of-type) input', Handlers.payloadForm.pairs)
         .on('change', '#payload-raw textarea', Handlers.payloadForm.text)
 
