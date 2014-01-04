@@ -89,11 +89,19 @@
                         <div class="panel">
                             <form name="query" class="form-horizontal input-pairs" novalidate>
                                 <div class="form-group">
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-12">
                                         <div class="input-group">
-                                            <span class="input-group-input"><input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/></span>
+                                            <span class="input-group-input">
+                                                <label for="Key"><br/></label>
+                                                <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/>
+                                            </span>
+                                            <label for="Value"><br/></label>
                                             <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="e.g. bar"/>
-                                            <span class="input-group-btn"><button class="btn btn-danger form-control disabled" type="button"><span class="glyphicon glyphicon-remove"></span></button></span>
+
+                                            <span class="input-group-btn">
+                                                <label for=" "><br/></label>
+                                                <button class="btn btn-danger form-control disabled" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -659,52 +667,51 @@
                                     </div>
                                 </div>
 
-                                <div id="payload-form" class="tab-pane fade">
+                                <div id="payload-form" class="tab-pane input-pairs fade">
                                     <div class="alert alert-block alert-warning">
                                         <p>Content-Type will be overwritten to: <strong>application/x-www-form-urlencoded</strong></p>
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="col-lg-4">
-                                            <label for="Key"></label>
-                                            <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/>
-                                            <span class="help-block"></span>
-                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <span class="input-group-input">
+                                                    <label for="Key"><br/></label>
+                                                    <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/>
+                                                </span>
+                                                <label for="Value"><br/></label>
+                                                <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="e.g. bar"/>
 
-                                        <div class="col-lg-6">
-                                            <label for="Key"></label>
-                                            <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="e.g. bar"/>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-2">
-                                            <label for="-"></label>
-                                            <button class="btn btn-danger form-control" type="button">-</button>
+                                                <span class="input-group-btn">
+                                                    <label for=" "><br/></label>
+                                                    <button class="btn btn-danger form-control disabled" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div id="payload-attachments" class="tab-pane fade">
+                                <div id="payload-attachments" class="tab-pane input-pairs fade">
                                     <div class="alert alert-block alert-warning">
                                         <p>Content-Type will be overwritten to: <strong>multipart/form-data</strong></p>
                                     </div>
 
                                     <div class="form-group">
-                                        <div class="col-lg-4">
-                                            <label for="Key"></label>
-                                            <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/>
-                                            <span class="help-block"></span>
-                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <span class="input-group-input">
+                                                    <label for="Key"><br/></label>
+                                                    <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="e.g. foo"/>
+                                                </span>
 
-                                        <div class="col-lg-6">
-                                            <label for="File"></label>
-                                            <input class="form-control" type="file" name="file" tabindex="0"/>
-                                            <span class="help-block"></span>
-                                        </div>
+                                                <label for="File"><br/></label>
+                                                <input class="form-control" type="file" name="file" tabindex="0"/>
 
-                                        <div class="col-lg-2">
-                                            <label for="-"></label>
-                                            <button class="btn btn-danger form-control" type="button">-</button>
+                                                <span class="input-group-btn">
+                                                    <label for=" "><br/></label>
+                                                    <button class="btn btn-danger form-control disabled" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

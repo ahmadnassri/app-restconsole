@@ -70,44 +70,102 @@ var Handlers = {
         },
 
         remove: function() {
+            var pairs = $(this).parents('.input-pairs');
             $(this).parents('.form-group').remove();
 
             // re-construct
-            Handlers.inputPairs.change();
+            pairs.find('.form-group:first-of-type input').trigger('change');
+        }
+    },
+
+    // toggle Query Builder
+    queryPairs: {
+        toggle: function() {
+            $('#query').toggle();
+        },
+
+        path: function(event, skip) {
+            if (!skip) {
+                var path = $('input[name=Path]');
+
+                // TODO: handle duplicate keys => array values
+                var uri = new URI(path.val());
+
+                // clear inputs
+                $('#query .input-pairs .form-group:not(:last-of-type)').remove();
+
+                $.each(URI.parseQuery(uri.query()), function(key, value) {
+                    var container = $('#query .input-pairs .form-group:last-of-type');
+                    container.find('input[name="key"]').val(key);
+
+                    // triggering focus does not work here becuase the tab will not be in view
+                    Handlers.inputPairs.focus.call(container.find('input[name="value"]').val(value));
+                });
+            }
         },
 
         change: function() {
-            var path = $('input[name=Path]');
+            var path = $('input[name="Path"]');
             var uri = new URI(path.val());
 
             // clear the existing string
             uri.query('');
 
             // create key-value array
+            // TODO: handle duplicate keys => array values
             $('form[name="query"] .form-group:not(:last-of-type)').each(function() {
                 var group = $(this);
                 uri.addQuery(group.find('input[name="key"]').val(), group.find('input[name="value"]').val());
             });
 
-            path.val(uri.resource()).trigger('change');
+            path.val(uri.resource()).trigger('change', [true]);
+        }
+    },
+
+    payloadForm: {
+        pairs: function() {
+            var payload = $('textarea[name="payload"]');
+            var uri = new URI(payload.val());
+
+            // clear the existing string
+            uri.query('');
+
+            // create key-value array
+            // TODO: handle duplicate keys => array values
+            $('#payload-form .form-group:not(:last-of-type)').each(function() {
+                var group = $(this);
+                uri.addQuery(group.find('input[name="key"]').val(), group.find('input[name="value"]').val());
+            });
+
+            payload.val(uri.query()).trigger('change', [true]);
         },
 
-        toggle: function() {
-            $('#query').toggle();
+        confirm: function(e) {
+            var r = confirm('Press a button');
 
-            var path = $('input[name=Path]');
+            if (r !== true) {
+                e.preventDefault();
+            }
+        },
 
-            // TODO: handle duplicate keys => array values
-            var uri = new URI(path.val());
+        text: function(event, skip) {
+            if (!skip) {
+                var payload = $(this);
 
-            // clear inputs
-            $('.input-pairs .form-group:not(:last-of-type)').remove();
+                // TODO: handle duplicate keys => array values
+                var uri = new URI().query(payload.val());
 
-            $.each(URI.parseQuery(uri.query()), function(key, value) {
-                var container = $('.input-pairs .form-group:last-of-type');
-                container.find('input[name="key"]').val(key);
-                container.find('input[name="value"]').val(value).trigger('focus');
-            });
+                // clear inputs
+                $('#payload-form .form-group:not(:last-of-type)').remove();
+
+                $.each(URI.parseQuery(uri.query()), function(key, value) {
+                    var container = $('#payload-form .form-group:last-of-type');
+                    container.find('input[name="key"]').val(key);
+
+                    // triggering focus does not work here becuase the tab will not be in view
+                    Handlers.inputPairs.focus.call(container.find('input[name="value"]').val(value));
+                });
+            }
         }
     },
 

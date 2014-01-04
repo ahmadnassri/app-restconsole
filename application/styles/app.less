@@ -87,10 +87,34 @@ html {
         .input-group-input {
             .input-group-btn;
 
-            width: 200px;
+            width: 230px;
 
-            input {
-                border-right: none;
+            input:not(:focus) {
+                border-right: 0;
+            }
+        }
+
+        .input-pairs {
+            .form-group {
+                ~ .form-group {
+                    label {
+                        display:none;
+                    }
+                }
+
+                label {
+                    display:block;
+
+                    &:before {
+                        content: attr(for);
+                    }
+                }
+            }
+        }
+
+        .input-group {
+            input[name="value"]:not(:focus) {
+                border-left: 0;
             }
         }
 

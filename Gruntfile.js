@@ -264,7 +264,7 @@ module.exports = function(grunt) {
 
             html: {
                 files: ['application/pages/*.html'],
-                tasks: ['validation', 'htmlmin'],
+                tasks: ['htmlmin'],
                 options: {
                     spawn: false,
                 }
@@ -277,7 +277,6 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', [
-        'validation',
         'htmlmin',
         'minjson',
         'less:dev',

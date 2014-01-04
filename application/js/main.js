@@ -19,13 +19,21 @@ $(window).on('load', function () {
         .on('click', '.input-group-addon input[type="checkbox"]', Handlers.checkBoxToggle)
         .on('change', 'input:not([type="checkbox"], [name="Username"], [name="Password"], [name="key"], [name="value"]), select', Handlers.inputChange);
 
+    // catch all input-pairs
     $('.input-pairs')
         .on('focus', '.form-group:last-of-type input', Handlers.inputPairs.focus)
-        .on('change', '.form-group:not(:last-of-type) input', Handlers.inputPairs.change)
         .on('click', '.form-group:not(:last-of-type) button', Handlers.inputPairs.remove);
 
-    // query builder toggle
-    $('button[data-action="query-builder"]').on('click', Handlers.inputPairs.toggle);
+    // query builder
+    $('button[data-action="query-builder"]').on('click', Handlers.queryPairs.toggle);
+    $('#query .input-pairs').on('change', '.form-group:not(:last-of-type) input', Handlers.queryPairs.change);
+    $('input[name="Path"]').on('change', Handlers.queryPairs.path);
+
+    // form builder
+    $('#payload')
+        //.on('focus', '#payload-form .input-pairs .form-group:last-of-type input', Handlers.payloadForm.confirm)
+        .on('change', '#payload-form .form-group:not(:last-of-type) input', Handlers.payloadForm.pairs)
+        .on('change', '#payload-raw textarea', Handlers.payloadForm.text)
 
     // auto-MD5 toggle
     $('button[data-action="auto-md5"]').on('click', Handlers.MD5.toggle);
