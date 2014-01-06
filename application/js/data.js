@@ -1,48 +1,35 @@
-// TODO move to localStorage;
-var DATA = {};
-
 $(function () {
-    function constructHTTPRequestText (data) {
-        var headers_string = '';
+    // TODO move to localStorage;
+    var DATA = {};
 
-        // construct HAR object
-        var HAR = {
-            startedDateTime: 0,
-            time: 0,
-            request: {
-                method: data.target.Method,
-                url: jQuery.substitute('http://{target.Host}:{target.Port}{target.Path}', data),
-                httpVersion: data.target.Protocol,
-                headers: [],
-                queryString: [],
-                cookies: [],
-                headersSize: 0,
-                bodySize: 0
-            }
-        };
+    function constructHTTPRequestText () {
+        // construct HTTPArchive Request object
+        var request = new HTTPArchiveRequest({
+            'method': DATA.target.Method,
+            'url': 'http://' + DATA.target.Host + DATA.target.Path,
+            'httpVersion': DATA.target.Protocol
+        });
 
         // construct headers
-        $.each(data.headers, function (name, value) {
-            headers_string += name + ': ' + value + '\n';
-            HAR.request.headers.push({name: name, value: value});
+        $.each(DATA.headers, function (name, value) {
+            request.setHeader(name, value);
         });
 
         // add Authorization header
-        if (data.authorization['Authorization']) {
-            headers_string += 'Authorization: ' + data.authorization['Authorization'] + '\n';
-            HAR.request.headers.push({name: 'Authorization', value: data.authorization['Authorization']});
+        if (DATA.authorization['Authorization']) {
+            request.setHeader('Authorization', DATA.authorization['Authorization']);
         }
 
         // add Proxy-Authorization header
-        if (data.authorization['Proxy-Authorization']) {
-            headers_string += 'Proxy-Authorization: ' + data.authorization['Proxy-Authorization'] + '\n';
-            HAR.request.headers.push({name: 'Proxy-Authorization', value: data.authorization['Proxy-Authorization']});
+        if (DATA.authorization['Proxy-Authorization']) {
+            request.setHeader('Proxy-Authorization', DATA.authorization['Proxy-Authorization']);
         }
-
         // write outputs
         //$('#request-curl code').html(harToCurl(HAR));
-        $('#request-har code').html(JSON.stringify(HAR.request));
-        $('#request-raw code').html(jQuery.substitute('{target.Method} {target.Path} {target.Protocol}\nHost: {target.Host}\n', data) + headers_string);
+        $('#request-har code').html(JSON.stringify(request.toJSON()));
+
+        // TODO: manually add blocked headers (ex: HOST)
+        $('#request-raw code').html(request.printHeaders());
     }
 
     /**
@@ -80,7 +67,7 @@ $(function () {
             DATA[form][name] = el.val();
         }
 
-        constructHTTPRequestText(DATA);
+        constructHTTPRequestText();
     });
 
     // onload cycle through all the individual forms and generate output
@@ -100,7 +87,7 @@ $(function () {
         });
     });
 
-    constructHTTPRequestText(DATA);
+    constructHTTPRequestText();
 });
 
 // jQuery plugins

@@ -26,6 +26,11 @@
         "chrome":       true,
         "analytics":    true,
         "URI":          true,
-        "CryptoJS":     true
+        "CryptoJS":     true,
+        "HTTPArchiveLog":       true,
+        "HTTPArchivePage":      true,
+        "HTTPArchiveEntry":     true,
+        "HTTPArchiveRequest":   true,
+        "HTTPArchiveResponse":  true
     }
 }

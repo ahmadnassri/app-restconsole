@@ -65,6 +65,8 @@ module.exports = function (grunt) {
                         'bower_components/bootstrap/js/tab.js',
                         'bower_components/bootstrap/js/button.js',
 
+                        'bower_components/httparchive.js/dist/HTTPArchive.js',
+
                         'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
 
                         'bower_components/crypto-js/rollups/md5.js'

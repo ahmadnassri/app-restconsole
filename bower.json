@@ -9,7 +9,7 @@
         "highlightjs": "~7.5.0",
         "uri.js": "~1.11.2",
         "chrome-platform-analytics": "*",
-        "httparchive.js": "~1.0.1",
+        "httparchive.js": "~1.2.0",
         "crypto-js": "https://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip"
     }
 }
