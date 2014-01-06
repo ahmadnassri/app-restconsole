@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     /**
      * checkbox listener for enabling/disabling optional input fields
      */

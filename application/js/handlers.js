@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     function change () {
         var payload = $('textarea[name="payload"]');
         var md5 = CryptoJS.MD5(payload.val()).toString(CryptoJS.enc.Hex);
@@ -7,7 +7,7 @@ $(function() {
         $('input[name="Content-MD5"]').val(md5).trigger('change', [true]);
     }
     // auto-MD5 toggle
-    $('button[data-action="auto-md5"]').on('click', function() {
+    $('button[data-action="auto-md5"]').on('click', function () {
         var payload = $('textarea[name="payload"]');
 
         // seems weird that jQuery is not able to query registered event handlers

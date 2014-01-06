@@ -22,7 +22,7 @@ $(function () {
         };
 
         // construct headers
-        $.each(data.headers, function(name, value) {
+        $.each(data.headers, function (name, value) {
             headers_string += name + ': ' + value + '\n';
             HAR.request.headers.push({name: name, value: value});
         });
@@ -84,7 +84,7 @@ $(function () {
     });
 
     // onload cycle through all the individual forms and generate output
-    $('#editor form').each(function() {
+    $('#editor form').each(function () {
         var form = $(this);
 
         // initiate grouping
@@ -95,7 +95,7 @@ $(function () {
         }
 
         // create key-value array
-        $.each(form.serializeArray(), function(_, input) {
+        $.each(form.serializeArray(), function (_, input) {
             DATA[name][input.name] = input.value;
         });
     });

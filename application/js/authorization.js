@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     // input field listener
     $('#authorization-basic').on('change', 'input', function () {
         var input = $('input[name="Authorization"]').first();

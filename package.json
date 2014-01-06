@@ -46,9 +46,5 @@
     },
     "scripts": {
         "test": "grunt travis --verbose"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:codeinchaos/restconsole.git"
     }
 }

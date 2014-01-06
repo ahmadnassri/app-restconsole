@@ -1,9 +1,9 @@
-$(function() {
-    $('button[data-action="query-builder"]').on('click', function() {
+$(function () {
+    $('button[data-action="query-builder"]').on('click', function () {
         $('#query').toggle();
     });
 
-    $('input[name="Path"]').on('change', function(event, skip) {
+    $('input[name="Path"]').on('change', function (event, skip) {
         if (!skip) {
             var path = $('input[name=Path]');
 
@@ -13,7 +13,7 @@ $(function() {
             // clear inputs
             $('#query .input-pairs .form-group:not(:last-of-type)').remove();
 
-            $.each(URI.parseQuery(uri.query()), function(key, value) {
+            $.each(URI.parseQuery(uri.query()), function (key, value) {
                 var container = $('#query .input-pairs .form-group:last-of-type');
                 container.find('input[name="key"]').val(key);
 
@@ -23,7 +23,7 @@ $(function() {
         }
     });
 
-    $('#query .input-pairs').on('change', '.form-group:not(:last-of-type) input', function() {
+    $('#query .input-pairs').on('change', '.form-group:not(:last-of-type) input', function () {
         var path = $('input[name="Path"]');
         var uri = new URI(path.val());
 
@@ -32,7 +32,7 @@ $(function() {
 
         // create key-value array
         // TODO: handle duplicate keys => array values
-        $('form[name="query"] .form-group:not(:last-of-type)').each(function() {
+        $('form[name="query"] .form-group:not(:last-of-type)').each(function () {
             var group = $(this);
             uri.addQuery(group.find('input[name="key"]').val(), group.find('input[name="value"]').val());
         });
