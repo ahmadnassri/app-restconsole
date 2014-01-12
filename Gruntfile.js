@@ -241,7 +241,6 @@ module.exports = function (grunt) {
         bump: {
             options: {
                 part: 'minor',
-                tabSize: 2,
                 onBumped: function( data ) {
                     if ( data.index === 0 ) {
                         grunt.config( 'pkg.version', data.version );
