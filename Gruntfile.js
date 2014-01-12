@@ -1,170 +1,55 @@
 module.exports = function (grunt) {
     'use strict';
 
-    // Force use of Unix newlines
-    grunt.util.linefeed = '\n';
-
     // show elapsed time at the end
     require('time-grunt')(grunt);
+
     // load all grunt tasks
     require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        banner: '/*!\n' +
-              ' * REST Console v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-              ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
-              ' * Licensed under <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
-              ' */\n\n',
-
-        clean: {
-            dist: ['dist'],
-            all: ['dist', 'bower_components', 'node_modules']
-        },
-
-        copy: {
-            fonts: {
-                files: [{
-                    expand: true,
-                    flatten: true,
-                    filter: 'isFile',
-                    src: ['application/fonts/**', 'bower_components/bootstrap/dist/fonts/**'],
-                    dest: 'dist/application/fonts'
-                }]
+        config: {
+            app: 'app',
+            dist: 'dist/app',
+            package: 'dist/package',
+            paths: {
+                js: '<%= config.app %>/js/*.js',
+                html: '<%= config.app %>/pages/*.html',
+                less: '<%= config.app %>/styles/app.less',
+                locales: '<%= config.app %>/_locales/**/*.json'
             },
 
-            images: {
-                files: [{
-                    expand: true,
-                    src: ['application/images/**'],
-                    dest: 'dist/'
-                }]
-            }
+            banner: '/*!\n' +
+                    ' * REST Console v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+                    ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+                    ' * Licensed under <%= _.pluck(pkg.licenses, "url").join(", ") %>\n' +
+                    ' */\n\n'
         },
 
-        concat: {
-            app: {
-                options: {
-                    banner: '<%= banner %>'
-                },
-
-                files: {
-                    'dist/application/js/app.js': [
-                        'application/js/*.js',
-                    ]
-                }
-            },
-
-            libs: {
-                files: {
-                    'dist/application/js/libs.js': [
-                        'bower_components/jquery/jquery.js',
-                        'bower_components/uri.js/src/URI.js',
-                        'bower_components/bootstrap/js/transition.js',
-                        'bower_components/bootstrap/js/tab.js',
-                        'bower_components/bootstrap/js/button.js',
-
-                        'bower_components/httparchive.js/dist/HTTPArchive.js',
-
-                        'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
-
-                        'bower_components/crypto-js/rollups/md5.js'
-                    ],
-                }
-            }
-        },
-
-        uglify: {
-            options: {
-                banner: '<%= banner %>'
-            },
-
-            dist: {
-                files: {
-                    'dist/application/js/libs.js': 'dist/application/js/libs.js',
-                    'dist/application/js/app.js': 'dist/application/js/app.js'
-                }
-            }
-        },
-
-        minjson: {
-            dist: {
-                files: [
-                    {
-                        src: 'application/manifest.json',
-                        dest: 'dist/application/manifest.json'
-                    },
-                    {
-                        expand: true,
-                        cwd: 'application/_locales/',
-                        src: ['**/*.json'],
-                        dest: 'dist/application/_locales/'
-                    }
-                ]
-            }
-        },
-
+        /**
+         * Minification
+         */
         less: {
-            dev: {
-                options: {
-                    paths: ['application/styles']
-                },
-
-                files: {
-                    'dist/application/app.css': 'application/styles/app.less'
-                }
-            },
-
             dist: {
                 options: {
-                    paths: ['application/styles'],
-                    cleancss: true
+                    compress: true
                 },
 
                 files: {
-                    'dist/application/app.css': 'application/styles/app.less'
-                }
-            }
-        },
-
-        usebanner: {
-            dist: {
-                options: {
-                    position: 'top',
-                    banner: '<%= banner %>'
-                },
-
-                files: {
-                    src: ['dist/application/app.css']
+                    '<%= config.dist %>/app.css': '<%= config.paths.less %>'
                 }
             }
         },
 
         imagemin: {
-            png: {
-                options: {
-                    optimizationLevel: 7
-                },
-
+            dist: {
                 files: [{
                     expand: true,
-                    cwd: 'application/images/',
-                    src: ['**/*.png'],
-                    dest: 'dist/application/images/'
-                }]
-            },
-
-            jpg: {
-                options: {
-                    progressive: true
-                },
-
-                files: [{
-                    expand: true,
-                    cwd: 'application/images/',
-                    src: ['**/*.jpg'],
-                    dest: 'dist/application/images/'
+                    cwd: '<%= config.app %>/images',
+                    src: '{,*/}*.{png,jpg}',
+                    dest: '<%= config.dist %>/images'
                 }]
             }
         },
@@ -181,26 +66,78 @@ module.exports = function (grunt) {
                 },
 
                 files: {
-                    'dist/application/index.html': 'application/pages/index.html',
-                    'dist/application/options.html': 'application/pages/options.html'
+                    '<%= config.dist %>/index.html': '<%= config.app %>/pages/index.html',
+                    '<%= config.dist %>/options.html': '<%= config.app %>/pages/options.html'
                 }
             }
         },
 
+        uglify: {
+            app: {
+                options: {
+                    banner: '<%= config.banner %>'
+                },
+
+                files: {
+                    '<%= config.dist %>/js/app.js': [
+                        '<%= config.paths.js %>',
+                    ]
+                }
+            },
+
+            libs: {
+                files: {
+                    '<%= config.dist %>/js/libs.js': [
+                        'bower_components/jquery/jquery.js',
+                        'bower_components/uri.js/src/URI.js',
+                        'bower_components/bootstrap/js/transition.js',
+                        'bower_components/bootstrap/js/tab.js',
+                        'bower_components/bootstrap/js/button.js',
+
+                        'bower_components/httparchive.js/dist/HTTPArchive.js',
+
+                        'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
+
+                        'bower_components/crypto-js/rollups/md5.js'
+                    ],
+                }
+            }
+        },
+
+        minjson: {
+            dist: {
+                files: [
+                    {
+                        src: '<%= config.app %>/manifest.json',
+                        dest: '<%= config.dist %>/manifest.json'
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= config.app %>/_locales/',
+                        src: ['**/*.json'],
+                        dest: '<%= config.dist %>/_locales/'
+                    }
+                ]
+            }
+        },
+
+        /**
+         * Linting
+         */
         jshint: {
             options: {
                 jshintrc: '.jshintrc'
             },
 
-            development: ['Gruntfile.js', 'application/js/*.js'],
-            production: ['dist/application/js/app.js'],
+            dist: ['Gruntfile.js', '<%= config.paths.js %>'],
         },
 
         lesslint: {
             dist: {
                 files: {
-                    src: ['application/styles/*.less']
+                    src: ['<%= config.paths.less %>']
                 },
+
                 options: {
                     csslint: {
                         'ids': false,
@@ -215,96 +152,136 @@ module.exports = function (grunt) {
             }
         },
 
-        qunit: {
-            all: ['tests/*.html']
-        },
-
-        validation: {
+        htmlint: {
             options: {
-                charset: 'utf-8',
-                doctype: 'HTML5',
-                failHard: true,
-                reset: true,
                 relaxerror: [
                     'The for attribute of the label element must refer to a form control.',
                     'Attribute i18n not allowed on element [a-z1-9]+ at this point.'
-                    //'Bad value X-UA-Compatible for attribute http-equiv on element meta.',
-                    //'Element img is missing required attribute src.'
                 ]
             },
 
             files: {
-                src: ['application/pages/*.html']
+                src: ['<%= config.paths.html %>']
             }
+        },
+
+        jsonlint: {
+            dist: {
+                src: ['<%= config.app %>/manifest.json', '<%= config.paths.locales %>']
+            }
+        },
+
+        /**
+         * Testing
+         */
+        qunit: {
+            all: ['test/*.html']
+        },
+
+        /**
+         * Misc
+         */
+        copy: {
+            fonts: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    filter: 'isFile',
+                    src: ['<%= config.app %>/fonts/**', 'bower_components/bootstrap/dist/fonts/**'],
+                    dest: '<%= config.dist %>/fonts'
+                }]
+            }
+        },
+
+        usebanner: {
+            dist: {
+                options: {
+                    position: 'top',
+                    banner: '<%= config.banner %>'
+                },
+
+                files: {
+                    src: ['<%= config.dist %>/app.css']
+                }
+            }
+        },
+
+        clean: {
+            dist: ['<%= config.dist %>', '<%= config.package %>'],
         },
 
         watch: {
             options: {
+                spawn: false,
                 livereload: true,
             },
 
             json: {
-                files: ['application/manifest.json', 'application/_locales/**/*.json'],
-                tasks: ['minjson'],
-                options: {
-                    spawn: false,
-                }
+                files: ['<%= config.app %>/manifest.json', '<%= config.app.locales %>'],
+                tasks: ['jsonlint', 'minjson']
             },
 
             scripts: {
-                files: ['application/js/*.js'],
-                tasks: ['jshint:development', 'concat:app'],
-                options: {
-                    spawn: false,
-                }
+                files: ['<%= config.paths.js %>'],
+                tasks: ['jshint', 'uglify']
             },
 
             css: {
-                files: ['application/styles/*.less'],
-                tasks: ['less', 'lesslint', 'usebanner'],
-                options: {
-                    spawn: false,
-                }
+                files: ['<%= config.paths.less'],
+                tasks: ['lesslint', 'less']
             },
 
             html: {
-                files: ['application/pages/*.html'],
-                tasks: ['htmlmin'],
-                options: {
-                    spawn: false,
-                }
+                files: ['<%= config.paths.html %>'],
+                tasks: ['htmllint', 'htmlmin']
             }
         },
 
         bump: {
-            files: ['package.json', 'bower.json', 'application/manifest.json']
+            files: ['package.json', 'bower.json', '<%= config.app %>/manifest.json']
+        },
+
+        compress: {
+            dist: {
+                options: {
+                    archive: '<%= config.package %>/<%= pkg.name %> v<%= pkg.version %>.zip'
+                },
+
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.dist %>',
+                    src: ['**'],
+                    dest: ''
+                }]
+            }
         }
     });
 
     grunt.registerTask('default', [
-        'htmlmin',
-        'minjson',
-        'less:dev',
-        'usebanner',
+        'jshint',
+        'jsonlint',
         'lesslint',
-        'jshint:development',
-        'concat',
-        'copy:images',
-        'copy:fonts'
+        'htmlint',
+        'build'
+    ]);
+
+    grunt.registerTask('build', [
+        'clean',
+
+        'less',
+        'uglify',
+        'minjson',
+        'htmlmin',
+        'imagemin',
+
+        'copy',
+        'usebanner',
     ]);
 
     grunt.registerTask('release', [
-        'validation',
-        'htmlmin',
-        'minjson',
-        'less:dist',
-        'lesslint',
-        'jshint:development',
-        'concat',
-        'jshint:production',
-        'uglify',
-        'imagemin',
-        'copy:fonts'
+        'bump::patch',
+        'default',
+        'compress'
     ]);
 
     grunt.registerTask('travis', 'release');

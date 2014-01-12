@@ -1,6 +1,5 @@
-# grunt-html-validation
-validation-status.json
-validation-report.json
+# htmlint-report
+htmlint-report.json
 
 # Folders to ignore
 node_modules
@@ -8,4 +7,4 @@ bower_components
 dist
 
 # debugging
-application/_locales/xx/
+app/_locales/xx/
