@@ -207,7 +207,8 @@ module.exports = function (grunt) {
         },
 
         clean: {
-            dist: ['<%= config.dist %>', '<%= config.package %>'],
+            dist: ['<%= config.dist %>', 'htmlint-report.json'],
+            libs: ['bower_components', 'node_modules']
         },
 
         watch: {
@@ -266,7 +267,7 @@ module.exports = function (grunt) {
     ]);
 
     grunt.registerTask('build', [
-        'clean',
+        'clean:dist',
 
         'less',
         'uglify',
