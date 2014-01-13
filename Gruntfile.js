@@ -175,7 +175,24 @@ module.exports = function (grunt) {
          * Testing
          */
         qunit: {
+            options: {
+                '--web-security': 'no',
+                coverage: {
+                    src: ['app/js/*.js'],
+                    instrumentedFiles: 'tmp/',
+                    htmlReport: 'test/report/coverage',
+                    lcovReport: 'test/report/lcov',
+                    linesThresholdPct: 0
+                }
+            },
+
             all: ['test/*.html']
+        },
+
+        coveralls: {
+            all: {
+                src: 'test/report/lcov/lcov.info'
+            }
         },
 
         /**
@@ -268,11 +285,16 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', [
+        'test',
+        'build'
+    ]);
+
+    grunt.registerTask('test', [
         'jshint',
         'jsonlint',
         'lesslint',
         'htmlint',
-        'build'
+        'qunit'
     ]);
 
     grunt.registerTask('build', [

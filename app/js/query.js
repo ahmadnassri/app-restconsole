@@ -7,6 +7,11 @@ $(function () {
         if (!skip) {
             var path = $('input[name=Path]');
 
+            // validate starting slash
+            if (path.val().indexOf('/') !== 0) {
+                path.val('/' + path.val());
+            }
+
             // TODO: handle duplicate keys => array values
             var uri = new URI(path.val());
 

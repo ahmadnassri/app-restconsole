@@ -2,7 +2,9 @@ $(function () {
     /**
      * monitor host field
      */
-    $('input[name="Host"').on('change', function () {
+    $('input[name="Host"]').on('change', function (event) {
+        event.preventDefault();
+
         // construct URI object
         var uri = new URI($(this).val().trim());
 
@@ -17,6 +19,8 @@ $(function () {
             // populate fields
             $('input[name=Port]').val(uri.port()).trigger('change');
             $('input[name=Path]').val(uri.resource()).trigger('change');
+
+            // TODO potential danger of loop
             $('input[name=Host]').val(uri.hostname()).trigger('change');
 
             // handle basic authentication typed/pasted into the URI
