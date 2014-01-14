@@ -1,7 +1,7 @@
 {
     "name": "RESTConsole",
     "version": "5.0.0",
-	"dependencies": {},
+    "dependencies": {},
     "devDependencies": {
         "jquery": "~2.0.3",
         "bootstrap": "~3.0.3",
