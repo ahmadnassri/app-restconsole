@@ -1,7 +1,7 @@
-$(function () {
+$(function Data () {
     function constructHTTPRequestText () {
-        chrome.storage.local.get('session', function (storage) {
-            console.log(storage.session.target.Path);
+        chrome.storage.local.get('session', function getSession (storage) {
+            //console.log(storage.session.target.Path);
             // construct HTTPArchive Request object
             var request = new HTTPArchiveRequest({
                 'method': storage.session.target.Method,
@@ -10,7 +10,7 @@ $(function () {
             });
 
             // construct headers
-            $.each(storage.session.headers, function (name, value) {
+            $.each(storage.session.headers, function constructHeader (name, value) {
                 request.setHeader(name, value);
             });
 
@@ -35,8 +35,8 @@ $(function () {
     /**
      * listener on input changes to clean up and set default values
      */
-    $('#editor').on('change', 'input:not([type="checkbox"], [name="Username"], [name="Password"], [name="key"], [name="value"]), select', function (event, enable) {
-        chrome.storage.local.get('session', function (storage) {
+    $('#editor').on('change', 'input:not([type="checkbox"], [name="Username"], [name="Password"], [name="key"], [name="value"]), select', function onChange (event, enable) {
+        chrome.storage.local.get('session', function getSession (storage) {
             var el = $(this);
             var form = el.parents('form').prop('name');
             var name = el.prop('name');
@@ -69,7 +69,7 @@ $(function () {
             }
 
             if (name === 'Path') {
-                console.log(name, storage.session[form][name]);
+                //console.log(name, storage.session[form][name]);
             }
 
             // save changes
@@ -79,7 +79,7 @@ $(function () {
 
     // listener to changes on local storage
     // TODO this is not successful, need to get away from callback hell
-    chrome.storage.onChanged.addListener(function(changes) {
+    chrome.storage.onChanged.addListener(function onChanged (changes) {
         if (changes.hasOwnProperty('session')) {
             // reconstruct request
             constructHTTPRequestText();
@@ -87,13 +87,13 @@ $(function () {
     });
 
     // initiate local storage
-    chrome.storage.local.get('session', function (storage) {
+    chrome.storage.local.get('session', function getSession (storage) {
         // must be first time
         if (!storage.hasOwnProperty('session')) {
             storage.session = {};
 
             // cycle through all the individual forms and generate output
-            $('#editor form').each(function () {
+            $('#editor form').each(function constructStorageObject () {
                 var form = $(this);
                 var name = form.prop('name');
 

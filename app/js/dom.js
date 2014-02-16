@@ -1,8 +1,8 @@
-$(function () {
+$(function DOM () {
     /**
      * checkbox listener for enabling/disabling optional input fields
      */
-    $('#editor').on('click', '.input-group-addon input[type="checkbox"]', function () {
+    $('#editor').on('click', '.input-group-addon input[type="checkbox"]', function onClick () {
         // go up, then go down
         var input = $(this).parents('.input-group').find('.form-control');
 

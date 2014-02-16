@@ -1,4 +1,4 @@
-$(function () {
+$(function Main () {
     // enable tabs
     $('a[data-toggle="tab"]').tab();
 

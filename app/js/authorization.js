@@ -1,6 +1,6 @@
-$(function () {
+$(function Authorization() {
     // input field listener
-    $('#authorization-basic').on('change', 'input', function () {
+    $('#authorization-basic').on('change', 'input', function onChange () {
         var input = $('input[name="Authorization"]').first();
         var container = $(this).parents('.form-group');
         var base64 = btoa(container.find('input[name="Username"]').val() + ':' + container.find('input[name="Password"]').val());

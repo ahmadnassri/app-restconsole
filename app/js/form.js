@@ -1,4 +1,4 @@
-$(function () {
+$(function Form () {
     function force() {
         var type = $('input[name="Content-Type"]');
 
@@ -18,7 +18,7 @@ $(function () {
 
     // form builder
     $('#payload')
-        .on('change', '#payload-form .form-group:not(:last-of-type) input', function () {
+        .on('change', '#payload-form .form-group:not(:last-of-type) input', function onChange () {
             if (!force()) {
                 return;
             }
@@ -31,7 +31,8 @@ $(function () {
 
             // create key-value array
             // TODO: handle duplicate keys => array values
-            $('#payload-form .form-group:not(:last-of-type)').each(function () {
+            // TODO: isn't this the same as pairs.js?
+            $('#payload-form .form-group:not(:last-of-type)').each(function addQueryPair () {
                 var group = $(this);
                 uri.addQuery(group.find('input[name="key"]').val(), group.find('input[name="value"]').val());
             });
@@ -39,7 +40,7 @@ $(function () {
             payload.val(uri.query()).trigger('change');
         })
 
-        .on('change', '#payload-raw textarea', function (event, skip) {
+        .on('change', '#payload-raw textarea', function onChange (event, skip) {
             if (skip) {
                 return;
             }
@@ -60,7 +61,7 @@ $(function () {
             // clear inputs
             $('#payload-form .form-group:not(:last-of-type)').remove();
 
-            $.each(URI.parseQuery(uri.query()), function (key, value) {
+            $.each(URI.parseQuery(uri.query()), function setQueryPair (key, value) {
                 var container = $('#payload-form .form-group:last-of-type');
                 container.find('input[name="key"]').val(key);
 

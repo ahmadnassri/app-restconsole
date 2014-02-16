@@ -1,8 +1,8 @@
-$(function () {
+$(function Host () {
     /**
      * monitor host field
      */
-    $('input[name="Host"]').on('change', function (event) {
+    $('input[name="Host"]').on('change', function onChange (event) {
         event.preventDefault();
 
         // construct URI object
