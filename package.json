@@ -19,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/codeinchaos/restconsole/issues"
   },
-  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "bower": "~1.2.8",
@@ -39,7 +38,7 @@
     "grunt-coveralls": "~0.3.0",
     "grunt-lesslint": "~0.17.0",
     "grunt-jsonlint": "~1.0.4",
-    "grunt-lint5": "~0.2.4",
+    "grunt-lint5": "~0.3.0",
     "grunt-minjson": "~0.1.1",
     "grunt-banner": "~0.2.0",
     "grunt-bumpx": "~0.2.0",

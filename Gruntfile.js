@@ -166,7 +166,7 @@ module.exports = function (grunt) {
         },
 
         lint5: {
-            views: '<%= config.app %>/pages',
+            dirPath: '<%= config.app %>/pages',
 
             ignoreList: [
                 'The “for” attribute of the “label” element must refer to a form control.',
@@ -340,6 +340,4 @@ module.exports = function (grunt) {
         'usebanner',        /* release only */
         'compress'          /* release only */
     ]);
-
-    grunt.registerTask('travis', 'release');
 };
