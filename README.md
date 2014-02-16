@@ -34,8 +34,8 @@ an HTTP Request Visualizer and Constructor tool, helps developers build, debug a
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Compiling](#compiling)
 - [Contributing](#contributing)
-- [Donating](#donating)
 - [Community](#community)
+- [Donating](#donating)
 - [Versioning](#versioning)
 - [Authors](#authors)
 - [License](#license)
@@ -103,10 +103,6 @@ More over, if your pull request contains JavaScript patches or features, you mus
 
 Editor preferences are available in the [editor config](https://github.com/codeinchaos/restconsole/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <http://editorconfig.org>.
 
-## Donating
-Donations are welcome to help support the continuous development of this project.
-- [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UJ2B2BTK9VLRS)
-
 ## Community
 
 Keep track of development and updates.
@@ -115,6 +111,10 @@ Keep track of development and updates.
 - Tweet [@RESTConsole](http://twitter.com/restconsole) with any questions/personal support requests.
 - Implementation help may be found at Stack Overflow (tagged [`restconsole`](http://stackoverflow.com/questions/tagged/restconsole)).
 - Read and subscribe to [My Blog](http://blog.ahmadnassri.com).
+
+## Donating
+Donations are welcome to help support the continuous development of this project.
+- [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UJ2B2BTK9VLRS)
 
 ## Versioning
 
