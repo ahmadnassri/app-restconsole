@@ -1,14 +1,11 @@
 # npm
 npm-debug.log
 
-# htmlint-report
-htmlint-report.json
-
 # Folders to ignore
 test/report
 node_modules
 bower_components
 dist
 
-# debugging
+# development
 app/_locales/xx/

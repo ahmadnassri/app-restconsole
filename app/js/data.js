@@ -24,11 +24,11 @@ $(function Data () {
                 request.setHeader('Proxy-Authorization', storage.session.authorization['Proxy-Authorization']);
             }
             // write outputs
-            //$('#request-curl code').html(harToCurl(HAR));
-            $('#request-har code').html(JSON.stringify(request.toJSON()));
+            //$('#request-curl kbd').html(harToCurl(HAR));
+            $('#request-har pre').html(JSON.stringify(request.toJSON()));
 
             // TODO: manually add blocked headers (ex: HOST)
-            $('#request-raw code').html(request.printHeaders());
+            $('#request-raw pre').html(request.printHeaders());
         });
     }
 
