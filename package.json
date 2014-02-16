@@ -1,7 +1,8 @@
 {
+  "private": true,
   "name": "RESTConsole",
   "version": "5.0.0",
-  "author": "Ahmad Nassri",
+  "author": "Ahmad Nassri <ahmad@codeinchaos.com> (http://ahmadnassri.com)",
   "description": "an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.",
   "homepage": "http://restconsole.com",
   "keywords": [
@@ -18,12 +19,8 @@
   "bugs": {
     "url": "https://github.com/codeinchaos/restconsole/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/codeinchaos/restconsole/blob/production/LICENSE"
-    }
-  ],
+  "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
     "bower": "~1.2.8",
     "grunt": "~0.4.2",
@@ -52,6 +49,6 @@
   },
   "scripts": {
     "ci": "grunt test && grunt coveralls",
-    "test": "grunt travis --verbose"
+    "test": "grunt release --verbose"
   }
 }
