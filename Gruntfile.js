@@ -17,7 +17,7 @@ module.exports = function (grunt) {
             paths: {
                 js: '<%= config.app %>/js/*.js',
                 html: '<%= config.app %>/pages/*.html',
-                less: '<%= config.app %>/styles/app.less',
+                less: '<%= config.app %>/styles/*.less',
                 locales: '<%= config.app %>/_locales/**/*.json'
             },
 
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
                 },
 
                 files: {
-                    '<%= config.dist %>/app.css': '<%= config.paths.less %>'
+                    '<%= config.dist %>/style.css': '<%= config.paths.less %>'
                 }
             }
         },
@@ -165,17 +165,18 @@ module.exports = function (grunt) {
             }
         },
 
-        htmlint: {
-            options: {
-                relaxerror: [
-                    'The for attribute of the label element must refer to a form control.',
-                    'Attribute i18n not allowed on element [a-z1-9]+ at this point.'
-                ]
-            },
+        lint5: {
+            views: '<%= config.app %>/pages',
 
-            files: {
-                src: ['<%= config.paths.html %>']
-            }
+            ignoreList: [
+                'The “for” attribute of the “label” element must refer to a form control.',
+                'Attribute “i18n” not allowed on element “[a-z1-9]+” at this point'
+            ],
+
+            templates: [
+                'index.html',
+                'options.html'
+            ]
         },
 
         jsonlint: {
@@ -246,7 +247,7 @@ module.exports = function (grunt) {
         },
 
         clean: {
-            dist: ['<%= config.dist %>', 'htmlint-report.json'],
+            dist: ['<%= config.dist %>'],
             libs: ['bower_components', 'node_modules']
         },
 
@@ -267,13 +268,13 @@ module.exports = function (grunt) {
             },
 
             css: {
-                files: ['<%= config.paths.less'],
+                files: ['<%= config.paths.less %>'],
                 tasks: ['lesslint', 'less']
             },
 
             html: {
                 files: ['<%= config.paths.html %>'],
-                tasks: ['htmllint', 'htmlmin']
+                tasks: ['lint5', 'htmlmin']
             }
         },
 
@@ -310,7 +311,7 @@ module.exports = function (grunt) {
         'jshint',
         'jsonlint',
         'lesslint',
-        'htmlint',
+        'lint5',
         //'qunit'
     ]);
 
