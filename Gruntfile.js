@@ -48,7 +48,7 @@ module.exports = function (grunt) {
                 files: [{
                     expand: true,
                     cwd: '<%= config.app %>/images',
-                    src: '{,*/}*.{png,jpg}',
+                    src: ['{,*/}*.{png,jpg}'],
                     dest: '<%= config.dist %>/images'
                 }]
             }
@@ -73,9 +73,22 @@ module.exports = function (grunt) {
         },
 
         uglify: {
-            app: {
+            dev: {
                 options: {
-                    banner: '<%= config.banner %>'
+                    sourceMap: true,
+                    sourceMapIncludeSources: true
+                },
+
+                files: {
+                    '<%= config.dist %>/js/app.js': [
+                        '<%= config.paths.js %>',
+                    ]
+                }
+            },
+
+            dist: {
+                options: {
+                    banner: '<%= config.banner %>',
                 },
 
                 files: {
@@ -207,6 +220,15 @@ module.exports = function (grunt) {
                     src: ['<%= config.app %>/fonts/**', 'bower_components/bootstrap/dist/fonts/**'],
                     dest: '<%= config.dist %>/fonts'
                 }]
+            },
+
+            images: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.app %>/images',
+                    src: '{,*/}*.{png,jpg}',
+                    dest: '<%= config.dist %>/images'
+                }]
             }
         },
 
@@ -241,7 +263,7 @@ module.exports = function (grunt) {
 
             scripts: {
                 files: ['<%= config.paths.js %>'],
-                tasks: ['jshint', 'uglify']
+                tasks: ['jshint', 'uglify:dev']
             },
 
             css: {
@@ -284,36 +306,38 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', [
-        'test',
-        'build'
-    ]);
-
     grunt.registerTask('test', [
         'jshint',
         'jsonlint',
         'lesslint',
         'htmlint',
-        'qunit'
+        //'qunit'
     ]);
 
-    grunt.registerTask('build', [
+    grunt.registerTask('default', [
         'clean:dist',
-
+        'test',
         'less',
-        'uglify',
+        'uglify:dev',
+        'uglify:libs',
         'minjson',
         'htmlmin',
-        'imagemin',
-
-        'copy',
-        'usebanner',
+        'copy'
     ]);
 
     grunt.registerTask('release', [
-        'bump::patch',
-        'default',
-        'compress'
+        'clean:dist',
+        'bump::patch',      /* release only */
+        'test',
+        'less',
+        'uglify:dist',  /* release only */
+        'uglify:libs',
+        'minjson',
+        'htmlmin',
+        'copy:fonts',
+        'imagemin',
+        'usebanner',        /* release only */
+        'compress'          /* release only */
     ]);
 
     grunt.registerTask('travis', 'release');
