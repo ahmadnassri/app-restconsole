@@ -313,7 +313,7 @@ module.exports = function (grunt) {
         'jsonlint',
         'lesslint',
         'lint5',
-        //'qunit'
+        'qunit'
     ]);
 
     grunt.registerTask('default', [
