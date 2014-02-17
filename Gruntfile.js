@@ -249,7 +249,8 @@ module.exports = function (grunt) {
 
         clean: {
             dist: ['<%= config.dist %>'],
-            libs: ['bower_components', 'node_modules']
+            libs: ['bower_components', 'node_modules'],
+            report: ['test/report']
         },
 
         watch: {
@@ -309,6 +310,7 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('test', [
+        'clean:report',
         'jshint',
         'jsonlint',
         'lesslint',
