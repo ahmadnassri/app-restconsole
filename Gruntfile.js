@@ -101,7 +101,7 @@ module.exports = function (grunt) {
             libs: {
                 files: {
                     '<%= config.dist %>/js/libs.js': [
-                        'bower_components/jquery/jquery.js',
+                        'bower_components/jquery/dist/jquery.js',
                         'bower_components/uri.js/src/URI.js',
                         'bower_components/bootstrap/js/transition.js',
                         'bower_components/bootstrap/js/tab.js',
@@ -189,22 +189,23 @@ module.exports = function (grunt) {
          * Testing
          */
         qunit: {
-            options: {
-                '--web-security': 'no',
-                coverage: {
-                    src: ['app/js/*.js'],
-                    instrumentedFiles: 'tmp/',
-                    htmlReport: 'test/report/coverage',
-                    lcovReport: 'test/report/lcov',
-                    linesThresholdPct: 0
-                }
-            },
+            dist: {
+                options: {
+                    coverage: {
+                        src: ['app/js/*.js'],
+                        instrumentedFiles: 'tmp/',
+                        htmlReport: 'test/report/coverage',
+                        lcovReport: 'test/report/lcov',
+                        linesThresholdPct: 0
+                    },
 
-            all: ['test/*.html']
+                    urls: ['test/index.html']
+                }
+            }
         },
 
         coveralls: {
-            all: {
+            dist: {
                 src: 'test/report/lcov/lcov.info'
             }
         },
@@ -331,7 +332,7 @@ module.exports = function (grunt) {
         'bump::patch',      /* release only */
         'test',
         'less',
-        'uglify:dist',  /* release only */
+        'uglify:dist',      /* release only */
         'uglify:libs',
         'minjson',
         'htmlmin',
