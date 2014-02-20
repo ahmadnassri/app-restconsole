@@ -4,10 +4,8 @@ $(function Host () {
     /**
      * monitor host field
      */
-    $('input[name="Host"]').on('change', function onChange (event) {
+    $('input[name="Host"]').on('change', function onChange (event, skipStorage) {
         console.log('(onChange) input[name="Host"]');
-
-        event.preventDefault();
 
         // construct URI object
         var uri = new URI($(this).val().trim());
@@ -21,17 +19,17 @@ $(function Host () {
             }
 
             // populate fields
-            $('input[name=Port]').val(uri.port()).trigger('change');
-            $('input[name=Path]').val(uri.resource()).trigger('change');
+            $('input[name=Port]').val(uri.port()).trigger('change', [skipStorage]);
+            $('input[name=Path]').val(uri.resource()).trigger('change', [skipStorage]);
 
             // TODO potential danger of loop
-            $('input[name=Host]').val(uri.hostname()).trigger('change');
+            $('input[name=Host]').val(uri.hostname()).trigger('change', [skipStorage]);
 
             // handle basic authentication typed/pasted into the URI
             if (uri.username() !== '') {
                 $('a[data-target="#headers-authorization"]').trigger('click').find('a[data-target="#authorization-basic"]').trigger('click');
                 $('#authorization-basic input[name="Username"]').val(uri.username());
-                $('#authorization-basic input[name="Password"]').val(uri.password()).trigger('change');
+                $('#authorization-basic input[name="Password"]').val(uri.password()).trigger('change', [skipStorage]);
             }
         }
 

@@ -7,10 +7,10 @@ $(function Query () {
         $('#query').toggle();
     });
 
-    $('input[name="Path"]').on('change', function onChange (event, skip) {
+    $('input[name="Path"]').on('change', function onChange (event, skipStorage, skipProcessing) {
         console.log('(onChange) input[name="Path"]');
 
-        if (!skip) {
+        if (skipProcessing !== true) {
             var path = $('input[name=Path]');
 
             // validate starting slash
@@ -50,6 +50,7 @@ $(function Query () {
             uri.addQuery(group.find('input[name="key"]').val(), group.find('input[name="value"]').val());
         });
 
-        path.val(uri.resource()).trigger('change');
+        // trigger change on the Path input, but skip processing (loop)
+        path.val(uri.resource()).trigger('change', [false, true]);
     });
 });

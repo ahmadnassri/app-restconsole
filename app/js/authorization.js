@@ -2,7 +2,7 @@ $(function Authorization() {
     console.log('Authorization.js');
 
     // input field listener
-    $('#authorization-basic').on('change', 'input', function onChange () {
+    $('#authorization-basic').on('change', 'input', function onChange (event, skipStorage) {
         console.log('(onChange) #authorization-basic > input');
 
         var input = $('input[name="Authorization"]').first();
@@ -13,6 +13,6 @@ $(function Authorization() {
         input.val('Basic ' + base64);
 
         // update
-        input.trigger('enable').trigger('change');
+        input.trigger('enable').trigger('change', [skipStorage]);
     });
 });

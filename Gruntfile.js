@@ -102,10 +102,16 @@ module.exports = function (grunt) {
                 files: {
                     '<%= config.dist %>/js/libs.js': [
                         'bower_components/jquery/dist/jquery.js',
+
                         'bower_components/uri.js/src/URI.js',
+
                         'bower_components/bootstrap/js/transition.js',
                         'bower_components/bootstrap/js/tab.js',
                         'bower_components/bootstrap/js/button.js',
+
+                        'bower_components/es6-promise/promise.js',
+
+                        'bower_components/underscore/underscore.js',
 
                         'bower_components/httparchive.js/dist/HTTPArchive.js',
 
@@ -325,7 +331,8 @@ module.exports = function (grunt) {
         'uglify:libs',
         'minjson',
         'htmlmin',
-        'copy'
+        'copy',
+        'watch'
     ]);
 
     grunt.registerTask('release', [

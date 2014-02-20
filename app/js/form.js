@@ -44,12 +44,8 @@ $(function Form () {
             payload.val(uri.query()).trigger('change');
         })
 
-        .on('change', '#payload-raw textarea', function onChange (event, skip) {
+        .on('change', '#payload-raw textarea', function onChange (event) {
             console.log('(onChange) #payload-raw > textarea');
-
-            if (skip) {
-                return;
-            }
 
             // should only work for the correct Content-Type
             var type = $('input[name="Content-Type"]').val();

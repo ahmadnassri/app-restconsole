@@ -20,6 +20,7 @@
     "trailing": true,
 
     "globals": {
+        "_":            true,
         "module":       true,
         "require":      true,
 
