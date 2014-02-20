@@ -1,8 +1,12 @@
 $(function Host () {
+    console.log('initiating Host.js');
+
     /**
      * monitor host field
      */
     $('input[name="Host"]').on('change', function onChange (event) {
+        console.log('(onChange) input[name="Host"]');
+
         event.preventDefault();
 
         // construct URI object

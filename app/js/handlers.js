@@ -1,27 +1,33 @@
-$(function handlers () {
-    function change () {
+$(function Handlers () {
+    console.log('initiating Handlers.js');
+
+    function onChange () {
+        console.log('(onChange) textarea[name="payload"]');
+
         var payload = $('textarea[name="payload"]');
         var md5 = CryptoJS.MD5(payload.val()).toString(CryptoJS.enc.Hex);
 
         // update input filed and trigger change
-        $('input[name="Content-MD5"]').val(md5).trigger('change', [true]);
+        $('input[name="Content-MD5"]').val(md5).trigger('enable').trigger('change');
     }
 
     // auto-MD5 toggle
     $('button[data-action="auto-md5"]').on('click', function onClick () {
+        console.log('(onClick) button[data-action="auto-md5"]');
+
         var payload = $('textarea[name="payload"]');
 
         // seems weird that jQuery is not able to query registered event handlers
         // the work around is to rely on the toggle class state of the button
         if ($(this).hasClass('active')) {
             // remove listner
-            payload.off('change', change);
+            payload.off('change', onChange);
         } else {
             // run the first time
-            change();
+            onChange();
 
             // attach as listner
-            payload.on('change', change);
+            payload.on('change', onChange);
         }
     });
 });
