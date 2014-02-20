@@ -191,15 +191,14 @@ module.exports = function (grunt) {
         qunit: {
             dist: {
                 options: {
+                    urls: ['test/index.html'],
                     coverage: {
                         src: ['app/js/*.js'],
                         instrumentedFiles: 'tmp/',
                         htmlReport: 'test/report/coverage',
                         lcovReport: 'test/report/lcov',
                         linesThresholdPct: 0
-                    },
-
-                    urls: ['test/index.html']
+                    }
                 }
             }
         },
