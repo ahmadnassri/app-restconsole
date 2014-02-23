@@ -18,7 +18,30 @@ module.exports = function (grunt) {
                 js: '<%= config.app %>/js/*.js',
                 html: '<%= config.app %>/pages/*.html',
                 less: '<%= config.app %>/styles/*.less',
-                locales: '<%= config.app %>/_locales/**/*.json'
+                locales: '<%= config.app %>/_locales/**/*.json',
+                libs: [
+                    'bower_components/jquery/dist/jquery.js',
+
+                    'bower_components/uri.js/src/URI.js',
+
+                    'bower_components/js-beautify/js/lib/beautify.js',
+                    'bower_components/js-beautify/js/lib/beautify-html.js',
+                    'bower_components/js-beautify/js/lib/beautify-css.js',
+
+                    'bower_components/bootstrap/js/transition.js',
+                    'bower_components/bootstrap/js/tab.js',
+                    'bower_components/bootstrap/js/button.js',
+
+                    'bower_components/es6-promise/promise.js',
+
+                    'bower_components/underscore/underscore.js',
+
+                    'bower_components/httparchive.js/dist/HTTPArchive.js',
+
+                    'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
+
+                    'bower_components/crypto-js/rollups/md5.js'
+                ]
             },
 
             banner: '/*!\n' +
@@ -100,25 +123,7 @@ module.exports = function (grunt) {
 
             libs: {
                 files: {
-                    '<%= config.dist %>/js/libs.js': [
-                        'bower_components/jquery/dist/jquery.js',
-
-                        'bower_components/uri.js/src/URI.js',
-
-                        'bower_components/bootstrap/js/transition.js',
-                        'bower_components/bootstrap/js/tab.js',
-                        'bower_components/bootstrap/js/button.js',
-
-                        'bower_components/es6-promise/promise.js',
-
-                        'bower_components/underscore/underscore.js',
-
-                        'bower_components/httparchive.js/dist/HTTPArchive.js',
-
-                        'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
-
-                        'bower_components/crypto-js/rollups/md5.js'
-                    ],
+                    '<%= config.dist %>/js/libs.js': '<%= config.paths.libs %>'
                 }
             }
         },
@@ -261,6 +266,7 @@ module.exports = function (grunt) {
         watch: {
             options: {
                 spawn: false,
+                interrupt: true,
                 livereload: true,
             },
 
@@ -272,6 +278,11 @@ module.exports = function (grunt) {
             scripts: {
                 files: ['<%= config.paths.js %>'],
                 tasks: ['jshint', 'uglify:dev']
+            },
+
+            libs: {
+                files: ['<%= config.paths.libs %>'],
+                tasks: ['uglify:libs']
             },
 
             css: {

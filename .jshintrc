@@ -23,7 +23,7 @@
         "_":            true,
         "module":       true,
         "require":      true,
-
+        "js_beautify":  true,
         "chrome":       true,
         "analytics":    true,
         "URI":          true,

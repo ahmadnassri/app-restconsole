@@ -35,8 +35,29 @@ $(function Data () {
             request.setHeader('Proxy-Authorization', localSessionData.authorization['Proxy-Authorization']);
         }
         // write outputs
-        $('#request-curl pre').html(request.toCurl(true));
-        $('#request-har pre').html(JSON.stringify(request.toJSON()));
+        $('#request-curl pre').html(request.toCurl({
+            'beautify': true,
+            'indent_size': 2,
+            'indent_char': ' '
+        }));
+
+        $('#request-har pre').html(js_beautify(JSON.stringify(request.toJSON()), {
+            'indent_size': 2,
+            'indent_char': ' ',
+            'indent_level': 0,
+            'indent_with_tabs': false,
+            'preserve_newlines': true,
+            'max_preserve_newlines': 10,
+            'jslint_happy': false,
+            'brace_style': 'end-expand',
+            'keep_array_indentation': false,
+            'keep_function_indentation': false,
+            'space_before_conditional': true,
+            'break_chained_methods': false,
+            'eval_code': false,
+            'unescape_strings': false,
+            'wrap_line_length': 0
+        }));
 
         // TODO: manually add blocked headers (ex: HOST)
         $('#request-raw pre').html(request.toString());
