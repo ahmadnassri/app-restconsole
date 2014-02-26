@@ -32,6 +32,7 @@
         "HTTPArchivePage":      true,
         "HTTPArchiveEntry":     true,
         "HTTPArchiveRequest":   true,
-        "HTTPArchiveResponse":  true
+        "HTTPArchiveResponse":  true,
+        "ChromeSocketXMLHttpRequest": true
     }
 }

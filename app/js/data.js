@@ -64,7 +64,7 @@ $(function Data () {
         $('#request-raw pre').html(request.toString());
 
         // TODO move the xhr construct to HTTPArchive.js
-        window.XHR = new XMLHttpRequest();
+        window.XHR = new ChromeSocketXMLHttpRequest();
 
         window.XHR.open(request.method, request.url);
 

@@ -5,11 +5,13 @@
  * @see http://developer.chrome.com/apps/app.window.html
  */
 chrome.app.runtime.onLaunched.addListener(function() {
-    // Center window on screen.
-    var screenWidth = screen.availWidth;
-    var screenHeight = screen.availHeight;
-    var width = 500;
-    var height = 300;
+    var options = {
+        id: 'RESTConsole',
+        bounds: {
+            width: screen.availWidth,
+            height: screen.availHeight
+        }
+    };
 
-    chrome.app.window.create('index.html', {'id': 'RESTConsole'}, function() {});
+    chrome.app.window.create('index.html', options);
 });

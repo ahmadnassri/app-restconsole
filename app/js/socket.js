@@ -174,26 +174,32 @@ ChromeSocketXMLHttpRequest.prototype._onConnect = function (result) {
     if (this.options.timer.expired) {
         return;
     } else if (result < 0) {
-        this.error({
+        this._onError({
             error: 'connection error',
             code: result
         });
     } else {
-        var headers = [];
-
-        // add missing parts to header
-        headers.push(this.options.method + ' ' + this.options.uri.resource() + ' HTTP/1.1');
-
-        for (var name in this.options.headers) {
-            headers.push(name + ': ' + this.options.headers[name]);
-        }
-
-        headers = headers.join('\r\n') + '\r\n\r\n';
-
+        // assign recieve listner
         chrome.sockets.tcp.onReceive.addListener(this._onReceive.bind(this));
 
-        chrome.socket.tcp.send(this.options.createInfo.socketId, headers.toArrayBuffer(), this._onSend.bind(this));
+        //
+        this.getMessage().toArrayBuffer(function sendMessage (buffer) {
+            chrome.sockets.tcp.send(this.options.createInfo.socketId, buffer, this._onSend.bind(this));
+        }.bind(this));
     }
+};
+
+ChromeSocketXMLHttpRequest.prototype.getMessage = function () {
+    var headers = [];
+
+    // add missing parts to header
+    headers.push(this.options.method + ' ' + this.options.uri.resource() + ' HTTP/1.1');
+
+    for (var name in this.options.headers) {
+        headers.push(name + ': ' + this.options.headers[name]);
+    }
+
+    return headers.join('\r\n') + '\r\n\r\n';
 };
 
 ChromeSocketXMLHttpRequest.prototype._onError = function (error) {
@@ -210,8 +216,8 @@ ChromeSocketXMLHttpRequest.prototype._close = function () {
     this.options.closed = true;
 
     if (this.options.createInfo !== null) {
-        chrome.socket.tcp.disconnect(this.options.createInfo.socketId);
-        chrome.socket.tcp.destroy(this.options.createInfo.socketId);
+        chrome.sockets.tcp.disconnect(this.options.createInfo.socketId);
+        chrome.sockets.tcp.close(this.options.createInfo.socketId);
         this.options.createInfo = null;
     }
 };
@@ -220,18 +226,20 @@ ChromeSocketXMLHttpRequest.prototype._expireTimer = function () {
     if (this.responseText === null) {
         this._close();
         this.options.timer.expired = true;
-        this.error({error: 'timeout'});
+        this._onError({error: 'timeout'});
     }
 };
 
 ChromeSocketXMLHttpRequest.prototype._onSend = function (sendInfo) {
+    console.log('data sent');
     if (sendInfo.resultCode < 0) {
-        this.error({error: 'sending error'});
+        this._onError({error: 'sending error'});
         this._close();
     }
 };
 
 ChromeSocketXMLHttpRequest.prototype._onReceive = function (info) {
+    console.log('onReceive');
     if (this.options.closed) {
         return;
     }
@@ -240,22 +248,31 @@ ChromeSocketXMLHttpRequest.prototype._onReceive = function (info) {
         return;
     }
 
-//    this._close();
+    this._close();
+
+    console.log('results coming...');
 
     console.log(String.fromCharCode.apply(null, new Uint16Array(info.data)));
 };
 
+ArrayBuffer.prototype.toString = function (callback) {
+    var bb = new Blob([this]);
+    var f = new FileReader();
 
+    f.onload = function (e) {
+        callback(e.target.result);
+    };
 
+    f.readAsText(bb);
+};
 
+String.prototype.toArrayBuffer = function (callback) {
+    var bb = new Blob([this]);
+    var f = new FileReader();
 
-String.prototype.toArrayBuffer = function () {
-    var buf = new ArrayBuffer(this.length * 2); // 2 bytes for each char
-    var bufView = new Uint16Array(buf);
+    f.onload = function (e) {
+        callback(e.target.result);
+    };
 
-    for (var i = 0, strLen = this.length; i < strLen; i++) {
-        bufView[i] = this.charCodeAt(i);
-    }
-
-    return buf;
+    f.readAsArrayBuffer(bb);
 };

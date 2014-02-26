@@ -26,7 +26,7 @@
 
     "sockets": {
         "tcp": {
-            "connect": ["*"]
+            "connect": "*:*"
         }
     },
 
