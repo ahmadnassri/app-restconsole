@@ -12,7 +12,7 @@ $(function Handlers () {
     }
 
     // auto-MD5 toggle
-    $('button[data-action="auto-md5"]').on('click', function onClick () {
+    $('button[data-action="auto-md5"]').on('click', function onClick (event) {
         console.log('(onClick) button[data-action="auto-md5"]');
 
         var payload = $('textarea[name="payload"]');
@@ -29,5 +29,17 @@ $(function Handlers () {
             // attach as listner
             payload.on('change', onChange);
         }
+    });
+
+    $('button[data-action="send-request"]').on('click', function onClick (event) {
+        console.log('(onClick) button[data-action="send-request"]');
+
+        window.XHR.send();
+    });
+
+    $('button[data-action="clipboard-copy"]').on('click', function onClick (event) {
+        console.log('(onClick) button[data-action="clipboard-copy"]');
+
+        document.execCommand('copy');
     });
 });

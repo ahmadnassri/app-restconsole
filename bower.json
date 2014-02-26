@@ -15,7 +15,7 @@
     "highlightjs": "~8.0.0",
     "uri.js": "~1.11.2",
     "es6-promise": "~0.1.1",
-    "httparchive.js": "~1.2.0",
+    "httparchive.js": "~1.2.2",
     "chrome-platform-analytics": "*",
     "crypto-js": "https://crypto-js.googlecode.com/files/CryptoJS%20v3.1.2.zip",
     "underscore": "~1.6.0",

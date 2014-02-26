@@ -41,6 +41,7 @@ $(function Data () {
             'indent_char': ' '
         }));
 
+        // beautify the HAR output and display it
         $('#request-har pre').html(js_beautify(JSON.stringify(request.toJSON()), {
             'indent_size': 2,
             'indent_char': ' ',
@@ -59,8 +60,25 @@ $(function Data () {
             'wrap_line_length': 0
         }));
 
-        // TODO: manually add blocked headers (ex: HOST)
+        // export request object into printed header message (RFC2616)
         $('#request-raw pre').html(request.toString());
+
+        // TODO move the xhr construct to HTTPArchive.js
+        window.XHR = new XMLHttpRequest();
+
+        window.XHR.open(request.method, request.url);
+
+        request.headers.forEach(function setRequestHeader (header) {
+            // exclude unsafe headers
+            window.XHR.setRequestHeader(header.name, header.value);
+        });
+
+        window.XHR.onreadystatechange = function() {
+            if (window.XHR.readyState === 4) {
+                // WARNING! Might be injecting a malicious script!
+                $('#response').show().find('#response-raw pre').text(window.XHR.responseText);
+            }
+        };
     }
 
     /**

@@ -15,6 +15,7 @@ module.exports = function (grunt) {
             dist: 'dist/app',
             package: 'dist/package',
             paths: {
+                main: '<%= config.app %>/main.js',
                 js: '<%= config.app %>/js/*.js',
                 html: '<%= config.app %>/pages/*.html',
                 less: '<%= config.app %>/styles/*.less',
@@ -105,6 +106,10 @@ module.exports = function (grunt) {
                 files: {
                     '<%= config.dist %>/js/app.js': [
                         '<%= config.paths.js %>',
+                    ],
+
+                    '<%= config.dist %>/main.js': [
+                        '<%= config.paths.main %>',
                     ]
                 }
             },
@@ -117,6 +122,10 @@ module.exports = function (grunt) {
                 files: {
                     '<%= config.dist %>/js/app.js': [
                         '<%= config.paths.js %>',
+                    ],
+
+                    '<%= config.dist %>/main.js': [
+                        '<%= config.paths.main %>',
                     ]
                 }
             },
@@ -153,7 +162,7 @@ module.exports = function (grunt) {
                 jshintrc: '.jshintrc'
             },
 
-            dist: ['Gruntfile.js', '<%= config.paths.js %>'],
+            dist: ['Gruntfile.js', '<%= config.paths.main %>', '<%= config.paths.js %>'],
         },
 
         lesslint: {
@@ -266,7 +275,6 @@ module.exports = function (grunt) {
         watch: {
             options: {
                 spawn: false,
-                interrupt: true,
                 livereload: true,
             },
 
@@ -276,7 +284,7 @@ module.exports = function (grunt) {
             },
 
             scripts: {
-                files: ['<%= config.paths.js %>'],
+                files: ['<%= config.paths.main %>', '<%= config.paths.js %>'],
                 tasks: ['jshint', 'uglify:dev']
             },
 
