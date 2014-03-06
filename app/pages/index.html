@@ -76,7 +76,9 @@
 
                                         <div class="input-group">
                                             <input class="form-control" type="text" name="Path" autocomplete="on" tabindex="1" value="/" data-default="/" placeholder="/hello.txt" required/>
-                                            <span class="input-group-btn"><button class="btn btn-default" type="button" data-action="query-builder" data-toggle="button" i18n="btn_query_builder"></button></span>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" data-action="query-builder" data-toggle="button" i18n="btn_query_builder"></button>
+                                            </span>
                                         </div>
 
                                         <span class="help-block"></span>
@@ -152,7 +154,9 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
                                                 <input class="form-control" type="text" name="Content-MD5" autocomplete="off" tabindex="2" placeholder="Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
-                                                <span class="input-group-btn"><button class="btn btn-default" type="button" data-action="auto-md5" data-toggle="button" i18n="btn_auto_generate"></button></span>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button" data-action="auto-md5" data-toggle="button" i18n="btn_auto_generate"></button>
+                                                </span>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -741,11 +745,11 @@
                                     </div>
 
                                     <div class="panel-footer">
-                                        <a class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Run</a>
+                                        <button class="btn btn-success" data-action="send-request"><span class="glyphicon glyphicon-play"></span> Run</button>
 
                                         <div class="pull-right">
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                            <button class="btn btn-primary" data-action="clipboard-copy"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</button>
+                                            <button class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</button>
                                         </div>
                                     </div>
                                 </div>
@@ -756,27 +760,27 @@
                                     </div>
 
                                     <div class="panel-footer">
-                                        <a class="btn btn-success"><span class="glyphicon glyphicon-play"></span> Run</a>
+                                        <button class="btn btn-success" data-action="send-request"><span class="glyphicon glyphicon-play"></span> Run</button>
 
                                         <div class="pull-right">
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                            <button class="btn btn-primary" data-action="clipboard-copy"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</button>
+                                            <button class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</button>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div id="request-curl" class="tab-pane fade">
                                     <div class="panel-body">
-                                        <kbd>testing one two three</kbd>
+                                        <pre class="pre-scrollable"></pre>
                                     </div>
 
                                     <div class="panel-footer">
-                                        <div class="pull-right">
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
-                                        </div>
+                                        <button class="btn btn-success" data-action="send-request"><span class="glyphicon glyphicon-play"></span> Run</button>
 
-                                        <div class="clearfix"></div>
+                                        <div class="pull-right">
+                                            <button class="btn btn-primary" data-action="clipboard-copy"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</button>
+                                            <button class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -799,8 +803,8 @@
 
                                     <div class="panel-footer">
                                         <div class="pull-right">
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                            <button class="btn btn-primary" data-action="clipboard-copy"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</button>
+                                            <button class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</button>
                                         </div>
 
                                         <div class="clearfix"></div>
@@ -814,8 +818,8 @@
 
                                     <div class="panel-footer">
                                         <div class="pull-right">
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                            <button class="btn btn-primary" data-action="clipboard-copy"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</button>
+                                            <button class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</button>
                                         </div>
 
                                         <div class="clearfix"></div>
@@ -829,8 +833,8 @@
 
                                     <div class="panel-footer">
                                         <div class="pull-right">
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</a>
-                                            <a class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</a>
+                                            <button class="btn btn-primary" data-action="clipboard-copy"><span class="glyphicon glyphicon-share-alt"></span> Copy to clipboard</button>
+                                            <button class="btn btn-primary"><span class="glyphicon glyphicon-cloud-download"></span> Download</button>
                                         </div>
 
                                         <div class="clearfix"></div>
@@ -1067,7 +1071,7 @@
         </datalist>
 
         <datalist id="methods">
-            <option value="CONNET">CONNET</option>
+            <option value="CONNECT">CONNECT</option>
             <option value="DELETE">DELETE</option>
             <option value="GET">GET</option>
             <option value="HEAD">HEAD</option>

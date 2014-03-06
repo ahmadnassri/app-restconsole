@@ -1,4 +1,6 @@
 $(function Form () {
+    console.log('initiating Form.js');
+
     function force() {
         var type = $('input[name="Content-Type"]');
 
@@ -7,7 +9,7 @@ $(function Form () {
 
             if (result === true) {
                 // update value and force enable
-                type.val('application/x-www-form-urlencoded').trigger('change', [true]);
+                type.val('application/x-www-form-urlencoded').trigger('enable').trigger('change');
             }
 
             return result;
@@ -19,6 +21,8 @@ $(function Form () {
     // form builder
     $('#payload')
         .on('change', '#payload-form .form-group:not(:last-of-type) input', function onChange () {
+            console.log('(onChange) #payload-form > input');
+
             if (!force()) {
                 return;
             }
@@ -40,10 +44,8 @@ $(function Form () {
             payload.val(uri.query()).trigger('change');
         })
 
-        .on('change', '#payload-raw textarea', function onChange (event, skip) {
-            if (skip) {
-                return;
-            }
+        .on('change', '#payload-raw textarea', function onChange (event) {
+            console.log('(onChange) #payload-raw > textarea');
 
             // should only work for the correct Content-Type
             var type = $('input[name="Content-Type"]').val();

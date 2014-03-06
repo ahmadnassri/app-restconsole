@@ -1,10 +1,16 @@
 $(function Query () {
+    console.log('Query.js');
+
     $('button[data-action="query-builder"]').on('click', function onClick () {
+        console.log('(onClick) button[data-action="query-builder"]');
+
         $('#query').toggle();
     });
 
-    $('input[name="Path"]').on('change', function onChange (event, skip) {
-        if (!skip) {
+    $('input[name="Path"]').on('change', function onChange (event, skipStorage, skipProcessing) {
+        console.log('(onChange) input[name="Path"]');
+
+        if (skipProcessing !== true) {
             var path = $('input[name=Path]');
 
             // validate starting slash
@@ -29,6 +35,8 @@ $(function Query () {
     });
 
     $('#query .input-pairs').on('change', '.form-group:not(:last-of-type) input', function onChange () {
+        console.log('(onChange) #query .input-pairs > .form-group:not(:last-of-type) > input');
+
         var path = $('input[name="Path"]');
         var uri = new URI(path.val());
 
@@ -42,6 +50,7 @@ $(function Query () {
             uri.addQuery(group.find('input[name="key"]').val(), group.find('input[name="value"]').val());
         });
 
-        path.val(uri.resource()).trigger('change', [true]);
+        // trigger change on the Path input, but skip processing (loop)
+        path.val(uri.resource()).trigger('change', [false, true]);
     });
 });

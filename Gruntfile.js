@@ -15,10 +15,34 @@ module.exports = function (grunt) {
             dist: 'dist/app',
             package: 'dist/package',
             paths: {
+                main: '<%= config.app %>/main.js',
                 js: '<%= config.app %>/js/*.js',
                 html: '<%= config.app %>/pages/*.html',
                 less: '<%= config.app %>/styles/*.less',
-                locales: '<%= config.app %>/_locales/**/*.json'
+                locales: '<%= config.app %>/_locales/**/*.json',
+                libs: [
+                    'bower_components/jquery/dist/jquery.js',
+
+                    'bower_components/uri.js/src/URI.js',
+
+                    'bower_components/js-beautify/js/lib/beautify.js',
+                    'bower_components/js-beautify/js/lib/beautify-html.js',
+                    'bower_components/js-beautify/js/lib/beautify-css.js',
+
+                    'bower_components/bootstrap/js/transition.js',
+                    'bower_components/bootstrap/js/tab.js',
+                    'bower_components/bootstrap/js/button.js',
+
+                    'bower_components/es6-promise/promise.js',
+
+                    'bower_components/underscore/underscore.js',
+
+                    'bower_components/httparchive.js/dist/HTTPArchive.js',
+
+                    'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
+
+                    'bower_components/crypto-js/rollups/md5.js'
+                ]
             },
 
             banner: '/*!\n' +
@@ -82,6 +106,10 @@ module.exports = function (grunt) {
                 files: {
                     '<%= config.dist %>/js/app.js': [
                         '<%= config.paths.js %>',
+                    ],
+
+                    '<%= config.dist %>/main.js': [
+                        '<%= config.paths.main %>',
                     ]
                 }
             },
@@ -94,25 +122,17 @@ module.exports = function (grunt) {
                 files: {
                     '<%= config.dist %>/js/app.js': [
                         '<%= config.paths.js %>',
+                    ],
+
+                    '<%= config.dist %>/main.js': [
+                        '<%= config.paths.main %>',
                     ]
                 }
             },
 
             libs: {
                 files: {
-                    '<%= config.dist %>/js/libs.js': [
-                        'bower_components/jquery/dist/jquery.js',
-                        'bower_components/uri.js/src/URI.js',
-                        'bower_components/bootstrap/js/transition.js',
-                        'bower_components/bootstrap/js/tab.js',
-                        'bower_components/bootstrap/js/button.js',
-
-                        'bower_components/httparchive.js/dist/HTTPArchive.js',
-
-                        'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
-
-                        'bower_components/crypto-js/rollups/md5.js'
-                    ],
+                    '<%= config.dist %>/js/libs.js': '<%= config.paths.libs %>'
                 }
             }
         },
@@ -142,7 +162,7 @@ module.exports = function (grunt) {
                 jshintrc: '.jshintrc'
             },
 
-            dist: ['Gruntfile.js', '<%= config.paths.js %>'],
+            dist: ['Gruntfile.js', '<%= config.paths.main %>', '<%= config.paths.js %>'],
         },
 
         lesslint: {
@@ -191,15 +211,14 @@ module.exports = function (grunt) {
         qunit: {
             dist: {
                 options: {
+                    urls: ['test/index.html'],
                     coverage: {
                         src: ['app/js/*.js'],
                         instrumentedFiles: 'tmp/',
                         htmlReport: 'test/report/coverage',
                         lcovReport: 'test/report/lcov',
                         linesThresholdPct: 0
-                    },
-
-                    urls: ['test/index.html']
+                    }
                 }
             }
         },
@@ -265,8 +284,13 @@ module.exports = function (grunt) {
             },
 
             scripts: {
-                files: ['<%= config.paths.js %>'],
+                files: ['<%= config.paths.main %>', '<%= config.paths.js %>'],
                 tasks: ['jshint', 'uglify:dev']
+            },
+
+            libs: {
+                files: ['<%= config.paths.libs %>'],
+                tasks: ['uglify:libs']
             },
 
             css: {
@@ -326,7 +350,8 @@ module.exports = function (grunt) {
         'uglify:libs',
         'minjson',
         'htmlmin',
-        'copy'
+        'copy',
+        'watch'
     ]);
 
     grunt.registerTask('release', [

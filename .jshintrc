@@ -20,9 +20,10 @@
     "trailing": true,
 
     "globals": {
+        "_":            true,
         "module":       true,
         "require":      true,
-
+        "js_beautify":  true,
         "chrome":       true,
         "analytics":    true,
         "URI":          true,
@@ -31,6 +32,7 @@
         "HTTPArchivePage":      true,
         "HTTPArchiveEntry":     true,
         "HTTPArchiveRequest":   true,
-        "HTTPArchiveResponse":  true
+        "HTTPArchiveResponse":  true,
+        "ChromeSocketXMLHttpRequest": true
     }
 }
