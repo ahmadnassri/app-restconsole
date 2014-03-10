@@ -4,11 +4,12 @@ function ChromeSocketXMLHttpRequest() {
             enumerable: false,
             writable: true,
             value: {
-                createInfo: null,
-                method: null,
-                closed: false,
                 url: null,
                 uri: null,
+                data: null,
+                method: null,
+                createInfo: null,
+                inprogress: false,
                 timer: {
                     id: null,
                     expired: false
@@ -17,6 +18,10 @@ function ChromeSocketXMLHttpRequest() {
                     'Connection': 'close',
                     'Accept-Encoding': 'identity',
                     'Content-Length': 0
+                },
+                response: {
+                    headers: null,
+                    responseText: null
                 }
             }
         },
@@ -114,12 +119,15 @@ function ChromeSocketXMLHttpRequest() {
 }
 
 ChromeSocketXMLHttpRequest.prototype.abort = function () {
+    this.disconnect();
 };
 
-ChromeSocketXMLHttpRequest.prototype.getResponseHeader = function () {
+ChromeSocketXMLHttpRequest.prototype.getResponseHeader = function (header) {
+    // TODO: use regex
 };
 
-ChromeSocketXMLHttpRequest.prototype.getAllResponseHeaders = function (header) {
+ChromeSocketXMLHttpRequest.prototype.getAllResponseHeaders = function () {
+    return this.options.response.headers;
 };
 
 ChromeSocketXMLHttpRequest.prototype.open = function (method, url) {
@@ -139,10 +147,13 @@ ChromeSocketXMLHttpRequest.prototype.send = function (data) {
         name: 'RESTConsole-ChromeSocketXMLHttpRequest'
     };
 
-    chrome.sockets.tcp.create(socketProperties, this._onCreate.bind(this));
+    this.options.inprogress = true;
+    this.options.data = data || null;
+
+    chrome.sockets.tcp.create(socketProperties, this.onCreate.bind(this));
 
     if (this.timeout > 0) {
-        this.options.timer.id = setTimeout(this._expireTimer.bind(this), this.timeout);
+        this.options.timer.id = setTimeout(this.expireTimer.bind(this), this.timeout);
     }
 };
 
@@ -154,8 +165,8 @@ ChromeSocketXMLHttpRequest.prototype.sendAsBinary = function (body) {
 };
 
 
-ChromeSocketXMLHttpRequest.prototype._onCreate = function (createInfo) {
-    if (this.options.closed) {
+ChromeSocketXMLHttpRequest.prototype.onCreate = function (createInfo) {
+    if (!this.options.inprogress) {
         return;
     }
 
@@ -163,28 +174,28 @@ ChromeSocketXMLHttpRequest.prototype._onCreate = function (createInfo) {
 
     this.options.createInfo = createInfo;
 
-    chrome.sockets.tcp.connect(createInfo.socketId, this.options.uri.hostname(), port, this._onConnect.bind(this));
+    chrome.sockets.tcp.connect(createInfo.socketId, this.options.uri.hostname(), port, this.onConnect.bind(this));
 };
 
-ChromeSocketXMLHttpRequest.prototype._onConnect = function (result) {
-    if (this.options.closed) {
+ChromeSocketXMLHttpRequest.prototype.onConnect = function (result) {
+    if (!this.options.inprogress) {
         return;
     }
 
     if (this.options.timer.expired) {
         return;
     } else if (result < 0) {
-        this._onError({
+        this.error({
             error: 'connection error',
             code: result
         });
     } else {
         // assign recieve listner
-        chrome.sockets.tcp.onReceive.addListener(this._onReceive.bind(this));
+        chrome.sockets.tcp.onReceive.addListener(this.onReceive.bind(this));
 
         //
         this.getMessage().toArrayBuffer(function sendMessage (buffer) {
-            chrome.sockets.tcp.send(this.options.createInfo.socketId, buffer, this._onSend.bind(this));
+            chrome.sockets.tcp.send(this.options.createInfo.socketId, buffer, this.onSend.bind(this));
         }.bind(this));
     }
 };
@@ -199,12 +210,12 @@ ChromeSocketXMLHttpRequest.prototype.getMessage = function () {
         headers.push(name + ': ' + this.options.headers[name]);
     }
 
-    return headers.join('\r\n') + '\r\n\r\n';
+    return headers.join('\r\n') + '\r\n\r\n' + this.options.data;
 };
 
-ChromeSocketXMLHttpRequest.prototype._onError = function (error) {
-    if (!this.options.closed) {
-        this._close();
+ChromeSocketXMLHttpRequest.prototype.error = function (error) {
+    if (this.options.inprogress) {
+        this.disconnect();
     }
 
     if (this.onerror) {
@@ -212,8 +223,8 @@ ChromeSocketXMLHttpRequest.prototype._onError = function (error) {
     }
 };
 
-ChromeSocketXMLHttpRequest.prototype._close = function () {
-    this.options.closed = true;
+ChromeSocketXMLHttpRequest.prototype.disconnect = function () {
+    this.options.inprogress = false;
 
     if (this.options.createInfo !== null) {
         chrome.sockets.tcp.disconnect(this.options.createInfo.socketId);
@@ -222,25 +233,23 @@ ChromeSocketXMLHttpRequest.prototype._close = function () {
     }
 };
 
-ChromeSocketXMLHttpRequest.prototype._expireTimer = function () {
+ChromeSocketXMLHttpRequest.prototype.expireTimer = function () {
     if (this.responseText === null) {
-        this._close();
+        this.disconnect();
         this.options.timer.expired = true;
-        this._onError({error: 'timeout'});
+        this.error({error: 'timeout'});
     }
 };
 
-ChromeSocketXMLHttpRequest.prototype._onSend = function (sendInfo) {
-    console.log('data sent');
+ChromeSocketXMLHttpRequest.prototype.onSend = function (sendInfo) {
     if (sendInfo.resultCode < 0) {
-        this._onError({error: 'sending error'});
-        this._close();
+        this.error({error: 'sending error'});
+        this.disconnect();
     }
 };
 
-ChromeSocketXMLHttpRequest.prototype._onReceive = function (info) {
-    console.log('onReceive');
-    if (this.options.closed) {
+ChromeSocketXMLHttpRequest.prototype.onReceive = function (info) {
+    if (!this.options.inprogress) {
         return;
     }
 
@@ -248,31 +257,38 @@ ChromeSocketXMLHttpRequest.prototype._onReceive = function (info) {
         return;
     }
 
-    this._close();
+    this.disconnect();
 
-    console.log('results coming...');
+    info.data.toString(function (response) {
+        response = response.split('\r\n\r\n');
+        this.options.response.headers = response.shift();
+        this.options.response.responseText = response.join('\r\n\r\n');
 
-    console.log(String.fromCharCode.apply(null, new Uint16Array(info.data)));
+        this.responseText = this.options.responseText;
+
+        console.log('headers: ', this.options.response.headers);
+        console.log('body: ', this.options.response.responseText);
+    }.bind(this));
 };
 
 ArrayBuffer.prototype.toString = function (callback) {
-    var bb = new Blob([this]);
-    var f = new FileReader();
+    var blob = new Blob([this]);
+    var reader = new FileReader();
 
-    f.onload = function (e) {
+    reader.onload = function (e) {
         callback(e.target.result);
     };
 
-    f.readAsText(bb);
+    reader.readAsText(blob);
 };
 
 String.prototype.toArrayBuffer = function (callback) {
-    var bb = new Blob([this]);
-    var f = new FileReader();
+    var blob = new Blob([this]);
+    var reader = new FileReader();
 
-    f.onload = function (e) {
+    reader.onload = function (e) {
         callback(e.target.result);
     };
 
-    f.readAsArrayBuffer(bb);
+    reader.readAsArrayBuffer(blob);
 };
