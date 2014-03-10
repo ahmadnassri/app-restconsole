@@ -122,6 +122,7 @@
                             <li><a data-toggle="tab" data-target="#headers-authorization" i18n="tab_headers_authorization"></a></li>
                             <li><a data-toggle="tab" data-target="#headers-standard" i18n="tab_headers_standard"></a></li>
                             <li><a data-toggle="tab" data-target="#headers-cache" i18n="tab_headers_cache"></a></li>
+                            <li><a data-toggle="tab" data-target="#headers-generated" i18n="tab_headers_generated"></a></li>
                             <li><a data-toggle="tab" data-target="#headers-other" i18n="tab_headers_other"></a></li>
                         </ul>
 
@@ -139,10 +140,19 @@
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <label for="Content-Encoding" i18n="field_content_encoding"></label>
+                                            <label for="Content-Length"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Content-Encoding" autocomplete="on" list="charset" tabindex="2" placeholder="utf-8" disabled/>
+                                                <input class="form-control" type="text" name="Content-Length" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Content-Transfer-Encoding"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Content-Transfer-Encoding" tabindex="1" autocomplete="on" placeholder="1" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -478,6 +488,33 @@
                                         </div>
 
                                         <div class="col-lg-6">
+                                            <label for="Accept-Charset"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Accept-Charset" tabindex="1" autocomplete="on" list="charset" placeholder="" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Accept-Datetime"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Accept-Datetime" tabindex="1" autocomplete="on" placeholder="" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Accept-Encoding"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Accept-Encoding" tabindex="1" autocomplete="on" list="encoding" placeholder="" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
                                             <label for="Accept-Language"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
@@ -485,9 +522,7 @@
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="From"></label>
                                             <div class="input-group">
@@ -505,9 +540,7 @@
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="Pragma"></label>
                                             <div class="input-group">
@@ -525,9 +558,7 @@
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="Warning"></label>
                                             <div class="input-group">
@@ -542,7 +573,7 @@
 
                             <div id="headers-cache" class="tab-pane fade">
                                 <form name="headers" class="form-horizontal" novalidate>
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="If-Match"></label>
                                             <div class="input-group">
@@ -603,6 +634,15 @@
                             <div id="headers-other" class="tab-pane fade">
                                 <form name="headers" class="form-horizontal" novalidate>
                                     <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <label for="User-Agent"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="User-Agent" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
                                         <div class="col-lg-6">
                                             <label for="X-HTTP-Method-Override"></label>
                                             <div class="input-group">
@@ -644,6 +684,147 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
                                                 <input class="form-control" type="text" name="DNT" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Access-Control-Request-Headers"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Access-Control-Request-Headers" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Access-Control-Request-Method"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Access-Control-Request-Method" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Cookie"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Cookie" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Cookie-2"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Cookie 2" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Expect"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Expect" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Connection"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Connection" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Keep-Alive"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Keep-Alive" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Origin"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Origin" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Referer"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Referer" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="TE"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="TE" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Trailer"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Trailer" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+f
+                                        <div class="col-lg-6">
+                                            <label for="Upgrade"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Upgrade" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Via"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Via" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="headers-generated" class="tab-pane fade">
+                                <form name="headers" class="form-horizontal" novalidate>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="Host"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Host" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Date"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Date" tabindex="1" autocomplete="on" placeholder="1" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>

@@ -63,6 +63,10 @@
         "message": "Cache"
     },
 
+    "tab_headers_generated": {
+        "message": "Auto Generated"
+    },
+
     "tab_headers_other": {
         "message": "Other"
     },
