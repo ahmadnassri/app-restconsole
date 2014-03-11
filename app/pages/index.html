@@ -30,7 +30,7 @@
             <div id="main" class="tab-pane active">
                 <div id="editor">
                     <section id="target">
-                        <header i18n="target_header"></header>
+                        <header i18n="header_target"></header>
 
                         <div class="panel">
                             <form name="target" class="form-horizontal" novalidate>
@@ -85,29 +85,59 @@
                                     </div>
                                 </div>
                             </form>
+
+                            <div id="query" class="panel">
+                                <form name="query" class="form-horizontal input-pairs" novalidate>
+                                    <header i18n="btn_query_builder"></header>
+
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <span class="input-group-input">
+                                                    <label for="Key" i18n="field_key"><br/></label>
+                                                    <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="foo"/>
+                                                </span>
+                                                <label for="Value" i18n="field_value"><br/></label>
+                                                <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="bar"/>
+
+                                                <span class="input-group-btn">
+                                                    <label for="&nbsp;"><br/></label>
+                                                    <button class="btn btn-danger form-control disabled" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </section>
 
-                    <section id="query">
-                        <header i18n="header_query_builder"></header>
+                    <section id="authorization">
+                        <header i18n="header_authorization"></header>
 
                         <div class="panel">
-                            <form name="query" class="form-horizontal input-pairs" novalidate>
+                            <form name="headers" class="form-horizontal" novalidate>
                                 <div class="form-group">
                                     <div class="col-lg-12">
+                                        <label for="Authorization"></label>
                                         <div class="input-group">
-                                            <span class="input-group-input">
-                                                <label for="Key" i18n="field_key"><br/></label>
-                                                <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="foo"/>
-                                            </span>
-                                            <label for="Value" i18n="field_value"><br/></label>
-                                            <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="bar"/>
-
+                                            <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                            <input class="form-control" type="text" name="Authorization" autocomplete="off" tabindex="2" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
                                             <span class="input-group-btn">
-                                                <label for="&nbsp;"><br/></label>
-                                                <button class="btn btn-danger form-control disabled" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                                                <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#authorization-modal"><span class="glyphicon glyphicon glyphicon-flash"></span> <span i18n="btn_authorization_builder"></span></button>
                                             </span>
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-lg-12">
+                                        <label for="Proxy-Authorization"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                            <input class="form-control" type="text" name="Proxy-Authorization" tabindex="1" autocomplete="on" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
+                                        </div>
+                                        <span class="help-block"></span>
                                     </div>
                                 </div>
                             </form>
@@ -118,364 +148,13 @@
                         <header i18n="header_headers"></header>
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" data-target="#headers-payload" i18n="tab_headers_payload"></a></li>
-                            <li><a data-toggle="tab" data-target="#headers-authorization" i18n="tab_headers_authorization"></a></li>
-                            <li><a data-toggle="tab" data-target="#headers-standard" i18n="tab_headers_standard"></a></li>
+                            <li class="active"><a data-toggle="tab" data-target="#headers-accept" i18n="tab_headers_accept"></a></li>
                             <li><a data-toggle="tab" data-target="#headers-cache" i18n="tab_headers_cache"></a></li>
-                            <li><a data-toggle="tab" data-target="#headers-generated" i18n="tab_headers_generated"></a></li>
                             <li><a data-toggle="tab" data-target="#headers-other" i18n="tab_headers_other"></a></li>
                         </ul>
 
                         <div class="tab-content">
-                            <div id="headers-payload" class="tab-pane fade in active">
-                                <form name="headers" class="form-horizontal" novalidate>
-                                    <div class="form-group">
-                                        <div class="col-lg-6">
-                                            <label for="Contet-Type" i18n="field_content_type"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Content-Type" autocomplete="on" list="mimetypes" tabindex="2" placeholder="application/x-www-form-urlencoded" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label for="Content-Length"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Content-Length" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label for="Content-Transfer-Encoding"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Content-Transfer-Encoding" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="col-lg-12">
-                                            <label for="Content-MD5" i18n="field_content_md5"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Content-MD5" autocomplete="off" tabindex="2" placeholder="Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-default" type="button" data-action="auto-md5" data-toggle="button" i18n="btn_auto_generate"></button>
-                                                </span>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div id="headers-authorization" class="tab-pane fade">
-                                <form name="authorization" class="form-horizontal" novalidate>
-                                    <div class="form-group">
-                                        <div class="col-lg-6">
-                                            <label for="Authorization"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Authorization" tabindex="1" autocomplete="on" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label for="Proxy-Authorization"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Proxy-Authorization" tabindex="1" autocomplete="on" placeholder="Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" data-target="#authorization-basic" i18n="tab_authorization_basic"></a></li>
-                                        <li><a data-toggle="tab" data-target="#authorization-digest" i18n="tab_authorization_digest"></a></li>
-                                        <li><a data-toggle="tab" data-target="#authorization-oauth-1" i18n="tab_authorization_oauth_1"></a></li>
-                                        <li><a data-toggle="tab" data-target="#authorization-oauth-2" i18n="tab_authorization_oauth_2"></a></li>
-                                    </ul>
-
-                                    <div class="tab-content">
-                                        <div id="authorization-basic" class="tab-pane fade in active">
-                                            <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="Username"></label>
-                                                        <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="on" placeholder="username"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="Password"></label>
-                                                        <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="on" placeholder="password"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel-footer">
-                                                <button class="btn btn-primary" i18n="btn_generate"></button>
-                                            </div>
-                                        </div>
-
-                                        <div id="authorization-digest" class="tab-pane fade">
-                                            <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="Username" i18n="field_digest_username"></label>
-                                                        <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="on" placeholder="username"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="Password" i18n="field_digest_password"></label>
-                                                        <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="on" placeholder="password"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel-footer">
-                                                <button class="btn btn-primary" i18n="btn_generate"></button>
-                                            </div>
-                                        </div>
-
-                                        <div id="authorization-oauth-1" class="tab-pane fade">
-                                            <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="consumer_key">Consumer Key</label>
-                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="consumer_secret">Consumer Secret</label>
-                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="token_key">Token Key</label>
-                                                        <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="token_secret">Token Secret</label>
-                                                        <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="scope">Scope</label>
-                                                        <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="on" placeholder=""/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="realm">Realm</label>
-                                                        <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="on" placeholder=""/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="Signature">Signature Method</label>
-                                                        <select class="form-control" name="Signature">
-                                                            <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
-                                                            <option value="PLAINTEXT">PLAINTEXT</option>
-                                                        </select>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="Method"> Method</label>
-                                                        <select class="form-control" name="Method">
-                                                            <option value="header">Header</option>
-                                                            <option value="query">Query String</option>
-                                                        </select>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel-footer">
-                                                <button class="btn btn-primary" i18n="btn_generate"></button>
-                                            </div>
-
-                                            <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="request_url">Request Token URL</label>
-                                                        <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/request_token"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="access_url">Request Token URL</label>
-                                                        <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/access_token"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="authorize_url">Authorize URL</label>
-                                                        <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/authorize"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="oauth_callback">Callback URL</label>
-                                                        <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="on" placeholder="https://www.domain.com"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="oauth_verifier">Oauth Verifier</label>
-                                                        <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel-footer">
-                                                <button class="btn btn-success" disabled>Authorize</button>
-                                            </div>
-                                        </div>
-
-                                        <div id="authorization-oauth-2" class="tab-pane fade">
-                                            <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="consumer_key">Consumer Key</label>
-                                                        <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="consumer_secret">Consumer Secret</label>
-                                                        <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="token_key">Token Key</label>
-                                                        <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="token_secret">Token Secret</label>
-                                                        <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="scope">Scope</label>
-                                                        <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="on" placeholder=""/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="realm">Realm</label>
-                                                        <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="on" placeholder=""/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="Signature">Signature Method</label>
-                                                        <select class="form-control" name="Signature">
-                                                            <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
-                                                            <option value="PLAINTEXT">PLAINTEXT</option>
-                                                        </select>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="Method"> Method</label>
-                                                        <select class="form-control" name="Method">
-                                                            <option value="header">Header</option>
-                                                            <option value="query">Query String</option>
-                                                        </select>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel-footer">
-                                                <button class="btn btn-primary" i18n="btn_generate"></button>
-                                            </div>
-
-                                            <div class="panel-body">
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="request_url">Request Token URL</label>
-                                                        <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/request_token"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="access_url">Request Token URL</label>
-                                                        <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/access_token"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="authorize_url">Authorize URL</label>
-                                                        <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/authorize"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <label for="oauth_callback">Callback URL</label>
-                                                        <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="on" placeholder="https://www.domain.com"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-lg-6">
-                                                        <label for="oauth_verifier">Oauth Verifier</label>
-                                                        <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
-                                                        <span class="help-block"></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="panel-footer">
-                                                <button class="btn btn-success" disabled>Authorize</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div id="headers-standard" class="tab-pane fade">
+                            <div id="headers-accept" class="tab-pane fade in active">
                                 <form name="headers" class="form-horizontal" novalidate>
                                     <div class="form-group">
                                         <div class="col-lg-6">
@@ -524,19 +203,43 @@
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <label for="From"></label>
+                                            <label for="Expect"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="From" tabindex="1" autocomplete="on" placeholder="user@example.com" disabled/>
+                                                <input class="form-control" type="text" name="Expect" tabindex="1" autocomplete="on" placeholder="1" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <label for="Max-Forwards"></label>
+                                            <label for="TE"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Max-Forwards" tabindex="1" autocomplete="on" placeholder="10" disabled/>
+                                                <input class="form-control" type="text" name="TE" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Range"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Range" tabindex="1" autocomplete="on" placeholder="bytes=500-999" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="headers-cache" class="tab-pane fade">
+                                <form name="headers" class="form-horizontal" novalidate>
+                                    <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="Cache-Control"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Cache-Control" tabindex="1" autocomplete="on" placeholder="no-cache" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -550,30 +253,6 @@
                                             <span class="help-block"></span>
                                         </div>
 
-                                        <div class="col-lg-6">
-                                            <label for="Range"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Range" tabindex="1" autocomplete="on" placeholder="bytes=500-999" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label for="Warning"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Warning" tabindex="1" autocomplete="on" placeholder="199 Miscellaneous warning" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <div id="headers-cache" class="tab-pane fade">
-                                <form name="headers" class="form-horizontal" novalidate>
-                                    <div class="form-group">
                                         <div class="col-lg-6">
                                             <label for="If-Match"></label>
                                             <div class="input-group">
@@ -618,12 +297,36 @@
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
+                                    </div>
+                                </form>
+                            </div>
 
+                            <div id="headers-cors" class="tab-pane fade">
+                                <form name="headers" class="form-horizontal" novalidate>
+                                    <div class="form-group">
                                         <div class="col-lg-6">
-                                            <label for="Cache-Control"></label>
+                                            <label for="Origin"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Cache-Control" tabindex="1" autocomplete="on" placeholder="no-cache" disabled/>
+                                                <input class="form-control" type="text" name="Origin" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Access-Control-Request-Headers"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Access-Control-Request-Headers" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Access-Control-Request-Method"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Access-Control-Request-Method" tabindex="1" autocomplete="on" placeholder="1" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -634,6 +337,45 @@
                             <div id="headers-other" class="tab-pane fade">
                                 <form name="headers" class="form-horizontal" novalidate>
                                     <div class="form-group">
+                                        <div class="col-lg-6">
+                                            <label for="Host"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Host" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Date"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Date" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="From"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="From" tabindex="1" autocomplete="on" placeholder="user@example.com" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <label for="Max-Forwards"></label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                                <input class="form-control" type="text" name="Max-Forwards" tabindex="1" autocomplete="on" placeholder="10" disabled/>
+                                            </div>
+                                            <span class="help-block"></span>
+                                        </div>
+
+
+
+
                                         <div class="col-lg-12">
                                             <label for="User-Agent"></label>
                                             <div class="input-group">
@@ -689,24 +431,6 @@
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <label for="Access-Control-Request-Headers"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Access-Control-Request-Headers" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label for="Access-Control-Request-Method"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Access-Control-Request-Method" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
                                             <label for="Cookie"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
@@ -724,14 +448,7 @@
                                             <span class="help-block"></span>
                                         </div>
 
-                                        <div class="col-lg-6">
-                                            <label for="Expect"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Expect" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
+
 
                                         <div class="col-lg-6">
                                             <label for="Connection"></label>
@@ -743,55 +460,20 @@
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <label for="Keep-Alive"></label>
+                                            <label for="Warning"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Keep-Alive" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                                <input class="form-control" type="text" name="Warning" tabindex="1" autocomplete="on" placeholder="199 Miscellaneous warning" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
 
-                                        <div class="col-lg-6">
-                                            <label for="Origin"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Origin" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
 
                                         <div class="col-lg-6">
                                             <label for="Referer"></label>
                                             <div class="input-group">
                                                 <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
                                                 <input class="form-control" type="text" name="Referer" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label for="TE"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="TE" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label for="Trailer"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Trailer" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-f
-                                        <div class="col-lg-6">
-                                            <label for="Upgrade"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Upgrade" tabindex="1" autocomplete="on" placeholder="1" disabled/>
                                             </div>
                                             <span class="help-block"></span>
                                         </div>
@@ -807,52 +489,67 @@ f
                                     </div>
                                 </form>
                             </div>
-
-                            <div id="headers-generated" class="tab-pane fade">
-                                <form name="headers" class="form-horizontal" novalidate>
-                                    <div class="form-group">
-                                        <div class="col-lg-6">
-                                            <label for="Host"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Host" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-
-                                        <div class="col-lg-6">
-                                            <label for="Date"></label>
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
-                                                <input class="form-control" type="text" name="Date" tabindex="1" autocomplete="on" placeholder="1" disabled/>
-                                            </div>
-                                            <span class="help-block"></span>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
                     </section>
 
                     <section id="payload">
                         <header>Payload</header>
 
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" data-target="#payload-raw">RAW Body</a></li>
-                            <li><a data-toggle="tab" data-target="#payload-form">Form Data</a></li>
-                            <li><a data-toggle="tab" data-target="#payload-attachments">Attachments</a></li>
-                        </ul>
+                        <div class="panel">
+                            <header>Headers</header>
+                            <form name="headers" class="form-horizontal" novalidate>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <label for="Contet-Type" i18n="field_content_type"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                            <input class="form-control" type="text" name="Content-Type" autocomplete="on" list="mimetypes" tabindex="2" placeholder="application/x-www-form-urlencoded" disabled/>
+                                        </div>
+                                        <span class="help-block"></span>
+                                    </div>
 
-                        <form name="payload" class="form-horizontal" novalidate>
+                                    <div class="col-lg-6">
+                                        <label for="Content-Length"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                            <input class="form-control" type="text" name="Content-Length" tabindex="1" autocomplete="on" placeholder="1" disabled/>
+                                        </div>
+                                        <span class="help-block"></span>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <label for="Content-MD5" i18n="field_content_md5"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><input type="checkbox" tabindex="-1"></span>
+                                            <input class="form-control" type="text" name="Content-MD5" autocomplete="off" tabindex="2" placeholder="Q2hlY2sgSW50ZWdyaXR5IQ==" disabled/>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button" data-action="auto-md5" data-toggle="button"><span class="glyphicon glyphicon glyphicon-flash"></span> <span i18n="btn_auto_generate"></span></button>
+                                            </span>
+                                        </div>
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <header>Body</header>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" data-target="#payload-raw">RAW Body</a></li>
+                                <li><a data-toggle="tab" data-target="#payload-form">Form Data</a></li>
+                                <li><a data-toggle="tab" data-target="#payload-attachments">Attachments</a></li>
+                            </ul>
 
                             <div class="tab-content">
                                 <div id="payload-raw" class="tab-pane fade in active">
-                                    <div class="form-group">
-                                        <div class="col-lg-12">
-                                            <textarea class="form-control" name="payload" rows="5" tabindex="2" placeholder="XML, JSON, etc ..."></textarea>
-                                            <span class="help-block">Remember to set the Content-Type header.</span>
+
+
+                                    <form name="payload" class="form-horizontal" novalidate>
+                                        <div class="form-group">
+                                            <div class="col-lg-12">
+                                                <textarea class="form-control" name="payload" rows="5" tabindex="2" placeholder="XML, JSON, etc ..."></textarea>
+                                                <span class="help-block">Remember to set the Content-Type header.</span>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
 
                                 <div id="payload-form" class="tab-pane input-pairs fade">
@@ -904,7 +601,7 @@ f
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </section>
                 </div>
 
@@ -1073,6 +770,300 @@ f
                         </div>
                     </form>
                 </section>
+            </div>
+        </div>
+
+        <div id="modals">
+            <div id="authorization-modal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Authorization Builder</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form name="authorization" class="form-horizontal" novalidate>
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a data-toggle="tab" data-target="#authorization-basic" i18n="tab_authorization_basic"></a></li>
+                                    <li><a data-toggle="tab" data-target="#authorization-digest" i18n="tab_authorization_digest"></a></li>
+                                    <li><a data-toggle="tab" data-target="#authorization-oauth-1" i18n="tab_authorization_oauth_1"></a></li>
+                                    <li><a data-toggle="tab" data-target="#authorization-oauth-2" i18n="tab_authorization_oauth_2"></a></li>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div id="authorization-basic" class="tab-pane fade in active">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="Username"></label>
+                                                    <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="on" placeholder="username"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="Password"></label>
+                                                    <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="on" placeholder="password"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-footer">
+                                            <button class="btn btn-primary" i18n="btn_insert"></button>
+                                        </div>
+                                    </div>
+
+                                    <div id="authorization-digest" class="tab-pane fade">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="Username" i18n="field_digest_username"></label>
+                                                    <input class="form-control" type="text" name="Username" tabindex="1" autocomplete="on" placeholder="username"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="Password" i18n="field_digest_password"></label>
+                                                    <input class="form-control" type="text" name="Password" tabindex="1" autocomplete="on" placeholder="password"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-footer">
+                                            <button class="btn btn-primary" i18n="btn_insert"></button>
+                                        </div>
+                                    </div>
+
+                                    <div id="authorization-oauth-1" class="tab-pane fade">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="consumer_key">Consumer Key</label>
+                                                    <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="consumer_secret">Consumer Secret</label>
+                                                    <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="token_key">Token Key</label>
+                                                    <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="token_secret">Token Secret</label>
+                                                    <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="scope">Scope</label>
+                                                    <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="on" placeholder=""/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="realm">Realm</label>
+                                                    <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="on" placeholder=""/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="Signature">Signature Method</label>
+                                                    <select class="form-control" name="Signature">
+                                                        <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
+                                                        <option value="PLAINTEXT">PLAINTEXT</option>
+                                                    </select>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="Method"> Method</label>
+                                                    <select class="form-control" name="Method">
+                                                        <option value="header">Header</option>
+                                                        <option value="query">Query String</option>
+                                                    </select>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-footer">
+                                            <button class="btn btn-primary" i18n="btn_insert"></button>
+                                        </div>
+
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="request_url">Request Token URL</label>
+                                                    <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/request_token"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="access_url">Request Token URL</label>
+                                                    <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/access_token"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="authorize_url">Authorize URL</label>
+                                                    <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/authorize"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="oauth_callback">Callback URL</label>
+                                                    <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="on" placeholder="https://www.domain.com"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="oauth_verifier">Oauth Verifier</label>
+                                                    <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-footer">
+                                            <button class="btn btn-success" disabled>Authorize</button>
+                                        </div>
+                                    </div>
+
+                                    <div id="authorization-oauth-2" class="tab-pane fade">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="consumer_key">Consumer Key</label>
+                                                    <input class="form-control" type="text" name="consumer_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="consumer_secret">Consumer Secret</label>
+                                                    <input class="form-control" type="text" name="consumer_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d" required/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="token_key">Token Key</label>
+                                                    <input class="form-control" type="text" name="token_key" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="token_secret">Token Secret</label>
+                                                    <input class="form-control" type="text" name="token_secret" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="scope">Scope</label>
+                                                    <input class="form-control" type="text" name="scope" tabindex="3" autocomplete="on" placeholder=""/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="realm">Realm</label>
+                                                    <input class="form-control" type="text" name="realm" tabindex="3" autocomplete="on" placeholder=""/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="Signature">Signature Method</label>
+                                                    <select class="form-control" name="Signature">
+                                                        <option value="HMAC-SHA1" selected>HMAC-SHA1</option>
+                                                        <option value="PLAINTEXT">PLAINTEXT</option>
+                                                    </select>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="Method"> Method</label>
+                                                    <select class="form-control" name="Method">
+                                                        <option value="header">Header</option>
+                                                        <option value="query">Query String</option>
+                                                    </select>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-footer">
+                                            <button class="btn btn-primary" i18n="btn_insert"></button>
+                                        </div>
+
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="request_url">Request Token URL</label>
+                                                    <input class="form-control" type="text" name="request_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/request_token"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="access_url">Request Token URL</label>
+                                                    <input class="form-control" type="text" name="access_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/access_token"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="authorize_url">Authorize URL</label>
+                                                    <input class="form-control" type="text" name="authorize_url" tabindex="3" autocomplete="on" placeholder="https://api.provider.com/oauth/authorize"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <label for="oauth_callback">Callback URL</label>
+                                                    <input class="form-control" type="text" name="oauth_callback" tabindex="3" autocomplete="on" placeholder="https://www.domain.com"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-lg-6">
+                                                    <label for="oauth_verifier">Oauth Verifier</label>
+                                                    <input class="form-control" type="text" name="oauth_verifier" tabindex="3" autocomplete="on" placeholder="737060cd8c284d8af7ad3082f209582d"/>
+                                                    <span class="help-block"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="panel-footer">
+                                            <button class="btn btn-success" disabled>Authorize</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

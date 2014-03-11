@@ -27,8 +27,12 @@
         "message": "Settings"
     },
 
-    "target_header": {
+    "header_target": {
         "message": "Target"
+    },
+
+    "header_authorization": {
+        "message": "Authorization"
     },
 
     "field_protocol": {
@@ -55,16 +59,12 @@
         "message": "Authorization"
     },
 
-    "tab_headers_standard": {
-        "message": "Standard"
+    "tab_headers_accept": {
+        "message": "Accept"
     },
 
     "tab_headers_cache": {
         "message": "Cache"
-    },
-
-    "tab_headers_generated": {
-        "message": "Auto Generated"
     },
 
     "tab_headers_other": {
@@ -99,8 +99,12 @@
         "message": "Digest Password"
     },
 
-    "btn_generate": {
-        "message": "Generate"
+    "btn_insert": {
+        "message": "Insert"
+    },
+
+    "btn_authorization_builder": {
+        "message": "Authorization Builder"
     },
 
     "btn_auto_generate": {

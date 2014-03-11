@@ -54,6 +54,21 @@ html {
             }
         }
 
+        .nav-tabs {
+            li {
+                a {
+                    border-radius: 0;
+                }
+            }
+        }
+
+        .modal-body {
+            .tab-content {
+                border: 1px solid #ddd;
+                border-top: none;
+            }
+        }
+
         // class overrides
         .panel {
             .panel;
@@ -103,10 +118,6 @@ html {
 
                 label {
                     display:block;
-
-                    &:before {
-                        content: attr(for);
-                    }
                 }
             }
         }

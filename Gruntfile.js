@@ -32,6 +32,7 @@ module.exports = function (grunt) {
                     'bower_components/bootstrap/js/transition.js',
                     'bower_components/bootstrap/js/tab.js',
                     'bower_components/bootstrap/js/button.js',
+                    'bower_components/bootstrap/js/modal.js',
 
                     'bower_components/es6-promise/promise.js',
 
@@ -279,7 +280,7 @@ module.exports = function (grunt) {
             },
 
             json: {
-                files: ['<%= config.app %>/manifest.json', '<%= config.app.locales %>'],
+                files: ['<%= config.app %>/manifest.json', '<%= config.app %>/_locales/**/*.json'],
                 tasks: ['jsonlint', 'minjson']
             },
 
