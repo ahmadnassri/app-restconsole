@@ -150,7 +150,9 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" data-target="#headers-accept" i18n="tab_headers_accept"></a></li>
                             <li><a data-toggle="tab" data-target="#headers-cache" i18n="tab_headers_cache"></a></li>
+                            <li><a data-toggle="tab" data-target="#headers-cors" i18n="tab_headers_cors"></a></li>
                             <li><a data-toggle="tab" data-target="#headers-other" i18n="tab_headers_other"></a></li>
+                            <li><a data-toggle="tab" data-target="#headers-custom" i18n="tab_headers_custom"></a></li>
                         </ul>
 
                         <div class="tab-content">
@@ -485,6 +487,28 @@
                                                 <input class="form-control" type="text" name="Via" tabindex="1" autocomplete="on" placeholder="1" disabled/>
                                             </div>
                                             <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="headers-custom" class="tab-pane fade">
+                                <form name="custom-headers" class="form-horizontal input-pairs" novalidate>
+                                    <div class="form-group">
+                                        <div class="col-lg-12">
+                                            <div class="input-group">
+                                                <span class="input-group-input">
+                                                    <label for="Key" i18n="field_key"><br/></label>
+                                                    <input class="form-control" type="text" name="key" tabindex="0" autocomplete="on" placeholder="foo"/>
+                                                </span>
+                                                <label for="Value" i18n="field_value"><br/></label>
+                                                <input class="form-control" type="text" name="value" tabindex="0" autocomplete="on" placeholder="bar"/>
+
+                                                <span class="input-group-btn">
+                                                    <label for="&nbsp;"><br/></label>
+                                                    <button class="btn btn-danger form-control disabled" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
