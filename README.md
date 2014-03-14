@@ -53,3 +53,6 @@ we don't collect any personal data and we don't want access to your data on all 
 * Get the source code: https://github.com/codeinchaos/restconsole
 * Report issues: https://github.com/codeinchaos/restconsole/issues
 * Donate: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=UJ2B2BTK9VLRS
+* 
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/codeinchaos/restconsole/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
