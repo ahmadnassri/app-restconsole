@@ -1,16 +1,10 @@
 {
   "private": true,
-  "name": "RESTConsole",
   "version": "5.0.0",
-  "author": "Ahmad Nassri <ahmad@codeinchaos.com> (http://ahmadnassri.com)",
+  "name": "RESTConsole",
   "description": "an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.",
+  "author": "Ahmad Nassri <ahmad@codeinchaos.com> (http://ahmadnassri.com)",
   "homepage": "http://restconsole.com",
-  "keywords": [
-    "API",
-    "REST",
-    "REST Console",
-    "Chrome"
-  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -19,6 +13,12 @@
   "bugs": {
     "url": "https://github.com/codeinchaos/restconsole/issues"
   },
+  "keywords": [
+    "API",
+    "REST",
+    "REST Console",
+    "Chrome"
+  ],
   "dependencies": {},
   "devDependencies": {
     "bower": "~1.2.8",

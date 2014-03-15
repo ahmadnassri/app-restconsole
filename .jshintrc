@@ -1,7 +1,7 @@
 {
     "indent":   4,
     "quotmark": "single",
-//    "strict": true,
+    "strict": true,
     "browser":  true,
     "jquery":   true,
     "devel":    true,

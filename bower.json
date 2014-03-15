@@ -1,9 +1,9 @@
 {
   "private": true,
-  "name": "RESTConsole",
   "version": "5.0.0",
-  "license": "MIT",
+  "name": "RESTConsole",
   "homepage": "https://restconsole.com",
+  "license": "MIT",
   "authors": [
     "Ahmad Nassri <ahmad@codeinchaos.com> (http://ahmadnassri.com)"
   ],

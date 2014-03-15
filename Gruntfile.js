@@ -1,6 +1,9 @@
 module.exports = function (grunt) {
     'use strict';
 
+    // Force use of Unix newlines
+    grunt.util.linefeed = '\n';
+
     // show elapsed time at the end
     require('time-grunt')(grunt);
 
