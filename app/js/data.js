@@ -1,4 +1,6 @@
 $(function Data () {
+    'use strict';
+
     console.log('initiating Data.js');
 
     var localSessionData = {};

@@ -1,4 +1,6 @@
 $(function DOM () {
+    'use strict';
+
     console.log('initiating DOM.js');
 
     /**

@@ -1,4 +1,6 @@
 $(function Authorization() {
+    'use strict';
+
     console.log('Authorization.js');
 
     // input field listener

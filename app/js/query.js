@@ -1,4 +1,6 @@
 $(function Query () {
+    'use strict';
+
     console.log('Query.js');
 
     $('button[data-action="query-builder"]').on('click', function onClick () {

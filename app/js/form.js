@@ -1,4 +1,6 @@
 $(function Form () {
+    'use strict';
+
     console.log('initiating Form.js');
 
     function force() {

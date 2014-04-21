@@ -1,4 +1,6 @@
 $(function Pairs () {
+    'use strict';
+
     console.log('initiating Pairs.js');
 
     // catch all input-pairs

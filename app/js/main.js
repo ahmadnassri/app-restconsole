@@ -1,4 +1,6 @@
 $(function Main () {
+    'use strict';
+
     console.log('initiating Main.js');
 
     // initiate HTTP Log

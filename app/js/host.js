@@ -1,4 +1,6 @@
 $(function Host () {
+    'use strict';
+
     console.log('initiating Host.js');
 
     /**

@@ -5,6 +5,8 @@
  * @see http://developer.chrome.com/apps/app.window.html
  */
 chrome.app.runtime.onLaunched.addListener(function() {
+    'use strict';
+
     var options = {
         id: 'RESTConsole',
         bounds: {

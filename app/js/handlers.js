@@ -1,4 +1,6 @@
 $(function Handlers () {
+    'use strict';
+
     console.log('initiating Handlers.js');
 
     function onChange () {

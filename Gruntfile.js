@@ -43,6 +43,8 @@ module.exports = function (grunt) {
 
                     'bower_components/httparchive.js/dist/HTTPArchive.js',
 
+                    'bower_components/chrome.sockets.tcp.xhr/dist/chrome.sockets.tcp.xhr.min.js',
+
                     'bower_components/chrome-platform-analytics/google-analytics-bundle.js',
 
                     'bower_components/crypto-js/rollups/md5.js'
@@ -343,7 +345,7 @@ module.exports = function (grunt) {
         'jsonlint',
         'lesslint',
         'lint5',
-        'qunit'
+        //'qunit'
     ]);
 
     grunt.registerTask('default', [

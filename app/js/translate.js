@@ -1,4 +1,6 @@
 $(function Translate () {
+    'use strict';
+
     console.group('Translate.js');
     console.time('Translate.js');
 
