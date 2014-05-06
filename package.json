@@ -48,6 +48,7 @@
     "qunitjs": "~1.14.0"
   },
   "scripts": {
+    "postinstall": "node_modules/.bin/bower install",
     "ci": "grunt test && grunt coveralls",
     "test": "grunt release --verbose"
   }
