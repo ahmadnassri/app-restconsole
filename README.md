@@ -1,4 +1,4 @@
-# REST Console
+# REST Console [![Actively Maintained](https://maintained.tech/badge.svg)](https://maintained.tech/)
 
 an HTTP Request Visualizer and Constructor tool, helps developers build, debug and test RESTful APIs.
 
